@@ -27,7 +27,7 @@ export default function WelcomeMessage() {
 
      
         <Image 
-          src="/assets/svg/home-screen.svg"
+          src="/svg/home-screen.svg"
           alt="Layout"
           width={48}
           height={48}
