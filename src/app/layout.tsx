@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     description: siteConfig.meta.twitter.description,
     creator: siteConfig.meta.twitter.creator,
   },
+  themeColor: siteConfig.meta.themeColor,
   icons: {
     icon: '/favicon.ico',
   },

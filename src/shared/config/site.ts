@@ -1,8 +1,8 @@
 export const siteConfig = {
   meta: {
     title: {
-      default: 'Wellestate | Next.js Scalable Starter',
-      template: '%s | Next.js Scalable Starter',
+      default: 'Wellestate | Distress Detection System',
+      template: '%s | Distress Detection System',
     },
     description: 'A scalable and modular Next.js starter template',
     keywords: ['Next.js', 'React', 'Tailwind CSS', 'Server Components', 'Starter Template'],
@@ -21,16 +21,17 @@ export const siteConfig = {
       type: 'website',
       locale: 'en_US',
       url: 'https://next-scalable-starter.vercel.app',
-      title: 'Next.js Scalable Starter',
+      title: 'Distress Detection System',
       description: 'A scalable and modular Next.js starter template',
-      siteName: 'Next.js Scalable Starter',
+      siteName: 'Distress Detection System',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Next.js Scalable Starter',
+      title: 'Distress Detection System',
       description: 'A scalable and modular Next.js starter template',
       creator: '@yourusername',
     },
+    themeColor: "#4299E1",
     icons: {
       icon: '/favicon.ico',
     },
