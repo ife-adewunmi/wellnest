@@ -1,31 +1,31 @@
 import localFont from 'next/font/local'
 
 export const interRegular = localFont({
-  src: './assets/fonts/Inter_24pt-Regular.ttf',
+  src: './assets/Inter_24pt-Regular.ttf',
   display: 'swap',
   variable: '--font-inter-regular',
-});
+})
 
 export const interSemiBold = localFont({
-  src: './assets/fonts/Inter_24pt-SemiBold.ttf',
+  src: './assets/Inter_24pt-SemiBold.ttf',
   display: 'swap',
   variable: '--font-inter-semibold',
-});
+})
 
 export const interMedium = localFont({
-  src: './assets/fonts/Inter_24pt-Medium.ttf',
+  src: './assets/Inter_24pt-Medium.ttf',
   display: 'swap',
   variable: '--font-inter-medium',
-});
+})
 
 export const interBold = localFont({
-  src: './assets/fonts/Inter_24pt-Bold.ttf',
+  src: './assets/Inter_24pt-Bold.ttf',
   display: 'swap',
   variable: '--font-inter-bold',
-});
+})
 
 export const plusJakarta = localFont({
-  src: './assets/fonts/PlusJakartaSans-SemiBold.ttf',
+  src: './assets/PlusJakartaSans-SemiBold.ttf',
   display: 'swap',
   variable: '--font-plus-jakarta-semibold',
-});
+})

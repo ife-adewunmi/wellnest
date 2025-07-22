@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import GoogleSignupButton from '@/shared/components/ui/google-signup-button'
-import { Separator } from '@/shared/components/ui/seperator'
 import { Label } from '@/shared/components/ui/label'
 import { Input } from '@/shared/components/ui/custom-input'
 import PasswordInput from '@/shared/components/ui/password-input'
@@ -13,17 +12,39 @@ import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 
-export default function SignupForm() {
+export default function SigninForm() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
-    confirmPassword: '',
   })
+  const [remember, setRemember] = useState(false)
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberEmail')
+    const savedPassword = localStorage.getItem('rememberPassword')
+
+    if (savedEmail && savedPassword) {
+      setFormData({
+        email: savedEmail,
+        password: savedPassword,
+      })
+      setRemember(true)
+    }
+  }, [])
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (remember) {
+      console.log('Logging in with:', formData.email, formData.password)
+      localStorage.setItem('rememberEmail', formData.email)
+      localStorage.setItem('rememberPassword', formData.password)
+    } else {
+      localStorage.removeItem('rememberEmail')
+      localStorage.removeItem('rememberPassword')
+    }
   }
 
   return (
@@ -60,41 +81,7 @@ export default function SignupForm() {
               </div>
 
               {/* Form fields */}
-              <div className="mt-[2.5rem] flex flex-col gap-[1rem]">
-                {/* 🔧 FIXED: Added flex-1 and min-w-0 to prevent overflow */}
-                <div className="flex w-full items-center gap-[1rem]">
-                  <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
-                    <Label
-                      htmlFor="firstName"
-                      className={`text-[1rem] text-[#666666] ${interRegular.className}`}
-                    >
-                      First name
-                    </Label>
-                    <Input
-                      id="firstName"
-                      placeholder="John"
-                      value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value)}
-                      className="w-full"
-                    />
-                  </div>
-                  <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
-                    <Label
-                      htmlFor="lastName"
-                      className={`text-[1rem] text-[#666666] ${interRegular.className}`}
-                    >
-                      Last name
-                    </Label>
-                    <Input
-                      id="lastName"
-                      placeholder="Doe"
-                      value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value)}
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-
+              <form onSubmit={handleLogin} className="mt-[2.5rem] flex flex-col gap-[1rem]">
                 <div className="flex flex-col gap-[4px]">
                   <Label
                     htmlFor="email"
@@ -112,48 +99,47 @@ export default function SignupForm() {
                   />
                 </div>
 
-                {/* 🔧 FIXED: Added flex-1 and min-w-0 to password fields too */}
-                <div className="flex items-center gap-[1rem]">
-                  <div className="min-w-0 flex-1">
-                    <PasswordInput
-                      id="password"
-                      label="Password"
-                      placeholder="••••••••"
-                      value={formData.password}
-                      onChange={(value) => handleInputChange('password', value)}
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <PasswordInput
-                      id="confirmPassword"
-                      label="Confirm your password"
-                      placeholder="••••••••"
-                      value={formData.confirmPassword}
-                      onChange={(value) => handleInputChange('confirmPassword', value)}
-                    />
-                  </div>
+                <div className="flex w-full items-center gap-[1rem]">
+                  <PasswordInput
+                    id="password"
+                    label="Password"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={(value) => handleInputChange('password', value)}
+                  />
                 </div>
 
-                <p className={`${interRegular.className} text-[14px] text-[#666666]`}>
-                  Use 8 or more characters with a mix of letters, numbers & symbols
+                <p
+                  className={`${interRegular.className} text-end text-[1rem] text-[#111111] underline`}
+                >
+                  Forgot your password
                 </p>
-
+                <div className="flex gap-[8px]">
+                  <input
+                    id="remember"
+                    type="checkbox"
+                    checked={remember}
+                    onChange={(e) => setRemember(e.target.checked)}
+                  />
+                  <label htmlFor="remember" className="text-sm">
+                    Remember password
+                  </label>
+                </div>
                 <div className="mt-[2.5rem] flex items-center justify-center">
-                  <Button variant={'default'} className="flex items-center">
-                    Sign up
+                  <Button type="submit" variant={'default'} className="flex items-center">
+                    Sign in
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
-
                 <div className="mt-[2.5rem] flex items-center justify-center">
                   <p className={`${interRegular.className} text-[14px] text-[#666666]`}>
-                    Already have an account?{' '}
-                    <Link href="/signin" className="underline">
-                      Sign in
+                    You don`t have an account?{' '}
+                    <Link href="/signup" className="underline">
+                      Sign up
                     </Link>
                   </p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

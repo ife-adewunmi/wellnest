@@ -1,8 +1,8 @@
-import SignInForm from "@/feature/components/login-form";
-export default function page(){
+import SigninForm from '@/feature/auth/components/signin-form'
+export default function page() {
   return (
     <div>
-      <SignInForm />
+      <SigninForm />
     </div>
   )
 }

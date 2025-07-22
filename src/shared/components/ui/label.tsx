@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { cva, type VariantProps } from "class-variance-authority"
-import { interRegular } from "@/fonts"
+import * as React from 'react'
+import * as LabelPrimitive from '@radix-ui/react-label'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { interRegular } from '@/shared/styles/fonts'
 // import { cn } from "@/lib/utils"
 
 const labelVariants = cva(`text-[1rem] text-[#666666] ${interRegular.className}`)
@@ -12,11 +12,7 @@ const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root
-    ref={ref}
-    className={`${labelVariants()} ${className || ''}`}
-    {...props}
-  />
+  <LabelPrimitive.Root ref={ref} className={`${labelVariants()} ${className || ''}`} {...props} />
 ))
 Label.displayName = LabelPrimitive.Root.displayName
 
