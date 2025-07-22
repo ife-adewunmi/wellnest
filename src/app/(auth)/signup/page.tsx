@@ -1,4 +1,4 @@
-import SignupForm from '@/feature/components/signup-form'
+import SignupForm from '@/feature/auth/components/signup-form'
 import React from 'react'
 
 export default function page() {
