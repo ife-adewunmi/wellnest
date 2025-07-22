@@ -9,7 +9,7 @@ import WelcomeMessage from './ui/welcome-message'
 
       
       <Image 
-        src="/assets/images/onboarding.png"
+        src="/images/onboarding.png"
         alt="Layout"
         width={674}
         height={960}

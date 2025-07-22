@@ -127,11 +127,11 @@ export function Notifications() {
         </Button>
       </div>
       <div className={`mt-[1.5rem] rounded-[12px] p-[1rem] border border-[#CBD5E0] gap-[1rem] inline-flex flex-col`}>
-        {displayedNotifications.map((notification) => (
-          <div>
+        {displayedNotifications.map((notification, index) => (
+          <div key={notification.id} >
 
      
-          <div key={notification.id} className="flex  gap-[0.875rem] ">
+          <div className="flex  gap-[0.875rem] ">
             <div className="">{notification.icon}</div>
             <div className="flex flex-col ">
               <p className={`text-[#121417] text-[1rem] ${interMedium.className}`}>{notification.title}</p>

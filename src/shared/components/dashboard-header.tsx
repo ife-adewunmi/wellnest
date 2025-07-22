@@ -6,13 +6,15 @@ import Avatar from "./ui/avatar"
 import Image from "next/image"
 import { interBold, plusJakarta } from "@/fonts"
 import React, { useState } from 'react';
+import Link from "next/link"
+import { usePathname } from 'next/navigation';
 
 interface AvatarIconProps {
     initialIcon: string;
 }
 export function Header() {
    const [activeTab, setActiveTab] = useState('Dashboard')
-
+   const pathname = usePathname()
 
 const AvatarIcon = ({ initialIcon = 'notification' }: AvatarIconProps) => {
   const [bgColor, setBgColor] = useState('#F0F2F5');
@@ -82,30 +84,36 @@ return (
       <button 
         onClick={() => setActiveTab('Dashboard')}
         className={`text-[0.875rem] hover:text-[#1A202C] cursor-pointer ${
-          activeTab === 'Dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
-        } ${plusJakarta.className}`}
+            pathname === '/dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
+                  } ${plusJakarta.className}`}
       >
-        Dashboard
+                <Link href="/dashboard">Dashboard</Link>
+
+        
       </button>
     </li>
     <li>
       <button 
         onClick={() => setActiveTab('Students')}
         className={`text-[0.875rem] hover:text-[#1A202C] cursor-pointer ${
-          activeTab === 'Students' ? 'text-[#3182CE]' : 'text-[#718096]'
-        } ${plusJakarta.className}`}
+            pathname === '/student-table' ? 'text-[#3182CE]' : 'text-[#718096]'
+                  } ${plusJakarta.className}
+
+        `}
       >
-        Students
+        <Link href="/student-table">Students</Link>
+        
       </button>
     </li>
     <li>
       <button 
         onClick={() => setActiveTab('Intervention')}
         className={`text-[0.875rem] hover:text-[#1A202C] cursor-pointer ${
-          activeTab === 'Intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
+          pathname === '/intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
         } ${plusJakarta.className}`}
       >
-        Intervention
+                <Link href="/intervention">Intervention</Link>
+
       </button>
     </li>
     <li>

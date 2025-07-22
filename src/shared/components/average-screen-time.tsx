@@ -7,13 +7,13 @@ import { ChartContainer } from "./ui/chart"
 import { interBold, interMedium, interRegular } from "@/fonts"
 
 const data = [
-  { day: "Mon", hours: 3.0, displayHours: "3h" },
-  { day: "Tue", hours: 4.2, displayHours: "4h 12m" },
-  { day: "Wed", hours: 2.8, displayHours: "2h 48m" },
-  { day: "Thu", hours: 4.5, displayHours: "4h 30m" },
-  { day: "Fri", hours: 7.2, displayHours: "7h 12m" },
-  { day: "Sat", hours: 8.8, displayHours: "8h 48m" },
-  { day: "Sun", hours: 5.1, displayHours: "5h 6m" },
+  { day: "Mon", hours: 3.0, displayhour: "3h" },
+  { day: "Tue", hours: 4.2, displayhour: "4h 12m" },
+  { day: "Wed", hours: 2.8, displayhour: "2h 48m" },
+  { day: "Thu", hours: 4.5, displayhour: "4h 30m" },
+  { day: "Fri", hours: 7.2, displayhour: "7h 12m" },
+  { day: "Sat", hours: 8.8, displayhour: "8h 48m" },
+  { day: "Sun", hours: 5.1, displayhour: "5h 6m" },
 ]
 
 const CustomBar = (props: any) => {
