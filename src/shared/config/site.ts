@@ -31,7 +31,7 @@ export const siteConfig = {
       description: 'A scalable and modular Next.js starter template',
       creator: '@yourusername',
     },
-    themeColor: "#4299E1",
+    themeColor: '#4299E1',
     icons: {
       icon: '/favicon.ico',
     },
