@@ -167,7 +167,7 @@ export function StudentTable() {
         <div className={`border rounded-[12px] border-[#CBD5E0] overflow-x-auto ${showAll ? "max-h-96 overflow-y-auto" : ""}`}>
           <table className="w-full border rounded-[12px] border-[#CBD5E0]">
             <thead>
-              <tr className="border-b border-[#CBD5E0]">
+              <tr className="border-b border-[#CBD5E0] ">
                 <th className={`py-[12px] pl-[2rem] text-left ${interRegular.className} text-[#121417] text-[0.875rem]`}>Student ID</th>
                 <th className={`py-[12px]  text-left ${interRegular.className} text-[#121417] text-[0.875rem]`}>Last check-in</th>
                 <th className={`py-[12px]  text-left ${interRegular.className} text-[#121417] text-[0.875rem] pl-[11px]`}>Risk level</th>
