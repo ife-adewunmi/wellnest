@@ -16,7 +16,7 @@ export default function WelcomeMessage() {
 
   return (
     <div
-      className={`absolute flex text-center flex-col bottom-[6rem] left-[5.5rem] bg-white rounded-[1.25rem] p-[1.25rem] max-w-[487px] w-full transition-all duration-1000 ease-out transform ${
+      className={` flex text-center flex-col bg-white rounded-[1.25rem] p-[1.25rem] max-w-[487px] w-full transition-all duration-1000 ease-out transform ${
         isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
       }`}
     >

@@ -1,18 +1,20 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
+import { Metadata } from 'next';
+import QueryProvider from '@/shared/components/query-provider';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+export const metadata: Metadata = {
+  title: 'WellNest',
+  description: 'Student wellness tracking application',
+  manifest: '/manifest.json',
+  themeColor: '#317EFB',
+  icons: {
+    apple: '/icons/icon-192x192.png',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -21,16 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-  <Head>
-  <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#317EFB" />
-  <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-</Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-     
+      <body>
+        <QueryProvider>
+          {children}
+        </QueryProvider>
+          <ToastContainer />
       </body>
     </html>
   );

@@ -12,18 +12,68 @@ import { ArrowRight } from "lucide-react"
 import LayoutImage from "@/shared/components/layout-image"
 import HomeMessage from "@/shared/components/ui/home-screen-popup"
 import { interMedium, interRegular } from "@/fonts"
+import useCreateUsers from "@/shared/hooks/useCreateUsers"
+import { signupSchema, SignupFormData } from "@/shared/lib/validations"
+import { toast } from 'react-toastify'; 
 
 export default function SignupForm() {
-  const [formData, setFormData] = useState({
+  const { mutate: createUser, isPending } = useCreateUsers()
+  const [formData, setFormData] = useState<SignupFormData>({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   })
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: keyof SignupFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    if (validationErrors[field]) {
+      setValidationErrors((prev) => ({ ...prev, [field]: "" }))
+    }
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const validationResult = signupSchema.safeParse(formData)
+
+    if (!validationResult.success) {
+      const errors: Record<string, string> = {}
+      validationResult.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string
+        errors[field] = issue.message
+      })
+      setValidationErrors(errors)
+      return
+    }
+
+    setValidationErrors({})
+
+    const { confirmPassword, ...userData } = validationResult.data
+    createUser({
+      first_name: userData.firstName,
+      last_name: userData.lastName,
+      email: userData.email,
+      password: userData.password,
+    }, {
+      onSuccess: (data) => {
+        console.log('User created successfully:', data)
+        formData.firstName = "",
+        formData.lastName = "",
+        formData.email = "",
+        formData.password = "",
+        formData.confirmPassword = ""
+        toast.success('User created successfully!')
+        // You can redirect or show success message here
+      },
+      onError: (error) => {
+        toast.error("Failed to create user!")
+        console.error('Failed to create user:', error)
+
+      }
+    })
   }
 
 return (
@@ -52,8 +102,10 @@ return (
             </div>
 
             {/* Form fields */}
+            <form onSubmit={handleSubmit}>
+
+         
             <div className="mt-[2.5rem] flex flex-col gap-[1rem]">
-              {/* 🔧 FIXED: Added flex-1 and min-w-0 to prevent overflow */}
               <div className="flex items-center gap-[1rem] w-full">
                 <div className="flex flex-col gap-[4px] flex-1 min-w-0">
                   <Label htmlFor="firstName" className={`text-[1rem] text-[#666666] ${interRegular.className}`}>
@@ -64,8 +116,11 @@ return (
                     placeholder="John"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    className="w-full"
+                    className={`w-full ${validationErrors.firstName ? 'border-red-500' : ''}`}
                   />
+                  {validationErrors.firstName && (
+                    <span className="text-red-500 text-sm">{validationErrors.firstName}</span>
+                  )}
                 </div>
                 <div className="flex flex-col gap-[4px] flex-1 min-w-0">
                   <Label htmlFor="lastName" className={`text-[1rem] text-[#666666] ${interRegular.className}`}>
@@ -76,8 +131,11 @@ return (
                     placeholder="Doe"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    className="w-full"
+                    className={`w-full ${validationErrors.lastName ? 'border-red-500' : ''}`}
                   />
+                  {validationErrors.lastName && (
+                    <span className="text-red-500 text-sm">{validationErrors.lastName}</span>
+                  )}
                 </div>
               </div>
 
@@ -91,12 +149,15 @@ return (
                   placeholder="johndoe@eg.com"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  className="px-[1rem] py-[17px] border border-[#E2E8F0]"
+                  className={`px-[1rem] py-[17px] border border-[#E2E8F0] ${validationErrors.email ? 'border-red-500' : ''}`}
                 />
+                {validationErrors.email && (
+                  <span className="text-red-500 text-sm">{validationErrors.email}</span>
+                )}
               </div>
 
-              {/* 🔧 FIXED: Added flex-1 and min-w-0 to password fields too */}
-              <div className="flex items-center gap-[1rem]">
+              {/* Password fields with validation */}
+              <div className="flex items-start gap-[1rem]">
                 <div className="flex-1 min-w-0">
                   <PasswordInput
                     id="password"
@@ -105,6 +166,9 @@ return (
                     value={formData.password}
                     onChange={(value) => handleInputChange("password", value)}
                   />
+                  {validationErrors.password && (
+                    <span className="text-red-500 text-sm mt-1 block">{validationErrors.password}</span>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <PasswordInput
@@ -114,6 +178,9 @@ return (
                     value={formData.confirmPassword}
                     onChange={(value) => handleInputChange("confirmPassword", value)}
                   />
+                  {validationErrors.confirmPassword && (
+                    <span className="text-red-500 text-sm mt-1 block">{validationErrors.confirmPassword}</span>
+                  )}
                 </div>
               </div>
 
@@ -122,9 +189,14 @@ return (
               </p>
               
               <div className="mt-[2.5rem] flex items-center justify-center">
-                <Button variant={'default'} className="flex items-center">
-                  Sign up
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Button
+                  variant={'default'}
+                  className="flex items-center"
+                  type="submit"
+                  disabled={isPending}
+                >
+                  {isPending ? 'Creating account...' : 'Sign up'}
+                  {!isPending && <ArrowRight className="w-4 h-4 ml-2" />}
                 </Button>
               </div>
               
@@ -137,6 +209,7 @@ return (
                 </p>
               </div>
             </div>
+               </form>
           </div>
         </div>
       </div>
