@@ -1,17 +1,16 @@
 // src/components/Avatar.tsx
 
-import React, { FunctionComponent, useState } from 'react';
-import Image from 'next/image';
-
+import React, { FunctionComponent, useState } from 'react'
+import Image from 'next/image'
 
 type AvatarProps = {
-  size?: number;
-  source?: string;
-  type?: 'user' | 'group';
-  profilePicture?: string;
-  headerImage?: string;
-  customDefault?: 'thumbnail';
-};
+  size?: number
+  source?: string
+  type?: 'user' | 'group'
+  profilePicture?: string
+  headerImage?: string
+  customDefault?: 'thumbnail'
+}
 
 const Avatar: FunctionComponent<AvatarProps> = ({
   source,
@@ -21,7 +20,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
   headerImage,
   customDefault,
 }) => {
-  const [imageError, setImageError] = useState(false);
+  const [imageError, setImageError] = useState(false)
 
   const styles = {
     image: {
@@ -38,29 +37,30 @@ const Avatar: FunctionComponent<AvatarProps> = ({
       justifyContent: 'center',
       alignItems: 'center',
     },
-  };
+  }
 
   const getImageSrc = () => {
-    if (imageError) return null;
-    return headerImage || source || profilePicture || null;
-  };
+    if (imageError) return null
+    return headerImage || source || profilePicture || null
+  }
 
   const handleImageError = () => {
-    setImageError(true);
-  };
+    setImageError(true)
+  }
 
-  const imageSrc = getImageSrc();
+  const imageSrc = getImageSrc()
 
   if (customDefault === 'thumbnail') {
     return (
       <div style={styles.svgContainer}>
-         <Image
-        src='/images/header-default-profile.svg'
-        alt="Default Profile"
-         width={size} height={size} />
-       
+        <Image
+          src="/images/header-default-profile.svg"
+          alt="Default Profile"
+          width={size}
+          height={size}
+        />
       </div>
-    );
+    )
   }
 
   if (imageSrc) {
@@ -73,18 +73,15 @@ const Avatar: FunctionComponent<AvatarProps> = ({
         style={styles.image}
         onError={handleImageError}
       />
-    );
+    )
   } else if (type === 'user') {
     return (
       <div style={styles.svgContainer}>
-        <Image
-        src='/images/profile-img.png'
-        alt="Default Profile"
-         width={size} height={size} />
+        <Image src="/images/profile-img.png" alt="Default Profile" width={size} height={size} />
       </div>
-    );
-  } 
-};
+    )
+  }
+}
 
-export { Avatar };
-export default Avatar;
+export { Avatar }
+export default Avatar
