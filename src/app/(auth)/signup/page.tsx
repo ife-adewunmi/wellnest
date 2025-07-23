@@ -1,10 +1,5 @@
-import SignupForm from '@/feature/auth/components/signup-form'
-import React from 'react'
+import SignupForm from '@/feature/components/signup-form'
 
-export default function page() {
-  return (
-    <div>
-      <SignupForm />
-    </div>
-  )
+export default function SignupPage() {
+  return <SignupForm />
 }
