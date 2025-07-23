@@ -20,9 +20,28 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/shared/components/*"],
+      "@/config/*": ["./src/shared/config/*"],
+      "@/db/*": ["./src/shared/db/*"],
+      "@/enums/*": ["./src/shared/enums/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/hooks/*": ["./src/shared/hooks/*"],
+      "@/lib/*": ["./src/shared/lib/*"],
+      "@/providers/*": ["./src/shared/providers/*"],
+      "@/styles/*": ["./src/shared/styles/*"],
+      "@/store/*": ["./src/shared/store/*"],
+      "@/types/*": ["./src/shared/types/*"],
+      "@/ui/*": ["./src/shared/components/ui/*"],
+      "@/shared/*": ["./src/shared/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/feature/components/upcoming-sessions.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/feature/components/upcoming-sessions.tsx"
+  ],
   "exclude": ["node_modules"]
 }
