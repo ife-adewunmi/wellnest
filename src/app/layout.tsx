@@ -1,4 +1,6 @@
 
+
+import './globals.css'
 import { Metadata } from 'next';
 import QueryProvider from '@/shared/components/query-provider';
 
