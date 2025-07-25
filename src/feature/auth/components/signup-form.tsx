@@ -80,9 +80,9 @@ export default function SignupForm() {
 return (
   <div className="flex w-full" style={{paddingRight: '4.44vw', paddingLeft: '2.22vw', paddingTop: '2.22vh', paddingBottom: '2.22vh'}}>
     <div className="flex w-full max-w-[1346px] gap-[4.44vw]">
-      <div style={{ width: 'fit-content' }}>
+      {/* <div style={{ width: 'fit-content' }}>
         <LayoutImage />
-      </div>
+      </div> */}
       <div className="w-full flex items-center flex-col">
         <HomeMessage />
         <div className="w-full max-w-[458px] mt-[3.125rem]">

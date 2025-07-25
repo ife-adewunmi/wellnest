@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Button } from './ui/custom-button'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
+import { useRouter } from 'next/navigation'
 
 interface Student {
   id: string
@@ -14,6 +15,7 @@ interface Student {
 }
 
 export function StudentTable() {
+  const router = useRouter()
   const allStudents: Student[] = [
     {
       id: '1',
@@ -162,9 +164,15 @@ export function StudentTable() {
         <Button
           variant="ghost"
           className={`${interMedium.className} text-[0.875rem] text-[#4A5568]`}
-          onClick={() => setShowAll(!showAll)}
+          onClick={() => {
+            if (showAll) {
+              setShowAll(false)
+            } else {
+              router.push('/student-table')
+            }
+          }}
         >
-          {showAll ? 'Show less' : 'View all'}
+          {showAll ? 'Show less' : 'View all table'}
         </Button>
       </div>
       <div className="mt-[25px]">

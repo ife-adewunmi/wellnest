@@ -4,6 +4,8 @@ import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { AddNoteDialog } from "./add-note-dialogue"
+import { interBold, interMedium, interSemiBold } from "../styles/fonts"
+import Image from "next/image"
 
 
 interface Note {
@@ -49,38 +51,59 @@ export function CounselorNotes() {
   }
 
   return (
-    <Card>
+    <div>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-medium">Counselor Notes</CardTitle>
+          <CardTitle className={`${interBold.className} text-[22px] text-[#121417]`}>Counselor Notes</CardTitle>
           <AddNoteDialog onAddNote={addNote} />
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <div className="mt-[1rem]">
         {notes.map((note) => (
-          <div key={note.id} className="border rounded-lg p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
-                  <div className="w-4 h-4 bg-blue-600 rounded"></div>
+          <div  key={note.id}>
+
+        
+          <div className="w-full flex justify-between  rounded-[12px] border border-[#CBD5E0] px-[1.5rem] py-[1rem] mt-[1rem]">
+          <div className="flex flex-col gap-[12px]">
+
+        
+            <div className="flex gap-[1rem]">
+                <Image 
+            src="/svg/note.svg"
+            alt="notes"
+            width={24}
+            height={24}
+            />
+            <div className="flex items-center gap-[1rem]">
+                  <p className={`${interSemiBold.className} text-[18px] text-[#1A202C] `}>{note.title}</p>
+                  <p className={`${interMedium.className} text-[12px] text-[#718096]`}>{note.date}</p>
                 </div>
-                <div>
-                  <p className="font-medium">{note.title}</p>
-                  <p className="text-sm text-gray-500">{note.date}</p>
+                          
+
+            </div>
+            {note.expanded && note.content && <p className="text-sm text-gray-700">{note.content}</p>}
+   </div>
+            <div className="flex items-center justify-between ">
+              <div className="flex items-center ">
+                <div className="w-8 h-8  rounded flex items-center justify-center">
+              
                 </div>
+                
               </div>
-              <button onClick={() => toggleNote(note.id)}>
+              <button
+              className="cursor-pointer"
+               onClick={() => toggleNote(note.id)}>
                 {note.expanded ? (
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <ChevronDown className="h-[32px] w-[32px] " color="#1A202C" />
                 ) : (
-                  <ChevronUp className="h-4 w-4 text-gray-400" />
+                  <ChevronUp className="h-[32px] w-[32px] " color="#1A202C" />
                 )}
               </button>
             </div>
-            {note.expanded && note.content && <p className="text-sm text-gray-700">{note.content}</p>}
           </div>
+            </div>
         ))}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
 import { Plus } from "lucide-react"
 import { Label } from "./ui/label"
 import { Input } from "./ui/custom-input"
 import { Button } from "./ui/custom-button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialogue"
 
 interface AddNoteDialogProps {
   onAddNote: (note: { title: string; content: string }) => void
@@ -27,8 +27,8 @@ export function AddNoteDialog({ onAddNote }: AddNoteDialogProps) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" >
-          <Plus className="h-4 w-4 mr-2" />
+        <Button variant="dropdown" className="flex items-center gap-[8px]">
+          <Plus className="h-4 w-4 " />
           Add Note
         </Button>
       </DialogTrigger>

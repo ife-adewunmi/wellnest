@@ -104,7 +104,7 @@ export default function LoginForm() {
 
 
         <div style={{ width: 'fit-content' }}>
-          <LayoutImage />
+          {/* <LayoutImage /> */}
         </div>
         <div className="w-full flex items-center flex-col">
           <HomeMessage />
