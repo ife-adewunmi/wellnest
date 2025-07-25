@@ -19,6 +19,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
   profilePicture,
   headerImage,
   customDefault,
+  onClick
 }) => {
   const [imageError, setImageError] = useState(false)
 

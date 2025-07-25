@@ -23,7 +23,11 @@ interface Student {
   screenTime: string
 }
 
+
 export function StudentTable() {
+  const { currentView, setCurrentView } = useViewContext();
+  const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null);
+  
   const allStudents: Student[] = [
     {
       id: '1',
@@ -182,6 +186,11 @@ export function StudentTable() {
     console.log('Add student clicked')
     // Add your logic here
   }
+
+  const handleStudentClick = (student: Student) => {
+    setSelectedStudent(student);
+    setCurrentView('profile');
+  };
 
   const handleExport = () => {
     // Prepare the data for export
@@ -403,4 +412,14 @@ export function StudentTable() {
       </div>
     </div>
   )
+
+   return (
+    <div className="pb-[7.43vh]">
+      <Header />
+      <div className="w-full flex justify-center pt-[4.44vh]">
+        {/* Conditionally render based on currentView */}
+        {currentView === 'students' ? renderStudentsTable() : <Profile student={selectedStudent} />}
+      </div>
+    </div>
+  );
 }
