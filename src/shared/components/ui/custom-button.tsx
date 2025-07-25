@@ -13,6 +13,7 @@ const buttonVariants = cva('', {
       secondary: 'cursor-pointer bg-secondary text-secondary-foreground hover:bg-secondary/80',
       ghost: 'hover:bg-accent cursor-pointer hover:text-accent-foreground',
       link: `bg-[#CBD5E0] cursor-pointer rounded-[100px] py-[8px] px-[12px] text-[#1A202C] text-[14px] ${interSemiBold.className}`,
+      dropdown: `bg-[#EDF2F7] cursor-pointer rounded-[100px] py-[8px] px-[12px] text-[#1A202C] text-[14px] ${interSemiBold.className}`,
     },
     size: {},
   },

@@ -1,7 +1,6 @@
 'use client'
 
-import { Bell, Settings, MessageCircle } from 'lucide-react'
-import { Button } from '@/shared/components/ui/custom-button'
+import { Menu, X } from 'lucide-react'
 import Avatar from './ui/avatar'
 import Image from 'next/image'
 import { interBold, plusJakarta } from '@/shared/styles/fonts'
@@ -9,12 +8,15 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+
 interface AvatarIconProps {
   initialIcon: string
 }
 export function Header() {
   const [activeTab, setActiveTab] = useState('Dashboard')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+
 
   const AvatarIcon = ({ initialIcon = 'notification' }: AvatarIconProps) => {
     const [bgColor, setBgColor] = useState('#F0F2F5')
@@ -114,11 +116,117 @@ export function Header() {
     }
   }
 
+  // Mobile Navigation Component
+  const MobileNavigation = () => (
+    <>
+      {/* Mobile Menu Button - Only visible on mobile/tablet */}
+      <button
+        onClick={() => setMobileMenuOpen(true)}
+        className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+      >
+        <Menu className="w-6 h-6 text-gray-600" />
+      </button>
+
+      {/* Mobile Slide-in Menu */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0  bg-opacity-50 z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+
+          {/* Slide-in Menu */}
+          <div className="lg:hidden fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out">
+            {/* Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <div className="flex items-center gap-2">
+                <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
+                <h2 className={`text-lg font-semibold text-gray-800 ${interBold.className}`}>
+                  Distress Detection
+                </h2>
+              </div>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="p-4 space-y-2">
+              <Link
+                href="/dashboard"
+                onClick={() => {
+                  setActiveTab('Dashboard')
+                  setMobileMenuOpen(false)
+                }}
+                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                  pathname === '/dashboard'
+                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    : 'text-gray-700 hover:bg-gray-50'
+                } ${plusJakarta.className}`}
+              >
+                Dashboard
+              </Link>
+
+              <Link
+                href="/student-table"
+                onClick={() => {
+                  setActiveTab('Students')
+                  setMobileMenuOpen(false)
+                }}
+                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                  pathname === '/student-table'
+                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    : 'text-gray-700 hover:bg-gray-50'
+                } ${plusJakarta.className}`}
+              >
+                Students
+              </Link>
+
+              <Link
+                href="/intervention"
+                onClick={() => {
+                  setActiveTab('Intervention')
+                  setMobileMenuOpen(false)
+                }}
+                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                  pathname === '/intervention'
+                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    : 'text-gray-700 hover:bg-gray-50'
+                } ${plusJakarta.className}`}
+              >
+                Intervention
+              </Link>
+
+              <button
+                onClick={() => {
+                  setActiveTab('Reports')
+                  setMobileMenuOpen(false)
+                }}
+                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                  activeTab === 'Reports'
+                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    : 'text-gray-700 hover:bg-gray-50'
+                } ${plusJakarta.className}`}
+              >
+                Reports
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+
   return (
-    <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-[1.25rem]">
+    <>
+    <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-[1.25rem] lg:px-[1.5rem]">
       <div className="flex w-full max-w-[1360px] items-center justify-between">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex w-full items-center gap-[2px]">
+        <div className="flex flex-col justify-center lg:flex-row lg:items-center w-full items-center lg:justify-between">
+          <div className="flex items-center justify-center w-full max-w-[206px] items-center gap-[2px] lg:justify-start">
             <div className="flex">
               <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
             </div>
@@ -126,8 +234,9 @@ export function Header() {
               Distress Detection
             </h1>
           </div>
-          <div className="flex w-full max-w-['43.33%'] items-center gap-[2rem]">
-            <nav className="flex w-full max-w-['23%'] items-center">
+          <div className="flex w-full justify-center max-w-['43.33%'] items-center gap-[2rem] lg:justify-end">
+            {/* Desktop Navigation - Hidden on mobile */}
+            <nav className="hidden lg:flex w-full items-center max-w-[414px]">
               <ul className="flex w-full items-center justify-between">
                 <li>
                   <button
@@ -172,6 +281,11 @@ export function Header() {
               </ul>
             </nav>
 
+            {/* Mobile Hamburger Menu Button */}
+            <div className="lg:hidden">
+              <MobileNavigation />
+            </div>
+
             <div className="flex items-center gap-[2rem]">
               <div className="flex cursor-pointer items-center gap-[8px]">
                 <AvatarIcon initialIcon="notification" />
@@ -190,5 +304,6 @@ export function Header() {
         </div>
       </div>
     </header>
+    </>
   )
 }

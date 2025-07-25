@@ -29,3 +29,9 @@ export const plusJakarta = localFont({
   display: 'swap',
   variable: '--font-plus-jakarta-semibold',
 })
+
+export const manropeRegular = localFont({
+  src: './assets/Manrope-Regular.ttf',
+  display: 'swap',
+  variable: '--font-manrope-regular',
+})

@@ -5,11 +5,11 @@ import { Header } from './dashboard-header'
 import { MoodHistoryChart } from './line-charts'
 import { MoodCheckIns } from './mood-checkIn'
 import { Notifications } from './notification'
-import { SocialMediaActivity } from './social-media-activity'
 import { StudentTable } from './student-table'
 import { MetricCard } from './metric-card'
 import { interBold } from '@/shared/styles/fonts'
 import AverageScreenTime from './average-screen-time'
+import SocialMedia from './social-media'
 
 export default function Dashboard() {
   const moodCheckIns = [
@@ -87,7 +87,7 @@ export default function Dashboard() {
         {/* Screen Time and Social Media Activity */}
         <div className="mt-[2rem] grid grid-cols-1 gap-[2rem] lg:grid-cols-2">
           <AverageScreenTime />
-          <SocialMediaActivity />
+          <SocialMedia />
         </div>
 
         {/* Additional Dashboard Sections */}
