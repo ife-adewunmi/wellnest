@@ -11,7 +11,7 @@ const buttonVariants = cva('', {
       outline:
         'border cursor-pointer border-[#333333] bg-transparent rounded-[2.5rem] px-[7.6875rem] py-[1.25rem]',
       secondary: 'cursor-pointer bg-secondary text-secondary-foreground hover:bg-secondary/80',
-      ghost: 'hover:bg-accent cursor-pointer hover:text-accent-foreground',
+      ghost: `cursor-pointer items-center bg-[#3182CE] text-[12px]  lg:text-[18px] text-white   ${interSemiBold.className} px-[1rem] lg:px-[24px] py-[10px] rounded-full gap-[8px] flex  `,
       link: `bg-[#CBD5E0] cursor-pointer rounded-[100px] py-[8px] px-[12px] text-[#1A202C] text-[14px] ${interSemiBold.className}`,
       dropdown: `bg-[#EDF2F7] cursor-pointer rounded-[100px] py-[8px] px-[12px] text-[#1A202C] text-[14px] ${interSemiBold.className}`,
     },

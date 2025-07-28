@@ -1,9 +1,9 @@
-import Dashboard from '@/shared/components/dashboard'
+import Dashboard from '@/features/dashboard/components/dashboard'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='pb-[7.43vh]'>
+    <div>
       <Dashboard />
     </div>
   )
