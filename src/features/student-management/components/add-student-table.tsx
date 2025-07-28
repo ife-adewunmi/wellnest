@@ -415,7 +415,7 @@ export function StudentTable() {
   )
 
   return (
-    <div className="pb-[7.43vh]">
+    <div >
       <Header />
       <div className="w-full flex justify-center pt-[4.44vh]">
         {/* Conditionally render based on currentView */}

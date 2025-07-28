@@ -1,0 +1,48 @@
+"use client"
+
+import { useState } from "react"
+import { ScheduleHeader } from "./schedule-header"
+import { SessionsTable } from "./session-table"
+import { LogHistoryTable } from "./log-history-table"
+import { CreateSessionModal } from "./create-session-modal"
+import { useSessions } from "../hooks/use-sessions"
+import { DashboardHeader } from "@/features/dashboard"
+import { interBold } from "@/shared/styles/fonts"
+
+export default function ScheduleSession() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { upcomingSessions, logHistory, addSession } = useSessions()
+
+  const handleCreateSession = () => {
+    setIsModalOpen(true)
+  }
+
+  return (
+    <div className="flex flex-col">
+           <DashboardHeader />
+           <div className="flex justify-center flex-col items-center mt-[4.44vh]">
+
+         
+      <div className="w-full max-w-[1152px]  min-w-[320px] lg:min-w-[1024px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-0 ">
+     
+        {/* Schedule Session Section */}
+        <div className="bg-white gap-[24px] flex flex-col">
+          <ScheduleHeader onCreateSession={handleCreateSession} />
+          <SessionsTable sessions={upcomingSessions} />
+        </div>
+
+        {/* Log History Section */}
+        <div className="gap-[24px] flex flex-col mt-[24px]">
+          <div className="">
+            <h2 className={`${interBold.className} text-[1rem] lg:text-[1.5rem] text-[#121417]`}>Log History</h2>
+          </div>
+          <LogHistoryTable logEntries={logHistory} />
+        </div>
+      </div>
+
+      {/* Create Session Modal */}
+      <CreateSessionModal open={isModalOpen} onOpenChange={setIsModalOpen} onSave={addSession} />
+    </div>
+      </div>
+  )
+}
