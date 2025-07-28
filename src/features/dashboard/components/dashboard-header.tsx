@@ -275,7 +275,7 @@ export function Header() {
                       activeTab === 'Reports' ? 'text-[#3182CE]' : 'text-[#718096]'
                     } ${plusJakarta.className}`}
                   >
-                    Reports
+                     <Link href="/reports">Report</Link>
                   </button>
                 </li>
               </ul>
