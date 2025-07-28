@@ -1,8 +1,7 @@
 import React from 'react'
-import { ReportData } from '../types/report-types'
-
+import type { StudentReportData } from "../types/report-types"
 interface ReportPreviewProps {
-  data: ReportData[]
+  data: StudentReportData[]
   isLoading: boolean
 }
 
@@ -87,7 +86,7 @@ export function ReportPreview({ data, isLoading }: ReportPreviewProps) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    {report.exportType.toUpperCase()}
+                    {report.exportType?.toUpperCase() || 'N/A'}
                   </span>
                 </td>
               </tr>

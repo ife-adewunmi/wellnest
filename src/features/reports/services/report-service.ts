@@ -1,63 +1,86 @@
-import { ReportData, ReportFilterValues } from "../types/report-types";
+
+import { StudentReportData, ReportFilters } from "../types/report-types";
 
 // Mock data for development
-const mockReports: ReportData[] = [
+const mockReports: StudentReportData[] = [
   {
     id: "1",
     report: "Academic Performance Report",
+    studentId: "STU001",
     student: "John Doe",
+    studentName: "John Doe",
+    department: "Computer Science",
     level: "400",
     gender: "male",
     startDate: "2024-01-01",
     endDate: "2024-01-31",
-    exportType: "xlsx"
+    exportType: "xlsx",
+    dateRange: {
+      start: "2024-01-01",
+      end: "2024-01-31"
+    }
   },
   {
     id: "2",
     report: "Mood Assessment Report",
+    studentId: "STU002",
     student: "Jane Smith",
+    studentName: "Jane Smith",
+    department: "Psychology",
     level: "300",
     gender: "female",
     startDate: "2024-01-01",
     endDate: "2024-01-31",
-    exportType: "pdf"
+    exportType: "pdf",
+    dateRange: {
+      start: "2024-01-01",
+      end: "2024-01-31"
+    }
   },
   {
     id: "3",
     report: "Digital Wellness Report",
+    studentId: "STU003",
     student: "Mike Johnson",
+    studentName: "Mike Johnson",
+    department: "Engineering",
     level: "400",
     gender: "male",
     startDate: "2024-02-01",
     endDate: "2024-02-28",
-    exportType: "csv"
+    exportType: "csv",
+    dateRange: {
+      start: "2024-02-01",
+      end: "2024-02-28"
+    }
   },
   {
     id: "4",
     report: "Academic Performance Report",
+    studentId: "STU004",
     student: "Sarah Wilson",
+    studentName: "Sarah Wilson",
+    department: "Business",
     level: "200",
     gender: "female",
     startDate: "2024-01-15",
     endDate: "2024-02-15",
-    exportType: "xlsx"
+    exportType: "xlsx",
+    dateRange: {
+      start: "2024-01-15",
+      end: "2024-02-15"
+    }
   }
 ];
 
-export async function getReports(filters: ReportFilterValues): Promise<ReportData[]> {
+export async function getReports(filters: ReportFilters): Promise<StudentReportData[]> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 500));
 
   // In a real app, this would be an API call
   return mockReports.filter(report => {
-    // Filter by report type
-    if (filters.reportType === "academic" && !report.report.toLowerCase().includes("academic")) {
-      return false;
-    }
-    if (filters.reportType === "mood" && !report.report.toLowerCase().includes("mood")) {
-      return false;
-    }
-    if (filters.reportType === "digital" && !report.report.toLowerCase().includes("digital")) {
+    // Filter by department
+    if (filters.department && report.department.toLowerCase() !== filters.department.toLowerCase()) {
       return false;
     }
 
@@ -77,10 +100,10 @@ export async function getReports(filters: ReportFilterValues): Promise<ReportDat
     }
 
     // Filter by date range (simplified - in real app would be more sophisticated)
-    if (filters.startDate && report.startDate < filters.startDate) {
+    if (filters.startDate && report.startDate && report.startDate < filters.startDate) {
       return false;
     }
-    if (filters.endDate && report.endDate > filters.endDate) {
+    if (filters.endDate && report.endDate && report.endDate > filters.endDate) {
       return false;
     }
 

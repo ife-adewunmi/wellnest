@@ -1,6 +1,6 @@
 
 
-import { ReportsPage } from "@/features/reports/reports-page"
+import { ReportsPage } from "@/features/reports"
 
 const page = () => {
   return (
