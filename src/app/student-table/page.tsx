@@ -1,4 +1,4 @@
-import { StudentTable } from '@/feature/components/add-student-table'
+import { StudentTable } from '@/features/student-management/components/add-student-table'
 import React from 'react'
 
 const page = () => {

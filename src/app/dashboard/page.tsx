@@ -1,4 +1,4 @@
-import Dashboard from '@/shared/components/dashboard'
+import Dashboard from '@/features/dashboard/components/dashboard'
 import React from 'react'
 
 const page = () => {
