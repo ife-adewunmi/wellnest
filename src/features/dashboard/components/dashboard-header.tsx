@@ -4,9 +4,10 @@ import { Menu, X } from 'lucide-react'
 import Avatar from '@/shared/components/ui/avatar'
 import Image from 'next/image'
 import { interBold, plusJakarta } from '@/shared/styles/fonts'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import {useRouter} from 'next/navigation'
 
 
 interface AvatarIconProps {
@@ -16,7 +17,7 @@ export function Header() {
   const [activeTab, setActiveTab] = useState('Dashboard')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-
+  const router = useRouter()
 
   const AvatarIcon = ({ initialIcon = 'notification' }: AvatarIconProps) => {
     const [bgColor, setBgColor] = useState('#F0F2F5')
@@ -26,7 +27,15 @@ export function Header() {
       setBgColor((prev) => (prev === '#F0F2F5' ? '#3182CE' : '#F0F2F5'))
       setColor((prev) => (prev === '#000000' ? '#FFFFFF' : '#000000'))
     }
-    if (initialIcon === 'notification') {
+
+const handleSubmitNotification = () => {
+  handleClick()
+  Promise.resolve().then(() => {
+    router.push('/settings')
+  })
+}
+
+        if (initialIcon === 'notification') {
       return (
         <svg
           onClick={handleClick}
@@ -54,7 +63,7 @@ export function Header() {
     } else if (initialIcon === 'settings') {
       return (
         <svg
-          onClick={handleClick}
+          onClick={handleSubmitNotification}
           width="40"
           height="40"
           viewBox="0 0 40 40"
@@ -271,8 +280,8 @@ export function Header() {
                 <li>
                   <button
                     onClick={() => setActiveTab('Reports')}
-                    className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
-                      activeTab === 'Reports' ? 'text-[#3182CE]' : 'text-[#718096]'
+                       className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                      pathname === '/reports' ? 'text-[#3182CE]' : 'text-[#718096]'
                     } ${plusJakarta.className}`}
                   >
                      <Link href="/reports">Report</Link>

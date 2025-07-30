@@ -4,4 +4,5 @@ export * from './student-management';
 export * from './social-media';
 export * from './notes';
 export * from './intervention';
+export * from './settings';
 
