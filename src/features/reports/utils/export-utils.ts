@@ -1,7 +1,7 @@
-import * as XLSX from "xlsx"
-import { StudentReportData } from "../types/report-types"
+import * as XLSX from 'xlsx'
+import { StudentReportData } from '../types/report-types'
 
-declare module "jspdf" {
+declare module 'jspdf' {
   interface jsPDF {
     autoTable: (options: any) => jsPDF
   }
@@ -12,33 +12,33 @@ export async function exportToExcel(data: StudentReportData, filename: string) {
 
   // Summary sheet
   const summaryData = [
-    ["Student Report Summary"],
-    [""],
-    ["Student Name", data.studentName],
-    ["Department", data.department],
-    ["Level", data.level],
-    ["Gender", data.gender],
-    ["Report Period", `${data.dateRange.start} to ${data.dateRange.end}`],
-    [""],
+    ['Student Report Summary'],
+    [''],
+    ['Student Name', data.studentName],
+    ['Department', data.department],
+    ['Level', data.level],
+    ['Gender', data.gender],
+    ['Report Period', `${data.dateRange.start} to ${data.dateRange.end}`],
+    [''],
   ]
 
   const summarySheet = XLSX.utils.aoa_to_sheet(summaryData)
-  XLSX.utils.book_append_sheet(workbook, summarySheet, "Summary")
+  XLSX.utils.book_append_sheet(workbook, summarySheet, 'Summary')
 
   // Mood History sheet
   if (data.moodHistory) {
     const moodData = [
-      ["Date", "Mood", "Notes"],
-      ...data.moodHistory.map((entry) => [entry.date, entry.mood, entry.notes || ""]),
+      ['Date', 'Mood', 'Notes'],
+      ...data.moodHistory.map((entry) => [entry.date, entry.mood, entry.notes || '']),
     ]
     const moodSheet = XLSX.utils.aoa_to_sheet(moodData)
-    XLSX.utils.book_append_sheet(workbook, moodSheet, "Mood History")
+    XLSX.utils.book_append_sheet(workbook, moodSheet, 'Mood History')
   }
 
   // Screen Time sheet
   if (data.screenTime) {
     const screenTimeData = [
-      ["Date", "Total Hours", "Social", "Entertainment", "Productivity", "Education"],
+      ['Date', 'Total Hours', 'Social', 'Entertainment', 'Productivity', 'Education'],
       ...data.screenTime.map((entry) => [
         entry.date,
         entry.totalHours.toFixed(2),
@@ -49,17 +49,22 @@ export async function exportToExcel(data: StudentReportData, filename: string) {
       ]),
     ]
     const screenTimeSheet = XLSX.utils.aoa_to_sheet(screenTimeData)
-    XLSX.utils.book_append_sheet(workbook, screenTimeSheet, "Screen Time")
+    XLSX.utils.book_append_sheet(workbook, screenTimeSheet, 'Screen Time')
   }
 
   // Social Media sheet
   if (data.socialMediaUsage) {
     const socialMediaData = [
-      ["Date", "Platform", "Time Spent (minutes)", "Interactions"],
-      ...data.socialMediaUsage.map((entry) => [entry.date, entry.platform, entry.timeSpent, entry.interactions]),
+      ['Date', 'Platform', 'Time Spent (minutes)', 'Interactions'],
+      ...data.socialMediaUsage.map((entry) => [
+        entry.date,
+        entry.platform,
+        entry.timeSpent,
+        entry.interactions,
+      ]),
     ]
     const socialMediaSheet = XLSX.utils.aoa_to_sheet(socialMediaData)
-    XLSX.utils.book_append_sheet(workbook, socialMediaSheet, "Social Media Usage")
+    XLSX.utils.book_append_sheet(workbook, socialMediaSheet, 'Social Media Usage')
   }
 
   XLSX.writeFile(workbook, filename)
@@ -77,7 +82,7 @@ export function exportToCSV(data: StudentReportData, filename: string) {
     csvContent += `Mood History\n`
     csvContent += `Date,Mood,Notes\n`
     data.moodHistory.forEach((entry) => {
-      csvContent += `${entry.date},${entry.mood},${entry.notes || ""}\n`
+      csvContent += `${entry.date},${entry.mood},${entry.notes || ''}\n`
     })
     csvContent += `\n`
   }
@@ -99,26 +104,26 @@ export function exportToCSV(data: StudentReportData, filename: string) {
     })
   }
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
-  const link = document.createElement("a")
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const link = document.createElement('a')
   const url = URL.createObjectURL(blob)
-  link.setAttribute("href", url)
-  link.setAttribute("download", filename)
-  link.style.visibility = "hidden"
+  link.setAttribute('href', url)
+  link.setAttribute('download', filename)
+  link.style.visibility = 'hidden'
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
 }
 
 export async function exportToPDF(data: StudentReportData, filename: string) {
-  const { default: jsPDF } = await import("jspdf")
-  await import("jspdf-autotable")
+  const { default: jsPDF } = await import('jspdf')
+  await import('jspdf-autotable')
 
   const doc = new jsPDF()
 
   // Title
   doc.setFontSize(20)
-  doc.text("Student Well-being Report", 20, 20)
+  doc.text('Student Well-being Report', 20, 20)
 
   // Summary information
   doc.setFontSize(12)
@@ -133,14 +138,16 @@ export async function exportToPDF(data: StudentReportData, filename: string) {
   // Mood History
   if (data.moodHistory && data.moodHistory.length > 0) {
     doc.setFontSize(14)
-    doc.text("Mood History", 20, yPosition)
+    doc.text('Mood History', 20, yPosition)
     yPosition += 10
 
-    const moodTableData = data.moodHistory.slice(0, 10).map((entry) => [entry.date, entry.mood, entry.notes || ""])
+    const moodTableData = data.moodHistory
+      .slice(0, 10)
+      .map((entry) => [entry.date, entry.mood, entry.notes || ''])
 
     doc.autoTable({
       startY: yPosition,
-      head: [["Date", "Mood", "Notes"]],
+      head: [['Date', 'Mood', 'Notes']],
       body: moodTableData,
       margin: { left: 20 },
     })
@@ -151,7 +158,7 @@ export async function exportToPDF(data: StudentReportData, filename: string) {
   // Screen Time (if there's space)
   if (data.screenTime && data.screenTime.length > 0 && yPosition < 200) {
     doc.setFontSize(14)
-    doc.text("Screen Time Summary", 20, yPosition)
+    doc.text('Screen Time Summary', 20, yPosition)
     yPosition += 10
 
     const screenTimeTableData = data.screenTime
@@ -165,7 +172,7 @@ export async function exportToPDF(data: StudentReportData, filename: string) {
 
     doc.autoTable({
       startY: yPosition,
-      head: [["Date", "Total Hours", "Social", "Entertainment"]],
+      head: [['Date', 'Total Hours', 'Social', 'Entertainment']],
       body: screenTimeTableData,
       margin: { left: 20 },
     })

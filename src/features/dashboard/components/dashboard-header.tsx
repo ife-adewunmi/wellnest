@@ -7,8 +7,7 @@ import { interBold, plusJakarta } from '@/shared/styles/fonts'
 import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {useRouter} from 'next/navigation'
-
+import { useRouter } from 'next/navigation'
 
 interface AvatarIconProps {
   initialIcon: string
@@ -28,14 +27,14 @@ export function Header() {
       setColor((prev) => (prev === '#000000' ? '#FFFFFF' : '#000000'))
     }
 
-const handleSubmitNotification = () => {
-  handleClick()
-  Promise.resolve().then(() => {
-    router.push('/settings')
-  })
-}
+    const handleSubmitNotification = () => {
+      handleClick()
+      Promise.resolve().then(() => {
+        router.push('/settings')
+      })
+    }
 
-        if (initialIcon === 'notification') {
+    if (initialIcon === 'notification') {
       return (
         <svg
           onClick={handleClick}
@@ -131,9 +130,9 @@ const handleSubmitNotification = () => {
       {/* Mobile Menu Button - Only visible on mobile/tablet */}
       <button
         onClick={() => setMobileMenuOpen(true)}
-        className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+        className="rounded-lg p-2 hover:bg-gray-100 lg:hidden"
       >
-        <Menu className="w-6 h-6 text-gray-600" />
+        <Menu className="h-6 w-6 text-gray-600" />
       </button>
 
       {/* Mobile Slide-in Menu */}
@@ -141,14 +140,14 @@ const handleSubmitNotification = () => {
         <>
           {/* Backdrop */}
           <div
-            className="lg:hidden fixed inset-0  bg-opacity-50 z-40"
+            className="bg-opacity-50 fixed inset-0 z-40 lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Slide-in Menu */}
-          <div className="lg:hidden fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out">
+          <div className="fixed top-0 left-0 z-50 h-full w-80 transform bg-white shadow-lg transition-transform duration-300 ease-in-out lg:hidden">
             {/* Menu Header */}
-            <div className="flex items-center justify-between p-4 border-b">
+            <div className="flex items-center justify-between border-b p-4">
               <div className="flex items-center gap-2">
                 <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
                 <h2 className={`text-lg font-semibold text-gray-800 ${interBold.className}`}>
@@ -157,23 +156,23 @@ const handleSubmitNotification = () => {
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg"
+                className="rounded-lg p-2 hover:bg-gray-100"
               >
-                <X className="w-5 h-5 text-gray-600" />
+                <X className="h-5 w-5 text-gray-600" />
               </button>
             </div>
 
             {/* Navigation Links */}
-            <div className="p-4 space-y-2">
+            <div className="space-y-2 p-4">
               <Link
                 href="/dashboard"
                 onClick={() => {
                   setActiveTab('Dashboard')
                   setMobileMenuOpen(false)
                 }}
-                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                className={`block w-full rounded-lg p-3 text-left transition-colors ${
                   pathname === '/dashboard'
-                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    ? 'bg-blue-50 font-medium text-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 } ${plusJakarta.className}`}
               >
@@ -186,9 +185,9 @@ const handleSubmitNotification = () => {
                   setActiveTab('Students')
                   setMobileMenuOpen(false)
                 }}
-                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                className={`block w-full rounded-lg p-3 text-left transition-colors ${
                   pathname === '/student-table'
-                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    ? 'bg-blue-50 font-medium text-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 } ${plusJakarta.className}`}
               >
@@ -201,9 +200,9 @@ const handleSubmitNotification = () => {
                   setActiveTab('Intervention')
                   setMobileMenuOpen(false)
                 }}
-                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                className={`block w-full rounded-lg p-3 text-left transition-colors ${
                   pathname === '/intervention'
-                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    ? 'bg-blue-50 font-medium text-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 } ${plusJakarta.className}`}
               >
@@ -215,9 +214,9 @@ const handleSubmitNotification = () => {
                   setActiveTab('Reports')
                   setMobileMenuOpen(false)
                 }}
-                className={`block w-full text-left p-3 rounded-lg transition-colors ${
+                className={`block w-full rounded-lg p-3 text-left transition-colors ${
                   activeTab === 'Reports'
-                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    ? 'bg-blue-50 font-medium text-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 } ${plusJakarta.className}`}
               >
@@ -228,91 +227,91 @@ const handleSubmitNotification = () => {
         </>
       )}
     </>
-  );
+  )
 
   return (
     <>
-    <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-[1.25rem] lg:px-[1.5rem]">
-      <div className="flex w-full max-w-[1360px] items-center justify-between">
-        <div className="flex flex-col justify-center lg:flex-row lg:items-center w-full items-center lg:justify-between">
-          <div className="flex items-center justify-center w-full max-w-[206px] items-center gap-[2px] lg:justify-start">
-            <div className="flex">
-              <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
-            </div>
-            <h1 className={`text-[1.25rem] text-[#121417] ${interBold.className}`}>
-              Distress Detection
-            </h1>
-          </div>
-          <div className="flex w-full justify-center max-w-['43.33%'] items-center gap-[2rem] lg:justify-end">
-            {/* Desktop Navigation - Hidden on mobile */}
-            <nav className="hidden lg:flex w-full items-center max-w-[414px]">
-              <ul className="flex w-full items-center justify-between">
-                <li>
-                  <button
-                    onClick={() => setActiveTab('Dashboard')}
-                    className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
-                      pathname === '/dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
-                    } ${plusJakarta.className}`}
-                  >
-                    <Link href="/dashboard">Dashboard</Link>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setActiveTab('Students')}
-                    className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
-                      pathname === '/student-table' ? 'text-[#3182CE]' : 'text-[#718096]'
-                    } ${plusJakarta.className} `}
-                  >
-                    <Link href="/student-table">Students</Link>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setActiveTab('Intervention')}
-                    className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
-                      pathname === '/intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
-                    } ${plusJakarta.className}`}
-                  >
-                    <Link href="/intervention">Intervention</Link>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setActiveTab('Reports')}
-                       className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
-                      pathname === '/reports' ? 'text-[#3182CE]' : 'text-[#718096]'
-                    } ${plusJakarta.className}`}
-                  >
-                     <Link href="/reports">Report</Link>
-                  </button>
-                </li>
-              </ul>
-            </nav>
-
-            {/* Mobile Hamburger Menu Button */}
-            <div className="lg:hidden">
-              <MobileNavigation />
-            </div>
-
-            <div className="flex items-center gap-[2rem]">
-              <div className="flex cursor-pointer items-center gap-[8px]">
-                <AvatarIcon initialIcon="notification" />
-                <AvatarIcon initialIcon="settings" />
-                <AvatarIcon initialIcon="chat" />
+      <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-[1.25rem] lg:px-[1.5rem]">
+        <div className="flex w-full max-w-[1360px] items-center justify-between">
+          <div className="flex w-full flex-col items-center justify-center lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex w-full max-w-[206px] items-center justify-center gap-[2px] lg:justify-start">
+              <div className="flex">
+                <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
               </div>
-              <Avatar
-                size={38}
-                type="user"
-                //   headerImage={user?.header_image}
-                //   profilePicture={user?.thumbnail}
-                customDefault="thumbnail" // ✅ Forces fallback to DefaultThumbnail on this page only
-              />
+              <h1 className={`text-[1.25rem] text-[#121417] ${interBold.className}`}>
+                Distress Detection
+              </h1>
+            </div>
+            <div className="flex w-full max-w-['43.33%'] items-center justify-center gap-[2rem] lg:justify-end">
+              {/* Desktop Navigation - Hidden on mobile */}
+              <nav className="hidden w-full max-w-[414px] items-center lg:flex">
+                <ul className="flex w-full items-center justify-between">
+                  <li>
+                    <button
+                      onClick={() => setActiveTab('Dashboard')}
+                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                        pathname === '/dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
+                      } ${plusJakarta.className}`}
+                    >
+                      <Link href="/dashboard">Dashboard</Link>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setActiveTab('Students')}
+                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                        pathname === '/student-table' ? 'text-[#3182CE]' : 'text-[#718096]'
+                      } ${plusJakarta.className} `}
+                    >
+                      <Link href="/student-table">Students</Link>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setActiveTab('Intervention')}
+                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                        pathname === '/intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
+                      } ${plusJakarta.className}`}
+                    >
+                      <Link href="/intervention">Intervention</Link>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setActiveTab('Reports')}
+                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                        pathname === '/reports' ? 'text-[#3182CE]' : 'text-[#718096]'
+                      } ${plusJakarta.className}`}
+                    >
+                      <Link href="/reports">Report</Link>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+
+              {/* Mobile Hamburger Menu Button */}
+              <div className="lg:hidden">
+                <MobileNavigation />
+              </div>
+
+              <div className="flex items-center gap-[2rem]">
+                <div className="flex cursor-pointer items-center gap-[8px]">
+                  <AvatarIcon initialIcon="notification" />
+                  <AvatarIcon initialIcon="settings" />
+                  <AvatarIcon initialIcon="chat" />
+                </div>
+                <Avatar
+                  size={38}
+                  type="user"
+                  //   headerImage={user?.header_image}
+                  //   profilePicture={user?.thumbnail}
+                  customDefault="thumbnail" // ✅ Forces fallback to DefaultThumbnail on this page only
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
     </>
   )
 }

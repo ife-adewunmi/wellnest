@@ -18,14 +18,26 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 CardHeader.displayName = 'CardHeader'
 
 const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => <h1 ref={ref} className={`${interBold.className} text-[#121417] text-[2.25rem] ${className || ''}`} {...props} />,
+  ({ className, ...props }, ref) => (
+    <h1
+      ref={ref}
+      className={`${interBold.className} text-[2.25rem] text-[#121417] ${className || ''}`}
+      {...props}
+    />
+  ),
 )
 CardTitle.displayName = 'CardTitle'
 
 const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => <p ref={ref} className={`${interRegular.className} text-[#718096] text-[0.875rem] ${className || ''}`} {...props} />)
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={`${interRegular.className} text-[0.875rem] text-[#718096] ${className || ''}`}
+    {...props}
+  />
+))
 CardDescription.displayName = 'CardDescription'
 
 const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

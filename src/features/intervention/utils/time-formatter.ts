@@ -6,22 +6,22 @@
 export function formatTime(time: string): string {
   // If time already has AM/PM, return as is
   if (time.includes('AM') || time.includes('PM')) {
-    return time;
+    return time
   }
 
   // Parse time string (assuming format like "10:00" or "14:30")
-  const [hours, minutes] = time.split(':').map(Number);
-  
+  const [hours, minutes] = time.split(':').map(Number)
+
   if (isNaN(hours) || isNaN(minutes)) {
-    return time; // Return original if parsing fails
+    return time // Return original if parsing fails
   }
 
   // Convert to 12-hour format
-  const period = hours >= 12 ? 'PM' : 'AM';
-  const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
-  const displayMinutes = minutes.toString().padStart(2, '0');
+  const period = hours >= 12 ? 'PM' : 'AM'
+  const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours
+  const displayMinutes = minutes.toString().padStart(2, '0')
 
-  return `${displayHours}:${displayMinutes} ${period}`;
+  return `${displayHours}:${displayMinutes} ${period}`
 }
 
 /**
@@ -31,14 +31,14 @@ export function formatTime(time: string): string {
  */
 export function formatDate(date: string): string {
   try {
-    const dateObj = new Date(date);
+    const dateObj = new Date(date)
     return dateObj.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
-    });
+      day: 'numeric',
+    })
   } catch (error) {
-    return date; // Return original if parsing fails
+    return date // Return original if parsing fails
   }
 }
 
@@ -49,5 +49,5 @@ export function formatDate(date: string): string {
  * @returns Combined formatted date and time
  */
 export function formatDateTime(date: string, time: string): string {
-  return `${formatDate(date)} at ${formatTime(time)}`;
+  return `${formatDate(date)} at ${formatTime(time)}`
 }

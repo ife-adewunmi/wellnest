@@ -1,25 +1,28 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Card, CardContent } from "@/shared/components/ui/card"
-import { exportToExcel, exportToCSV, exportToPDF } from "./utils/export-utils"
-import type { ReportFilters as ReportFiltersType, ReportOptions as ReportOptionsType } from "./types/report-types"
-import { generateReportData } from "./utils/reports-generator"
-import { ReportHeader } from "./components/report-header"
-import { ReportFilters } from "./components/reports-filter"
-import { ReportOptions } from "./components/reports-options"
-import { toast } from 'react-toastify'; 
-import { DashboardHeader } from "../dashboard/components"
+import { useState } from 'react'
+import { Card, CardContent } from '@/shared/components/ui/card'
+import { exportToExcel, exportToCSV, exportToPDF } from './utils/export-utils'
+import type {
+  ReportFilters as ReportFiltersType,
+  ReportOptions as ReportOptionsType,
+} from './types/report-types'
+import { generateReportData } from './utils/reports-generator'
+import { ReportHeader } from './components/report-header'
+import { ReportFilters } from './components/reports-filter'
+import { ReportOptions } from './components/reports-options'
+import { toast } from 'react-toastify'
+import { DashboardHeader } from '../dashboard/components'
 
 export default function Reports() {
   const [filters, setFilters] = useState<ReportFiltersType>({
-    department: "computer-science",
-    student: "oyemakinde-tinubu",
-    level: "400",
-    gender: "male",
-    startDate: "2025-01-22",
-    endDate: "2025-06-30",
-    exportType: "xlsx",
+    department: 'computer-science',
+    student: 'oyemakinde-tinubu',
+    level: '400',
+    gender: 'male',
+    startDate: '2025-01-22',
+    endDate: '2025-06-30',
+    exportType: 'xlsx',
   })
 
   const [options, setOptions] = useState<ReportOptionsType>({
@@ -29,7 +32,6 @@ export default function Reports() {
   })
 
   const [isDownloading, setIsDownloading] = useState(false)
-  
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }))
@@ -47,48 +49,50 @@ export default function Reports() {
       const reportData = generateReportData(filters, options)
 
       // Create filename
-      const studentName = filters.student.replace("-", "_")
-      const timestamp = new Date().toISOString().split("T")[0]
+      const studentName = filters.student.replace('-', '_')
+      const timestamp = new Date().toISOString().split('T')[0]
       const filename = `${studentName}_wellbeing_report_${timestamp}`
 
       // Export based on selected format
       switch (filters.exportType) {
-        case "xlsx":
+        case 'xlsx':
           await exportToExcel(reportData, `${filename}.xlsx`)
           break
-        case "csv":
+        case 'csv':
           exportToCSV(reportData, `${filename}.csv`)
           break
-        case "pdf":
+        case 'pdf':
           exportToPDF(reportData, `${filename}.pdf`)
           break
         default:
-          throw new Error("Unsupported export format")
+          throw new Error('Unsupported export format')
       }
 
-      toast.success(`Your ${filters.exportType.toUpperCase()} report has been downloaded successfully.`)
+      toast.success(
+        `Your ${filters.exportType.toUpperCase()} report has been downloaded successfully.`,
+      )
     } catch (error) {
-      console.error("Download error:", error)
-      toast.error("There was an error generating your report. Please try again.")
+      console.error('Download error:', error)
+      toast.error('There was an error generating your report. Please try again.')
     } finally {
       setIsDownloading(false)
     }
   }
 
   return (
-       <div className="flex flex-col">
-           <DashboardHeader />
-           <div className="flex justify-center flex-col items-center mt-[4.44vh]">
-      <div className="w-full max-w-[1152px]  min-w-[320px] lg:min-w-[1024px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-0 ">
-        <div className="">
-          <ReportHeader onDownload={handleDownload} isDownloading={isDownloading} />
-          <div className="mt-[3.5rem] flex flex-col gap-[3.5rem]">
-            <ReportFilters filters={filters} onFilterChange={handleFilterChange} />
-            <ReportOptions options={options} onOptionChange={handleOptionChange} />
+    <div className="flex flex-col">
+      <DashboardHeader />
+      <div className="mt-[4.44vh] flex flex-col items-center justify-center">
+        <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
+          <div className="">
+            <ReportHeader onDownload={handleDownload} isDownloading={isDownloading} />
+            <div className="mt-[3.5rem] flex flex-col gap-[3.5rem]">
+              <ReportFilters filters={filters} onFilterChange={handleFilterChange} />
+              <ReportOptions options={options} onOptionChange={handleOptionChange} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }

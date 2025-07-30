@@ -16,8 +16,10 @@ export default function WelcomeMessage() {
 
   return (
     <div
-      className={` flex text-center flex-col bg-white rounded-[1.25rem] p-[1.25rem] max-w-[487px] w-full transition-all duration-1000 ease-out transform ${
-        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95 pointer-events-none"
+      className={`flex w-full max-w-[487px] transform flex-col rounded-[1.25rem] bg-white p-[1.25rem] text-center transition-all duration-1000 ease-out ${
+        isVisible
+          ? 'translate-y-0 scale-100 opacity-100'
+          : 'pointer-events-none translate-y-8 scale-95 opacity-0'
       }`}
     >
       <h2 className={`text-[2rem] text-[#0D141C] ${interBold.className}`}>Welcome to WellNest!</h2>

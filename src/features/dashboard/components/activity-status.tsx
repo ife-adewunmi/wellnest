@@ -1,42 +1,42 @@
-import { AlertTriangle, Flag, CheckCircle } from "lucide-react"
-import { Card, CardContent } from "@/shared/components/ui/card"
+import { AlertTriangle, Flag, CheckCircle } from 'lucide-react'
+import { Card, CardContent } from '@/shared/components/ui/card'
 
 export function ActivityStatus() {
   const activities = [
     {
       icon: AlertTriangle,
-      title: "Distress Detected",
-      time: "2 days ago",
-      bgColor: "bg-orange-50",
-      borderColor: "border-orange-200",
-      iconColor: "text-orange-600",
-      titleColor: "text-orange-900",
-      timeColor: "text-orange-700",
+      title: 'Distress Detected',
+      time: '2 days ago',
+      bgColor: 'bg-orange-50',
+      borderColor: 'border-orange-200',
+      iconColor: 'text-orange-600',
+      titleColor: 'text-orange-900',
+      timeColor: 'text-orange-700',
     },
     {
       icon: Flag,
-      title: "Flagged Post",
-      time: "3 days ago",
-      bgColor: "bg-red-50",
-      borderColor: "border-red-200",
-      iconColor: "text-red-600",
-      titleColor: "text-red-900",
-      timeColor: "text-red-700",
+      title: 'Flagged Post',
+      time: '3 days ago',
+      bgColor: 'bg-red-50',
+      borderColor: 'border-red-200',
+      iconColor: 'text-red-600',
+      titleColor: 'text-red-900',
+      timeColor: 'text-red-700',
     },
     {
       icon: CheckCircle,
-      title: "Normal Activity",
-      time: "4 days ago",
-      bgColor: "bg-green-50",
-      borderColor: "border-green-200",
-      iconColor: "text-green-600",
-      titleColor: "text-green-900",
-      timeColor: "text-green-700",
+      title: 'Normal Activity',
+      time: '4 days ago',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      iconColor: 'text-green-600',
+      titleColor: 'text-green-900',
+      timeColor: 'text-green-700',
     },
   ]
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {activities.map((activity, index) => {
         const Icon = activity.icon
         return (

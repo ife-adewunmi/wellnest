@@ -1,5 +1,5 @@
-import { Checkbox } from "@/shared/components/ui/checkbox"
-import { Label } from "@/shared/components/ui/label"
+import { Checkbox } from '@/shared/components/ui/checkbox'
+import { Label } from '@/shared/components/ui/label'
 
 interface ReportOptionsProps {
   options: {
@@ -22,9 +22,12 @@ export function ReportOptions({ options, onOptionChange }: ReportOptionsProps) {
           <Checkbox
             id="mood-history"
             checked={options.moodHistory}
-            onCheckedChange={handleCheckboxChange("moodHistory")}
+            onCheckedChange={handleCheckboxChange('moodHistory')}
           />
-          <Label htmlFor="mood-history" className="text-sm font-medium text-gray-700 cursor-pointer">
+          <Label
+            htmlFor="mood-history"
+            className="cursor-pointer text-sm font-medium text-gray-700"
+          >
             Mood History
           </Label>
         </div>
@@ -33,9 +36,9 @@ export function ReportOptions({ options, onOptionChange }: ReportOptionsProps) {
           <Checkbox
             id="screen-time"
             checked={options.screenTime}
-            onCheckedChange={handleCheckboxChange("screenTime")}
+            onCheckedChange={handleCheckboxChange('screenTime')}
           />
-          <Label htmlFor="screen-time" className="text-sm font-medium text-gray-700 cursor-pointer">
+          <Label htmlFor="screen-time" className="cursor-pointer text-sm font-medium text-gray-700">
             Screen Time
           </Label>
         </div>
@@ -44,9 +47,12 @@ export function ReportOptions({ options, onOptionChange }: ReportOptionsProps) {
           <Checkbox
             id="social-media"
             checked={options.socialMediaUsage}
-            onCheckedChange={handleCheckboxChange("socialMediaUsage")}
+            onCheckedChange={handleCheckboxChange('socialMediaUsage')}
           />
-          <Label htmlFor="social-media" className="text-sm font-medium text-gray-700 cursor-pointer">
+          <Label
+            htmlFor="social-media"
+            className="cursor-pointer text-sm font-medium text-gray-700"
+          >
             Social Media Usage
           </Label>
         </div>

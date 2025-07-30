@@ -1,13 +1,19 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Calendar, Clock, Search } from "lucide-react"
-import { Button } from "@/shared/components/ui/custom-button"
-import { Input } from "@/shared/components/ui/custom-input"
-import { Label } from "@/shared/components/ui/label"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialogue"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select"
-import type { Session } from "../types/session"
+import { useState } from 'react'
+import { Calendar, Clock, Search } from 'lucide-react'
+import { Button } from '@/shared/components/ui/custom-button'
+import { Input } from '@/shared/components/ui/custom-input'
+import { Label } from '@/shared/components/ui/label'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/components/ui/dialogue'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/ui/select'
+import type { Session } from '../types/session'
 interface CreateSessionModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -16,20 +22,20 @@ interface CreateSessionModalProps {
 
 export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSessionModalProps) {
   const [formData, setFormData] = useState({
-    student: "",
-    date: "",
-    time: "",
-    intervention: "",
+    student: '',
+    date: '',
+    time: '',
+    intervention: '',
   })
 
   const interventionOptions = [
-    "Counseling Session",
-    "Workshop",
-    "Follow-up Call",
-    "Group Therapy",
-    "Individual Counseling",
-    "Assessment",
-    "Crisis Intervention",
+    'Counseling Session',
+    'Workshop',
+    'Follow-up Call',
+    'Group Therapy',
+    'Individual Counseling',
+    'Assessment',
+    'Crisis Intervention',
   ]
 
   const handleSave = () => {
@@ -43,10 +49,10 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
 
       // Reset form
       setFormData({
-        student: "",
-        date: "",
-        time: "",
-        intervention: "",
+        student: '',
+        date: '',
+        time: '',
+        intervention: '',
       })
 
       onOpenChange(false)
@@ -67,7 +73,7 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
           <DialogTitle className="text-xl font-semibold">Create new session</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 ">
+        <div className="space-y-6">
           {/* Student Field */}
           <div className="space-y-2">
             <Label htmlFor="student" className="text-sm font-medium text-gray-700">
@@ -78,10 +84,13 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
                 id="student"
                 placeholder="Enter student name"
                 value={formData.student}
-                onChange={(e) => handleInputChange("student", e.target.value)}
-                className="pr-10 w-full placeholder:text[#1A202C]"
+                onChange={(e) => handleInputChange('student', e.target.value)}
+                className="placeholder:text[#1A202C] w-full pr-10"
               />
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 " color="#1A202C" />
+              <Search
+                className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform"
+                color="#1A202C"
+              />
             </div>
           </div>
 
@@ -96,8 +105,8 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
                   id="date"
                   type="date"
                   value={formData.date}
-                  onChange={(e) => handleInputChange("date", e.target.value)}
-                  className="pr-10 placeholder:text[#1A202C]"
+                  onChange={(e) => handleInputChange('date', e.target.value)}
+                  className="placeholder:text[#1A202C] pr-10"
                 />
                 {/* <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" /> */}
               </div>
@@ -112,8 +121,8 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
                   id="time"
                   type="time"
                   value={formData.time}
-                  onChange={(e) => handleInputChange("time", e.target.value)}
-                  className="pr-10 placeholder:text[#1A202C]"
+                  onChange={(e) => handleInputChange('time', e.target.value)}
+                  className="placeholder:text[#1A202C] pr-10"
                 />
                 {/* <Clock className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" /> */}
               </div>
@@ -125,8 +134,11 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
             <Label htmlFor="intervention" className="text-sm font-medium text-gray-700">
               Intervention Description
             </Label>
-            <Select value={formData.intervention} onValueChange={(value) => handleInputChange("intervention", value)}>
-              <SelectTrigger className="w-full rounded-[6px] border border-[#E2E8F0] px-[1rem] py-[17px] placeholder:text-[18px] placeholder:text-[#A0AEC0] focus:border-[#4299E1] flex items-center justify-between focus:ring-1 focus:ring-[#4299E1] focus:outline-none ">
+            <Select
+              value={formData.intervention}
+              onValueChange={(value) => handleInputChange('intervention', value)}
+            >
+              <SelectTrigger className="flex w-full items-center justify-between rounded-[6px] border border-[#E2E8F0] px-[1rem] py-[17px] placeholder:text-[18px] placeholder:text-[#A0AEC0] focus:border-[#4299E1] focus:ring-1 focus:ring-[#4299E1] focus:outline-none">
                 <SelectValue placeholder="Select intervention type" />
               </SelectTrigger>
               <SelectContent>
@@ -145,7 +157,9 @@ export function CreateSessionModal({ open, onOpenChange, onSave }: CreateSession
           <Button
             onClick={handleSave}
             variant="ghost"
-            disabled={!formData.student || !formData.date || !formData.time || !formData.intervention}
+            disabled={
+              !formData.student || !formData.date || !formData.time || !formData.intervention
+            }
           >
             Save
           </Button>
