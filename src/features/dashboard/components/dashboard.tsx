@@ -86,7 +86,7 @@ export default function Dashboard() {
 
         {/* Screen Time and Social Media Activity */}
         <div className="mt-[2rem] grid grid-cols-1 gap-[2rem] lg:grid-cols-2">
-          <AverageScreenTime />
+          {/* <AverageScreenTime /> */}
           <SocialMedia />
         </div>
 

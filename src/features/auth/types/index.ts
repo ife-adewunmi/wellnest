@@ -3,8 +3,15 @@ export interface User {
   email: string
   name: string
   role: string
+  avatar?: string
+  department?: string
+  studentId?: string
+  level?: string
+  firstName: string
+  lastName: string
   createdAt: Date
   updatedAt: Date
+
 }
 
 export interface LoginCredentials {
@@ -13,8 +20,8 @@ export interface LoginCredentials {
 }
 
 export interface SignupCredentials {
-  first_name: string
-  last_name: string
+  firstName: string
+  lastName: string
   email: string
   password: string
 }

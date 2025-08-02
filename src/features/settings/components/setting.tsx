@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui
 import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Switch } from '@/shared/components/ui/switch'
 import { Label } from '@/shared/components/ui/label'
-import { Separator } from '@/shared/components/ui/seperator'
+import { Separator } from '@/shared/components/ui/separator'
 import { toast } from 'react-toastify'
 import { DashboardHeader } from '@/features/dashboard/components'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
