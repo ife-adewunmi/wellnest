@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import GoogleSignupButton from '@/shared/components/ui/google-signup-button'
-import { Separator } from '@/shared/components/ui/seperator'
 import { Label } from '@/shared/components/ui/label'
 import { Input } from '@/shared/components/ui/custom-input'
 import PasswordInput from '@/shared/components/ui/password-input'
@@ -18,6 +17,7 @@ import useLoginUser from '../hooks/useLoginUser'
 import { toast } from 'react-toastify'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
+import { UserRole } from '../enums'
 
 export default function LoginForm() {
   const router = useRouter()
@@ -72,8 +72,8 @@ export default function LoginForm() {
         if (data.user) {
           setUser({
             id: data.user.id.toString(),
-            first_name: data.user.first_name,
-            last_name: data.user.last_name,
+            first_name: data.user.firstName,
+            last_name: data.user.lastName,
             email: data.user.email,
             password: '',
           })
@@ -88,7 +88,12 @@ export default function LoginForm() {
         }
 
         toast.success('Login successful!')
-        router.push('/dashboard')
+        if (data.user?.role === UserRole.COUNSELOR) {
+          router.push('/dashboard')
+        } else {
+          router.push('/student')
+        }
+        router.refresh()
       },
       onError: (error) => {
         console.error('Failed to login:', error)
