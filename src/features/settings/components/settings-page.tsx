@@ -11,6 +11,7 @@ import { toast } from "react-toastify"
 import { useDashboardSettings } from "@/shared/contexts/dashboard-settings-context"
 import { DashboardHeader } from "@/features/dashboard/components"
 import { interMedium, interRegular } from "@/shared/styles/fonts"
+import { DashboardWidget } from "@/features"
 
 interface NotificationSetting {
   id: string
