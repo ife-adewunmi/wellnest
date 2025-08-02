@@ -1,4 +1,4 @@
-import { MoodCheckIn } from "../types/mood"
+import { MoodCheckIn } from '../types/mood'
 
 // Enhanced error types for better error handling
 export interface ApiError {
@@ -20,20 +20,20 @@ export class ApiErrorHandler {
   static handleError(error: any): ApiError {
     if (error instanceof TypeError) {
       return {
-        message: "Network error. Please check your connection.",
+        message: 'Network error. Please check your connection.',
         status: 0,
-        code: "NETWORK_ERROR",
+        code: 'NETWORK_ERROR',
       }
     }
-    
+
     if (error.status) {
       return error
     }
-    
+
     return {
-      message: error.message || "An unexpected error occurred",
+      message: error.message || 'An unexpected error occurred',
       status: 500,
-      code: "UNKNOWN_ERROR",
+      code: 'UNKNOWN_ERROR',
     }
   }
 }
@@ -42,20 +42,20 @@ class ApiClient {
   private baseURL: string
   private defaultTimeout: number = 10000
 
-  constructor(baseURL = "") {
+  constructor(baseURL = '') {
     this.baseURL = baseURL
   }
 
   async request<T>(endpoint: string, options: RequestInit = {}): Promise<{ data: T }> {
     const url = `${this.baseURL}${endpoint}`
-    
+
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), this.defaultTimeout)
 
     try {
       const config: RequestInit = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           ...options.headers,
         },
         signal: controller.signal,
@@ -79,13 +79,13 @@ class ApiClient {
   }
 
   async get<T>(endpoint: string, options?: RequestInit): Promise<{ data: T }> {
-    return this.request<T>(endpoint, { ...options, method: "GET" })
+    return this.request<T>(endpoint, { ...options, method: 'GET' })
   }
 
   async post<T>(endpoint: string, data?: any, options?: RequestInit): Promise<{ data: T }> {
     return this.request<T>(endpoint, {
       ...options,
-      method: "POST",
+      method: 'POST',
       body: data ? JSON.stringify(data) : undefined,
     })
   }
@@ -93,13 +93,13 @@ class ApiClient {
   async put<T>(endpoint: string, data?: any, options?: RequestInit): Promise<{ data: T }> {
     return this.request<T>(endpoint, {
       ...options,
-      method: "PUT",
+      method: 'PUT',
       body: data ? JSON.stringify(data) : undefined,
     })
   }
 
   async delete<T>(endpoint: string, options?: RequestInit): Promise<{ data: T }> {
-    return this.request<T>(endpoint, { ...options, method: "DELETE" })
+    return this.request<T>(endpoint, { ...options, method: 'DELETE' })
   }
 }
 
@@ -113,13 +113,16 @@ type ApiResult<T> = {
 }
 
 class ApiService {
-  private static async safeCall<T>(apiCall: () => Promise<{ data: T }>, fallback: T): Promise<ApiResult<T>> {
+  private static async safeCall<T>(
+    apiCall: () => Promise<{ data: T }>,
+    fallback: T,
+  ): Promise<ApiResult<T>> {
     try {
       const result = await apiCall()
       return {
         data: result.data,
         error: null,
-        loading: false
+        loading: false,
       }
     } catch (error) {
       const apiError = ApiErrorHandler.handleError(error)
@@ -127,12 +130,14 @@ class ApiService {
       return {
         data: fallback,
         error: apiError,
-        loading: false
+        loading: false,
       }
     }
   }
 
-  private static async safeCallWithError<T>(apiCall: () => Promise<{ data: T }>): Promise<ApiResult<T>> {
+  private static async safeCallWithError<T>(
+    apiCall: () => Promise<{ data: T }>,
+  ): Promise<ApiResult<T>> {
     try {
       const result = await apiCall()
       return { data: result.data, error: null, loading: false }
@@ -145,100 +150,69 @@ class ApiService {
 
   // Mood check-ins
   static async fetchMoodCheckIns(userId: string): Promise<ApiResult<MoodCheckIn[]>> {
-    return this.safeCall(
-      () => api.get(`/api/mood-check-ins?userId=${userId}`),
-      []
-    )
+    return this.safeCall(() => api.get(`/api/mood-check-ins?userId=${userId}`), [])
   }
 
   // Sessions
   static async fetchUpcomingSessions(userId: string) {
-    return this.safeCall(
-      () => api.get(`/api/sessions?userId=${userId}&upcoming=true`),
-      []
-    )
+    return this.safeCall(() => api.get(`/api/sessions?userId=${userId}&upcoming=true`), [])
   }
 
   static async createSession(sessionData: any) {
-    return this.safeCallWithError(
-      () => api.post('/api/sessions', sessionData)
-    )
+    return this.safeCallWithError(() => api.post('/api/sessions', sessionData))
   }
 
   // Messages
   static async fetchRecentMessages(userId: string) {
-    return this.safeCall(
-      () => api.get(`/api/messages?userId=${userId}&recent=true`),
-      []
-    )
+    return this.safeCall(() => api.get(`/api/messages?userId=${userId}&recent=true`), [])
   }
 
   static async sendMessage(messageData: any) {
-    return this.safeCallWithError(
-      () => api.post('/api/messages', messageData)
-    )
+    return this.safeCallWithError(() => api.post('/api/messages', messageData))
   }
 
   // Students
   static async fetchStudentsList(): Promise<ApiResult<any[]>> {
-    return this.safeCall(
-      () => api.get('/api/students'),
-      []
-    )
+    return this.safeCall(() => api.get('/api/students'), [])
   }
 
   static async fetchStudentStats(userId: string) {
-    return this.safeCall(
-      () => api.get(`/api/students/${userId}/stats`),
-      {
-        weeklyCheckIns: 0,
-        totalCheckIns: 7,
-        averageMood: 'Good',
-        moodEmoji: '🙂',
-        nextSession: null
-      }
-    )
+    return this.safeCall(() => api.get(`/api/students/${userId}/stats`), {
+      weeklyCheckIns: 0,
+      totalCheckIns: 7,
+      averageMood: 'Good',
+      moodEmoji: '🙂',
+      nextSession: null,
+    })
   }
 
   // Dashboard
   static async fetchDashboardStats() {
-    return this.safeCall(
-      () => api.get('/api/dashboard/stats'),
-      {
-        totalStudents: 0,
-        highRiskStudents: 0,
-        activeSessions: 0,
-        messagesToday: 0
-      }
-    )
+    return this.safeCall(() => api.get('/api/dashboard/stats'), {
+      totalStudents: 0,
+      highRiskStudents: 0,
+      activeSessions: 0,
+      messagesToday: 0,
+    })
   }
 
   // Notifications
   static async fetchNotifications(userId: string) {
-    return this.safeCall(
-      () => api.get(`/api/notifications?userId=${userId}`),
-      []
-    )
+    return this.safeCall(() => api.get(`/api/notifications?userId=${userId}`), [])
   }
 
   static async markNotificationAsRead(notificationId: string) {
-    return this.safeCall(
-      () => api.put(`/api/notifications/${notificationId}/read`),
-      false
-    )
+    return this.safeCall(() => api.put(`/api/notifications/${notificationId}/read`), false)
   }
 
   // Screen time
   static async fetchScreenTimeStats(userId: string) {
-    return this.safeCall(
-      () => api.get(`/api/screen-time/stats?userId=${userId}`),
-      {
-        dailyAverage: 0,
-        weeklyTotal: 0,
-        todayTotal: 0,
-        threshold: 8 * 60 * 60 * 1000 // 8 hours in milliseconds
-      }
-    )
+    return this.safeCall(() => api.get(`/api/screen-time/stats?userId=${userId}`), {
+      dailyAverage: 0,
+      weeklyTotal: 0,
+      todayTotal: 0,
+      threshold: 8 * 60 * 60 * 1000, // 8 hours in milliseconds
+    })
   }
 }
 

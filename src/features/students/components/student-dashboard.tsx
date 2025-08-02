@@ -1,16 +1,21 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { MoodCheckInForm } from "@/features/mood/components/mood-check-in-form"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { MoodHistoryChart } from "@/features/mood/components/mood-history-chart"
-import { UpcomingSessions } from "@/features/sessions/components/upcoming-sessions"
-import { RecentMessages } from "@/features/messaging/components/recent-messages"
-import type { User } from "@/features/auth/types"
-import { fetchMoodCheckIns, fetchUpcomingSessions, fetchScreenTimeStats, fetchStudentStats } from "@/shared/service/api"
-import { MoodCheckIn } from "@/shared/types/mood"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { MoodCheckInForm } from '@/features/mood/components/mood-check-in-form'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
+import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
+import { RecentMessages } from '@/features/messaging/components/recent-messages'
+import type { User } from '@/features/auth/types'
+import {
+  fetchMoodCheckIns,
+  fetchUpcomingSessions,
+  fetchScreenTimeStats,
+  fetchStudentStats,
+} from '@/shared/service/api'
+import { MoodCheckIn } from '@/shared/types/mood'
 // import ScreenTimeMonitor from "@/features/screen-time/lib/screen-time-monitor"
 // import { useToast } from "@/shared/hooks/use-toast"
 
@@ -26,7 +31,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
     dailyAverage: 0,
     weeklyTotal: 0,
     todayTotal: 0,
-    threshold: 8 * 60 * 60 * 1000
+    threshold: 8 * 60 * 60 * 1000,
   })
   type NextSession = {
     counselorName: string
@@ -45,7 +50,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
     totalCheckIns: 7,
     averageMood: 'Good',
     moodEmoji: '🙂',
-    nextSession: null
+    nextSession: null,
   })
   const [loading, setLoading] = useState(true)
 
@@ -57,7 +62,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
           fetchMoodCheckIns(user.id),
           fetchUpcomingSessions(user.id),
           fetchScreenTimeStats(user.id),
-          fetchStudentStats(user.id)
+          fetchStudentStats(user.id),
         ])
         setMoodCheckIns(checkIns.data ?? [])
         setUpcomingSessions(sessions.data)
@@ -75,15 +80,16 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-primary to-blue-600 text-white rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-2">Good Afternoon, {user.name}!</h1>
+      <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white">
+        <h1 className="mb-2 text-2xl font-bold">Good Afternoon, {user.name}!</h1>
         <p className="text-blue-100">
-          Welcome back to your portal account! You can start by using the menu dashboard to navigate the portal
+          Welcome back to your portal account! You can start by using the menu dashboard to navigate
+          the portal
         </p>
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* Mood Check-in Widget */}
         <Card>
           <CardHeader>
@@ -92,8 +98,8 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">Record your mood</p>
-            <div className="flex gap-2 mb-4">
+            <p className="text-muted-foreground mb-4 text-sm">Record your mood</p>
+            <div className="mb-4 flex gap-2">
               <span className="text-2xl">😊</span>
               <span className="text-2xl">🙂</span>
               <span className="text-2xl">😐</span>
@@ -128,19 +134,22 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-sm">Check-ins</span>
-                  <span className="font-medium">{studentStats.weeklyCheckIns}/{studentStats.totalCheckIns}</span>
+                  <span className="font-medium">
+                    {studentStats.weeklyCheckIns}/{studentStats.totalCheckIns}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Average Mood</span>
-                  <span className="font-medium">{studentStats.averageMood} {studentStats.moodEmoji}</span>
+                  <span className="font-medium">
+                    {studentStats.averageMood} {studentStats.moodEmoji}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Screen Time</span>
                   <span className="font-medium">
-                    {screenTimeStats.dailyAverage > 0 
+                    {screenTimeStats.dailyAverage > 0
                       ? `${(screenTimeStats.dailyAverage / (60 * 60 * 1000)).toFixed(1)}h/day`
-                      : 'No data'
-                    }
+                      : 'No data'}
                   </span>
                 </div>
               </div>
@@ -157,21 +166,21 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
             {loading ? (
               <div className="space-y-2">
                 <p className="font-medium">Loading...</p>
-                <p className="text-sm text-muted-foreground">--</p>
+                <p className="text-muted-foreground text-sm">--</p>
               </div>
             ) : studentStats.nextSession ? (
               <div className="space-y-2">
                 <p className="font-medium">{studentStats.nextSession.counselorName}</p>
-                <p className="text-sm text-muted-foreground">{studentStats.nextSession.date}</p>
-                <p className="text-sm text-muted-foreground">{studentStats.nextSession.type}</p>
-                <Button variant="outline" size="sm" className="w-full mt-2 bg-transparent">
+                <p className="text-muted-foreground text-sm">{studentStats.nextSession.date}</p>
+                <p className="text-muted-foreground text-sm">{studentStats.nextSession.type}</p>
+                <Button variant="outline" size="sm" className="mt-2 w-full bg-transparent">
                   View Details
                 </Button>
               </div>
             ) : (
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">No upcoming sessions</p>
-                <Button variant="outline" size="sm" className="w-full mt-2 bg-transparent">
+                <p className="text-muted-foreground text-sm">No upcoming sessions</p>
+                <Button variant="outline" size="sm" className="mt-2 w-full bg-transparent">
                   Schedule Session
                 </Button>
               </div>
@@ -181,7 +190,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="space-y-6">
           <MoodHistoryChart userId={user.id} />
           <UpcomingSessions userId={user.id} />

@@ -55,8 +55,8 @@ class ScreenTimeMonitor {
   private initializeEventListeners() {
     // Track user activity
     const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click']
-    
-    activityEvents.forEach(event => {
+
+    activityEvents.forEach((event) => {
       document.addEventListener(event, this.handleActivity.bind(this), true)
     })
 
@@ -115,15 +115,19 @@ class ScreenTimeMonitor {
 
   private getDeviceType(): 'mobile' | 'desktop' | 'tablet' {
     const userAgent = navigator.userAgent
-    
+
     if (/tablet|ipad|playbook|silk/i.test(userAgent)) {
       return 'tablet'
     }
-    
-    if (/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent)) {
+
+    if (
+      /mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(
+        userAgent,
+      )
+    ) {
       return 'mobile'
     }
-    
+
     return 'desktop'
   }
 
@@ -141,7 +145,7 @@ class ScreenTimeMonitor {
       isActive: true,
       url: window.location.href,
       userAgent: navigator.userAgent,
-      deviceType: this.getDeviceType()
+      deviceType: this.getDeviceType(),
     }
 
     this.currentSession = session
@@ -164,7 +168,7 @@ class ScreenTimeMonitor {
     this.clearTimers()
 
     this.callbacks.onSessionEnd?.(session)
-    
+
     // Save session to database
     this.saveSession(session)
 
@@ -211,7 +215,7 @@ class ScreenTimeMonitor {
         shortestSession: 0,
         todayTime: 0,
         weeklyTime: 0,
-        monthlyTime: 0
+        monthlyTime: 0,
       }
     }
   }
@@ -232,7 +236,7 @@ class ScreenTimeMonitor {
       const response = await fetch('/api/screen-time/thresholds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(threshold)
+        body: JSON.stringify(threshold),
       })
       return response.ok
     } catch (error) {
@@ -272,7 +276,7 @@ class ScreenTimeMonitor {
     if (!thresholds || !thresholds.enabled) return
 
     const stats = await this.getStats(this.currentSession.userId)
-    
+
     // Check daily limit
     const dailyMinutes = stats.todayTime / (1000 * 60)
     if (dailyMinutes >= thresholds.dailyLimit) {
@@ -297,9 +301,9 @@ class ScreenTimeMonitor {
       const response = await fetch('/api/screen-time/sessions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(session)
+        body: JSON.stringify(session),
       })
-      
+
       if (!response.ok) {
         console.error('Failed to save session to server')
         // Store locally for retry later
@@ -319,18 +323,20 @@ class ScreenTimeMonitor {
 
   public async syncPendingSessions() {
     const pendingSessions = JSON.parse(localStorage.getItem('pendingScreenTimeSessions') || '[]')
-    
+
     for (const session of pendingSessions) {
       try {
         const response = await fetch('/api/screen-time/sessions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(session)
+          body: JSON.stringify(session),
         })
-        
+
         if (response.ok) {
           // Remove from pending list
-          const updatedPending = pendingSessions.filter((s: ScreenTimeSession) => s.id !== session.id)
+          const updatedPending = pendingSessions.filter(
+            (s: ScreenTimeSession) => s.id !== session.id,
+          )
           localStorage.setItem('pendingScreenTimeSessions', JSON.stringify(updatedPending))
         }
       } catch (error) {
@@ -342,13 +348,13 @@ class ScreenTimeMonitor {
   public destroy() {
     this.endSession()
     this.clearTimers()
-    
+
     // Remove event listeners
     const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click']
-    activityEvents.forEach(event => {
+    activityEvents.forEach((event) => {
       document.removeEventListener(event, this.handleActivity.bind(this), true)
     })
-    
+
     document.removeEventListener('visibilitychange', this.handleVisibilityChange.bind(this))
     window.removeEventListener('focus', this.handleFocus.bind(this))
     window.removeEventListener('blur', this.handleBlur.bind(this))

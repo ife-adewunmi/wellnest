@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Shield, Eye, Lock, Download, Trash2 } from "lucide-react"
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { Shield, Eye, Lock, Download, Trash2 } from 'lucide-react'
 
 export default function StudentPrivacyPage() {
   const [settings, setSettings] = useState({
@@ -13,21 +13,21 @@ export default function StudentPrivacyPage() {
     allowPushNotifications: true,
     shareScreenTimeData: false,
     allowLocationTracking: false,
-    enableAnalytics: true
+    enableAnalytics: true,
   })
 
   const handleSettingChange = (key: string, value: boolean) => {
-    setSettings(prev => ({ ...prev, [key]: value }))
+    setSettings((prev) => ({ ...prev, [key]: value }))
   }
 
   const handleExportData = () => {
     // Mock export functionality
-    console.log("Exporting user data...")
+    console.log('Exporting user data...')
   }
 
   const handleDeleteAccount = () => {
     // Mock delete functionality
-    console.log("Deleting account...")
+    console.log('Deleting account...')
   }
 
   return (
@@ -49,7 +49,7 @@ export default function StudentPrivacyPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <Label htmlFor="share-data">Share Data with Counselor</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Allow your counselor to access your mood check-ins and session data
               </p>
             </div>
@@ -63,7 +63,7 @@ export default function StudentPrivacyPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <Label htmlFor="push-notifications">Push Notifications</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Receive notifications for appointments and reminders
               </p>
             </div>
@@ -77,7 +77,7 @@ export default function StudentPrivacyPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <Label htmlFor="screen-time">Share Screen Time Data</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Allow sharing of screen time monitoring data for analysis
               </p>
             </div>
@@ -91,7 +91,7 @@ export default function StudentPrivacyPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <Label htmlFor="location">Location Tracking</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Enable location tracking for emergency situations
               </p>
             </div>
@@ -105,7 +105,7 @@ export default function StudentPrivacyPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <Label htmlFor="analytics">Usage Analytics</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Help improve the app by sharing anonymous usage data
               </p>
             </div>
@@ -127,28 +127,26 @@ export default function StudentPrivacyPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 border rounded-lg">
+          <div className="flex items-center justify-between rounded-lg border p-4">
             <div>
               <h3 className="font-medium">Export Your Data</h3>
-              <p className="text-sm text-muted-foreground">
-                Download a copy of all your data
-              </p>
+              <p className="text-muted-foreground text-sm">Download a copy of all your data</p>
             </div>
             <Button variant="outline" onClick={handleExportData}>
-              <Download className="h-4 w-4 mr-2" />
+              <Download className="mr-2 h-4 w-4" />
               Export Data
             </Button>
           </div>
 
-          <div className="flex items-center justify-between p-4 border rounded-lg">
+          <div className="flex items-center justify-between rounded-lg border p-4">
             <div>
               <h3 className="font-medium">Data Retention</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Your data is retained for 7 years or until you delete your account
               </p>
             </div>
             <Button variant="outline" disabled>
-              <Lock className="h-4 w-4 mr-2" />
+              <Lock className="mr-2 h-4 w-4" />
               Secured
             </Button>
           </div>
@@ -164,17 +162,13 @@ export default function StudentPrivacyPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="p-4 border border-destructive rounded-lg">
-            <h3 className="font-medium text-destructive">Delete Account</h3>
-            <p className="text-sm text-muted-foreground mt-1">
+          <div className="border-destructive rounded-lg border p-4">
+            <h3 className="text-destructive font-medium">Delete Account</h3>
+            <p className="text-muted-foreground mt-1 text-sm">
               Permanently delete your account and all associated data. This action cannot be undone.
             </p>
-            <Button 
-              variant="destructive" 
-              className="mt-4"
-              onClick={handleDeleteAccount}
-            >
-              <Trash2 className="h-4 w-4 mr-2" />
+            <Button variant="destructive" className="mt-4" onClick={handleDeleteAccount}>
+              <Trash2 className="mr-2 h-4 w-4" />
               Delete Account
             </Button>
           </div>
@@ -183,9 +177,7 @@ export default function StudentPrivacyPage() {
 
       {/* Save Settings */}
       <div className="flex justify-end">
-        <Button>
-          Save Settings
-        </Button>
+        <Button>Save Settings</Button>
       </div>
     </div>
   )

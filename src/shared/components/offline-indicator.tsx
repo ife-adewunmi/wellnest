@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { useOfflineStorage } from "@/hooks/use-offline-storage"
-import { Badge } from "@/components/ui/badge"
-import { WifiOff, Clock } from "lucide-react"
+import { useOfflineStorage } from '@/hooks/use-offline-storage'
+import { Badge } from '@/components/ui/badge'
+import { WifiOff, Clock } from 'lucide-react'
 
 export function OfflineIndicator() {
   const { isOnline, pendingSync } = useOfflineStorage()
@@ -10,7 +10,7 @@ export function OfflineIndicator() {
   if (isOnline && pendingSync.length === 0) return null
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed right-4 bottom-4 z-50">
       {!isOnline ? (
         <Badge variant="destructive" className="flex items-center gap-2">
           <WifiOff className="h-3 w-3" />

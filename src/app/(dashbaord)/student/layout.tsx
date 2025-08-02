@@ -1,26 +1,22 @@
-import type React from "react"
-import { getSession } from "@/features/auth/lib/auth"
-import { redirect } from "next/navigation"
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarProvider } from "@/components/ui/sidebar-context"
-import { SidebarInset } from "@/components/ui/sidebar"
-import { OfflineIndicator } from "@/components/offline-indicator"
-import { cookies } from "next/headers"
-import { Header } from "@/components/header"
+import type React from 'react'
+import { getSession } from '@/features/auth/lib/auth'
+import { redirect } from 'next/navigation'
+import { AppSidebar } from '@/components/app-sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar-context'
+import { SidebarInset } from '@/components/ui/sidebar'
+import { OfflineIndicator } from '@/components/offline-indicator'
+import { cookies } from 'next/headers'
+import { Header } from '@/components/header'
 
-export default async function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession()
 
   if (!session) {
-    redirect("/signin")
+    redirect('/signin')
   }
 
   const cookieStore = cookies()
-  const defaultOpen = (await cookieStore).get("sidebar:state")?.value === "true"
+  const defaultOpen = (await cookieStore).get('sidebar:state')?.value === 'true'
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>

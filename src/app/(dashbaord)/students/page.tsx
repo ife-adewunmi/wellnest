@@ -1,27 +1,27 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Search, Plus, Filter, MoreHorizontal } from "lucide-react"
-import { fetchStudentsList } from "@/shared/service/api"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Search, Plus, Filter, MoreHorizontal } from 'lucide-react'
+import { fetchStudentsList } from '@/shared/service/api'
 
 interface Student {
   id: string
   name: string
   email: string
-  status: "active" | "inactive" | "at-risk"
+  status: 'active' | 'inactive' | 'at-risk'
   lastCheckIn: string
-  riskLevel: "low" | "medium" | "high"
+  riskLevel: 'low' | 'medium' | 'high'
 }
 
 export default function StudentsPage() {
   const [students, setStudents] = useState<Student[]>([])
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
+  const [searchTerm, setSearchTerm] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -41,13 +41,14 @@ export default function StudentsPage() {
   }, [])
 
   useEffect(() => {
-    let filtered = students.filter(student =>
-      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.email.toLowerCase().includes(searchTerm.toLowerCase())
+    let filtered = students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.email.toLowerCase().includes(searchTerm.toLowerCase()),
     )
 
-    if (statusFilter !== "all") {
-      filtered = filtered.filter(student => student.status === statusFilter)
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter((student) => student.status === statusFilter)
     }
 
     setFilteredStudents(filtered)
@@ -55,31 +56,39 @@ export default function StudentsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "bg-green-100 text-green-800"
-      case "inactive": return "bg-gray-100 text-gray-800"
-      case "at-risk": return "bg-red-100 text-red-800"
-      default: return "bg-gray-100 text-gray-800"
+      case 'active':
+        return 'bg-green-100 text-green-800'
+      case 'inactive':
+        return 'bg-gray-100 text-gray-800'
+      case 'at-risk':
+        return 'bg-red-100 text-red-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
   }
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case "low": return "bg-green-100 text-green-800"
-      case "medium": return "bg-yellow-100 text-yellow-800"
-      case "high": return "bg-red-100 text-red-800"
-      default: return "bg-gray-100 text-gray-800"
+      case 'low':
+        return 'bg-green-100 text-green-800'
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800'
+      case 'high':
+        return 'bg-red-100 text-red-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Students</h1>
           <p className="text-muted-foreground">Manage and monitor your students</p>
         </div>
         <Button>
-          <Plus className="h-4 w-4 mr-2" />
+          <Plus className="mr-2 h-4 w-4" />
           Add Student
         </Button>
       </div>
@@ -93,7 +102,7 @@ export default function StudentsPage() {
           <div className="flex gap-4">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Search className="text-muted-foreground absolute top-3 left-3 h-4 w-4" />
                 <Input
                   placeholder="Search students..."
                   value={searchTerm}
@@ -105,7 +114,7 @@ export default function StudentsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 border rounded-md"
+              className="rounded-md border px-3 py-2"
             >
               <option value="all">All Status</option>
               <option value="active">Active</option>
@@ -123,34 +132,33 @@ export default function StudentsPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="text-center py-8">Loading students...</div>
+            <div className="py-8 text-center">Loading students...</div>
           ) : filteredStudents.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-muted-foreground py-8 text-center">
               No students found matching your criteria
             </div>
           ) : (
             <div className="space-y-4">
               {filteredStudents.map((student) => (
-                <div key={student.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div
+                  key={student.id}
+                  className="flex items-center justify-between rounded-lg border p-4"
+                >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <span className="font-medium text-primary">
-                        {student.name.charAt(0)}
-                      </span>
+                    <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
+                      <span className="text-primary font-medium">{student.name.charAt(0)}</span>
                     </div>
                     <div>
                       <h3 className="font-medium">{student.name}</h3>
-                      <p className="text-sm text-muted-foreground">{student.email}</p>
+                      <p className="text-muted-foreground text-sm">{student.email}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <Badge className={getStatusColor(student.status)}>
-                      {student.status}
-                    </Badge>
+                    <Badge className={getStatusColor(student.status)}>{student.status}</Badge>
                     <Badge className={getRiskColor(student.riskLevel)}>
                       {student.riskLevel} risk
                     </Badge>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-muted-foreground text-sm">
                       Last check-in: {student.lastCheckIn}
                     </div>
                     <Button variant="ghost" size="sm">

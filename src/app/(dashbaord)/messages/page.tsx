@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Send, User, Search } from "lucide-react"
-import { fetchRecentMessages, sendMessage } from "@/shared/service/api"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Send, User, Search } from 'lucide-react'
+import { fetchRecentMessages, sendMessage } from '@/shared/service/api'
 
 interface Message {
   id: string
@@ -15,20 +15,20 @@ interface Message {
   content: string
   timestamp: string
   read: boolean
-  type: "received" | "sent"
+  type: 'received' | 'sent'
 }
 
 export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([])
-  const [newMessage, setNewMessage] = useState("")
-  const [recipient, setRecipient] = useState("")
+  const [newMessage, setNewMessage] = useState('')
+  const [recipient, setRecipient] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function loadMessages() {
       setLoading(true)
       try {
-        const result = await fetchRecentMessages("counselor")
+        const result = await fetchRecentMessages('counselor')
         setMessages(result.data as Message[])
       } catch (error) {
         console.error('Error loading messages:', error)
@@ -48,12 +48,12 @@ export default function MessagesPage() {
       await sendMessage({
         content: newMessage,
         recipient: recipient,
-        senderId: "counselor"
+        senderId: 'counselor',
       })
-      setNewMessage("")
-      setRecipient("")
+      setNewMessage('')
+      setRecipient('')
       // Reload messages
-      const result = await fetchRecentMessages("counselor")
+      const result = await fetchRecentMessages('counselor')
       setMessages(result.data as Message[])
     } catch (error) {
       console.error('Error sending message:', error)
@@ -67,7 +67,7 @@ export default function MessagesPage() {
         <p className="text-muted-foreground">Communicate with your students</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Messages List */}
         <Card>
           <CardHeader>
@@ -75,36 +75,28 @@ export default function MessagesPage() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <div className="text-center py-8">Loading messages...</div>
+              <div className="py-8 text-center">Loading messages...</div>
             ) : messages.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                No messages yet
-              </div>
+              <div className="text-muted-foreground py-8 text-center">No messages yet</div>
             ) : (
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`p-4 rounded-lg border ${
-                      message.type === "received" 
-                        ? "bg-muted/50" 
-                        : "bg-primary/10"
+                    className={`rounded-lg border p-4 ${
+                      message.type === 'received' ? 'bg-muted/50' : 'bg-primary/10'
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
+                      <div className="bg-primary/20 flex h-8 w-8 items-center justify-center rounded-full">
                         <User className="h-4 w-4" />
                       </div>
                       <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                          <span className="font-medium text-sm">
-                            {message.sender}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {message.timestamp}
-                          </span>
+                        <div className="flex items-start justify-between">
+                          <span className="text-sm font-medium">{message.sender}</span>
+                          <span className="text-muted-foreground text-xs">{message.timestamp}</span>
                         </div>
-                        <p className="text-sm mt-1">{message.content}</p>
+                        <p className="mt-1 text-sm">{message.content}</p>
                       </div>
                     </div>
                   </div>
@@ -141,7 +133,7 @@ export default function MessagesPage() {
                 />
               </div>
               <Button type="submit" className="w-full">
-                <Send className="h-4 w-4 mr-2" />
+                <Send className="mr-2 h-4 w-4" />
                 Send Message
               </Button>
             </form>

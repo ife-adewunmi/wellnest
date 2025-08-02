@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, User, Plus } from "lucide-react"
-import { fetchUpcomingSessions } from "@/shared/service/api"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Calendar, Clock, User, Plus } from 'lucide-react'
+import { fetchUpcomingSessions } from '@/shared/service/api'
 
 interface Session {
   id: string
   counselorName: string
   date: string
   time: string
-  type: "individual" | "group"
-  status: "scheduled" | "completed" | "cancelled"
+  type: 'individual' | 'group'
+  status: 'scheduled' | 'completed' | 'cancelled'
   notes?: string
 }
 
@@ -25,7 +25,7 @@ export default function StudentSessionsPage() {
     async function loadSessions() {
       setLoading(true)
       try {
-        const result = await fetchUpcomingSessions("student")
+        const result = await fetchUpcomingSessions('student')
         setSessions(result.data as Session[])
       } catch (error) {
         console.error('Error loading sessions:', error)
@@ -39,46 +39,53 @@ export default function StudentSessionsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "scheduled": return "bg-blue-100 text-blue-800"
-      case "completed": return "bg-green-100 text-green-800"
-      case "cancelled": return "bg-red-100 text-red-800"
-      default: return "bg-gray-100 text-gray-800"
+      case 'scheduled':
+        return 'bg-blue-100 text-blue-800'
+      case 'completed':
+        return 'bg-green-100 text-green-800'
+      case 'cancelled':
+        return 'bg-red-100 text-red-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
   }
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "individual": return "bg-blue-100 text-blue-800"
-      case "group": return "bg-purple-100 text-purple-800"
-      default: return "bg-gray-100 text-gray-800"
+      case 'individual':
+        return 'bg-blue-100 text-blue-800'
+      case 'group':
+        return 'bg-purple-100 text-purple-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
   }
 
-  const upcomingSessions = sessions.filter(s => s.status === "scheduled")
-  const pastSessions = sessions.filter(s => s.status === "completed")
+  const upcomingSessions = sessions.filter((s) => s.status === 'scheduled')
+  const pastSessions = sessions.filter((s) => s.status === 'completed')
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Sessions</h1>
           <p className="text-muted-foreground">View your counseling sessions</p>
         </div>
         <Button>
-          <Plus className="h-4 w-4 mr-2" />
+          <Plus className="mr-2 h-4 w-4" />
           Request Session
         </Button>
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-blue-600" />
               <span className="text-sm font-medium">Upcoming</span>
             </div>
-            <div className="text-2xl font-bold mt-2">{upcomingSessions.length}</div>
+            <div className="mt-2 text-2xl font-bold">{upcomingSessions.length}</div>
           </CardContent>
         </Card>
         <Card>
@@ -87,7 +94,7 @@ export default function StudentSessionsPage() {
               <Clock className="h-4 w-4 text-green-600" />
               <span className="text-sm font-medium">Completed</span>
             </div>
-            <div className="text-2xl font-bold mt-2">{pastSessions.length}</div>
+            <div className="mt-2 text-2xl font-bold">{pastSessions.length}</div>
           </CardContent>
         </Card>
         <Card>
@@ -96,7 +103,7 @@ export default function StudentSessionsPage() {
               <User className="h-4 w-4 text-purple-600" />
               <span className="text-sm font-medium">Total Sessions</span>
             </div>
-            <div className="text-2xl font-bold mt-2">{sessions.length}</div>
+            <div className="mt-2 text-2xl font-bold">{sessions.length}</div>
           </CardContent>
         </Card>
       </div>
@@ -108,33 +115,32 @@ export default function StudentSessionsPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="text-center py-8">Loading sessions...</div>
+            <div className="py-8 text-center">Loading sessions...</div>
           ) : upcomingSessions.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-muted-foreground py-8 text-center">
               No upcoming sessions scheduled
             </div>
           ) : (
             <div className="space-y-4">
               {upcomingSessions.map((session) => (
-                <div key={session.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div
+                  key={session.id}
+                  className="flex items-center justify-between rounded-lg border p-4"
+                >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <User className="h-5 w-5 text-primary" />
+                    <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
+                      <User className="text-primary h-5 w-5" />
                     </div>
                     <div>
                       <h3 className="font-medium">{session.counselorName}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {session.date} at {session.time}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <Badge className={getTypeColor(session.type)}>
-                      {session.type}
-                    </Badge>
-                    <Badge className={getStatusColor(session.status)}>
-                      {session.status}
-                    </Badge>
+                    <Badge className={getTypeColor(session.type)}>{session.type}</Badge>
+                    <Badge className={getStatusColor(session.status)}>{session.status}</Badge>
                     <Button variant="outline" size="sm">
                       Join Session
                     </Button>
@@ -153,31 +159,28 @@ export default function StudentSessionsPage() {
         </CardHeader>
         <CardContent>
           {pastSessions.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              No past sessions
-            </div>
+            <div className="text-muted-foreground py-8 text-center">No past sessions</div>
           ) : (
             <div className="space-y-4">
               {pastSessions.map((session) => (
-                <div key={session.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div
+                  key={session.id}
+                  className="flex items-center justify-between rounded-lg border p-4"
+                >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <User className="h-5 w-5 text-primary" />
+                    <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
+                      <User className="text-primary h-5 w-5" />
                     </div>
                     <div>
                       <h3 className="font-medium">{session.counselorName}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {session.date} at {session.time}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <Badge className={getTypeColor(session.type)}>
-                      {session.type}
-                    </Badge>
-                    <Badge className={getStatusColor(session.status)}>
-                      {session.status}
-                    </Badge>
+                    <Badge className={getTypeColor(session.type)}>{session.type}</Badge>
+                    <Badge className={getStatusColor(session.status)}>{session.status}</Badge>
                     <Button variant="outline" size="sm">
                       View Notes
                     </Button>

@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Send, User } from "lucide-react"
-import { fetchRecentMessages, sendMessage } from "@/shared/service/api"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { Send, User } from 'lucide-react'
+import { fetchRecentMessages, sendMessage } from '@/shared/service/api'
 
 interface Message {
   id: string
@@ -14,19 +14,19 @@ interface Message {
   content: string
   timestamp: string
   read: boolean
-  type: "received" | "sent"
+  type: 'received' | 'sent'
 }
 
 export default function StudentMessagesPage() {
   const [messages, setMessages] = useState<Message[]>([])
-  const [newMessage, setNewMessage] = useState("")
+  const [newMessage, setNewMessage] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function loadMessages() {
       setLoading(true)
       try {
-        const result = await fetchRecentMessages("student")
+        const result = await fetchRecentMessages('student')
         setMessages(result.data as Message[])
       } catch (error) {
         console.error('Error loading messages:', error)
@@ -45,12 +45,12 @@ export default function StudentMessagesPage() {
     try {
       await sendMessage({
         content: newMessage,
-        recipient: "counselor",
-        senderId: "student"
+        recipient: 'counselor',
+        senderId: 'student',
       })
-      setNewMessage("")
+      setNewMessage('')
       // Reload messages
-      const result = await fetchRecentMessages("student")
+      const result = await fetchRecentMessages('student')
       setMessages(result.data as Message[])
     } catch (error) {
       console.error('Error sending message:', error)
@@ -72,38 +72,30 @@ export default function StudentMessagesPage() {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <div className="text-center py-8">Loading messages...</div>
+              <div className="py-8 text-center">Loading messages...</div>
             ) : messages.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
+              <div className="text-muted-foreground py-8 text-center">
                 No messages yet. Start a conversation with your counselor!
               </div>
             ) : (
-              <div className="space-y-4 max-h-[300px] overflow-y-auto">
+              <div className="max-h-[300px] space-y-4 overflow-y-auto">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`flex ${
-                      message.type === "sent" ? "justify-end" : "justify-start"
-                    }`}
+                    className={`flex ${message.type === 'sent' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[70%] p-3 rounded-lg ${
-                        message.type === "sent"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted"
+                      className={`max-w-[70%] rounded-lg p-3 ${
+                        message.type === 'sent' ? 'bg-primary text-primary-foreground' : 'bg-muted'
                       }`}
                     >
                       <div className="flex items-start gap-2">
                         <div className="flex-1">
-                          <div className="flex justify-between items-start">
-                            <span className="font-medium text-sm">
-                              {message.sender}
-                            </span>
-                            <span className="text-xs opacity-70">
-                              {message.timestamp}
-                            </span>
+                          <div className="flex items-start justify-between">
+                            <span className="text-sm font-medium">{message.sender}</span>
+                            <span className="text-xs opacity-70">{message.timestamp}</span>
                           </div>
-                          <p className="text-sm mt-1">{message.content}</p>
+                          <p className="mt-1 text-sm">{message.content}</p>
                         </div>
                       </div>
                     </div>
@@ -130,7 +122,7 @@ export default function StudentMessagesPage() {
                 />
               </div>
               <Button type="submit" className="w-full">
-                <Send className="h-4 w-4 mr-2" />
+                <Send className="mr-2 h-4 w-4" />
                 Send Message
               </Button>
             </form>

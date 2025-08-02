@@ -11,7 +11,6 @@ export interface User {
   lastName: string
   createdAt: Date
   updatedAt: Date
-
 }
 
 export interface LoginCredentials {

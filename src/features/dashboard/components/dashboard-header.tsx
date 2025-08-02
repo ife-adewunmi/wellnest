@@ -8,8 +8,8 @@ import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import { Button } from "@/components/ui/button"
-import { Avatar as UserAvatar, AvatarFallback, AvatarImage } from "@/components/avatar"
+import { Button } from '@/components/ui/button'
+import { Avatar as UserAvatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu'
 import { User } from '@/features/auth/types'
 
 interface HeaderProps {
@@ -245,8 +245,8 @@ export function Header({ user }: HeaderProps) {
   )
 
   const handleSignOut = async () => {
-    await fetch("/api/auth/signout", { method: "POST" })
-    router.push("/signin")
+    await fetch('/api/auth/signout', { method: 'POST' })
+    router.push('/signin')
     router.refresh()
   }
 
@@ -327,28 +327,24 @@ export function Header({ user }: HeaderProps) {
                     <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                       {user ? (
                         <UserAvatar className="h-8 w-8">
-                          <AvatarImage src={user?.avatar || "/placeholder.svg"} alt={user?.name} />
+                          <AvatarImage src={user?.avatar || '/placeholder.svg'} alt={user?.name} />
                           <AvatarFallback>
                             {user?.name
-                              .split(" ")
+                              .split(' ')
                               .map((n) => n[0])
-                              .join("")}
+                              .join('')}
                           </AvatarFallback>
                         </UserAvatar>
                       ) : (
-                        <Avatar
-                          size={38}
-                          type="user"
-                          customDefault="thumbnail"
-                        />
+                        <Avatar size={38} type="user" customDefault="thumbnail" />
                       )}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user?.name}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+                        <p className="text-sm leading-none font-medium">{user?.name}</p>
+                        <p className="text-muted-foreground text-xs leading-none">{user?.email}</p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />

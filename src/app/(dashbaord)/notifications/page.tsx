@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { fetchNotifications } from "@/shared/service/api"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { fetchNotifications } from '@/shared/service/api'
 
 interface Notification {
   id: string
@@ -20,7 +20,7 @@ export default function NotificationsPage() {
     async function loadNotifications() {
       setLoading(true)
       try {
-        const result = await fetchNotifications("counselor")
+        const result = await fetchNotifications('counselor')
         setNotifications(result.data as Notification[])
       } catch (error) {
         console.error('Error loading notifications:', error)
@@ -45,31 +45,23 @@ export default function NotificationsPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="text-center py-8">Loading notifications...</div>
+            <div className="py-8 text-center">Loading notifications...</div>
           ) : notifications.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              You have no notifications
-            </div>
+            <div className="text-muted-foreground py-8 text-center">You have no notifications</div>
           ) : (
             <div className="space-y-4">
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="flex justify-between items-center p-4 border rounded-lg"
+                  className="flex items-center justify-between rounded-lg border p-4"
                 >
                   <div>
                     <h3 className="font-medium">{notification.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {notification.message}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {notification.date}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{notification.message}</p>
+                    <p className="text-muted-foreground mt-1 text-xs">{notification.date}</p>
                   </div>
                   {!notification.read && (
-                    <span className="text-xs font-semibold text-primary">
-                      New
-                    </span>
+                    <span className="text-primary text-xs font-semibold">New</span>
                   )}
                 </div>
               ))}
@@ -80,4 +72,3 @@ export default function NotificationsPage() {
     </div>
   )
 }
-

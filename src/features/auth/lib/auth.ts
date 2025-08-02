@@ -1,37 +1,37 @@
-import { SignJWT, jwtVerify } from "jose"
-import { cookies } from "next/headers"
-import { UserRole } from "../enums"
-import { User } from "../types"
+import { SignJWT, jwtVerify } from 'jose'
+import { cookies } from 'next/headers'
+import { UserRole } from '../enums'
+import { User } from '../types'
 
-const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET || "fallback-secret-key")
+const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET || 'fallback-secret-key')
 
 // Mock users for demo purposes
 const mockUsers: User[] = [
   {
-    id: "1",
-    email: "student@example.com",
-    name: "John Student",
+    id: '1',
+    email: 'student@example.com',
+    name: 'John Student',
     role: UserRole.STUDENT,
     avatar: '',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    id: "2",
-    email: "counselor@example.com",
-    name: "Dr. Sarah Johnson",
+    id: '2',
+    email: 'counselor@example.com',
+    name: 'Dr. Sarah Johnson',
     role: UserRole.COUNSELOR,
     avatar: '',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
 ]
 
 export async function signJWT(payload: any) {
   return await new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
+    .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime("24h")
+    .setExpirationTime('24h')
     .sign(secret)
 }
 
@@ -46,7 +46,7 @@ export async function verifyJWT(token: string) {
 
 export async function getSession(): Promise<{ user: User } | null> {
   const cookieStore = cookies()
-  const token = (await cookieStore).get("auth-token")?.value
+  const token = (await cookieStore).get('auth-token')?.value
 
   if (!token) {
     return null
@@ -73,6 +73,6 @@ export async function signIn(email: string, password: string): Promise<User | nu
 }
 
 export async function signOut() {
-  const cookieStore = cookies();
-  (await cookieStore).delete("auth-token")
+  const cookieStore = cookies()
+  ;(await cookieStore).delete('auth-token')
 }

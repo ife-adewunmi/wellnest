@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { Home, Users, MessageSquare, Calendar, FileText, Settings, Bell } from "lucide-react"
+import { Home, Users, MessageSquare, Calendar, FileText, Settings, Bell } from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -12,12 +12,12 @@ import {
   SidebarMenuItem,
   SidebarHeader,
   SidebarFooter,
-} from "./ui/sidebar"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import type { User } from "@/shared/types/auth"
+} from './ui/sidebar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
+import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import type { User } from '@/shared/types/auth'
 
 interface AppSidebarProps {
   user: User
@@ -25,34 +25,34 @@ interface AppSidebarProps {
 
 const counselorNavItems = [
   {
-    title: "Dashboard",
-    url: "/dashboard",
+    title: 'Dashboard',
+    url: '/dashboard',
     icon: Home,
   },
   {
-    title: "Students",
-    url: "/students",
+    title: 'Students',
+    url: '/students',
     icon: Users,
   },
   {
-    title: "Intervention",
-    url: "/intervention",
+    title: 'Intervention',
+    url: '/intervention',
     icon: Calendar,
   },
   {
-    title: "Messages",
-    url: "/messages",
+    title: 'Messages',
+    url: '/messages',
     icon: MessageSquare,
     badge: 3,
   },
   {
-    title: "Reports",
-    url: "/reports",
+    title: 'Reports',
+    url: '/reports',
     icon: FileText,
   },
   {
-    title: "Notifications",
-    url: "/notifications",
+    title: 'Notifications',
+    url: '/notifications',
     icon: Bell,
     badge: 5,
   },
@@ -60,39 +60,39 @@ const counselorNavItems = [
 
 const studentNavItems = [
   {
-    title: "Dashboard",
-    url: "/student",
+    title: 'Dashboard',
+    url: '/student',
     icon: Home,
   },
   {
-    title: "Messages",
-    url: "/student/messages",
+    title: 'Messages',
+    url: '/student/messages',
     icon: MessageSquare,
     badge: 1,
   },
   {
-    title: "Sessions",
-    url: "/student/sessions",
+    title: 'Sessions',
+    url: '/student/sessions',
     icon: Calendar,
   },
   {
-    title: "Privacy",
-    url: "/student/privacy",
+    title: 'Privacy',
+    url: '/student/privacy',
     icon: Settings,
   },
 ]
 
 export function AppSidebar({ user }: AppSidebarProps) {
   const pathname = usePathname()
-  const navItems = user.role === "COUNSELOR" ? counselorNavItems : studentNavItems
+  const navItems = user.role === 'COUNSELOR' ? counselorNavItems : studentNavItems
 
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">⚠</span>
+            <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-lg">
+              <span className="text-sm font-bold text-white">⚠</span>
             </div>
             <span className="font-semibold">Distress Detection</span>
           </div>
@@ -127,17 +127,17 @@ export function AppSidebar({ user }: AppSidebarProps) {
       <SidebarFooter className="p-4">
         <div className="flex items-center gap-3">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.avatar || "/placeholder.svg"} />
+            <AvatarImage src={user.avatar || '/placeholder.svg'} />
             <AvatarFallback>
               {user.name
-                .split(" ")
+                .split(' ')
                 .map((n) => n[0])
-                .join("")}
+                .join('')}
             </AvatarFallback>
           </Avatar>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">{user.name}</p>
-            <p className="text-xs text-muted-foreground capitalize">{user.role.toLowerCase()}</p>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-medium">{user.name}</p>
+            <p className="text-muted-foreground text-xs capitalize">{user.role.toLowerCase()}</p>
           </div>
         </div>
       </SidebarFooter>
