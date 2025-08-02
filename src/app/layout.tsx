@@ -1,7 +1,8 @@
 import '@/styles/globals.css'
-import { Metadata } from 'next'
-import QueryProvider from '@/shared/components/query-provider'
-import { ViewProvider } from '@/context/view-context'
+import { Metadata } from 'next';
+import QueryProvider from '@/shared/components/query-provider';
+import { ViewProvider } from '@/context/view-context';
+import { DashboardSettingsProvider } from '@/shared/contexts/dashboard-settings-context';
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -45,7 +46,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="pb-[7.43vh]">
         <QueryProvider>
-          <ViewProvider>{children}</ViewProvider>
+          <ViewProvider>
+            <DashboardSettingsProvider>
+              {children}
+            </DashboardSettingsProvider>
+          </ViewProvider>
         </QueryProvider>
         <ToastContainer />
       </body>

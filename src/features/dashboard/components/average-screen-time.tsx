@@ -17,7 +17,7 @@ const data = [
 ]
 
 const CustomBar = (props: any) => {
-  const { fill, ...rest } = props
+  const { fill, tooltipPosition, dataKey, ...rest } = props
   return (
     <g>
       <rect {...rest} fill="#E2E8F0" rx={2} />
@@ -52,7 +52,8 @@ export default function ScreenTimeDashboard() {
                 color: '#E2E8F0',
               },
             }}
-            className="h-80 w-full"
+            className="w-full"
+            style={{ height: '199px' }}
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
