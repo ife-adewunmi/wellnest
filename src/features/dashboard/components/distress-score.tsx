@@ -4,10 +4,10 @@ import { interBold, interMedium, interRegular } from "@/shared/styles/fonts";
 
 export function DistressScore() {
   return (
-<div className="w-full max-w-[465px]">
+<div className="w-full max-w-[465px] ">
 
 
-        <CardTitle className={`${interBold.className} text-[22px] text-[#121417]`}>Distress Score</CardTitle>
+        {/* <CardTitle className={`${interBold.className} text-[22px] text-[#121417]`}>Distress Score</CardTitle> */}
     
   
           <div className="w-full rounded-[12px] border border-[#CBD5E0] p-[1rem] mt-[1rem]">
@@ -24,7 +24,7 @@ export function DistressScore() {
                  
         
 
-          <div className="mt-[2.1875rem]">
+          <div className="mt-[6.25rem]">
             <div className="h-[53px] bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full"></div>
             <div className={`mt-[8px] ${interBold.className} text-[#4A739C] text-[0.875rem] flex justify-between w-full items-center`}>
               <span>Low</span>

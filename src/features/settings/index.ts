@@ -1,2 +1,2 @@
-export { default as SettingsPage } from './components/setting';
+export { default as SettingsPage } from './components/settings-page';
 export * from './types';

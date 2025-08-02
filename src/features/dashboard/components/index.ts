@@ -6,4 +6,4 @@ export { InsightCard } from './insight-card';
 export { ActivityStatus } from './activity-status';
 export { default as AverageScreenTime } from './average-screen-time';
 export { DistressScore } from './distress-score';
-export { MoodCheckIns as MoodCheckIn } from './mood-checkIn';
+export { MoodCheckIns as MoodCheckIn } from './mood-check-ins';

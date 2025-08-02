@@ -6,16 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui
 import { Checkbox } from "@/shared/components/ui/checkbox"
 import { Switch } from "@/shared/components/ui/switch"
 import { Label } from "@/shared/components/ui/label"
-import { Separator } from "@/shared/components/ui/seperator"
+import { Separator } from "@/shared/components/ui/separator"
 import { toast } from "react-toastify"
+import { useDashboardSettings } from "@/shared/contexts/dashboard-settings-context"
 import { DashboardHeader } from "@/features/dashboard/components"
 import { interMedium, interRegular } from "@/shared/styles/fonts"
-
-interface DashboardWidget {
-  id: string
-  label: string
-  enabled: boolean
-}
 
 interface NotificationSetting {
   id: string
@@ -31,14 +26,7 @@ interface NotificationMethod {
 }
 
 export default function SettingsPage() {
-  const [dashboardWidgets, setDashboardWidgets] = useState<DashboardWidget[]>([
-    { id: "mood-tracker", label: "Mood tracker", enabled: true },
-    { id: "screen-time", label: "Screen time tracker", enabled: true },
-    { id: "distress-score", label: "Overall distress score", enabled: true },
-    { id: "notification-widget", label: "Notification widget", enabled: true },
-    { id: "upcoming-sessions", label: "Upcoming Sessions", enabled: true },
-    { id: "student-table", label: "Student table", enabled: true },
-  ])
+  const { dashboardWidgets, toggleWidget } = useDashboardSettings()
 
   const [notifications, setNotifications] = useState<NotificationSetting[]>([
     {
@@ -68,9 +56,7 @@ export default function SettingsPage() {
   ])
 
   const handleWidgetToggle = (widgetId: string) => {
-    setDashboardWidgets((prev) =>
-      prev.map((widget) => (widget.id === widgetId ? { ...widget, enabled: !widget.enabled } : widget)),
-    )
+    toggleWidget(widgetId)
   }
 
   const handleNotificationToggle = (notificationId: string) => {
@@ -88,8 +74,8 @@ export default function SettingsPage() {
   }
 
   const handleSaveChanges = () => {
-    // Simulate saving changes
-    toast.success("Your preferences have been updated successfully.")
+    // Settings are automatically saved via context and localStorage
+    toast.success("Your dashboard preferences have been updated successfully. Changes will be visible on the dashboard.")
   }
 
   return (
