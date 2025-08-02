@@ -1,6 +1,6 @@
-import { Badge } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import { interBold, interMedium, interRegular } from "@/shared/styles/fonts";
+import { Badge } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
 
 export function DistressScore() {
   return (
@@ -33,8 +33,7 @@ export function DistressScore() {
             </div>
           </div>
         </div>
-     </div>
-     </div>
-    
+      </div>
+    </div>
   )
 }

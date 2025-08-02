@@ -20,7 +20,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
   profilePicture,
   headerImage,
   customDefault,
-  onClick
+  onClick,
 }) => {
   const [imageError, setImageError] = useState(false)
 
@@ -54,7 +54,11 @@ const Avatar: FunctionComponent<AvatarProps> = ({
 
   if (customDefault === 'thumbnail') {
     return (
-      <div style={styles.svgContainer} onClick={onClick} className={onClick ? 'cursor-pointer' : ''}>
+      <div
+        style={styles.svgContainer}
+        onClick={onClick}
+        className={onClick ? 'cursor-pointer' : ''}
+      >
         <Image
           src="/images/header-default-profile.svg"
           alt="Default Profile"
@@ -72,14 +76,18 @@ const Avatar: FunctionComponent<AvatarProps> = ({
         alt="Avatar"
         width={size}
         height={size}
-        style={{...styles.image, cursor: onClick ? 'pointer' : 'default'}}
+        style={{ ...styles.image, cursor: onClick ? 'pointer' : 'default' }}
         onError={handleImageError}
         onClick={onClick}
       />
     )
   } else if (type === 'user') {
     return (
-      <div style={styles.svgContainer} onClick={onClick} className={onClick ? 'cursor-pointer' : ''}>
+      <div
+        style={styles.svgContainer}
+        onClick={onClick}
+        className={onClick ? 'cursor-pointer' : ''}
+      >
         <Image src="/images/profile-img.png" alt="Default Profile" width={size} height={size} />
       </div>
     )

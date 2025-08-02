@@ -1,11 +1,7 @@
-
-
-import { ReportsPage } from "@/features/reports"
+import { ReportsPage } from '@/features/reports'
 
 const page = () => {
-  return (
-    <ReportsPage />
-  )
+  return <ReportsPage />
 }
 
 export default page

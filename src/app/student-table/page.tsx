@@ -2,9 +2,7 @@ import { StudentTable } from '@/features/student-management/components/add-stude
 import React from 'react'
 
 const page = () => {
-  return (
-    <StudentTable />
-  )
+  return <StudentTable />
 }
 
 export default page

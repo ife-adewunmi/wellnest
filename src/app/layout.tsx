@@ -1,14 +1,12 @@
-
-
 import '@/styles/globals.css'
 import { Metadata } from 'next';
 import QueryProvider from '@/shared/components/query-provider';
 import { ViewProvider } from '@/context/view-context';
 import { DashboardSettingsProvider } from '@/shared/contexts/dashboard-settings-context';
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { siteConfig } from "@/shared/config/site";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { siteConfig } from '@/shared/config/site'
 
 export const metadata: Metadata = {
   title: {
@@ -46,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="pb-[7.43vh] ">
+      <body className="pb-[7.43vh]">
         <QueryProvider>
           <ViewProvider>
             <DashboardSettingsProvider>
@@ -54,7 +52,7 @@ export default function RootLayout({
             </DashboardSettingsProvider>
           </ViewProvider>
         </QueryProvider>
-          <ToastContainer />
+        <ToastContainer />
       </body>
     </html>
   )

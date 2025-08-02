@@ -4,8 +4,19 @@ import * as React from 'react'
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import { useIsMobile } from '@/shared/hooks/use-mobile'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/shared/components/ui/chart'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/shared/components/ui/chart'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/ui/select'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/components/ui/toggle-group'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
 

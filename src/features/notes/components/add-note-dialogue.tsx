@@ -1,12 +1,18 @@
-"use client"
+'use client'
 
-import { useState } from "react"
+import { useState } from 'react'
 
-import { Plus } from "lucide-react"
-import { Label } from "@/shared/components/ui/label"
-import { Input } from "@/shared/components/ui/custom-input"
-import { Button } from "@/shared/components/ui/custom-button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/shared/components/ui/dialogue"
+import { Plus } from 'lucide-react'
+import { Label } from '@/shared/components/ui/label'
+import { Input } from '@/shared/components/ui/custom-input'
+import { Button } from '@/shared/components/ui/custom-button'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/components/ui/dialogue'
 
 interface AddNoteDialogProps {
   onAddNote: (note: { title: string; content: string }) => void
@@ -14,12 +20,12 @@ interface AddNoteDialogProps {
 
 export function AddNoteDialog({ onAddNote }: AddNoteDialogProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [newNote, setNewNote] = useState({ title: "", content: "" })
+  const [newNote, setNewNote] = useState({ title: '', content: '' })
 
   const handleAddNote = () => {
     if (newNote.title.trim() && newNote.content.trim()) {
       onAddNote(newNote)
-      setNewNote({ title: "", content: "" })
+      setNewNote({ title: '', content: '' })
       setIsDialogOpen(false)
     }
   }
@@ -28,7 +34,7 @@ export function AddNoteDialog({ onAddNote }: AddNoteDialogProps) {
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="dropdown" className="flex items-center gap-[8px]">
-          <Plus className="h-4 w-4 " />
+          <Plus className="h-4 w-4" />
           Add Note
         </Button>
       </DialogTrigger>

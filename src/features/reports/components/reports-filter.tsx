@@ -1,9 +1,13 @@
-
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select"
-import { Label } from "@/shared/components/ui/label"
-import { Input } from "@/shared/components/ui/custom-input"
-import { interRegular } from "@/shared/styles/fonts"
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/ui/select'
+import { Label } from '@/shared/components/ui/label'
+import { Input } from '@/shared/components/ui/custom-input'
+import { interRegular } from '@/shared/styles/fonts'
 
 interface ReportFiltersProps {
   filters: {
@@ -18,9 +22,6 @@ interface ReportFiltersProps {
   onFilterChange?: (key: string, value: string) => void
 }
 
-
-
-
 export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
   const handleSelectChange = (key: string) => (value: string) => {
     onFilterChange?.(key, value)
@@ -34,10 +35,13 @@ export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
     <div className="">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div className="flex flex-col">
-          <Label htmlFor="department" className={`${interRegular.className} text-[1rem] text-[#666666] mb-[12px]`}>
+          <Label
+            htmlFor="department"
+            className={`${interRegular.className} mb-[12px] text-[1rem] text-[#666666]`}
+          >
             Department
           </Label>
-          <Select value={filters.department} onValueChange={handleSelectChange("department")}>
+          <Select value={filters.department} onValueChange={handleSelectChange('department')}>
             <SelectTrigger id="department">
               <SelectValue />
             </SelectTrigger>
@@ -51,10 +55,13 @@ export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
         </div>
 
         <div className="flex flex-col gap-[12px]">
-          <Label htmlFor="student" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
+          <Label
+            htmlFor="student"
+            className={`${interRegular.className} text-[1rem] text-[#666666]`}
+          >
             Student
           </Label>
-          <Select value={filters.student} onValueChange={handleSelectChange("student")}>
+          <Select value={filters.student} onValueChange={handleSelectChange('student')}>
             <SelectTrigger id="student">
               <SelectValue />
             </SelectTrigger>
@@ -70,7 +77,7 @@ export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
           <Label htmlFor="level" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
             Level
           </Label>
-          <Select value={filters.level} onValueChange={handleSelectChange("level")}>
+          <Select value={filters.level} onValueChange={handleSelectChange('level')}>
             <SelectTrigger id="level">
               <SelectValue />
             </SelectTrigger>
@@ -85,12 +92,15 @@ export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-4 mt-[3.5rem]">
+      <div className="mt-[3.5rem] grid grid-cols-1 gap-6 md:grid-cols-4">
         <div className="flex flex-col gap-[12px]">
-          <Label htmlFor="gender" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
+          <Label
+            htmlFor="gender"
+            className={`${interRegular.className} text-[1rem] text-[#666666]`}
+          >
             Gender
           </Label>
-          <Select value={filters.gender} onValueChange={handleSelectChange("gender")}>
+          <Select value={filters.gender} onValueChange={handleSelectChange('gender')}>
             <SelectTrigger id="gender">
               <SelectValue />
             </SelectTrigger>
@@ -103,36 +113,45 @@ export function ReportFilters({ filters, onFilterChange }: ReportFiltersProps) {
         </div>
 
         <div className="flex flex-col gap-[12px]">
-          <Label htmlFor="start-date" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
+          <Label
+            htmlFor="start-date"
+            className={`${interRegular.className} text-[1rem] text-[#666666]`}
+          >
             Start Date
           </Label>
           <Input
             id="start-date"
             type="date"
             value={filters.startDate}
-            onChange={handleInputChange("startDate")}
+            onChange={handleInputChange('startDate')}
             className="w-full"
           />
         </div>
 
         <div className="flex flex-col gap-[12px]">
-          <Label htmlFor="end-date" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
+          <Label
+            htmlFor="end-date"
+            className={`${interRegular.className} text-[1rem] text-[#666666]`}
+          >
             End Date
           </Label>
           <Input
             id="end-date"
             type="date"
             value={filters.endDate}
-            onChange={handleInputChange("endDate")}
+            onChange={handleInputChange('endDate')}
             className="w-full"
           />
         </div>
 
         <div className="flex flex-col gap-[12px]">
-          <Label htmlFor="export-type" className={`${interRegular.className} text-[1rem] text-[#666666]`}>
+          <Label
+            htmlFor="export-type"
+            className={`${interRegular.className} text-[1rem] text-[#666666]`}
+          >
             Export Type
           </Label>
-          <Select value={filters.exportType} onValueChange={handleSelectChange("exportType")}>
+          <Select value={filters.exportType} onValueChange={handleSelectChange('exportType')}>
             <SelectTrigger id="export-type">
               <SelectValue />
             </SelectTrigger>

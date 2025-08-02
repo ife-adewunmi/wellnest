@@ -14,7 +14,7 @@ import {
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { Header } from '@/features/dashboard/components/dashboard-header'
 import { useViewContext } from '@/context/view-context'
-import {Profile} from './student-profile'
+import { Profile } from './student-profile'
 
 interface Student {
   id: string
@@ -25,11 +25,10 @@ interface Student {
   screenTime: string
 }
 
-
 export function StudentTable() {
-  const { currentView, setCurrentView } = useViewContext();
-  const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null);
-  
+  const { currentView, setCurrentView } = useViewContext()
+  const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null)
+
   const allStudents: Student[] = [
     {
       id: '1',
@@ -190,9 +189,9 @@ export function StudentTable() {
   }
 
   const handleStudentClick = (student: Student) => {
-    setSelectedStudent(student);
-    setCurrentView('profile');
-  };
+    setSelectedStudent(student)
+    setCurrentView('profile')
+  }
 
   const handleExport = () => {
     // Prepare the data for export
@@ -362,7 +361,7 @@ export function StudentTable() {
               {displayedStudents.map((student) => (
                 <tr
                   key={student.id}
-                  className="border-b border-[#CBD5E0] hover:bg-gray-50 cursor-pointer transition-colors"
+                  className="cursor-pointer border-b border-[#CBD5E0] transition-colors hover:bg-gray-50"
                   onClick={() => handleStudentClick(student)}
                 >
                   <td
@@ -415,12 +414,12 @@ export function StudentTable() {
   )
 
   return (
-    <div >
+    <div>
       <Header />
-      <div className="w-full flex justify-center pt-[4.44vh]">
+      <div className="flex w-full justify-center pt-[4.44vh]">
         {/* Conditionally render based on currentView */}
         {currentView === 'students' ? renderStudentsTable() : <Profile student={selectedStudent} />}
       </div>
     </div>
-  );
+  )
 }

@@ -15,7 +15,7 @@ export interface ReportOptions {
 }
 
 export interface StudentReportData {
-    id?: string
+  id?: string
   report?: string
   studentId: string
   student: string
@@ -37,7 +37,7 @@ export interface StudentReportData {
 
 export interface MoodEntry {
   date: string
-  mood: "excellent" | "good" | "neutral" | "poor" | "very-poor"
+  mood: 'excellent' | 'good' | 'neutral' | 'poor' | 'very-poor'
   notes?: string
 }
 
