@@ -3,15 +3,19 @@
 import { UpcomingSessions } from '@/features/student-management/components/upcoming-sessions'
 import { Header } from './dashboard-header'
 import { MoodHistoryChart } from './line-charts'
-import { MoodCheckIns } from './mood-checkIn'
+import { MoodCheckIns } from './mood-check-ins'
 import { Notifications } from '@/shared/components/notification'
 import { StudentTable } from '@/features/student-management/components/student-table'
 import { MetricCard } from './metric-card'
 import { interBold } from '@/shared/styles/fonts'
 import AverageScreenTime from './average-screen-time'
 import SocialMedia from '@/features/social-media/components/social-media'
+import { useDashboardSettings } from '@/shared/contexts/dashboard-settings-context'
+import { DistressScore } from './distress-score'
 
 export default function Dashboard() {
+  const { isWidgetEnabled } = useDashboardSettings()
+
   const moodCheckIns = [
     {
       name: 'Sarah M.',
@@ -51,6 +55,30 @@ export default function Dashboard() {
     { title: 'Distress Alerts', value: '3', change: '-1%', positive: false },
   ]
 
+  // Helper function to determine grid layout based on enabled widgets
+  const getGridLayout = (enabledCount: number) => {
+    if (enabledCount === 1) return 'grid-cols-1'
+    return 'grid-cols-1 lg:grid-cols-2'
+  }
+
+  // Count enabled widgets for different sections
+  const analysisWidgets = [
+    isWidgetEnabled('mood-tracker'),
+    // Add mood history chart as it's part of mood tracking
+    isWidgetEnabled('mood-tracker')
+  ].filter(Boolean)
+
+  const screenTimeWidgets = [
+    isWidgetEnabled('screen-time'),
+    // Social media is separate but related to screen time
+    true // Keep social media always visible for now
+  ].filter(Boolean)
+
+  const notificationWidgets = [
+    isWidgetEnabled('notification-widget'),
+    isWidgetEnabled('upcoming-sessions')
+  ].filter(Boolean)
+
   return (
     <div className="flex flex-col items-center justify-center pb-3">
       <Header />
@@ -60,46 +88,60 @@ export default function Dashboard() {
         <h1 className={`${interBold.className} text-[2rem] text-[#121417]`}>Dashboard</h1>
 
         {/* Metrics Cards */}
-        <div className="mt-[2.8125rem] flex items-center gap-[1.5rem]">
-          {metrics.map((metric, index) => (
-            <MetricCard
-              key={index}
-              title={metric.title}
-              value={metric.value}
-              change={metric.change}
-              positive={metric.positive}
-            />
-          ))}
+        <div className="mt-[2.8125rem] flex items-center gap-[1.5rem] ">
+          {metrics.map((metric, index) => {
+            // Hide distress score if the widget is disabled
+            if (metric.title === 'Distress Alerts' && !isWidgetEnabled('distress-score')) {
+              return null
+            }
+            return (
+              <MetricCard
+                key={index}
+                title={metric.title}
+                value={metric.value}
+                change={metric.change}
+                positive={metric.positive}
+              />
+            )
+          })}
         </div>
 
         {/* Analysis Overview */}
-        <div className="mt-[4.5rem]">
-          <h2 className={`text-[1.375rem] text-[#121417] ${interBold.className}`}>
-            Analysis Overview
-          </h2>
+        {isWidgetEnabled('mood-tracker') && (
+          <div className="mt-[4.5rem]">
+            <h2 className={`text-[1.375rem] text-[#121417] ${interBold.className}`}>
+              Analysis Overview
+            </h2>
 
-          <div className="mt-[2rem] grid grid-cols-1 gap-[2rem] lg:grid-cols-2">
-            <MoodCheckIns checkIns={moodCheckIns} />
-            <MoodHistoryChart />
+            <div className={`mt-[2rem] grid gap-[2rem] ${getGridLayout(analysisWidgets.length)}`}>
+              <MoodCheckIns checkIns={moodCheckIns} />
+              <MoodHistoryChart />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Screen Time and Social Media Activity */}
-        <div className="mt-[2rem] grid grid-cols-1 gap-[2rem] lg:grid-cols-2">
-          {/* <AverageScreenTime /> */}
-          <SocialMedia />
-        </div>
+        {(isWidgetEnabled('screen-time') || true) && (
+          <div className={`mt-[2rem] grid gap-[2rem] ${getGridLayout(screenTimeWidgets.length)}`}>
+            {isWidgetEnabled('screen-time') && {/* <AverageScreenTime /> */}}
+            <DistressScore />
+          </div>
+        )}
 
         {/* Additional Dashboard Sections */}
-        <div className="mt-[5rem] mb-[5rem] flex gap-[2rem]">
-          <Notifications />
-          <div className="w-full max-w-[806px]">
-            <UpcomingSessions />
+        {(isWidgetEnabled('notification-widget') || isWidgetEnabled('upcoming-sessions')) && (
+          <div className="mt-[5rem] mb-[5rem] flex gap-[2rem]">
+            {isWidgetEnabled('notification-widget') && <Notifications />}
+            {isWidgetEnabled('upcoming-sessions') && (
+              <div className={`w-full ${isWidgetEnabled('notification-widget') ? 'max-w-[806px]' : ''}`}>
+                <UpcomingSessions />
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
         {/* Student Table */}
-        <StudentTable />
+        {isWidgetEnabled('student-table') && <StudentTable />}
       </main>
     </div>
   )
