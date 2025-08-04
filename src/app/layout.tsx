@@ -1,8 +1,8 @@
 import '@/styles/globals.css'
-import { Metadata } from 'next';
-import QueryProvider from '@/shared/components/query-provider';
-import { ViewProvider } from '@/context/view-context';
-import { DashboardSettingsProvider } from '@/shared/contexts/dashboard-settings-context';
+import { Metadata } from 'next'
+import QueryProvider from '@/shared/components/query-provider'
+import { ViewProvider } from '@/context/view-context'
+import { DashboardSettingsProvider } from '@/shared/contexts/dashboard-settings-context'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: siteConfig.meta.twitter.description,
     creator: siteConfig.meta.twitter.creator,
   },
-  themeColor: siteConfig.meta.themeColor,
+  // themeColor: siteConfig.meta.themeColor,
   icons: {
     icon: '/favicon.ico',
   },
@@ -48,9 +48,7 @@ export default function RootLayout({
       <body className="pb-[7.43vh]">
         <QueryProvider>
           <ViewProvider>
-            <DashboardSettingsProvider>
-              {children}
-            </DashboardSettingsProvider>
+            <DashboardSettingsProvider>{children}</DashboardSettingsProvider>
           </ViewProvider>
         </QueryProvider>
         <ToastContainer />

@@ -73,20 +73,18 @@ export function Header({ user }: HeaderProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={user.avatar || '/placeholder.svg'} alt={user.name} />
-                <AvatarFallback>
-                  {user.name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
-                </AvatarFallback>
+                <AvatarImage
+                  src={user.avatar || '/placeholder.svg'}
+                  alt={`${user?.firstName} ${user?.lastName}`}
+                />
+                <AvatarFallback>{`${user?.firstName} ${user?.lastName}`}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm leading-none font-medium">{user.name}</p>
+                <p className="text-sm leading-none font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
                 <p className="text-muted-foreground text-xs leading-none">{user.email}</p>
               </div>
             </DropdownMenuLabel>

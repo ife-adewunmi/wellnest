@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { User } from '@/shared/types/auth'
+import { User } from '@/features/auth/types'
 
 interface AppSidebarProps {
   user: User
@@ -128,15 +128,10 @@ export function AppSidebar({ user }: AppSidebarProps) {
         <div className="flex items-center gap-3">
           <Avatar className="h-8 w-8">
             <AvatarImage src={user.avatar || '/placeholder.svg'} />
-            <AvatarFallback>
-              {user.name
-                .split(' ')
-                .map((n) => n[0])
-                .join('')}
-            </AvatarFallback>
+            <AvatarFallback>{`${user?.firstName} ${user?.lastName}`}</AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium">{user.name}</p>
+            <p className="truncate text-sm font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
             <p className="text-muted-foreground text-xs capitalize">{user.role.toLowerCase()}</p>
           </div>
         </div>

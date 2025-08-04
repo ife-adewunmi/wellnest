@@ -33,7 +33,7 @@ export function Header({ user }: HeaderProps) {
   const [iconStates, setIconStates] = useState({
     notification: { bgColor: '#F0F2F5', color: '#000000' },
     settings: { bgColor: '#F0F2F5', color: '#000000' },
-    chat: { bgColor: '#F0F2F5', color: '#000000' }
+    chat: { bgColor: '#F0F2F5', color: '#000000' },
   })
   const pathname = usePathname()
   const router = useRouter()
@@ -41,14 +41,14 @@ export function Header({ user }: HeaderProps) {
   // Update settings icon state based on current path
   useEffect(() => {
     if (pathname === '/settings') {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
-        settings: { bgColor: '#3182CE', color: '#FFFFFF' }
+        settings: { bgColor: '#3182CE', color: '#FFFFFF' },
       }))
     } else {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
-        settings: { bgColor: '#F0F2F5', color: '#000000' }
+        settings: { bgColor: '#F0F2F5', color: '#000000' },
       }))
     }
   }, [pathname])
@@ -57,12 +57,18 @@ export function Header({ user }: HeaderProps) {
     const currentState = iconStates[initialIcon as keyof typeof iconStates]
 
     const handleClick = () => {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
         [initialIcon]: {
-          bgColor: prev[initialIcon as keyof typeof iconStates].bgColor === '#F0F2F5' ? '#3182CE' : '#F0F2F5',
-          color: prev[initialIcon as keyof typeof iconStates].color === '#000000' ? '#FFFFFF' : '#000000'
-        }
+          bgColor:
+            prev[initialIcon as keyof typeof iconStates].bgColor === '#F0F2F5'
+              ? '#3182CE'
+              : '#F0F2F5',
+          color:
+            prev[initialIcon as keyof typeof iconStates].color === '#000000'
+              ? '#FFFFFF'
+              : '#000000',
+        },
       }))
     }
 
@@ -351,13 +357,11 @@ export function Header({ user }: HeaderProps) {
                     <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                       {user ? (
                         <UserAvatar className="h-8 w-8">
-                          <AvatarImage src={user?.avatar || '/placeholder.svg'} alt={user?.name} />
-                          <AvatarFallback>
-                            {user?.name
-                              .split(' ')
-                              .map((n) => n[0])
-                              .join('')}
-                          </AvatarFallback>
+                          <AvatarImage
+                            src={user?.avatar || '/placeholder.svg'}
+                            alt={`${user?.firstName} ${user?.lastName}`}
+                          />
+                          <AvatarFallback>{`${user?.firstName} ${user?.lastName}`}</AvatarFallback>
                         </UserAvatar>
                       ) : (
                         <Avatar size={38} type="user" customDefault="thumbnail" />
@@ -367,7 +371,7 @@ export function Header({ user }: HeaderProps) {
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm leading-none font-medium">{user?.name}</p>
+                        <p className="text-sm leading-none font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
                         <p className="text-muted-foreground text-xs leading-none">{user?.email}</p>
                       </div>
                     </DropdownMenuLabel>

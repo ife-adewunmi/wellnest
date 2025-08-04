@@ -65,18 +65,18 @@ export default function Dashboard() {
   const analysisWidgets = [
     isWidgetEnabled('mood-tracker'),
     // Add mood history chart as it's part of mood tracking
-    isWidgetEnabled('mood-tracker')
+    isWidgetEnabled('mood-tracker'),
   ].filter(Boolean)
 
   const screenTimeWidgets = [
     isWidgetEnabled('screen-time'),
     // Social media is separate but related to screen time
-    true // Keep social media always visible for now
+    true, // Keep social media always visible for now
   ].filter(Boolean)
 
   const notificationWidgets = [
     isWidgetEnabled('notification-widget'),
-    isWidgetEnabled('upcoming-sessions')
+    isWidgetEnabled('upcoming-sessions'),
   ].filter(Boolean)
 
   return (
@@ -88,7 +88,7 @@ export default function Dashboard() {
         <h1 className={`${interBold.className} text-[2rem] text-[#121417]`}>Dashboard</h1>
 
         {/* Metrics Cards */}
-        <div className="mt-[2.8125rem] flex items-center gap-[1.5rem] ">
+        <div className="mt-[2.8125rem] flex items-center gap-[1.5rem]">
           {metrics.map((metric, index) => {
             // Hide distress score if the widget is disabled
             if (metric.title === 'Distress Alerts' && !isWidgetEnabled('distress-score')) {
@@ -123,7 +123,7 @@ export default function Dashboard() {
         {/* Screen Time and Social Media Activity */}
         {(isWidgetEnabled('screen-time') || true) && (
           <div className={`mt-[2rem] grid gap-[2rem] ${getGridLayout(screenTimeWidgets.length)}`}>
-            {isWidgetEnabled('screen-time') && {/* <AverageScreenTime /> */}}
+            {isWidgetEnabled('screen-time') && <AverageScreenTime />}
             <DistressScore />
           </div>
         )}
@@ -133,7 +133,9 @@ export default function Dashboard() {
           <div className="mt-[5rem] mb-[5rem] flex gap-[2rem]">
             {isWidgetEnabled('notification-widget') && <Notifications />}
             {isWidgetEnabled('upcoming-sessions') && (
-              <div className={`w-full ${isWidgetEnabled('notification-widget') ? 'max-w-[806px]' : ''}`}>
+              <div
+                className={`w-full ${isWidgetEnabled('notification-widget') ? 'max-w-[806px]' : ''}`}
+              >
                 <UpcomingSessions />
               </div>
             )}

@@ -1,17 +1,17 @@
 'use client'
 
-import { useState } from "react"
-import { Button } from "@/shared/components/ui/custom-button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
-import { Checkbox } from "@/shared/components/ui/checkbox"
-import { Switch } from "@/shared/components/ui/switch"
-import { Label } from "@/shared/components/ui/label"
-import { Separator } from "@/shared/components/ui/separator"
-import { toast } from "react-toastify"
-import { useDashboardSettings } from "@/shared/contexts/dashboard-settings-context"
-import { DashboardHeader } from "@/features/dashboard/components"
-import { interMedium, interRegular } from "@/shared/styles/fonts"
-import { DashboardWidget } from "@/features"
+import { useState } from 'react'
+import { Button } from '@/shared/components/ui/custom-button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { Checkbox } from '@/shared/components/ui/checkbox'
+import { Switch } from '@/shared/components/ui/switch'
+import { Label } from '@/shared/components/ui/label'
+import { Separator } from '@/shared/components/ui/separator'
+import { toast } from 'react-toastify'
+import { useDashboardSettings } from '@/shared/contexts/dashboard-settings-context'
+import { DashboardHeader } from '@/features/dashboard/components'
+import { interMedium, interRegular } from '@/shared/styles/fonts'
+import { DashboardWidget } from '@/features'
 
 interface NotificationSetting {
   id: string
@@ -91,7 +91,9 @@ export default function SettingsPage() {
 
   const handleSaveChanges = () => {
     // Settings are automatically saved via context and localStorage
-    toast.success("Your dashboard preferences have been updated successfully. Changes will be visible on the dashboard.")
+    toast.success(
+      'Your dashboard preferences have been updated successfully. Changes will be visible on the dashboard.',
+    )
   }
 
   return (
