@@ -173,13 +173,13 @@ export function StudentTable() {
   const getRiskLevelColor = (level: string) => {
     switch (level) {
       case 'High':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FED7D7B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FED7D7B2] rounded-full'
       case 'Medium':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FEFCBFB2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FEFCBFB2] rounded-full'
       case 'Low':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#C6F6D5B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#C6F6D5B2] rounded-full'
       default:
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FED7D7B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FED7D7B2] rounded-full'
     }
   }
 
@@ -228,21 +228,12 @@ export function StudentTable() {
   }
 
   const renderStudentsTable = () => (
-    <div className="w-full max-w-[1152px]">
+    <div className="mx-auto w-full mt-[4rem] max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
       {/* Header */}
-      <div className="flex flex-row items-center justify-between py-[1rem]">
-        <h1 className="text-[1.5rem] font-bold text-[#121417]">Students Table</h1>
-        <Button
-          onClick={handleAddStudent}
-          className="flex cursor-pointer items-center gap-[8px] rounded-full bg-[#3182CE] px-[1.5rem] py-[10px] text-white hover:bg-[#2C5AA0]"
-        >
-          <Plus className="h-[18px] w-[18px]" />
-          Add Student
-        </Button>
-      </div>
+
 
       {/* Search Input */}
-      <div className="relative mt-[2.3125rem] mb-[2rem]">
+      <div className="relative mt-[2.3125rem] mb-[2rem] ">
         {/* Search icon */}
         <Search className="absolute top-1/2 left-[28px] h-[18px] w-[18px] -translate-y-1/2 transform text-gray-400" />
 
@@ -252,15 +243,15 @@ export function StudentTable() {
           placeholder="Search students"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={`w-full rounded-full border-none bg-[#E2E8F0] px-[3.5rem] py-[19px] text-[18px] placeholder:text-[#A0AEC0] ${interRegular.className}`}
+          className={`w-full rounded-full border-none bg-[#E2E8F0] py-[14px] px-[3.5rem] lg:py-[19px] text-[18px] placeholder:text-[#A0AEC0] ${interRegular.className}`}
         />
       </div>
 
-      {/* Filters and Controls */}
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex items-center gap-3">
+    {/* Filters and Controls */}
+      <div className="flex gap-[1rem] flex-col lg:flex-row items-center lg:gap-0 justify-between">
+        <div className="flex flex-wrap items-center gap-[8px]">
           <Select value={filterAll} onValueChange={setFilterAll}>
-            <SelectTrigger className="flex items-center gap-[8px] rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px]">
+            <SelectTrigger className={`${interMedium.className} h-auto w-[80px] border-none text-[13px] flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] whitespace-nowrap`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -271,8 +262,8 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterRisk} onValueChange={setFilterRisk}>
-            <SelectTrigger className="flex items-center gap-[8px] rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px]">
-              <SelectValue />
+            <SelectTrigger className={`${interMedium.className} h-auto w-[90px] border-none flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}>
+              <SelectValue /> 
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="At-Risk">At-Risk</SelectItem>
@@ -283,7 +274,7 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterMonitored} onValueChange={setFilterMonitored}>
-            <SelectTrigger className="flex items-center gap-[8px] rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px]">
+            <SelectTrigger className={`${interMedium.className} h-auto w-[110px] border-none text-[13px] flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] whitespace-nowrap`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -293,7 +284,7 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterDepartments} onValueChange={setFilterDepartments}>
-            <SelectTrigger className="flex items-center gap-[8px] rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px]">
+            <SelectTrigger className={`${interMedium.className} h-auto w-[140px] border-none flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -305,16 +296,16 @@ export function StudentTable() {
           </Select>
         </div>
 
-        <div className="flex items-center gap-[8px]">
+        <div className="flex flex-wrap items-center gap-[8px]">
           <div className="flex items-center gap-[8px] rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px]">
             <CalendarIcon className="h-[24px] w-[24px] text-gray-500" />
-            <span className={` ${interMedium.className} text-[0.875rem] text-[#1A202C]`}>
+            <span className={`${interMedium.className} text-[0.875rem] text-[#1A202C]`}>
               Range: June 1, 2025 - June 30, 2025
             </span>
           </div>
           <Button
             onClick={handleExport}
-            className={`flex items-center gap-[8px] rounded-full border-none bg-[#EDF2F7] px-[24px] py-[8px] text-[#1A202C] ${interMedium.className}`}
+            className={`flex items-center gap-[8px] rounded-full border-none bg-[#EDF2F7] px-[24px] py-[8px] text-[#1A202C] hover:bg-[#E2E8F0] ${interMedium.className}`}
           >
             <Download className="h-4 w-4" color="#1A202C" />
             Export
@@ -325,72 +316,80 @@ export function StudentTable() {
       {/* Table */}
       <div className="mt-[2.5rem]">
         <div
-          className={`overflow-x-auto rounded-[12px] border border-[#CBD5E0] ${showAll ? 'max-h-96 overflow-y-auto' : ''}`}
+          className={`overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0] ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''}`}
         >
-          <table className="w-full rounded-[12px] border border-[#CBD5E0]">
+          <table className="w-full min-w-[640px] rounded-lg sm:rounded-xl border border-[#CBD5E0]">
             <thead>
-              <tr className="border-b border-[#CBD5E0]">
+              <tr className="border-b border-[#CBD5E0] bg-gray-50">
                 <th
-                  className={`py-[12px] pl-[2rem] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] pl-4 sm:pl-6 lg:pl-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Student ID
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Last check-in
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} pl-[11px] text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Risk level
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Mood
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Screen time
                 </th>
               </tr>
             </thead>
             <tbody>
-              {displayedStudents.map((student) => (
+              {displayedStudents.map((student, index) => (
                 <tr
                   key={student.id}
-                  className="cursor-pointer border-b border-[#CBD5E0] transition-colors hover:bg-gray-50"
+                  className={`cursor-pointer border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}
                   onClick={() => handleStudentClick(student)}
                 >
                   <td
-                    className={`py-[1.625rem] pl-[2rem] ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                   >
                     {student.studentId}
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.lastCheckIn}
                   </td>
-                  <td className="">
+                  <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3">
                     <span
-                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-[0.875rem] text-[#121417]`}
+                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-xs sm:text-sm text-[#121417]`}
                     >
                       {student.riskLevel}
                     </span>
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.mood}
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.screenTime}
                   </td>
+                  <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8">
+                                      <Button
+                                        variant="destructive"
+                                        onClick={() => handleViewDetails(student.id)}
+                                      >
+                                        View details
+                                      </Button>
+             </td>
                 </tr>
               ))}
             </tbody>

@@ -82,8 +82,8 @@ export function Notifications() {
       <div className="flex w-full max-w-[321px] flex-row items-center justify-between">
         <h1 className={`${interBold.className} text-[1.25rem] text-[#121417]`}>Notifications</h1>
         <Button
-          variant="ghost"
-          className={`${interMedium.className} text-[0.875rem] text-[#4A5568]`}
+            variant="ghost"
+                    className={`${interMedium.className} text-sm lg:text-[0.875rem] text-[#4A5568] self-start sm:self-auto`}
           onClick={() => setShowAll(!showAll)}
         >
           {showAll ? 'Show less' : 'View all'}
