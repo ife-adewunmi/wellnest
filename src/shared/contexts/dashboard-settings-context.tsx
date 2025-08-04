@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
@@ -20,12 +20,12 @@ const DashboardSettingsContext = createContext<DashboardSettingsContextType | un
 const STORAGE_KEY = 'dashboard-widget-settings'
 
 const defaultWidgets: DashboardWidget[] = [
-  { id: "mood-tracker", label: "Mood tracker", enabled: true },
-  { id: "screen-time", label: "Screen time tracker", enabled: true },
-  { id: "distress-score", label: "Overall distress score", enabled: true },
-  { id: "notification-widget", label: "Notification widget", enabled: true },
-  { id: "upcoming-sessions", label: "Upcoming Sessions", enabled: true },
-  { id: "student-table", label: "Student table", enabled: true },
+  { id: 'mood-tracker', label: 'Mood tracker', enabled: true },
+  { id: 'screen-time', label: 'Screen time tracker', enabled: true },
+  { id: 'distress-score', label: 'Overall distress score', enabled: true },
+  { id: 'notification-widget', label: 'Notification widget', enabled: true },
+  { id: 'upcoming-sessions', label: 'Upcoming Sessions', enabled: true },
+  { id: 'student-table', label: 'Student table', enabled: true },
 ]
 
 export function DashboardSettingsProvider({ children }: { children: React.ReactNode }) {
@@ -53,15 +53,15 @@ export function DashboardSettingsProvider({ children }: { children: React.ReactN
   }, [dashboardWidgets])
 
   const isWidgetEnabled = (widgetId: string): boolean => {
-    const widget = dashboardWidgets.find(w => w.id === widgetId)
+    const widget = dashboardWidgets.find((w) => w.id === widgetId)
     return widget?.enabled ?? false
   }
 
   const toggleWidget = (widgetId: string) => {
-    setDashboardWidgets(prev =>
-      prev.map(widget =>
-        widget.id === widgetId ? { ...widget, enabled: !widget.enabled } : widget
-      )
+    setDashboardWidgets((prev) =>
+      prev.map((widget) =>
+        widget.id === widgetId ? { ...widget, enabled: !widget.enabled } : widget,
+      ),
     )
   }
 

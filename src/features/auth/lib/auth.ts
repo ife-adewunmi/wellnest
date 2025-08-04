@@ -10,20 +10,23 @@ const mockUsers: User[] = [
   {
     id: '1',
     email: 'student@example.com',
-    name: 'John Student',
     role: UserRole.STUDENT,
     avatar: '',
     createdAt: new Date(),
     updatedAt: new Date(),
+    firstName: 'John',
+    lastName: 'Student',
   },
   {
     id: '2',
     email: 'counselor@example.com',
-    name: 'Dr. Sarah Johnson',
+    title: 'Dr.',
     role: UserRole.COUNSELOR,
     avatar: '',
     createdAt: new Date(),
     updatedAt: new Date(),
+    firstName: 'Sarah',
+    lastName: 'Johnson',
   },
 ]
 

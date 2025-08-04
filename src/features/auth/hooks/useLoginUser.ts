@@ -13,7 +13,7 @@ interface LoginResponse {
 const useLoginUser = () => {
   return useMutation<LoginResponse, Error, LoginFormData>({
     mutationFn: async (loginData: LoginFormData) => {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

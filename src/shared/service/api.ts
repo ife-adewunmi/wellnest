@@ -119,6 +119,7 @@ class ApiService {
   ): Promise<ApiResult<T>> {
     try {
       const result = await apiCall()
+
       return {
         data: result.data,
         error: null,
