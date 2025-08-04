@@ -68,67 +68,67 @@ export function UpcomingSessions() {
 
   return (
     <div>
-      <div className="flex flex-row items-center justify-between">
-        <h1 className={`${interBold.className} text-[1.25rem] text-[#121417]`}>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+        <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>
           Upcoming Sessions
         </h1>
         <Button
-          variant="ghost"
-          className={`${interMedium.className} text-[0.875rem] text-[#4A5568]`}
+           variant="ghost"
+                   className={`${interMedium.className} text-sm lg:text-[0.875rem] text-[#4A5568] self-start sm:self-auto`}
           onClick={() => setShowAll(!showAll)}
         >
           {showAll ? 'Show less' : 'View all'}
         </Button>
       </div>
-      <div>
+      <div className="mt-4 sm:mt-6 lg:mt-[1.5rem]">
         <div
-          className={`mt-[1.5rem] flex flex-col gap-[1.25rem] rounded-[12px] border border-[#CBD5E0]`}
+          className={`overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0] ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''}`}
         >
-          <table className="w-full">
+          <table className="w-full min-w-[640px] rounded-lg sm:rounded-xl border border-[#CBD5E0]">
             <thead>
-              <tr className="border-b border-[#CBD5E0]">
+              <tr className="border-b border-[#CBD5E0] bg-gray-50">
                 <th
-                  className={`py-[13px] pl-[1rem] text-left ${interRegular.className} text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[13px] pl-4 sm:pl-6 lg:pl-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Student
                 </th>
                 <th
-                  className={`py-[13px] pl-[1rem] text-left ${interRegular.className} text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 lg:px-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Date
                 </th>
                 <th
-                  className={`py-[13px] pl-[1rem] text-left ${interRegular.className} text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 lg:px-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Time
                 </th>
                 <th
-                  className={`py-[13px] pl-[1rem] text-left ${interRegular.className} text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Issue
                 </th>
               </tr>
             </thead>
             <tbody>
-              {displayedSessions.map((session) => (
-                <tr key={session.id} className="border-b border-[#CBD5E0]">
+              {displayedSessions.map((session, index) => (
+                <tr key={session.id} className={`border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}>
                   <td
-                    className={`py-[1.625rem] pl-[1rem] ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                   >
                     {session.student}
                   </td>
                   <td
-                    className={`py-[1.625rem] pl-[1rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 lg:px-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {session.date}
                   </td>
                   <td
-                    className={`py-[1.625rem] pl-[1rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 lg:px-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {session.time}
                   </td>
                   <td
-                    className={`py-[1.625rem] pl-[1rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {session.issue}
                   </td>

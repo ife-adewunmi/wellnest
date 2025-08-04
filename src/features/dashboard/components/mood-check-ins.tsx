@@ -55,11 +55,11 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
   const displayedCheckIns = showAll ? allCheckIns : checkIns
 
   return (
-    <div className="rounded-[12px] border border-[#CBD5E0] p-[1rem]">
-      <div className="flex flex-row items-center justify-between">
+    <div className="rounded-lg sm:rounded-xl border border-[#CBD5E0] p-3 sm:p-4 lg:p-[1rem]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
         <div>
-          <h1 className={`${interBold.className} text-[1.25rem] text-[#121417]`}>Mood Check-Ins</h1>
-          <h2 className={`${interRegular.className} text-[0.875rem] text-[#667582]`}>
+          <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>Mood Check-Ins</h1>
+          <h2 className={`${interRegular.className} text-sm lg:text-[0.875rem] text-[#667582]`}>
             Recent student mood check-in responses
           </h2>
         </div>
@@ -67,26 +67,26 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
           {showAll ? "Show less" : "View all"}
         </Button> */}
       </div>
-      <div className={`space-y-4 ${showAll ? 'max-h-96 overflow-y-auto' : ''} overflow-y-auto`}>
+      <div className={`space-y-3 sm:space-y-4 mt-3 sm:mt-4 ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''} overflow-y-auto`}>
         {displayedCheckIns.map((checkIn, index) => (
-          <div key={index} className="flex gap-[1rem] py-[8px]">
+          <div key={index} className="flex gap-3 sm:gap-4 py-2 sm:py-[8px]">
             <Avatar
-              size={40}
+              size={32}
               type="user"
               //   headerImage={user?.header_image}
               //   profilePicture={user?.thumbnail}
               customDefault="thumbnail" // ✅ Forces fallback to DefaultThumbnail on this page only
             />
             <div className="flex w-full flex-col">
-              <div className="flex w-full items-center justify-between">
-                <p className={`text-[1rem] ${interMedium.className} text-[#121417]`}>
+              <div className="flex w-full items-start sm:items-center justify-between flex-col sm:flex-row gap-1 sm:gap-0">
+                <p className={`text-sm sm:text-base lg:text-[1rem] ${interMedium.className} text-[#121417]`}>
                   {checkIn.name} - {checkIn.emoji}
                 </p>
-                <span className={`${interRegular.className} text-[0.875rem] text-[#667582]`}>
+                <span className={`${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#667582] flex-shrink-0`}>
                   {checkIn.time}
                 </span>
               </div>
-              <p className={`${interRegular.className} text-[0.875rem] text-[#667582]`}>
+              <p className={`${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#667582] mt-1`}>
                 {checkIn.message}
               </p>
             </div>

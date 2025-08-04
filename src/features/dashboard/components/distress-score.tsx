@@ -25,10 +25,10 @@ export function DistressScore() {
             </div>
           </div>
 
-          <div className="mt-[6.25rem]">
-            <div className="h-[53px] rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-400"></div>
+          <div className="mt-12 sm:mt-16 lg:mt-[6.25rem]">
+            <div className="h-8 sm:h-12 lg:h-[53px] bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full"></div>
             <div
-              className={`mt-[8px] ${interBold.className} flex w-full items-center justify-between text-[0.875rem] text-[#4A739C]`}
+              className={`mt-2 sm:mt-3 lg:mt-[8px] ${interBold.className} text-[#4A739C] text-xs sm:text-sm lg:text-[0.875rem] flex justify-between w-full items-center`}
             >
               <span>Low</span>
               <span>Medium</span>
