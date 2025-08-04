@@ -144,26 +144,30 @@ export function StudentTable() {
   // Show first 10 items by default, all items when showAll is true
   const displayedStudents = showAll ? allStudents : allStudents.slice(0, 10)
 
+  const handleViewDetails = (studentId: string) => {
+    // Navigate to student details page or open modal
+    router.push(`/student-details/${studentId}`)
+  }
   const getRiskLevelColor = (level: string) => {
     switch (level) {
       case 'High':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FED7D7B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FED7D7B2] rounded-full'
       case 'Medium':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FEFCBFB2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FEFCBFB2] rounded-full'
       case 'Low':
-        return 'py-[8px] w-[86px] text-[12px] bg-[#C6F6D5B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#C6F6D5B2] rounded-full'
       default:
-        return 'py-[8px] w-[86px] text-[12px] bg-[#FED7D7B2] rounded-full'
+        return 'py-1 sm:py-2 w-16 sm:w-20 lg:w-[86px] text-xs sm:text-sm bg-[#FED7D7B2] rounded-full'
     }
   }
 
   return (
-    <div className="mt-[5rem]">
-      <div className="flex flex-row items-center justify-between">
-        <h1 className={`${interBold.className} text-[1.25rem] text-[#121417]`}>Student Table</h1>
+    <div className="mt-8 sm:mt-12 lg:mt-[5rem]">
+      <div className="flex sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+        <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>Student Table</h1>
         <Button
           variant="ghost"
-          className={`${interMedium.className} text-[0.875rem] text-[#4A5568]`}
+          className={`${interMedium.className} text-sm lg:text-[0.875rem] text-[#4A5568] self-start sm:self-auto`}
           onClick={() => {
             if (showAll) {
               setShowAll(false)
@@ -175,69 +179,78 @@ export function StudentTable() {
           {showAll ? 'Show less' : 'View all table'}
         </Button>
       </div>
-      <div className="mt-[25px]">
+      <div className="mt-4 sm:mt-6 lg:mt-[25px]">
         <div
-          className={`overflow-x-auto rounded-[12px] border border-[#CBD5E0] ${showAll ? 'max-h-96 overflow-y-auto' : ''}`}
+          className={`overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0] ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''}`}
         >
-          <table className="w-full rounded-[12px] border border-[#CBD5E0]">
+          <table className="w-full min-w-[640px] rounded-lg sm:rounded-xl border border-[#CBD5E0]">
             <thead>
-              <tr className="border-b border-[#CBD5E0]">
+              <tr className="border-b border-[#CBD5E0] bg-gray-50">
+
                 <th
-                  className={`py-[12px] pl-[2rem] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] pl-4 sm:pl-6 lg:pl-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Student ID
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Last check-in
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} pl-[11px] text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Risk level
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Mood
                 </th>
                 <th
-                  className={`py-[12px] text-left ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                 >
                   Screen time
                 </th>
               </tr>
             </thead>
             <tbody>
-              {displayedStudents.map((student) => (
-                <tr key={student.id} className="border-b border-[#CBD5E0]">
+              {displayedStudents.map((student, index) => (
+                <tr key={student.id} className={`border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}>
                   <td
-                    className={`py-[1.625rem] pl-[2rem] ${interRegular.className} text-[0.875rem] text-[#121417]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
                   >
                     {student.studentId}
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.lastCheckIn}
                   </td>
-                  <td className="">
+                  <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3">
                     <span
-                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-[0.875rem] text-[#121417]`}
+                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-xs sm:text-sm text-[#121417]`}
                     >
                       {student.riskLevel}
                     </span>
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.mood}
                   </td>
                   <td
-                    className={`py-[1.625rem] ${interRegular.className} text-[0.875rem] text-[#61758A]`}
+                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
                   >
                     {student.screenTime}
+                  </td>
+                   <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8">
+                    <Button
+                      variant="destructive"
+                      // onClick={() => handleViewDetails(student.id)}
+                    >
+                      View details
+                    </Button>
                   </td>
                 </tr>
               ))}

@@ -97,27 +97,31 @@ export default function SettingsPage() {
   return (
     <div className="flex flex-col">
       <DashboardHeader />
-      <div className="mt-[4.44vh] flex flex-col items-center justify-center">
+      <div className="mt-4 sm:mt-6 lg:mt-[4.44vh] flex flex-col items-center justify-center">
         <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-              <p className="mt-1 text-gray-600">Customize your dashboard and notifications</p>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Settings</h1>
+              <p className="mt-1 text-sm sm:text-base text-gray-600">Customize your dashboard and notifications</p>
             </div>
+            <div>
+
+          
             <Button onClick={handleSaveChanges} variant="ghost">
               Save Changes
             </Button>
           </div>
+          </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Dashboard Widget Customisation */}
 
-            <CardTitle>Dashboard Widget Customisation</CardTitle>
+            <CardTitle >Dashboard Widget Customisation</CardTitle>
 
             <div>
-              <div className="flex flex-col gap-[1rem] lg:flex lg:flex-row lg:items-center lg:gap-[2.5rem]">
+              <div className="flex flex-col gap-4 sm:gap-6 lg:flex lg:flex-row lg:items-center lg:gap-8 xl:gap-10">
                 {dashboardWidgets.map((widget) => (
-                  <div key={widget.id} className="flex items-center gap-[8px]">
+                  <div key={widget.id} className="flex items-center gap-2 sm:gap-3">
                     <Checkbox
                       id={widget.id}
                       checked={widget.enabled}
@@ -126,7 +130,7 @@ export default function SettingsPage() {
                     />
                     <Label
                       htmlFor={widget.id}
-                      className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      className="text-sm sm:text-base leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
                       {widget.label}
                     </Label>
@@ -137,24 +141,24 @@ export default function SettingsPage() {
 
             {/* Notifications */}
             <CardHeader>
-              <CardTitle>Notifications</CardTitle>
+              <CardTitle className="text-lg sm:text-xl lg:text-2xl">Notifications</CardTitle>
             </CardHeader>
-            <CardContent className="rounded-[1rem] border border-[#CBD5E0] py-[1rem]">
+            <CardContent className="rounded-lg sm:rounded-xl border border-[#CBD5E0] py-3 sm:py-4">
               {notifications.map((notification, index) => (
                 <div key={notification.id}>
-                  <div className="flex items-center justify-between px-[1.5rem] py-[1rem]">
-                    <div className="flex flex-col gap-[8px]">
-                      <h3 className={`${interMedium.className} text-[18px] text-[#0D141C]`}>
+                  <div className="flex items-start sm:items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+                    <div className="flex flex-col gap-1 sm:gap-2 flex-1 pr-4">
+                      <h3 className={`${interMedium.className} text-base sm:text-lg lg:text-xl text-[#0D141C]`}>
                         {notification.title}
                       </h3>
-                      <p className={`${interRegular.className} text-[1rem] text-[#4A739C]`}>
+                      <p className={`${interRegular.className} text-sm sm:text-base text-[#4A739C] leading-relaxed`}>
                         {notification.description}
                       </p>
                     </div>
                     <Switch
                       checked={notification.enabled}
                       onCheckedChange={() => handleNotificationToggle(notification.id)}
-                      className="data-[state=checked]:bg-[#3182CE]"
+                      className="data-[state=checked]:bg-[#3182CE] flex-shrink-0"
                     />
                   </div>
                   {index < notifications.length - 1 && (
@@ -167,16 +171,16 @@ export default function SettingsPage() {
             {/* Notification Methods */}
 
             <CardHeader>
-              <CardTitle>Notification Methods</CardTitle>
+              <CardTitle className="text-lg sm:text-xl lg:text-2xl">Notification Methods</CardTitle>
             </CardHeader>
-            <CardContent className="rounded-[1rem] border border-[#CBD5E0] py-[1rem]">
+            <CardContent className="rounded-lg sm:rounded-xl border border-[#CBD5E0] py-3 sm:py-4">
               {notificationMethods.map((method, index) => (
                 <div key={method.id}>
-                  <div className="flex items-center justify-between px-[1.5rem] py-[1rem]">
+                  <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
                     <div className="flex w-full items-center justify-between">
                       <Label
                         htmlFor={method.id}
-                        className={`${interMedium.className} text-[18px] text-[#0D141C]`}
+                        className={`${interMedium.className} text-base sm:text-lg lg:text-xl text-[#0D141C]`}
                       >
                         {method.label}
                       </Label>
@@ -188,7 +192,7 @@ export default function SettingsPage() {
                       />
                     </div>
                   </div>
-                  {index < notifications.length - 1 && (
+                  {index < notificationMethods.length - 1 && (
                     <div className="h-[1px] w-full bg-[#CBD5E0]"></div>
                   )}
                 </div>

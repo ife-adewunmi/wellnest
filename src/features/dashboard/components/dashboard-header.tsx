@@ -248,19 +248,20 @@ export function Header({ user }: HeaderProps) {
                 Intervention
               </Link>
 
-              <button
+                   <Link
+                href="/reports"
                 onClick={() => {
                   setActiveTab('Reports')
                   setMobileMenuOpen(false)
                 }}
                 className={`block w-full rounded-lg p-3 text-left transition-colors ${
-                  activeTab === 'Reports'
+                  pathname === '/reports'
                     ? 'bg-blue-50 font-medium text-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 } ${plusJakarta.className}`}
               >
                 Reports
-              </button>
+              </Link>
             </div>
           </div>
         </>
@@ -276,14 +277,14 @@ export function Header({ user }: HeaderProps) {
 
   return (
     <>
-      <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-[1.25rem] lg:px-[1.5rem]">
+      <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-6">
         <div className="flex w-full max-w-[1360px] items-center justify-between">
           <div className="flex w-full flex-col items-center justify-center lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex w-full max-w-[206px] items-center justify-center gap-[2px] lg:justify-start">
+            <div className="flex w-full max-w-[206px] items-center justify-center gap-1 sm:gap-2 lg:justify-start">
               <div className="flex">
-                <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} />
+                <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <h1 className={`text-[1.25rem] text-[#121417] ${interBold.className}`}>
+              <h1 className={`text-lg sm:text-xl lg:text-[1.25rem] text-[#121417] ${interBold.className}`}>
                 Distress Detection
               </h1>
             </div>
@@ -294,7 +295,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Dashboard')}
-                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
                         pathname === '/dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >
@@ -304,7 +305,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Students')}
-                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
                         pathname === '/student-table' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className} `}
                     >
@@ -314,7 +315,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Intervention')}
-                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
                         pathname === '/intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >
@@ -324,7 +325,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Reports')}
-                      className={`cursor-pointer text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
                         pathname === '/reports' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >
@@ -339,8 +340,8 @@ export function Header({ user }: HeaderProps) {
                 <MobileNavigation />
               </div>
 
-              <div className="flex items-center gap-[2rem]">
-                <div className="flex cursor-pointer items-center gap-[8px]">
+              <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
+                <div className="flex cursor-pointer items-center gap-2 sm:gap-3">
                   <AvatarIcon initialIcon="notification" />
                   <AvatarIcon initialIcon="settings" />
                   <AvatarIcon initialIcon="chat" />
