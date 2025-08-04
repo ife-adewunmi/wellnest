@@ -1,17 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { LoginFormData } from '@/shared/lib/validations'
+import { User } from '../types'
 
 interface LoginResponse {
   success: boolean
   message?: string
-  user?: {
-    id: number
-    first_name: string
-    last_name: string
-    email: string
-    created_at: string
-    updated_at: string
-  }
+  user?: User
   error?: string
   details?: any
 }

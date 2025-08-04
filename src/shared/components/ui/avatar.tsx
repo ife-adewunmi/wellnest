@@ -1,5 +1,3 @@
-// src/components/Avatar.tsx
-
 import React, { FunctionComponent, useState } from 'react'
 import Image from 'next/image'
 

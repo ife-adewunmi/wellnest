@@ -122,8 +122,10 @@ export default function Dashboard() {
 
         {/* Screen Time and Social Media Activity */}
         {(isWidgetEnabled('screen-time') || true) && (
+
           <div className={`mt-4 sm:mt-6 lg:mt-[2rem] grid gap-4 sm:gap-6 lg:gap-[2rem] ${getGridLayout(screenTimeWidgets.length)}`}>
             {isWidgetEnabled('screen-time') && <AverageScreenTime />}
+
             <DistressScore />
           </div>
         )}

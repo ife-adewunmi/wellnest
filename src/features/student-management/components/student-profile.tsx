@@ -100,9 +100,9 @@ export const Profile = ({ student }: ProfileProps) => {
             Weekly
           </Button>
         </div>
-        <div className="w-full">
+        {/* <div className="w-full">
           <ScreenTimeDashboard />
-        </div>
+        </div> */}
 
         <div className="mt-[3rem] flex flex-col items-center gap-6 lg:mt-[5rem] lg:flex-row lg:gap-[3.33vw]">
           <div className="w-full lg:flex-1">
