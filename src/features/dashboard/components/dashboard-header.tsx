@@ -8,17 +8,32 @@ import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Avatar as UserAvatar, AvatarFallback, AvatarImage } from '@/components/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { User } from '@/features/auth/types'
+
+interface HeaderProps {
+  user?: User
+}
 
 interface AvatarIconProps {
   initialIcon: string
 }
-export function Header() {
+export function Header({ user }: HeaderProps) {
   const [activeTab, setActiveTab] = useState('Dashboard')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [iconStates, setIconStates] = useState({
     notification: { bgColor: '#F0F2F5', color: '#000000' },
     settings: { bgColor: '#F0F2F5', color: '#000000' },
-    chat: { bgColor: '#F0F2F5', color: '#000000' }
+    chat: { bgColor: '#F0F2F5', color: '#000000' },
   })
   const pathname = usePathname()
   const router = useRouter()
@@ -26,14 +41,14 @@ export function Header() {
   // Update settings icon state based on current path
   useEffect(() => {
     if (pathname === '/settings') {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
-        settings: { bgColor: '#3182CE', color: '#FFFFFF' }
+        settings: { bgColor: '#3182CE', color: '#FFFFFF' },
       }))
     } else {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
-        settings: { bgColor: '#F0F2F5', color: '#000000' }
+        settings: { bgColor: '#F0F2F5', color: '#000000' },
       }))
     }
   }, [pathname])
@@ -42,12 +57,18 @@ export function Header() {
     const currentState = iconStates[initialIcon as keyof typeof iconStates]
 
     const handleClick = () => {
-      setIconStates(prev => ({
+      setIconStates((prev) => ({
         ...prev,
         [initialIcon]: {
-          bgColor: prev[initialIcon as keyof typeof iconStates].bgColor === '#F0F2F5' ? '#3182CE' : '#F0F2F5',
-          color: prev[initialIcon as keyof typeof iconStates].color === '#000000' ? '#FFFFFF' : '#000000'
-        }
+          bgColor:
+            prev[initialIcon as keyof typeof iconStates].bgColor === '#F0F2F5'
+              ? '#3182CE'
+              : '#F0F2F5',
+          color:
+            prev[initialIcon as keyof typeof iconStates].color === '#000000'
+              ? '#FFFFFF'
+              : '#000000',
+        },
       }))
     }
 
@@ -254,6 +275,12 @@ export function Header() {
     </>
   )
 
+  const handleSignOut = async () => {
+    await fetch('/api/auth/signout', { method: 'POST' })
+    router.push('/signin')
+    router.refresh()
+  }
+
   return (
     <>
       <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-6">
@@ -325,13 +352,37 @@ export function Header() {
                   <AvatarIcon initialIcon="settings" />
                   <AvatarIcon initialIcon="chat" />
                 </div>
-                <Avatar
-                  size={38}
-                  type="user"
-                  //   headerImage={user?.header_image}
-                  //   profilePicture={user?.thumbnail}
-                  customDefault="thumbnail" // ✅ Forces fallback to DefaultThumbnail on this page only
-                />
+                {/* User Menu */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                      {user ? (
+                        <UserAvatar className="h-8 w-8">
+                          <AvatarImage
+                            src={user?.avatar || '/placeholder.svg'}
+                            alt={`${user?.firstName} ${user?.lastName}`}
+                          />
+                          <AvatarFallback>{`${user?.firstName} ${user?.lastName}`}</AvatarFallback>
+                        </UserAvatar>
+                      ) : (
+                        <Avatar size={38} type="user" customDefault="thumbnail" />
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end" forceMount>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm leading-none font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
+                        <p className="text-muted-foreground text-xs leading-none">{user?.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </div>
