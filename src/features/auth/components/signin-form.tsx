@@ -12,6 +12,7 @@ import { Button } from '@/shared/components/ui/custom-button'
 import { ArrowRight } from 'lucide-react'
 import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
+import WelcomeMessage from '@/shared/components/ui/welcome-message'
 
 import { loginSchema, LoginFormData } from '@/shared/lib/validations'
 import useLoginUser from '../hooks/useLoginUser'
@@ -99,43 +100,41 @@ export default function LoginForm() {
 
   return (
     <div
-      className="flex w-full"
-      style={{
-        paddingRight: '4.44vw',
-        paddingLeft: '2.22vw',
-        paddingTop: '2.22vh',
-        paddingBottom: '2.22vh',
-      }}
+      className="flex w-full justify-center min-h-screen px-4 sm:px-6 pt-[2rem]"
+
     >
-      <div className="flex w-full max-w-[1346px] gap-[4.44vw]">
-        <div style={{ width: 'fit-content' }}>
+      <div className="flex w-full max-w-[1346px]   justify-center lg:gap-[3rem] xl:gap-[4rem] ">
+        <div className='hidden lg:flex w-full max-w-[580px]'>
           <LayoutImage />
         </div>
-        <div className="flex w-full flex-col items-center">
+        <div className="flex w-full flex-col items-center w-full max-w-[580px] min-w-[320px]">
+          <div className="lg:hidden mb-6 sm:mb-8">
+            <WelcomeMessage />
+          </div>
           <HomeMessage />
-          <div className="mt-[3.125rem] w-full max-w-[458px]">
+          <div className="mt-6 sm:mt-8 lg:mt-[3.125rem] w-full max-w-[458px]">
             <div className="text-center">
-              <h1 className={`text-[1.25rem] text-[#333333] ${interMedium.className}`}>Sign in</h1>
+              <h1 className={`text-xl sm:text-2xl lg:text-[1.25rem] text-[#333333] ${interMedium.className}`}>Sign in</h1>
             </div>
 
-            <div className="mt-[2.5rem]">
+            <div className="mt-6 sm:mt-8 lg:mt-[2.5rem]">
               <GoogleSignupButton />
 
               {/* OR divider */}
-              <div className="mt-[2.5rem] flex items-center gap-[1.5rem]">
-                <div className="h-[2px] w-full bg-[#66666640]"></div>
+              <div className="mt-6 sm:mt-8 lg:mt-[2.5rem] flex items-center gap-3 sm:gap-4 lg:gap-[1.5rem]">
+                <div className="h-[1px] sm:h-[2px] w-full bg-[#66666640]"></div>
                 <div className="">
-                  <span className={`text-[#666666] ${interMedium.className} text-[18px]`}>OR</span>
+                  <span className={`text-[#666666] ${interMedium.className} text-sm sm:text-base lg:text-[18px]`}>OR</span>
                 </div>
-                <div className="h-[2px] w-full bg-[#66666640]"></div>
+                <div className="h-[1px] sm:h-[2px] w-full bg-[#66666640]"></div>
               </div>
 
               {/* Form fields */}
-              <form onSubmit={handleLogin} className="mt-[2.5rem] flex flex-col gap-[1rem]">
-                <div className="flex flex-col gap-[4px]">
+              <form onSubmit={handleLogin} className="mt-6 sm:mt-8 lg:mt-[2.5rem] flex flex-col gap-3 sm:gap-4 lg:gap-[1rem]">
+                <div className="flex flex-col gap-1 sm:gap-2 lg:gap-[4px]">
                   <Label
                     htmlFor="email"
-                    className={`text-[1rem] text-[#666666] ${interRegular.className}`}
+                    className={`text-sm sm:text-base lg:text-[1rem] text-[#666666] ${interRegular.className}`}
                   >
                     Email address
                   </Label>
@@ -145,7 +144,7 @@ export default function LoginForm() {
                     placeholder="johndoe@eg.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className={`border border-[#E2E8F0] px-[1rem] py-[17px] ${validationErrors.email ? 'border-red-500' : ''}`}
+                    className={`border border-[#E2E8F0] px-3 sm:px-4 lg:px-[1rem] py-3 sm:py-4 lg:py-[17px] ${validationErrors.email ? 'border-red-500' : ''}`}
                   />
                   {validationErrors.email && (
                     <span className="text-sm text-red-500">{validationErrors.email}</span>
@@ -166,34 +165,35 @@ export default function LoginForm() {
                 </div>
 
                 <p
-                  className={`${interRegular.className} text-end text-[1rem] text-[#111111] underline`}
+                  className={`${interRegular.className} text-end text-sm sm:text-base lg:text-[1rem] text-[#111111] underline`}
                 >
                   Forgot your password
                 </p>
-                <div className="flex gap-[8px]">
+                <div className="flex gap-2 sm:gap-3 lg:gap-[8px] items-center">
                   <input
                     id="remember"
                     type="checkbox"
                     checked={remember}
                     onChange={(e) => setRemember(e.target.checked)}
+                    className="w-4 h-4"
                   />
-                  <label htmlFor="remember" className="text-sm">
+                  <label htmlFor="remember" className="text-xs sm:text-sm">
                     Remember password
                   </label>
                 </div>
-                <div className="mt-[2.5rem] flex items-center justify-center">
+                <div className="mt-6 sm:mt-8 lg:mt-[2.5rem] flex items-center justify-center">
                   <Button
                     type="submit"
                     variant={'default'}
-                    className="flex items-center"
+                    className="flex items-center w-full"
                     disabled={isPending}
                   >
                     {isPending ? 'Signing in...' : 'Sign in'}
                     {!isPending && <ArrowRight className="ml-2 h-4 w-4" />}
                   </Button>
                 </div>
-                <div className="mt-[2.5rem] flex items-center justify-center">
-                  <p className={`${interRegular.className} text-[14px] text-[#666666]`}>
+                <div className="mt-6 sm:mt-8 lg:mt-[2.5rem] flex items-center justify-center">
+                  <p className={`${interRegular.className} text-xs sm:text-sm lg:text-[14px] text-[#666666] text-center`}>
                     You don`t have an account?{' '}
                     <Link href="/signup" className="underline">
                       Sign up

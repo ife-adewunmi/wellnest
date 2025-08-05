@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="pb-[7.43vh]">
+      <body className="">
         <QueryProvider>
           <ViewProvider>
             <DashboardSettingsProvider>
