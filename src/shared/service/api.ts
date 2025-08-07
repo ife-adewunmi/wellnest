@@ -160,7 +160,12 @@ class ApiService {
   }
 
   static async createSession(sessionData: any) {
+    if (!sessionData || !sessionData.userId) {
+      throw new Error('Session data must include userId')
+    }
+    console.log('Creating session with data:', sessionData)
     return this.safeCallWithError(() => api.post('/api/sessions', sessionData))
+  
   }
 
   // Messages

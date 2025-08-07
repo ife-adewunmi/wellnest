@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { signIn, signJWT } from '@/features/auth/lib/auth'
+import { signInServer, createToken } from '@/features/auth/lib/auth.server'
 import { cookies } from 'next/headers'
 
 export async function POST(request: NextRequest) {
@@ -10,14 +10,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email and password required' }, { status: 400 })
     }
 
-    const user = await signIn(email, password)
+    const user = await signInServer(email, password)
 
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
 
     // Create JWT token
-    const token = await signJWT({ user })
+    const token = await createToken(user)
 
     // Set cookie
     const cookieStore = cookies()

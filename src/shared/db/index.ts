@@ -1,13 +1,10 @@
 // src/shared/db/index.ts
-import { drizzle } from 'drizzle-orm/node-postgres'
-import { Pool } from 'pg'
-import { schema } from './schema'
+import { drizzle } from 'drizzle-orm/neon-http'
+import { neon } from '@neondatabase/serverless'
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-})
+import * as schema from './schema'
 
-export const db = drizzle(pool, { schema })
+// Use Neon serverless driver for better compatibility
+const sql = neon(process.env.DRIZZLE_DATABASE_URL!)
+
+export const db = drizzle(sql, { schema })

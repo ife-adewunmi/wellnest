@@ -52,10 +52,10 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.first_name} ${userWithoutPassword.last_name}`,
+        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
         role: 'user', // Default role
-        createdAt: userWithoutPassword.created_at,
-        updatedAt: userWithoutPassword.updated_at,
+        createdAt: userWithoutPassword.createdAt,
+        updatedAt: userWithoutPassword.updatedAt,
       }
 
       return {
@@ -110,8 +110,8 @@ export class AuthService {
       const result = await db
         .insert(users)
         .values({
-          first_name,
-          last_name,
+          firstName: first_name,
+          lastName: last_name,
           email,
           password: hashedPassword,
         })
@@ -122,10 +122,10 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.first_name} ${userWithoutPassword.last_name}`,
+        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
         role: 'user', // Default role
-        createdAt: userWithoutPassword.created_at,
-        updatedAt: userWithoutPassword.updated_at,
+        createdAt: userWithoutPassword.createdAt,
+        updatedAt: userWithoutPassword.updatedAt,
       }
 
       return {

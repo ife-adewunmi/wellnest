@@ -1,4 +1,4 @@
-import { getSession } from '@/features/auth/lib/auth'
+import { getSession } from '@/features/auth/lib/auth.server'
 import { redirect } from 'next/navigation'
 import { StudentDashboard } from '@/features/students/components/student-dashboard'
 import { UserRole } from '@/features/auth/enums'

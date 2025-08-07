@@ -8,6 +8,13 @@
       "when": 1753242734154,
       "tag": "0000_famous_cloak",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1754393909670,
+      "tag": "0001_lumpy_praxagora",
+      "breakpoints": true
     }
   ]
 }

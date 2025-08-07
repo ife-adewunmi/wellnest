@@ -109,7 +109,7 @@ export default function LoginForm() {
 
     >
       <div className="flex w-full max-w-[1346px]   justify-center lg:gap-[3rem] xl:gap-[4rem] ">
-        <div className='hidden lg:flex w-full max-w-[580px]'>
+        <div className='hidden lg:flex w-full '>
           <LayoutImage />
         </div>
         <div className="flex w-full flex-col items-center w-full max-w-[580px] min-w-[320px]">

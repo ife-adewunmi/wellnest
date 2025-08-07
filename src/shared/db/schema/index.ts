@@ -50,6 +50,13 @@ export const users = pgTable('users', {
   emergencyContact: text('emergency_contact'),
   consentScreenTime: boolean('consent_screen_time').default(false),
   consentSocialMedia: boolean('consent_social_media').default(false),
+  // Authentication enhancement fields
+  emailVerified: boolean('email_verified').default(false),
+  emailVerificationToken: text('email_verification_token'),
+  passwordResetToken: text('password_reset_token'),
+  passwordResetExpires: timestamp('password_reset_expires'),
+  lastLoginAt: timestamp('last_login_at'),
+  isActive: boolean('is_active').default(true),
   settings: jsonb('settings').$type<{
     notifications: {
       moodDrop: boolean

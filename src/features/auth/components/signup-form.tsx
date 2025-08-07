@@ -58,8 +58,8 @@ export default function SignupForm() {
     const { confirmPassword, ...userData } = validationResult.data
     createUser(
       {
-        first_name: userData.firstName,
-        last_name: userData.lastName,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
         email: userData.email,
         password: userData.password,
       },
@@ -71,8 +71,8 @@ export default function SignupForm() {
           if (data.user) {
             setUser({
               id: data.user.id,
-              first_name: data.user.name.split(' ')[0] || '',
-              last_name: data.user.name.split(' ')[1] || '',
+              first_name: data.user.firstName,
+              last_name: data.user.lastName,
               email: data.user.email,
               password: '',
             })

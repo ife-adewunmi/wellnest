@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/shared/lib/db'
+import { db } from '@/shared/db'
 import { messages } from '@/shared/db/schema'
 import { eq, desc, or, and } from 'drizzle-orm'
 import { z } from 'zod'
