@@ -155,7 +155,7 @@ export class SessionService {
   /**
    * Convert database session to log entry format
    */
-  private static convertToLogEntry(dbSession: DatabaseSession): LogEntry {
+  static convertToLogEntry(dbSession: DatabaseSession): LogEntry {
     const scheduledDate = new Date(dbSession.scheduledAt)
     
     return {

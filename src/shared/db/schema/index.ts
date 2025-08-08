@@ -88,6 +88,7 @@ export const moodCheckIns = pgTable('mood_check_ins', {
   mood: moodTypeEnum('mood').notNull(),
   reasons: jsonb('reasons').$type<string[]>(),
   description: text('description'),
+  socialMediaImpact: boolean('social_media_impact'),
   riskScore: integer('risk_score'),
   riskLevel: riskLevelEnum('risk_level'),
   mlAnalysis: jsonb('ml_analysis').$type<{
@@ -165,6 +166,7 @@ export const sessions = pgTable('sessions', {
   studentId: uuid('student_id')
     .references(() => users.id)
     .notNull(),
+  studentName: text('student_name'), // Store student's name snapshot
   title: text('title').notNull(),
   description: text('description'),
   scheduledAt: timestamp('scheduled_at').notNull(),

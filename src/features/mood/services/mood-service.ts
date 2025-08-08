@@ -5,6 +5,7 @@ export interface MoodCheckInData {
   mood: MoodType
   reasons?: string[]
   description?: string
+  socialMediaImpact?: boolean
 }
 
 export interface MoodCheckInResponse {
@@ -18,8 +19,11 @@ export interface MoodCheckInResponse {
 }
 
 export async function submitMoodCheckIn(data: MoodCheckInData): Promise<MoodCheckInResponse> {
-  const response = await api.post('/api/mood-check-in', data)
-  return response.data as MoodCheckInResponse
+  // Clean object so socialMediaImpact is defined for backend
+  const fullData: any = { ...data };
+  if (typeof data.socialMediaImpact === 'undefined') fullData.socialMediaImpact = null;
+  const response = await api.post('/api/mood-check-in', fullData);
+  return response.data as MoodCheckInResponse;
 }
 
 export async function getMoodHistory(userId: string, limit = 30): Promise<MoodCheckInResponse[]> {

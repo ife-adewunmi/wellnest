@@ -52,10 +52,15 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
-        role: 'user', // Default role
-        createdAt: userWithoutPassword.createdAt,
-        updatedAt: userWithoutPassword.updatedAt,
+        firstName: userWithoutPassword.firstName,
+        lastName: userWithoutPassword.lastName,
+        role: userWithoutPassword.role,
+        avatar: userWithoutPassword.avatar || undefined,
+        department: userWithoutPassword.department || undefined,
+        studentId: userWithoutPassword.studentId || undefined,
+        level: userWithoutPassword.level || undefined,
+        createdAt: userWithoutPassword.createdAt || new Date(),
+        updatedAt: userWithoutPassword.updatedAt || new Date(),
       }
 
       return {
@@ -122,10 +127,15 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
-        role: 'user', // Default role
-        createdAt: userWithoutPassword.createdAt,
-        updatedAt: userWithoutPassword.updatedAt,
+        firstName: userWithoutPassword.firstName,
+        lastName: userWithoutPassword.lastName,
+        role: userWithoutPassword.role,
+        avatar: userWithoutPassword.avatar || undefined,
+        department: userWithoutPassword.department || undefined,
+        studentId: userWithoutPassword.studentId || undefined,
+        level: userWithoutPassword.level || undefined,
+        createdAt: userWithoutPassword.createdAt || new Date(),
+        updatedAt: userWithoutPassword.updatedAt || new Date(),
       }
 
       return {

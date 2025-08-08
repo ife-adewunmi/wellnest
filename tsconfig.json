@@ -40,6 +40,7 @@
   },
   "include": [
     "next-env.d.ts",
+    "src/types/svg.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",

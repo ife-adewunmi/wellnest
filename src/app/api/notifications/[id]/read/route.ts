@@ -3,9 +3,9 @@ import { db } from '@/shared/db'
 import { notifications } from '@/shared/db/schema'
 import { eq } from 'drizzle-orm'
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const notificationId = params.id
+    const { id: notificationId } = await params
 
     const updatedNotification = await db
       .update(notifications)

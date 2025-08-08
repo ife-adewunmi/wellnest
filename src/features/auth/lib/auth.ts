@@ -6,7 +6,7 @@ import { User } from '../types'
 // Mock users for development and testing
 const mockUsers: User[] = [
   {
-    id: '1',
+    id: '550e8400-e29b-41d4-a716-446655440001', // Valid UUID for mock student
     email: 'student@example.com',
     role: UserRole.STUDENT,
     avatar: '',
@@ -16,7 +16,7 @@ const mockUsers: User[] = [
     lastName: 'Student',
   },
   {
-    id: '2',
+    id: '550e8400-e29b-41d4-a716-446655440002', // Valid UUID for mock counselor
     email: 'counselor@example.com',
     role: UserRole.COUNSELOR,
     avatar: '',

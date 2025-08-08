@@ -90,7 +90,7 @@ export async function signInServer(email: string, password: string): Promise<Use
   console.log('🔄 Falling back to mock authentication for development')
   const mockUsers = [
     {
-      id: 'mock-student',
+      id: '550e8400-e29b-41d4-a716-446655440001', // Valid UUID for mock student
       email: 'student@wellnest.com',
       firstName: 'Student',
       lastName: 'User',
@@ -99,7 +99,7 @@ export async function signInServer(email: string, password: string): Promise<Use
       updatedAt: new Date(),
     },
     {
-      id: 'mock-counselor',
+      id: '550e8400-e29b-41d4-a716-446655440002', // Valid UUID for mock counselor
       email: 'counselor@wellnest.com',
       firstName: 'Counselor',
       lastName: 'User',

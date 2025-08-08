@@ -2,10 +2,9 @@
 
 import type React from 'react'
 import { useEffect, useState } from 'react'
-import { useToast } from '@/shared/hooks/use-toast'
+import { toast } from 'react-toastify'
 
 export function PWAProvider({ children }: { children: React.ReactNode }) {
-  const { toast } = useToast()
   const [isOnline, setIsOnline] = useState(true)
   const [installPrompt, setInstallPrompt] = useState<any>(null)
 
@@ -23,18 +22,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
             if (newWorker) {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  toast({
-                    title: 'App Updated',
-                    description: 'A new version is available. Refresh to update.',
-                    action: (
-                      <button
-                        onClick={() => window.location.reload()}
-                        className="bg-primary text-primary-foreground rounded px-3 py-1 text-sm"
-                      >
-                        Refresh
-                      </button>
-                    ),
-                  })
+                  toast.info('App Updated! A new version is available. Please refresh to update.')
                 }
               })
             }
@@ -93,32 +81,17 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
           })
 
           if (response.ok) {
-            toast({
-              title: 'Notifications Enabled',
-              description: 'You will now receive push notifications.',
-            })
+            toast.success('Notifications Enabled! You will now receive push notifications.')
           } else {
-            toast({
-              title: 'Error',
-              description: 'Failed to subscribe to push notifications.',
-              variant: 'destructive',
-            })
+            toast.error('Failed to subscribe to push notifications.')
           }
         } catch (error) {
           console.error('Error subscribing to push notifications:', error)
-          toast({
-            title: 'Error',
-            description: 'Failed to subscribe to push notifications.',
-            variant: 'destructive',
-          })
+          toast.error('Failed to subscribe to push notifications.')
         }
       } else {
         console.warn('Notification permission denied.')
-        toast({
-          title: 'Notifications Blocked',
-          description: 'Please enable notifications in your browser settings.',
-          variant: 'destructive',
-        })
+        toast.error('Notifications Blocked! Please enable notifications in your browser settings.')
       }
     }
 
@@ -138,25 +111,7 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
 
       // Show install banner after a delay
       setTimeout(() => {
-        toast({
-          title: 'Install App',
-          description: 'Install this app on your device for a better experience.',
-          action: (
-            <button
-              onClick={async () => {
-                if (deferredPrompt) {
-                  deferredPrompt.prompt()
-                  const { outcome } = await deferredPrompt.userChoice
-                  console.log(`User response to the install prompt: ${outcome}`)
-                  deferredPrompt = null
-                }
-              }}
-              className="bg-primary text-primary-foreground rounded px-3 py-1 text-sm"
-            >
-              Install
-            </button>
-          ),
-        })
+        toast.info('Install App! Install this app on your device for a better experience.')
       }, 3000)
     }
 
@@ -165,26 +120,19 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
     // Network status monitoring
     const handleOnline = () => {
       setIsOnline(true)
-      toast({
-        title: 'Back Online',
-        description: 'Your connection has been restored. Syncing data...',
-      })
+      toast.success('Back Online! Your connection has been restored. Syncing data...')
 
       // Trigger background sync when back online
       if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
         navigator.serviceWorker.ready.then((registration) => {
-          return registration.sync.register('background-sync')
+          return (registration as any).sync.register('background-sync')
         })
       }
     }
 
     const handleOffline = () => {
       setIsOnline(false)
-      toast({
-        title: "You're Offline",
-        description: "Some features may be limited. Data will sync when you're back online.",
-        variant: 'destructive',
-      })
+      toast.warning("You're Offline! Some features may be limited. Data will sync when you're back online.")
     }
 
     // Add event listeners for network status

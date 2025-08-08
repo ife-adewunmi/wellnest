@@ -82,7 +82,8 @@ export function UpcomingSessions() {
     },
   ]
 
-  const displayedSessions = showAll ? allSessions : sessions
+  // Limit displayed sessions to maximum of 3
+  const displayedSessions = allSessions.slice(0, 3)
 
   const handleSession = () => {
     // setShowAll(!showAll)
@@ -129,7 +130,7 @@ export function UpcomingSessions() {
         </Button>
       </div>
       <div className="mt-4 sm:mt-6 lg:mt-[1.5rem]">
-        {sessions.length === 0 ? (
+        {displayedSessions.length === 0 ? (
           <p className="text-sm text-gray-600">No upcoming sessions to show.</p>
         ) : (
           <div className="overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0]">
@@ -151,7 +152,7 @@ export function UpcomingSessions() {
                 </tr>
               </thead>
               <tbody>
-                {sessions.map((session, index) => (
+                {displayedSessions.map((session, index) => (
                   <tr key={session.id} className={`border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}>
                     <td className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
                       {session.student}

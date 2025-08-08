@@ -82,9 +82,10 @@ export function useSessions(userId?: string, userRole: 'STUDENT' | 'COUNSELOR' =
         console.log('Session created successfully, updating local state')
 
         // Convert the created session back to UI format
-        const newUISession = SessionService.convertToUISession(createdSession)
+        const newUISession = SessionService.convertToUISession(createdSession);
+        const newUILogEntry = SessionService.convertToLogEntry(createdSession);
 
-        // Add to local state immediately for better UX
+        // Add to local state immediately for better UX (Upcoming Sessions)
         setUpcomingSessions(prev => {
           // Check if session already exists to avoid duplicates (by date, time, and intervention)
           const exists = prev.some(session =>
@@ -94,11 +95,21 @@ export function useSessions(userId?: string, userRole: 'STUDENT' | 'COUNSELOR' =
           )
           if (exists) return prev
           return [newUISession, ...prev]
-        })
+        });
+        // Add to local state for Log History as well
+        setLogHistory(prev => {
+          const exists = prev.some(entry =>
+            entry.date === newUILogEntry.date &&
+            entry.student === newUILogEntry.student &&
+            entry.intervention === newUILogEntry.intervention
+          );
+          if (exists) return prev;
+          return [newUILogEntry, ...prev];
+        });
 
         // Don't refetch immediately to avoid overwriting local state
         // The session will appear in subsequent fetches once the server storage is working properly
-        console.log('Session added to local state, skipping server refetch to preserve local changes')
+        console.log('Session added to local state, skipping server refetch to preserve local changes. Log history updated too.')
       }
     } catch (err) {
       console.error('Error adding session:', err)
