@@ -23,11 +23,11 @@ const SelectTrigger = React.forwardRef<
       'flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-[1rem] py-[14px]',
       'text-[18px] text-[#1A202C] placeholder:text-[#1A202C]',
       // Focus and hover states
-      'hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-opacity-20',
+      'focus:ring-opacity-20 hover:border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none',
       // Disabled state
-      'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50',
+      'disabled:cursor-not-allowed disabled:bg-gray-50 disabled:opacity-50',
       // Custom class override
-      className
+      className,
     )}
     {...props}
   >
@@ -48,7 +48,7 @@ const SelectContent = React.forwardRef<
       ref={ref}
       className={cn(
         // Base dropdown styling
-        'relative z-50  min-w-[8rem] overflow-hidden rounded-lg border border-[#CBD5E0] bg-white py-[14px] text-gray-900 ',
+        'relative z-50 min-w-[8rem] overflow-hidden rounded-lg border border-[#CBD5E0] bg-white py-[14px] text-gray-900',
         // Animation classes
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
@@ -64,7 +64,7 @@ const SelectContent = React.forwardRef<
         className={cn(
           'p-1',
           position === 'popper' &&
-            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
         )}
       >
         {children}
@@ -94,7 +94,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       // Base item styling
-      'relative flex w-full cursor-default select-none items-center rounded-md py-2 pl-2 pr-8 text-sm outline-none',
+      'relative flex w-full cursor-default items-center rounded-md py-2 pr-8 pl-2 text-sm outline-none select-none',
       // Hover and focus states
       'hover:bg-gray-100 focus:border-blue-500 focus:text-gray-900',
       // Disabled state
@@ -108,9 +108,7 @@ const SelectItem = React.forwardRef<
         <Check className="h-4 w-4 text-blue-600" />
       </SelectPrimitive.ItemIndicator>
     </span>
-    <SelectPrimitive.ItemText className="text-gray-700">
-      {children}
-    </SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemText className="text-gray-700">{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName

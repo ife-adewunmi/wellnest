@@ -84,12 +84,14 @@ export default function Dashboard() {
       <Header />
 
       {/* Main Content */}
-    <main className="mx-auto w-full mt-[4rem] max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
-        <h1 className={`${interBold.className} text-xl sm:text-2xl lg:text-[2rem] text-[#121417]`}>Dashboard</h1>
+      <main className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
+        <h1 className={`${interBold.className} text-xl text-[#121417] sm:text-2xl lg:text-[2rem]`}>
+          Dashboard
+        </h1>
 
         {/* Metrics Cards */}
 
-        <div className="mt-6 sm:mt-8 lg:mt-[2.8125rem] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 lg:mt-[2.8125rem] lg:grid-cols-3 lg:gap-6 xl:grid-cols-5">
           {metrics.map((metric, index) => {
             // Hide distress score if the widget is disabled
             if (metric.title === 'Distress Alerts' && !isWidgetEnabled('distress-score')) {
@@ -110,11 +112,15 @@ export default function Dashboard() {
         {/* Analysis Overview */}
         {isWidgetEnabled('mood-tracker') && (
           <div className="mt-8 sm:mt-12 lg:mt-[4.5rem]">
-            <h2 className={`text-lg sm:text-xl lg:text-[1.375rem] text-[#121417] ${interBold.className}`}>
+            <h2
+              className={`text-lg text-[#121417] sm:text-xl lg:text-[1.375rem] ${interBold.className}`}
+            >
               Analysis Overview
             </h2>
 
-            <div className={`mt-4 sm:mt-6 lg:mt-[2rem] grid gap-4 sm:gap-6 lg:gap-[2rem] ${getGridLayout(analysisWidgets.length)}`}>
+            <div
+              className={`mt-4 grid gap-4 sm:mt-6 sm:gap-6 lg:mt-[2rem] lg:gap-[2rem] ${getGridLayout(analysisWidgets.length)}`}
+            >
               <MoodCheckIns checkIns={moodCheckIns} />
               <MoodHistoryChart />
             </div>
@@ -123,8 +129,9 @@ export default function Dashboard() {
 
         {/* Screen Time and Social Media Activity */}
         {(isWidgetEnabled('screen-time') || true) && (
-
-          <div className={`mt-4 sm:mt-6 lg:mt-[2rem] grid gap-4 sm:gap-6 lg:gap-[2rem] ${getGridLayout(screenTimeWidgets.length)}`}>
+          <div
+            className={`mt-4 grid gap-4 sm:mt-6 sm:gap-6 lg:mt-[2rem] lg:gap-[2rem] ${getGridLayout(screenTimeWidgets.length)}`}
+          >
             {isWidgetEnabled('screen-time') && <AverageScreenTime />}
             <DistressScore />
           </div>
@@ -132,7 +139,7 @@ export default function Dashboard() {
 
         {/* Additional Dashboard Sections */}
         {(isWidgetEnabled('notification-widget') || isWidgetEnabled('upcoming-sessions')) && (
-          <div className="mt-8 sm:mt-12 lg:mt-[5rem] mb-8 sm:mb-12 lg:mb-[5rem] flex flex-col gap-4 sm:gap-6 lg:gap-[2rem] lg:flex-row">
+          <div className="mt-8 mb-8 flex flex-col gap-4 sm:mt-12 sm:mb-12 sm:gap-6 lg:mt-[5rem] lg:mb-[5rem] lg:flex-row lg:gap-[2rem]">
             {isWidgetEnabled('notification-widget') && <Notifications />}
             {isWidgetEnabled('upcoming-sessions') && (
               <div

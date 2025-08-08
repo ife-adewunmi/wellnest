@@ -228,12 +228,11 @@ export function StudentTable() {
   }
 
   const renderStudentsTable = () => (
-    <div className="mx-auto w-full mt-[4rem] max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
+    <div className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
       {/* Header */}
 
-
       {/* Search Input */}
-      <div className="relative mt-[2.3125rem] mb-[2rem] ">
+      <div className="relative mt-[2.3125rem] mb-[2rem]">
         {/* Search icon */}
         <Search className="absolute top-1/2 left-[28px] h-[18px] w-[18px] -translate-y-1/2 transform text-gray-400" />
 
@@ -243,15 +242,17 @@ export function StudentTable() {
           placeholder="Search students"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={`w-full rounded-full border-none bg-[#E2E8F0] py-[14px] px-[3.5rem] lg:py-[19px] text-[18px] placeholder:text-[#A0AEC0] ${interRegular.className}`}
+          className={`w-full rounded-full border-none bg-[#E2E8F0] px-[3.5rem] py-[14px] text-[18px] placeholder:text-[#A0AEC0] lg:py-[19px] ${interRegular.className}`}
         />
       </div>
 
-    {/* Filters and Controls */}
-      <div className="flex gap-[1rem] flex-col lg:flex-row items-center lg:gap-0 justify-between">
+      {/* Filters and Controls */}
+      <div className="flex flex-col items-center justify-between gap-[1rem] lg:flex-row lg:gap-0">
         <div className="flex flex-wrap items-center gap-[8px]">
           <Select value={filterAll} onValueChange={setFilterAll}>
-            <SelectTrigger className={`${interMedium.className} h-auto w-[80px] border-none text-[13px] flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] whitespace-nowrap`}>
+            <SelectTrigger
+              className={`${interMedium.className} flex h-auto w-[80px] items-center justify-between rounded-full border-none bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -262,8 +263,10 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterRisk} onValueChange={setFilterRisk}>
-            <SelectTrigger className={`${interMedium.className} h-auto w-[90px] border-none flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}>
-              <SelectValue /> 
+            <SelectTrigger
+              className={`${interMedium.className} flex h-auto w-[90px] items-center justify-between rounded-full border-none bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}
+            >
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="At-Risk">At-Risk</SelectItem>
@@ -274,7 +277,9 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterMonitored} onValueChange={setFilterMonitored}>
-            <SelectTrigger className={`${interMedium.className} h-auto w-[110px] border-none text-[13px] flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] whitespace-nowrap`}>
+            <SelectTrigger
+              className={`${interMedium.className} flex h-auto w-[110px] items-center justify-between rounded-full border-none bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -284,7 +289,9 @@ export function StudentTable() {
           </Select>
 
           <Select value={filterDepartments} onValueChange={setFilterDepartments}>
-            <SelectTrigger className={`${interMedium.className} h-auto w-[140px] border-none flex items-center justify-between rounded-full bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}>
+            <SelectTrigger
+              className={`${interMedium.className} flex h-auto w-[140px] items-center justify-between rounded-full border-none bg-[#EDF2F7] px-[1.25rem] py-[8px] text-[13px] whitespace-nowrap`}
+            >
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -316,33 +323,33 @@ export function StudentTable() {
       {/* Table */}
       <div className="mt-[2.5rem]">
         <div
-          className={`overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0] ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''}`}
+          className={`overflow-x-auto rounded-lg border border-[#CBD5E0] sm:rounded-xl ${showAll ? 'max-h-64 overflow-y-auto sm:max-h-80 lg:max-h-96' : ''}`}
         >
-          <table className="w-full min-w-[640px] rounded-lg sm:rounded-xl border border-[#CBD5E0]">
+          <table className="w-full min-w-[640px] rounded-lg border border-[#CBD5E0] sm:rounded-xl">
             <thead>
               <tr className="border-b border-[#CBD5E0] bg-gray-50">
                 <th
-                  className={`py-2 sm:py-3 lg:py-[12px] pl-4 sm:pl-6 lg:pl-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                  className={`py-2 pl-4 text-left sm:py-3 sm:pl-6 lg:py-[12px] lg:pl-8 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                 >
                   Student ID
                 </th>
                 <th
-                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                  className={`px-2 py-2 text-left sm:px-3 sm:py-3 lg:py-[12px] ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                 >
                   Last check-in
                 </th>
                 <th
-                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                  className={`px-2 py-2 text-left sm:px-3 sm:py-3 lg:py-[12px] ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                 >
                   Risk level
                 </th>
                 <th
-                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                  className={`px-2 py-2 text-left sm:px-3 sm:py-3 lg:py-[12px] ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                 >
                   Mood
                 </th>
                 <th
-                  className={`py-2 sm:py-3 lg:py-[12px] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                  className={`px-2 py-2 pr-4 text-left sm:px-3 sm:py-3 sm:pr-6 lg:py-[12px] lg:pr-8 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                 >
                   Screen time
                 </th>
@@ -352,44 +359,41 @@ export function StudentTable() {
               {displayedStudents.map((student, index) => (
                 <tr
                   key={student.id}
-                  className={`cursor-pointer border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}
+                  className={`cursor-pointer border-b border-[#CBD5E0] transition-colors hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}
                   onClick={() => handleStudentClick(student)}
                 >
                   <td
-                    className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}
+                    className={`py-3 pl-4 sm:py-4 sm:pl-6 lg:py-[1.625rem] lg:pl-8 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
                   >
                     {student.studentId}
                   </td>
                   <td
-                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
+                    className={`px-2 py-3 sm:px-3 sm:py-4 lg:py-[1.625rem] ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
                   >
                     {student.lastCheckIn}
                   </td>
-                  <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3">
+                  <td className="px-2 py-3 sm:px-3 sm:py-4 lg:py-[1.625rem]">
                     <span
-                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-xs sm:text-sm text-[#121417]`}
+                      className={`flex justify-center ${interMedium.className} ${getRiskLevelColor(student.riskLevel)} text-xs text-[#121417] sm:text-sm`}
                     >
                       {student.riskLevel}
                     </span>
                   </td>
                   <td
-                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
+                    className={`px-2 py-3 sm:px-3 sm:py-4 lg:py-[1.625rem] ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
                   >
                     {student.mood}
                   </td>
                   <td
-                    className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}
+                    className={`px-2 py-3 pr-4 sm:px-3 sm:py-4 sm:pr-6 lg:py-[1.625rem] lg:pr-8 ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
                   >
                     {student.screenTime}
                   </td>
-                  <td className="py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-8">
-                                      <Button
-                                        variant="destructive"
-                                        onClick={() => handleViewDetails(student.id)}
-                                      >
-                                        View details
-                                      </Button>
-             </td>
+                  <td className="px-2 py-3 pr-4 sm:px-3 sm:py-4 sm:pr-6 lg:py-[1.625rem] lg:pr-8">
+                    <Button variant="destructive" onClick={() => handleViewDetails(student.id)}>
+                      View details
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>

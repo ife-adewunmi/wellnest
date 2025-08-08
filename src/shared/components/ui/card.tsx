@@ -21,7 +21,7 @@ const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <h1
       ref={ref}
-      className={`${interBold.className} text-[1.5rem] lg:text-[2.25rem] text-[#121417] ${className || ''}`}
+      className={`${interBold.className} text-[1.5rem] text-[#121417] lg:text-[2.25rem] ${className || ''}`}
       {...props}
     />
   ),
