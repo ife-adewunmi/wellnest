@@ -33,7 +33,7 @@ async function resetDatabase() {
     await client.query('DROP TABLE IF EXISTS social_media_posts CASCADE')
     await client.query('DROP TABLE IF EXISTS mood_check_ins CASCADE')
     await client.query('DROP TABLE IF EXISTS risk_thresholds CASCADE')
-    await client.query('DROP TABLE IF EXISTS counselor_student_assignments CASCADE')
+    await client.query('DROP TABLE IF EXISTS counselor_student CASCADE')
     await client.query('DROP TABLE IF EXISTS students CASCADE')
     await client.query('DROP TABLE IF EXISTS counselors CASCADE')
     await client.query('DROP TABLE IF EXISTS users CASCADE')
