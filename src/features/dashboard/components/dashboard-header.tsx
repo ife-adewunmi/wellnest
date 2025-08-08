@@ -254,7 +254,7 @@ export function Header({ user }: HeaderProps) {
                 Intervention
               </Link>
 
-                   <Link
+              <Link
                 href="/reports"
                 onClick={() => {
                   setActiveTab('Reports')
@@ -283,14 +283,22 @@ export function Header({ user }: HeaderProps) {
 
   return (
     <>
-      <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-6">
+      <header className="flex w-full justify-center border border-t-0 border-r-0 border-l-0 border-b-[#E5E8EB] bg-white px-4 py-3 sm:px-6 sm:py-4 lg:px-6 lg:py-5">
         <div className="flex w-full max-w-[1360px] items-center justify-between">
           <div className="flex w-full flex-col items-center justify-center lg:flex-row lg:items-center lg:justify-between">
             <div className="flex w-full max-w-[206px] items-center justify-center gap-1 sm:gap-2 lg:justify-start">
               <div className="flex">
-                <Image src="/svg/distress.svg" alt="Logo" width={16} height={16} className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Image
+                  src="/svg/distress.svg"
+                  alt="Logo"
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 sm:h-5 sm:w-5"
+                />
               </div>
-              <h1 className={`text-lg sm:text-xl lg:text-[1.25rem] text-[#121417] ${interBold.className}`}>
+              <h1
+                className={`text-lg text-[#121417] sm:text-xl lg:text-[1.25rem] ${interBold.className}`}
+              >
                 Distress Detection
               </h1>
             </div>
@@ -301,7 +309,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Dashboard')}
-                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm hover:text-[#1A202C] lg:text-[0.875rem] ${
                         pathname === '/dashboard' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >
@@ -311,7 +319,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Students')}
-                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm hover:text-[#1A202C] lg:text-[0.875rem] ${
                         pathname === '/student-table' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className} `}
                     >
@@ -321,7 +329,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Intervention')}
-                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm hover:text-[#1A202C] lg:text-[0.875rem] ${
                         pathname === '/intervention' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >
@@ -331,7 +339,7 @@ export function Header({ user }: HeaderProps) {
                   <li>
                     <button
                       onClick={() => setActiveTab('Reports')}
-                      className={`cursor-pointer text-sm lg:text-[0.875rem] hover:text-[#1A202C] ${
+                      className={`cursor-pointer text-sm hover:text-[#1A202C] lg:text-[0.875rem] ${
                         pathname === '/reports' ? 'text-[#3182CE]' : 'text-[#718096]'
                       } ${plusJakarta.className}`}
                     >

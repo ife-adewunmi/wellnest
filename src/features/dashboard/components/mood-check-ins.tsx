@@ -55,11 +55,15 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
   const displayedCheckIns = showAll ? allCheckIns : checkIns
 
   return (
-    <div className="rounded-lg sm:rounded-xl border border-[#CBD5E0] p-3 sm:p-4 lg:p-[1rem]">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+    <div className="rounded-lg border border-[#CBD5E0] p-3 sm:rounded-xl sm:p-4 lg:p-[1rem]">
+      <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
         <div>
-          <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>Mood Check-Ins</h1>
-          <h2 className={`${interRegular.className} text-sm lg:text-[0.875rem] text-[#667582]`}>
+          <h1
+            className={`${interBold.className} text-lg text-[#121417] sm:text-xl lg:text-[1.25rem]`}
+          >
+            Mood Check-Ins
+          </h1>
+          <h2 className={`${interRegular.className} text-sm text-[#667582] lg:text-[0.875rem]`}>
             Recent student mood check-in responses
           </h2>
         </div>
@@ -67,9 +71,11 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
           {showAll ? "Show less" : "View all"}
         </Button> */}
       </div>
-      <div className={`space-y-3 sm:space-y-4 mt-3 sm:mt-4 ${showAll ? 'max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto' : ''} overflow-y-auto`}>
+      <div
+        className={`mt-3 space-y-3 sm:mt-4 sm:space-y-4 ${showAll ? 'max-h-64 overflow-y-auto sm:max-h-80 lg:max-h-96' : ''} overflow-y-auto`}
+      >
         {displayedCheckIns.map((checkIn, index) => (
-          <div key={index} className="flex gap-3 sm:gap-4 py-2 sm:py-[8px]">
+          <div key={index} className="flex gap-3 py-2 sm:gap-4 sm:py-[8px]">
             <Avatar
               size={32}
               type="user"
@@ -78,15 +84,21 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
               customDefault="thumbnail" // ✅ Forces fallback to DefaultThumbnail on this page only
             />
             <div className="flex w-full flex-col">
-              <div className="flex w-full items-start sm:items-center justify-between flex-col sm:flex-row gap-1 sm:gap-0">
-                <p className={`text-sm sm:text-base lg:text-[1rem] ${interMedium.className} text-[#121417]`}>
+              <div className="flex w-full flex-col items-start justify-between gap-1 sm:flex-row sm:items-center sm:gap-0">
+                <p
+                  className={`text-sm sm:text-base lg:text-[1rem] ${interMedium.className} text-[#121417]`}
+                >
                   {checkIn.name} - {checkIn.emoji}
                 </p>
-                <span className={`${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#667582] flex-shrink-0`}>
+                <span
+                  className={`${interRegular.className} flex-shrink-0 text-xs text-[#667582] sm:text-sm lg:text-[0.875rem]`}
+                >
                   {checkIn.time}
                 </span>
               </div>
-              <p className={`${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#667582] mt-1`}>
+              <p
+                className={`${interRegular.className} mt-1 text-xs text-[#667582] sm:text-sm lg:text-[0.875rem]`}
+              >
                 {checkIn.message}
               </p>
             </div>
