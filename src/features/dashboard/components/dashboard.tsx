@@ -52,7 +52,6 @@ export default function Dashboard() {
     { title: 'At-Risk Count', value: '15', change: '-5%', positive: false },
     { title: 'Avg. Mood Score', value: '7.8', change: '+2%', positive: true },
     { title: 'Screen-Time', value: '2.5hr', change: '+15%', positive: true },
-    { title: 'Distress Alerts', value: '3', change: '-1%', positive: false },
   ]
 
   // Helper function to determine grid layout based on enabled widgets

@@ -1,6 +1,6 @@
 import { db } from '@/shared/db'
-import { users } from '@/shared/db/schema'
 import { eq } from 'drizzle-orm'
+import { usersTable } from '@/shared/db/schema'
 import { loginSchema, createUserSchema } from '@/shared/lib/validations'
 import bcrypt from 'bcryptjs'
 import { LoginCredentials, AuthResponse, User, SignupCredentials } from '../types'
@@ -23,7 +23,11 @@ export class AuthService {
 
       const { email, password } = validationResult.data
 
-      const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
+      const existingUser = await db
+        .select()
+        .from(usersTable)
+        .where(eq(usersTable.email, email))
+        .limit(1)
 
       if (existingUser.length === 0) {
         return {
@@ -52,10 +56,10 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.first_name} ${userWithoutPassword.last_name}`,
+        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
         role: 'user', // Default role
-        createdAt: userWithoutPassword.created_at,
-        updatedAt: userWithoutPassword.updated_at,
+        createdAt: userWithoutPassword.createdAt,
+        updatedAt: userWithoutPassword.updatedAt,
       }
 
       return {
@@ -92,7 +96,11 @@ export class AuthService {
       const { first_name, last_name, email, password } = validationResult.data
 
       // Check if user already exists
-      const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
+      const existingUser = await db
+        .select()
+        .from(usersTable)
+        .where(eq(usersTable.email, email))
+        .limit(1)
       if (existingUser.length > 0) {
         return {
           success: false,
@@ -108,7 +116,7 @@ export class AuthService {
 
       // Create user
       const result = await db
-        .insert(users)
+        .insert(usersTable)
         .values({
           first_name,
           last_name,
@@ -122,10 +130,10 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.first_name} ${userWithoutPassword.last_name}`,
+        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
         role: 'user', // Default role
-        createdAt: userWithoutPassword.created_at,
-        updatedAt: userWithoutPassword.updated_at,
+        createdAt: userWithoutPassword.createdAt,
+        updatedAt: userWithoutPassword.updatedAt,
       }
 
       return {

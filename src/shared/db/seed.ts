@@ -3,36 +3,36 @@ import bcrypt from 'bcryptjs'
 import { randomUUID } from 'crypto'
 import { db } from '@/shared/db'
 import {
-  usersTable,
-  counselorsTable,
-  studentsTable,
-  counselorStudentTable,
-  sessionsTable,
-  counselorNotesTable,
-  moodCheckInsTable,
-  screenTimeDataTable,
-  screenTimeSessionsTable,
-  screenTimeThresholdsTable,
-  notificationsTable,
-  messagesTable,
-  riskThresholdsTable,
+  users,
+  counselors,
+  students,
+  counselorStudent,
+  sessions,
+  counselorNotes,
+  moodCheckIns,
+  screenTimeData,
+  screenTimeSessions,
+  screenTimeThresholds,
+  notifications,
+  messages,
+  riskThresholds,
 } from '@/shared/db/schema'
 import { inArray } from 'drizzle-orm'
 
 // Helpful inferred insert types from Drizzle
-type NewUser = typeof usersTable.$inferInsert
-type NewCounselor = typeof counselorsTable.$inferInsert
-type NewStudent = typeof studentsTable.$inferInsert
-type NewAssignment = typeof counselorStudentTable.$inferInsert
-type NewSession = typeof sessionsTable.$inferInsert
-type NewNote = typeof counselorNotesTable.$inferInsert
-type NewMood = typeof moodCheckInsTable.$inferInsert
-type NewScreenData = typeof screenTimeDataTable.$inferInsert
-type NewScreenSession = typeof screenTimeSessionsTable.$inferInsert
-type NewScreenThreshold = typeof screenTimeThresholdsTable.$inferInsert
-type NewNotification = typeof notificationsTable.$inferInsert
-type NewMessage = typeof messagesTable.$inferInsert
-type NewRiskThreshold = typeof riskThresholdsTable.$inferInsert
+type NewUser = typeof users.$inferInsert
+type NewCounselor = typeof counselors.$inferInsert
+type NewStudent = typeof students.$inferInsert
+type NewAssignment = typeof counselorStudent.$inferInsert
+type NewSession = typeof sessions.$inferInsert
+type NewNote = typeof counselorNotes.$inferInsert
+type NewMood = typeof moodCheckIns.$inferInsert
+type NewScreenData = typeof screenTimeData.$inferInsert
+type NewScreenSession = typeof screenTimeSessions.$inferInsert
+type NewScreenThreshold = typeof screenTimeThresholds.$inferInsert
+type NewNotification = typeof notifications.$inferInsert
+type NewMessage = typeof messages.$inferInsert
+type NewRiskThreshold = typeof riskThresholds.$inferInsert
 
 // Load env (DATABASE_URL)
 dotenv.config({ path: '.env.local' })
@@ -119,11 +119,11 @@ async function main() {
 
   // Insert users if they don't already exist (idempotent-ish seeding)
   const existing = await db
-    .select({ id: usersTable.id, email: usersTable.email })
-    .from(usersTable)
+    .select({ id: users.id, email: users.email })
+    .from(users)
     .where(
       inArray(
-        usersTable.email,
+        users.email,
         [...counselorUsers, ...studentUsers].map((u) => u.email),
       ),
     )
@@ -134,16 +134,16 @@ async function main() {
   )
 
   if (usersToInsert.length) {
-    await db.insert(usersTable).values(usersToInsert)
+    await db.insert(users).values(usersToInsert)
   }
 
   // Read back the users we care about
   const allSeedUsers = await db
     .select()
-    .from(usersTable)
+    .from(users)
     .where(
       inArray(
-        usersTable.email,
+        users.email,
         [...counselorUsers, ...studentUsers].map((u) => u.email),
       ),
     )
@@ -244,11 +244,11 @@ async function main() {
 
   // Insert counselor profiles if missing
   const existingCounselorProfiles = await db
-    .select({ userId: counselorsTable.userId })
-    .from(counselorsTable)
+    .select({ userId: counselors.userId })
+    .from(counselors)
     .where(
       inArray(
-        counselorsTable.userId,
+        counselors.userId,
         counselorProfilesInput.map((c) => c.userId),
       ),
     )
@@ -257,15 +257,15 @@ async function main() {
     (c) => !existingCounselorUserIds.has(c.userId),
   )
   if (counselorProfilesToInsert.length) {
-    await db.insert(counselorsTable).values(counselorProfilesToInsert)
+    await db.insert(counselors).values(counselorProfilesToInsert)
   }
 
   const counselorProfiles = await db
     .select()
-    .from(counselorsTable)
+    .from(counselors)
     .where(
       inArray(
-        counselorsTable.userId,
+        counselors.userId,
         counselorProfilesInput.map((c) => c.userId),
       ),
     )
@@ -350,26 +350,26 @@ async function main() {
   }))
 
   const existingStudentProfiles = await db
-    .select({ userId: studentsTable.userId })
-    .from(studentsTable)
+    .select({ userId: students.userId })
+    .from(students)
     .where(
       inArray(
-        studentsTable.userId,
+        students.userId,
         studentProfilesInput.map((s) => s.userId),
       ),
     )
   const existingStudentUserIds = new Set(existingStudentProfiles.map((s) => s.userId))
   const studentsToInsert = studentProfilesInput.filter((s) => !existingStudentUserIds.has(s.userId))
   if (studentsToInsert.length) {
-    await db.insert(studentsTable).values(studentsToInsert)
+    await db.insert(students).values(studentsToInsert)
   }
 
   const studentProfiles = await db
     .select()
-    .from(studentsTable)
+    .from(students)
     .where(
       inArray(
-        studentsTable.userId,
+        students.userId,
         studentProfilesInput.map((s) => s.userId),
       ),
     )
@@ -398,10 +398,10 @@ async function main() {
   // Avoid duplicate assignments
   const existingAssignments = await db
     .select()
-    .from(counselorStudentTable)
+    .from(counselorStudent)
     .where(
       inArray(
-        counselorStudentTable.studentId,
+        counselorStudent.studentId,
         assignmentsInput.map((a) => a.studentId),
       ),
     )
@@ -414,10 +414,10 @@ async function main() {
     (a) => !existingAssignmentKeys.has(`${a.counselorId}:${a.studentId}`),
   )
   if (assignmentsToInsert.length) {
-    await db.insert(counselorStudentTable).values(assignmentsToInsert)
+    await db.insert(counselorStudent).values(assignmentsToInsert)
   }
 
-  // 5) Create sample sessions (sessions table references usersTable ids)
+  // 5) Create sample sessions (sessions table references users ids)
   const counselorAUserId = counselorUserRows.find((u) => u.email === 'ada.okafor@wellnest.test')!.id
   const counselorBUserId = counselorUserRows.find(
     (u) => u.email === 'kunle.bello@wellnest.test',
@@ -442,7 +442,7 @@ async function main() {
       status: 'SCHEDULED' as const,
     },
   ]
-  await db.insert(sessionsTable).values(sessionsInput)
+  await db.insert(sessions).values(sessionsInput)
 
   // 6) Counselor notes
   const notesInput: NewNote[] = [
@@ -464,7 +464,7 @@ async function main() {
       isPrivate: true,
     },
   ]
-  await db.insert(counselorNotesTable).values(notesInput)
+  await db.insert(counselorNotes).values(notesInput)
 
   // 7) Mood check-ins for a few students
   const moodInput: NewMood[] = [
@@ -503,7 +503,7 @@ async function main() {
       createdAt: new Date(),
     },
   ]
-  await db.insert(moodCheckInsTable).values(moodInput)
+  await db.insert(moodCheckIns).values(moodInput)
 
   // 8) Screen time data and thresholds
   const screenDataInput: NewScreenData[] = [
@@ -528,7 +528,7 @@ async function main() {
       ],
     },
   ]
-  await db.insert(screenTimeDataTable).values(screenDataInput)
+  await db.insert(screenTimeData).values(screenDataInput)
 
   const screenThresholdsInput: NewScreenThreshold[] = [
     {
@@ -546,7 +546,7 @@ async function main() {
       enabled: true,
     },
   ]
-  await db.insert(screenTimeThresholdsTable).values(screenThresholdsInput)
+  await db.insert(screenTimeThresholds).values(screenThresholdsInput)
 
   const screenSessionsInput: NewScreenSession[] = [
     {
@@ -561,7 +561,7 @@ async function main() {
       deviceType: 'Desktop',
     },
   ]
-  await db.insert(screenTimeSessionsTable).values(screenSessionsInput)
+  await db.insert(screenTimeSessions).values(screenSessionsInput)
 
   // 9) Risk thresholds (counselors -> optionally for a student)
   const riskThresholdsInput: NewRiskThreshold[] = [
@@ -584,7 +584,7 @@ async function main() {
       isGlobal: true,
     },
   ]
-  await db.insert(riskThresholdsTable).values(riskThresholdsInput)
+  await db.insert(riskThresholds).values(riskThresholdsInput)
 
   // 10) Notifications and messages
   const notificationsInput: NewNotification[] = [
@@ -605,7 +605,7 @@ async function main() {
       isRead: false,
     },
   ]
-  await db.insert(notificationsTable).values(notificationsInput)
+  await db.insert(notifications).values(notificationsInput)
 
   const messagesInput: NewMessage[] = [
     {
@@ -623,7 +623,7 @@ async function main() {
       createdAt: new Date(),
     },
   ]
-  await db.insert(messagesTable).values(messagesInput)
+  await db.insert(messages).values(messagesInput)
 
   console.log('✅ Seeding complete!')
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/shared/lib/db'
+import { db } from '@/shared/db'
 import { messages } from '@/shared/db/schema'
 import { eq, desc, or, and } from 'drizzle-orm'
 import { z } from 'zod'
@@ -56,10 +56,7 @@ export async function POST(request: NextRequest) {
     console.error('Error creating message:', error)
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid data format', details: error.errors },
-        { status: 400 },
-      )
+      return NextResponse.json({ error: 'Invalid data format', details: error }, { status: 400 })
     }
 
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
