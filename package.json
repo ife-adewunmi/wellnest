@@ -12,7 +12,14 @@
     "format:fix:src": "prettier -c './src/**/*.{ts,tsx,js}' --write",
     "generate-icons": "node scripts/generate-icons.js",
     "pwa-audit": "npx lighthouse http://localhost:3000 --only-categories=pwa --chrome-flags='--headless'",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "db:test": "tsx src/shared/scripts/db-connection.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:reset": "tsx src/shared/db/reset.ts",
+    "db:seed": "tsx src/shared/db/seed.ts",
+    "db:setup": "yarn run db:reset && yarn run db:seed",
+    "db:inspect": "drizzle-kit introspect"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
