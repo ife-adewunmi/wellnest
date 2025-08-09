@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { db } from '@/shared/db'
 import { moodCheckIns } from '@/shared/db/schema'
 import { eq, desc } from 'drizzle-orm'
-import { getSession } from '@/features/auth/lib/auth.server'
+import { getSession } from '@/user/auth/lib/auth.server'
 
 const moodCheckInSchema = z.object({
   mood: z.enum(['HAPPY', 'GOOD', 'NEUTRAL', 'BAD', 'STRESSED']),

@@ -15,6 +15,13 @@
       "when": 1754393909670,
       "tag": "0001_lumpy_praxagora",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1754722054492,
+      "tag": "0002_tiresome_metal_master",
+      "breakpoints": true
     }
   ]
 }

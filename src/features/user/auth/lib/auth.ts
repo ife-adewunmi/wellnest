@@ -7,7 +7,7 @@ import { User } from '../types'
 const mockUsers: User[] = [
   {
     id: '550e8400-e29b-41d4-a716-446655440001', // Valid UUID for mock student
-    email: 'student@example.com',
+    email: 'student@wellnest.com',
     role: UserRole.STUDENT,
     avatar: '',
     createdAt: new Date(),
@@ -17,7 +17,7 @@ const mockUsers: User[] = [
   },
   {
     id: '550e8400-e29b-41d4-a716-446655440002', // Valid UUID for mock counselor
-    email: 'counselor@example.com',
+    email: 'counselor@wellnest.com',
     role: UserRole.COUNSELOR,
     avatar: '',
     createdAt: new Date(),

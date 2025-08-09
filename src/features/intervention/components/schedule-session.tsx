@@ -8,7 +8,7 @@ import { CreateSessionModal } from './create-session-modal'
 import { useSessions } from '../hooks/use-sessions'
 import { DashboardHeader } from '@/features/dashboard'
 import { interBold } from '@/shared/styles/fonts'
-import { getSession } from '@/features/auth/lib/auth'
+import { getSession } from '@/user/auth/lib/auth'
 
 export default function ScheduleSession() {
   const [isModalOpen, setIsModalOpen] = useState(false)

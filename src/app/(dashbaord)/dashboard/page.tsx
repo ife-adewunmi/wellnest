@@ -1,4 +1,4 @@
-import { getSession } from '@/features/auth/lib/auth.server'
+import { getSession } from '@/user/auth/lib/auth.server'
 import { redirect } from 'next/navigation'
 import Dashboard from '@/features/dashboard/components/dashboard'
 import React from 'react'

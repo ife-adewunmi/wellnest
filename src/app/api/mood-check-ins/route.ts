@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/shared/db'
 import { moodCheckIns } from '@/shared/db/schema'
 import { eq, desc } from 'drizzle-orm'
-import { getSession } from '@/features/auth/lib/auth.server'
+import { getSession } from '@/user/auth/lib/auth.server'
 
 // GET /api/mood-check-ins - Get mood check-ins (plural endpoint for compatibility)
 export async function GET(request: NextRequest) {

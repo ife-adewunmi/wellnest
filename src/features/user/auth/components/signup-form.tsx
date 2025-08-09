@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useUserStore } from '@/shared/store/useUserStore'
+import { useUserStore } from '../../store'
 import GoogleSignupButton from '@/shared/components/ui/google-signup-button'
 import { Label } from '@/shared/components/ui/label'
 import { Input } from '@/shared/components/ui/custom-input'
@@ -13,8 +13,8 @@ import { ArrowRight } from 'lucide-react'
 import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
 import WelcomeMessage from '@/shared/components/ui/welcome-message'
-import useSignup from '@/features/auth/hooks/useSignup'
-import { signupSchema, SignupFormData } from '@/shared/lib/validations'
+import { signupSchema, SignupFormData } from '../lib/validation'
+import useSignup from '../hooks/useSignup'
 import { toast } from 'react-toastify'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 
@@ -69,13 +69,7 @@ export default function SignupForm() {
 
           // Set user in store if user data is returned
           if (data.user) {
-            setUser({
-              id: data.user.id,
-              first_name: data.user.firstName,
-              last_name: data.user.lastName,
-              email: data.user.email,
-              password: '',
-            })
+            setUser(data.user)
           }
 
           // Clear form

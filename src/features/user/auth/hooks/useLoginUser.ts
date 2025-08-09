@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { LoginFormData } from '@/shared/lib/validations'
+import { LoginFormData } from '../lib/validation'
 import { User } from '../types'
 
 interface LoginResponse {

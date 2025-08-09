@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/
 import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
 import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
 import { RecentMessages } from '@/features/messaging/components/recent-messages'
-import type { User } from '@/features/auth/types'
+import type { User } from '@/user/auth/types'
 import {
   fetchMoodCheckIns,
   fetchUpcomingSessions,
@@ -17,6 +17,8 @@ import {
 } from '@/shared/service/api'
 import { MoodCheckIn } from '@/shared/types/mood'
 import { toast } from 'react-toastify'
+import { StudentProfile } from './student-profile'
+import Sidebar from './sidebar'
 // import ScreenTimeMonitor from "@/features/screen-time/lib/screen-time-monitor"
 // import { useToast } from "@/shared/hooks/use-toast"
 
@@ -90,9 +92,15 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
   }, [user.id])
 
   return (
-    <div className="space-y-6">
+    <div className="flex">
+           <Sidebar />
+      <section >
+
+
+
+
       {/* Welcome Section */}
-      <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white">
+      <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white w-full max-w-[541px]">
         <h1 className="mb-2 text-2xl font-bold">Good Afternoon, {user.firstName} {user.lastName}!</h1>
         <p className="text-blue-100">
           Welcome back to your portal account! You can start by using the menu dashboard to navigate
@@ -221,6 +229,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
           <RecentMessages userId={user.id} />
         </div>
       </div>
+      </section>
     </div>
   )
 }

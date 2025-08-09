@@ -47,8 +47,8 @@ yarn dev
 ```
 
 ## Default Test Accounts (After Seeding)
-- **Student**: student@wellnest.com / student123
-- **Counselor**: counselor@wellnest.com / counselor123
+- **Student**: student@wellnest.com / password
+- **Counselor**: counselor@wellnest.com / password
 
 ## Database Schema Features
 ✅ User authentication with bcrypt password hashing

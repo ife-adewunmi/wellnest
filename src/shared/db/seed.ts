@@ -1,15 +1,25 @@
 // src/shared/db/seed.ts
-import { db } from './index'
-import { users } from './schema'
+import { config } from 'dotenv'
+
+// Load environment variables from .env.local
+config({ path: '.env.local' })
+
+// Lazy import to prevent execution during module loading
+// import { db } from './index'
+// import { users } from './schema'
 import bcrypt from 'bcryptjs'
 
 async function seed() {
   console.log('🌱 Starting database seeding...')
 
   try {
+    // Dynamic imports to prevent execution during module loading
+    const { db } = await import('./index')
+    const { users } = await import('./schema')
+
     // Hash passwords
-    const studentPassword = await bcrypt.hash('student123', 12)
-    const counselorPassword = await bcrypt.hash('counselor123', 12)
+    const studentPassword = await bcrypt.hash('password', 12)
+    const counselorPassword = await bcrypt.hash('password', 12)
 
     // Insert seed users
     const seedUsers = await db
@@ -80,8 +90,8 @@ async function seed() {
       .returning()
 
     console.log('✅ Seed users created:', seedUsers.length)
-    console.log('📧 Student login: student@wellnest.com / student123')
-    console.log('📧 Counselor login: counselor@wellnest.com / counselor123')
+    console.log('📧 Student login: student@wellnest.com / password')
+    console.log('📧 Counselor login: counselor@wellnest.com / password')
     
   } catch (error) {
     console.error('❌ Error seeding database:', error)
@@ -90,7 +100,7 @@ async function seed() {
 }
 
 // Run seed if called directly
-if (require.main === module) {
+if (require.main === module || process.argv.includes('--seed')) {
   seed()
     .then(() => {
       console.log('🎉 Database seeding completed!')

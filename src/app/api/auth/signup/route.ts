@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { signUpServer, createToken } from '@/features/auth/lib/auth.server'
+import { signUpServer, createToken } from '@/user/auth/lib/auth.server'
 import { cookies } from 'next/headers'
 
 export async function POST(req: NextRequest) {

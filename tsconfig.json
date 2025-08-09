@@ -35,7 +35,8 @@
       "@/store/*": ["./src/shared/store/*"],
       "@/types/*": ["./src/shared/types/*"],
       "@/ui/*": ["./src/shared/components/ui/*"],
-      "@/shared/*": ["./src/shared/*"]
+      "@/shared/*": ["./src/shared/*"],
+      "@/user/*": ["./src/features/user/*"]
     }
   },
   "include": [

@@ -13,10 +13,10 @@ import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
 import WelcomeMessage from '@/shared/components/ui/welcome-message'
 
-import { loginSchema, LoginFormData } from '@/shared/lib/validations'
+import { loginSchema, LoginFormData } from '../lib/validation'
 import useLoginUser from '../hooks/useLoginUser'
 import { toast } from 'react-toastify'
-import { useUserStore } from '@/shared/store/useUserStore'
+import { useUserStore } from '../../store'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { UserRole } from '../enums'
 
@@ -71,13 +71,7 @@ export default function LoginForm() {
     loginUser(validationResult.data, {
       onSuccess: (data) => {
         if (data.user) {
-          setUser({
-            id: data.user.id.toString(),
-            first_name: data.user.firstName,
-            last_name: data.user.lastName,
-            email: data.user.email,
-            password: '',
-          })
+          setUser(data.user)
         }
 
         if (remember) {

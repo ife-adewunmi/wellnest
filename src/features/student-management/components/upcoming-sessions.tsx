@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/ui/custom-button'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
 import { useRouter } from 'next/navigation'
 import { useSessions } from '@/features/intervention/hooks/use-sessions'
-import { getSession } from '@/features/auth/lib/auth'
+import { getSession } from '@/user/auth/lib/auth'
 
 interface Session {
   id: string
