@@ -35,13 +35,11 @@
       "@/store/*": ["./src/shared/store/*"],
       "@/types/*": ["./src/shared/types/*"],
       "@/ui/*": ["./src/shared/components/ui/*"],
-      "@/shared/*": ["./src/shared/*"],
-      "@/user/*": ["./src/features/user/*"]
+      "@/shared/*": ["./src/shared/*"]
     }
   },
   "include": [
     "next-env.d.ts",
-    "src/types/svg.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useUserStore, IsLoggedIn } from '@/user/store'
+import { useUserStore, IsLoggedIn } from '@/shared/store/useUserStore'
 import Loading from '@/shared/components/ui/loading'
 
 export default function RootPage() {

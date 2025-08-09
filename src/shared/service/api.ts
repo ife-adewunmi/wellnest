@@ -160,12 +160,7 @@ class ApiService {
   }
 
   static async createSession(sessionData: any) {
-    if (!sessionData || !sessionData.userId) {
-      throw new Error('Session data must include userId')
-    }
-    console.log('Creating session with data:', sessionData)
     return this.safeCallWithError(() => api.post('/api/sessions', sessionData))
-  
   }
 
   // Messages
@@ -223,17 +218,17 @@ class ApiService {
 }
 
 // Export individual functions for backward compatibility
-export const fetchMoodCheckIns = (userId: string) => ApiService.fetchMoodCheckIns(userId)
-export const fetchUpcomingSessions = (userId: string) => ApiService.fetchUpcomingSessions(userId)
-export const fetchRecentMessages = (userId: string) => ApiService.fetchRecentMessages(userId)
-export const fetchStudentsList = () => ApiService.fetchStudentsList()
-export const fetchDashboardStats = () => ApiService.fetchDashboardStats()
-export const fetchNotifications = (userId: string) => ApiService.fetchNotifications(userId)
-export const markNotificationAsRead = (notificationId: string) => ApiService.markNotificationAsRead(notificationId)
-export const createSession = (sessionData: any) => ApiService.createSession(sessionData)
-export const sendMessage = (messageData: any) => ApiService.sendMessage(messageData)
-export const fetchScreenTimeStats = (userId: string) => ApiService.fetchScreenTimeStats(userId)
-export const fetchStudentStats = (userId: string) => ApiService.fetchStudentStats(userId)
+export const fetchMoodCheckIns = ApiService.fetchMoodCheckIns
+export const fetchUpcomingSessions = ApiService.fetchUpcomingSessions
+export const fetchRecentMessages = ApiService.fetchRecentMessages
+export const fetchStudentsList = ApiService.fetchStudentsList
+export const fetchDashboardStats = ApiService.fetchDashboardStats
+export const fetchNotifications = ApiService.fetchNotifications
+export const markNotificationAsRead = ApiService.markNotificationAsRead
+export const createSession = ApiService.createSession
+export const sendMessage = ApiService.sendMessage
+export const fetchScreenTimeStats = ApiService.fetchScreenTimeStats
+export const fetchStudentStats = ApiService.fetchStudentStats
 
 // Export the service for direct use
 export { ApiService }

@@ -3,18 +3,21 @@ import Image from 'next/image'
 import WelcomeMessage from './ui/welcome-message'
 
 export default function LayoutImage() {
-return (
-  <div className="relative w-full lg:max-w-[530px] xl:max-w-[674px] h-full max-h-[960px] rounded-lg lg:rounded-xl overflow-hidden aspect-[674/960]">
-    <Image
-      src="/images/onboarding.png"
-      alt="Layout"
-      width={674}
-      height={960}
-      className="w-full h-full object-cover rounded-lg lg:rounded-xl"
-    />
-    <div className="absolute bottom-[10%] left-[7.5%] w-[85%] ">
-      <WelcomeMessage />
+  return (
+    <div className="relative">
+      <div className="h-[400px] w-full sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[960px] xl:w-[674px]">
+        <Image
+          src="/images/onboarding.png"
+          alt="Layout"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority
+        />
+      </div>
+      <div className="absolute bottom-[6rem] left-[5rem]">
+        <WelcomeMessage />
+      </div>
     </div>
-  </div>
-)
+  )
 }

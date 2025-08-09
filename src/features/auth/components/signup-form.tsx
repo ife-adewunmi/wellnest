@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useUserStore } from '../../store'
+import { useUserStore } from '@/shared/store/useUserStore'
 import GoogleSignupButton from '@/shared/components/ui/google-signup-button'
+import { Separator } from '@/shared/components/ui/separator'
 import { Label } from '@/shared/components/ui/label'
 import { Input } from '@/shared/components/ui/custom-input'
 import PasswordInput from '@/shared/components/ui/password-input'
@@ -12,9 +13,8 @@ import { Button } from '@/shared/components/ui/custom-button'
 import { ArrowRight } from 'lucide-react'
 import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
-import WelcomeMessage from '@/shared/components/ui/welcome-message'
-import { signupSchema, SignupFormData } from '../lib/validation'
-import useSignup from '../hooks/useSignup'
+import useSignup from '@/features/auth/hooks/useSignup'
+import { signupSchema, SignupFormData } from '@/shared/lib/validations'
 import { toast } from 'react-toastify'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 
@@ -58,8 +58,8 @@ export default function SignupForm() {
     const { confirmPassword, ...userData } = validationResult.data
     createUser(
       {
-        firstName: userData.firstName,
-        lastName: userData.lastName,
+        first_name: userData.firstName,
+        last_name: userData.lastName,
         email: userData.email,
         password: userData.password,
       },
@@ -69,7 +69,13 @@ export default function SignupForm() {
 
           // Set user in store if user data is returned
           if (data.user) {
-            setUser(data.user)
+            setUser({
+              id: data.user.id,
+              first_name: data.user.name.split(' ')[0] || '',
+              last_name: data.user.name.split(' ')[1] || '',
+              email: data.user.email,
+              password: '',
+            })
           }
 
           // Clear form
@@ -94,43 +100,45 @@ export default function SignupForm() {
 
   return (
     <div
-      className="flex w-full pt-[2rem] justify-center min-h-screen px-4 sm:px-6 "
-
+      className="flex w-full"
+      style={{
+        paddingRight: '4.44vw',
+        paddingLeft: '2.22vw',
+        paddingTop: '2.22vh',
+        paddingBottom: '2.22vh',
+      }}
     >
-      <div className="flex w-full max-w-[1346px] justify-center lg:gap-[3rem] xl:gap-[4rem]  ">
-        <div className="hidden lg:flex w-full">
+      <div className="flex w-full max-w-[1346px] gap-[4.44vw]">
+        <div style={{ width: 'fit-content' }}>
           <LayoutImage />
         </div>
-        <div className="flex w-full flex-col items-center w-full max-w-[580px] min-w-[320px]">
-          <div className="lg:hidden mb-6 sm:mb-8">
-            <WelcomeMessage />
-          </div>
+        <div className="flex w-full flex-col items-center">
           <HomeMessage />
-          <div className="mt-6 sm:mt-8 lg:mt-[2.125rem] w-full max-w-[458px] min-w-[224px]">
+          <div className="mt-[3.125rem] w-full max-w-[458px]">
             <div className="text-center">
-              <h1 className={`text-xl sm:text-2xl lg:text-[1.25rem] text-[#333333] ${interMedium.className}`}>Sign up</h1>
+              <h1 className={`text-[1.25rem] text-[#333333] ${interMedium.className}`}>Sign up</h1>
             </div>
 
-            <div className="mt-6 sm:mt-8 lg:mt-[2rem] xl:mt-[2.5rem]">
+            <div className="mt-[2.5rem]">
               <GoogleSignupButton />
 
               {/* OR divider */}
-              <div className="mt-6 sm:mt-8 lg:mt-[2rem] xl:mt-[2.5rem] flex items-center gap-3 sm:gap-4 lg:gap-[1.5rem]">
-                <div className="h-[1px] sm:h-[2px] w-full bg-[#66666640]"></div>
+              <div className="mt-[2.5rem] flex items-center gap-[1.5rem]">
+                <div className="h-[2px] w-full bg-[#66666640]"></div>
                 <div className="">
-                  <span className={`text-[#666666] ${interMedium.className} text-sm sm:text-base lg:text-[18px]`}>OR</span>
+                  <span className={`text-[#666666] ${interMedium.className} text-[18px]`}>OR</span>
                 </div>
-                <div className="h-[1px] sm:h-[2px] w-full bg-[#66666640]"></div>
+                <div className="h-[2px] w-full bg-[#66666640]"></div>
               </div>
 
               {/* Form fields */}
               <form onSubmit={handleSubmit}>
-                <div className="mt-6 sm:mt-8 lg:mt-[2rem] xl:mt-[2.5rem] flex flex-col gap-3 sm:gap-4 lg:gap-[1rem]">
-                  <div className="flex w-full flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 lg:gap-[1rem]">
-                    <div className="flex min-w-0 flex-1 flex-col gap-1 sm:gap-2 lg:gap-[4px]">
+                <div className="mt-[2.5rem] flex flex-col gap-[1rem]">
+                  <div className="flex w-full items-center gap-[1rem]">
+                    <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
                       <Label
                         htmlFor="firstName"
-                        className={`text-sm sm:text-base lg:text-[0.875rem] xl:text-[1rem] text-[#666666] ${interRegular.className}`}
+                        className={`text-[1rem] text-[#666666] ${interRegular.className}`}
                       >
                         First name
                       </Label>
@@ -145,10 +153,10 @@ export default function SignupForm() {
                         <span className="text-sm text-red-500">{validationErrors.firstName}</span>
                       )}
                     </div>
-                    <div className="flex min-w-0 flex-1 flex-col gap-1 sm:gap-2 lg:gap-[4px]">
+                    <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
                       <Label
                         htmlFor="lastName"
-                        className={`text-sm sm:text-base lg:text-[0.875rem] xl:text-[1rem] text-[#666666] ${interRegular.className}`}
+                        className={`text-[1rem] text-[#666666] ${interRegular.className}`}
                       >
                         Last name
                       </Label>
@@ -165,10 +173,10 @@ export default function SignupForm() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-1 sm:gap-2 lg:gap-[4px]">
+                  <div className="flex flex-col gap-[4px]">
                     <Label
                       htmlFor="email"
-                      className={`text-sm sm:text-base lg:text-[1rem] text-[#666666] ${interRegular.className}`}
+                      className={`text-[1rem] text-[#666666] ${interRegular.className}`}
                     >
                       Email address
                     </Label>
@@ -178,7 +186,7 @@ export default function SignupForm() {
                       placeholder="johndoe@eg.com"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`border border-[#E2E8F0] px-3 sm:px-4 lg:px-[1rem] py-3 sm:py-4 lg:py-[17px] ${validationErrors.email ? 'border-red-500' : ''}`}
+                      className={`border border-[#E2E8F0] px-[1rem] py-[17px] ${validationErrors.email ? 'border-red-500' : ''}`}
                     />
                     {validationErrors.email && (
                       <span className="text-sm text-red-500">{validationErrors.email}</span>
@@ -217,14 +225,14 @@ export default function SignupForm() {
                     </div>
                   </div>
 
-                  <p className={`${interRegular.className} text-xs sm:text-sm lg:text-[14px] text-[#666666]`}>
+                  <p className={`${interRegular.className} text-[14px] text-[#666666]`}>
                     Use 8 or more characters with a mix of letters, numbers & symbols
                   </p>
 
-                  <div className="mt-6 sm:mt-8 lg:mt-[2rem] xl:mt-[2.5rem] flex items-center justify-center">
+                  <div className="mt-[2.5rem] flex items-center justify-center">
                     <Button
                       variant={'default'}
-                      className="flex items-center w-full "
+                      className="flex items-center"
                       type="submit"
                       disabled={isPending}
                     >
@@ -233,8 +241,8 @@ export default function SignupForm() {
                     </Button>
                   </div>
 
-                  <div className="mt-6 sm:mt-8 lg:mt-[2rem] xl:mt-[2.5rem] flex items-center justify-center">
-                    <p className={`${interRegular.className} text-xs sm:text-sm lg:text-[14px] text-[#666666] text-center`}>
+                  <div className="mt-[2.5rem] flex items-center justify-center">
+                    <p className={`${interRegular.className} text-[14px] text-[#666666]`}>
                       Already have an account?{' '}
                       <Link href="/signin" className="underline">
                         Sign in

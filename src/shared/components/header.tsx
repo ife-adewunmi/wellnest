@@ -16,7 +16,7 @@ import {
 import { SidebarTrigger } from '@/shared/components/ui/sidebar'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
 import { useRouter } from 'next/navigation'
-import { User } from '@/user/auth/types'
+import { User } from '@/features/auth/types'
 
 interface HeaderProps {
   user: User

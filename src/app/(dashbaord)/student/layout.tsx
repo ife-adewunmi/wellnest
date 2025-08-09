@@ -1,5 +1,5 @@
 import type React from 'react'
-import { getSession } from '@/user/auth/lib/auth.server'
+import { getSession } from '@/features/auth/lib/auth'
 import { redirect } from 'next/navigation'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider } from '@/components/ui/sidebar-context'

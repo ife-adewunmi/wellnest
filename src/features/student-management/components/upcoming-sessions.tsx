@@ -3,9 +3,6 @@
 import * as React from 'react'
 import { Button } from '@/shared/components/ui/custom-button'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
-import { useRouter } from 'next/navigation'
-import { useSessions } from '@/features/intervention/hooks/use-sessions'
-import { getSession } from '@/user/auth/lib/auth'
 
 interface Session {
   id: string
@@ -16,46 +13,31 @@ interface Session {
 }
 
 export function UpcomingSessions() {
-  const router = useRouter()
   const [showAll, setShowAll] = React.useState(false)
-  const [currentUser, setCurrentUser] = React.useState<any>(null)
 
-  // Get current user session
-  React.useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const session = await getSession()
-        if (session?.user) {
-          setCurrentUser(session.user)
-        } else {
-          // Fallback for development
-          setCurrentUser({ id: 'mock-counselor', role: 'COUNSELOR' })
-        }
-      } catch (error) {
-        console.error('Error loading user session:', error)
-        // Fallback for development
-        setCurrentUser({ id: 'mock-counselor', role: 'COUNSELOR' })
-      }
-    }
-
-    loadUser()
-  }, [])
-
-  const { upcomingSessions, loading } = useSessions(
-    currentUser?.id,
-    currentUser?.role || 'COUNSELOR'
-  )
-
-  // Convert intervention sessions to the expected format
-  const sessions: Session[] = upcomingSessions.map((session, index) => ({
-    id: (index + 1).toString(),
-    student: session.student, // This should work as the convertToUISession maps studentName to student
-    date: session.date,
-    time: session.time,
-    issue: session.intervention,
-  }))
-
-  console.log('🔍 Dashboard upcoming sessions:', { upcomingSessions, sessions })
+  const sessions: Session[] = [
+    {
+      id: '1',
+      student: 'Sophia Evans',
+      date: '2024-07-29',
+      time: '10:00 AM',
+      issue: 'Academic Planning',
+    },
+    {
+      id: '2',
+      student: 'Liam Foster',
+      date: '2024-07-30',
+      time: '2:00 PM',
+      issue: 'Personal Development',
+    },
+    {
+      id: '3',
+      student: 'Liam Foster',
+      date: '2024-07-30',
+      time: '2:00 PM',
+      issue: 'Personal Development',
+    },
+  ]
 
   const allSessions: Session[] = [
     ...sessions,
@@ -82,96 +64,84 @@ export function UpcomingSessions() {
     },
   ]
 
-  // Limit displayed sessions to maximum of 3
-  const displayedSessions = allSessions.slice(0, 3)
-
-  const handleSession = () => {
-    // setShowAll(!showAll)
-    router.push('/intervention')
-  }
-
-  if (loading) {
-    return (
-      <div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
-          <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>
-            Upcoming Sessions
-          </h1>
-          <Button
-            variant="ghost"
-            className={`${interMedium.className} text-sm lg:text-[0.875rem] text-[#4A5568] self-start sm:self-auto`}
-            onClick={handleSession}
-          >
-            View all
-          </Button>
-        </div>
-        <div className="mt-4 sm:mt-6 lg:mt-[1.5rem] flex items-center justify-center py-8">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto mb-2"></div>
-            <p className="text-sm text-gray-600">Loading sessions...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  const displayedSessions = showAll ? allSessions : sessions
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
-        <h1 className={`${interBold.className} text-lg sm:text-xl lg:text-[1.25rem] text-[#121417]`}>
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-0">
+        <h1
+          className={`${interBold.className} text-lg text-[#121417] sm:text-xl lg:text-[1.25rem]`}
+        >
           Upcoming Sessions
         </h1>
         <Button
           variant="ghost"
-          className={`${interMedium.className} text-sm lg:text-[0.875rem] text-[#4A5568] self-start sm:self-auto`}
-          onClick={handleSession}
+          className={`${interMedium.className} self-start text-sm text-[#4A5568] sm:self-auto lg:text-[0.875rem]`}
+          onClick={() => setShowAll(!showAll)}
         >
-          View all
+          {showAll ? 'Show less' : 'View all'}
         </Button>
       </div>
       <div className="mt-4 sm:mt-6 lg:mt-[1.5rem]">
-        {displayedSessions.length === 0 ? (
-          <p className="text-sm text-gray-600">No upcoming sessions to show.</p>
-        ) : (
-          <div className="overflow-x-auto rounded-lg sm:rounded-xl border border-[#CBD5E0]">
-            <table className="w-full min-w-[640px] rounded-lg sm:rounded-xl border border-[#CBD5E0]">
-              <thead>
-                <tr className="border-b border-[#CBD5E0] bg-gray-50">
-                  <th className={`py-2 sm:py-3 lg:py-[13px] pl-4 sm:pl-6 lg:pl-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
-                    Student
-                  </th>
-                  <th className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 lg:px-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
-                    Date
-                  </th>
-                  <th className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 lg:px-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
-                    Time
-                  </th>
-                  <th className={`py-2 sm:py-3 lg:py-[13px] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-4 text-left ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
-                    Issue
-                  </th>
+        <div
+          className={`overflow-x-auto rounded-lg border border-[#CBD5E0] sm:rounded-xl ${showAll ? 'max-h-64 overflow-y-auto sm:max-h-80 lg:max-h-96' : ''}`}
+        >
+          <table className="w-full min-w-[640px] rounded-lg border border-[#CBD5E0] sm:rounded-xl">
+            <thead>
+              <tr className="border-b border-[#CBD5E0] bg-gray-50">
+                <th
+                  className={`py-2 pl-4 text-left sm:py-3 sm:pl-6 lg:py-[13px] lg:pl-4 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
+                >
+                  Student
+                </th>
+                <th
+                  className={`px-2 py-2 text-left sm:px-3 sm:py-3 lg:px-4 lg:py-[13px] ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
+                >
+                  Date
+                </th>
+                <th
+                  className={`px-2 py-2 text-left sm:px-3 sm:py-3 lg:px-4 lg:py-[13px] ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
+                >
+                  Time
+                </th>
+                <th
+                  className={`px-2 py-2 pr-4 text-left sm:px-3 sm:py-3 sm:pr-6 lg:py-[13px] lg:pr-4 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
+                >
+                  Issue
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedSessions.map((session, index) => (
+                <tr
+                  key={session.id}
+                  className={`border-b border-[#CBD5E0] transition-colors hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}
+                >
+                  <td
+                    className={`py-3 pl-4 sm:py-4 sm:pl-6 lg:py-[1.625rem] lg:pl-4 ${interRegular.className} text-xs font-medium text-[#121417] sm:text-sm lg:text-[0.875rem]`}
+                  >
+                    {session.student}
+                  </td>
+                  <td
+                    className={`px-2 py-3 sm:px-3 sm:py-4 lg:px-4 lg:py-[1.625rem] ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
+                  >
+                    {session.date}
+                  </td>
+                  <td
+                    className={`px-2 py-3 sm:px-3 sm:py-4 lg:px-4 lg:py-[1.625rem] ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
+                  >
+                    {session.time}
+                  </td>
+                  <td
+                    className={`px-2 py-3 pr-4 sm:px-3 sm:py-4 sm:pr-6 lg:py-[1.625rem] lg:pr-4 ${interRegular.className} text-xs text-[#61758A] sm:text-sm lg:text-[0.875rem]`}
+                  >
+                    {session.issue}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {displayedSessions.map((session, index) => (
-                  <tr key={session.id} className={`border-b border-[#CBD5E0] hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-25'}`}>
-                    <td className={`py-3 sm:py-4 lg:py-[1.625rem] pl-4 sm:pl-6 lg:pl-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#121417] font-medium`}>
-                      {session.student}
-                    </td>
-                    <td className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 lg:px-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}>
-                      {session.date}
-                    </td>
-                    <td className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 lg:px-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}>
-                      {session.time}
-                    </td>
-                    <td className={`py-3 sm:py-4 lg:py-[1.625rem] px-2 sm:px-3 pr-4 sm:pr-6 lg:pr-4 ${interRegular.className} text-xs sm:text-sm lg:text-[0.875rem] text-[#61758A]`}>
-                      {session.issue}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
