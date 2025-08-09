@@ -1,5 +1,4 @@
 import { db } from '@/shared/db'
-import { users } from '@/shared/db/schema'
 import { eq } from 'drizzle-orm'
 import { loginSchema, createUserSchema } from '../lib/validation'
 import bcrypt from 'bcryptjs'
@@ -23,7 +22,11 @@ export class AuthService {
 
       const { email, password } = validationResult.data
 
-      const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
+      const existingUser = await db
+        .select()
+        .from(usersTable)
+        .where(eq(usersTable.email, email))
+        .limit(1)
 
       if (existingUser.length === 0) {
         return {
@@ -97,7 +100,11 @@ export class AuthService {
       const { first_name, last_name, email, password } = validationResult.data
 
       // Check if user already exists
-      const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
+      const existingUser = await db
+        .select()
+        .from(usersTable)
+        .where(eq(usersTable.email, email))
+        .limit(1)
       if (existingUser.length > 0) {
         return {
           success: false,
@@ -113,7 +120,7 @@ export class AuthService {
 
       // Create user
       const result = await db
-        .insert(users)
+        .insert(usersTable)
         .values({
           firstName: first_name,
           lastName: last_name,

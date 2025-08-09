@@ -7,7 +7,8 @@ const buttonVariants = cva('', {
   variants: {
     variant: {
       default: `bg-[#4299E1] w-full cursor-pointer py-3 sm:py-4 lg:py-[18px] justify-center flex items-center rounded-full text-[#FFFFFF] text-sm sm:text-base lg:text-lg ${interSemiBold.className}`,
-      destructive: 'bg-transparent border cursor-pointer border-[#3182CE] py-[4px] px-[8px] rounded-full text-[#3182CE] text-xs sm:text-sm lg:text-[12px] hover:bg-[#3182CE] hover:text-white',
+      destructive:
+        'bg-transparent border cursor-pointer border-[#3182CE] py-[4px] px-[8px] rounded-full text-[#3182CE] text-xs sm:text-sm lg:text-[12px] hover:bg-[#3182CE] hover:text-white',
       outline:
         'border cursor-pointer border-[#333333] bg-transparent rounded-full px-6 sm:px-12 lg:px-[7.6875rem] py-3 sm:py-4 lg:py-[1.25rem] text-sm sm:text-base',
       secondary: 'cursor-pointer bg-secondary text-secondary-foreground hover:bg-secondary/80',

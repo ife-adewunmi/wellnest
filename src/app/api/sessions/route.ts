@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/shared/db'
+import { sessions } from '@/shared/db/schema'
+import { eq, desc, gte, and } from 'drizzle-orm'
 import { z } from 'zod'
 import { db } from '@/shared/db'
 
@@ -239,10 +242,7 @@ export async function POST(request: NextRequest) {
     console.error('Error creating session:', error)
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Invalid data format', details: error.issues },
-        { status: 400 },
-      )
+      return NextResponse.json({ error: 'Invalid data format', details: error }, { status: 400 })
     }
 
     return NextResponse.json({
