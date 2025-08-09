@@ -29,6 +29,14 @@ export function StudentTable() {
   const { currentView, setCurrentView } = useViewContext()
   const [selectedStudent, setSelectedStudent] = React.useState<Student | null>(null)
 
+  const handleViewDetails = (studentId: string) => {
+    const student = allStudents.find((s: Student) => s.id === studentId)
+    if (student) {
+      setSelectedStudent(student)
+      setCurrentView('profile')
+    }
+  }
+
   const allStudents: Student[] = [
     {
       id: '1',

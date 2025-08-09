@@ -1,7 +1,6 @@
 import { db } from '@/shared/db'
 import { eq } from 'drizzle-orm'
-import { usersTable } from '@/shared/db/schema'
-import { loginSchema, createUserSchema } from '@/shared/lib/validations'
+import { loginSchema, createUserSchema } from '../lib/validation'
 import bcrypt from 'bcryptjs'
 import { LoginCredentials, AuthResponse, User, SignupCredentials } from '../types'
 
@@ -56,10 +55,15 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
-        role: 'user', // Default role
-        createdAt: userWithoutPassword.createdAt,
-        updatedAt: userWithoutPassword.updatedAt,
+        firstName: userWithoutPassword.firstName,
+        lastName: userWithoutPassword.lastName,
+        role: userWithoutPassword.role,
+        avatar: userWithoutPassword.avatar || undefined,
+        department: userWithoutPassword.department || undefined,
+        studentId: userWithoutPassword.studentId || undefined,
+        level: userWithoutPassword.level || undefined,
+        createdAt: userWithoutPassword.createdAt || new Date(),
+        updatedAt: userWithoutPassword.updatedAt || new Date(),
       }
 
       return {
@@ -118,8 +122,8 @@ export class AuthService {
       const result = await db
         .insert(usersTable)
         .values({
-          first_name,
-          last_name,
+          firstName: first_name,
+          lastName: last_name,
           email,
           password: hashedPassword,
         })
@@ -130,10 +134,15 @@ export class AuthService {
       const mappedUser: User = {
         id: userWithoutPassword.id.toString(),
         email: userWithoutPassword.email,
-        name: `${userWithoutPassword.firstName} ${userWithoutPassword.lastName}`,
-        role: 'user', // Default role
-        createdAt: userWithoutPassword.createdAt,
-        updatedAt: userWithoutPassword.updatedAt,
+        firstName: userWithoutPassword.firstName,
+        lastName: userWithoutPassword.lastName,
+        role: userWithoutPassword.role,
+        avatar: userWithoutPassword.avatar || undefined,
+        department: userWithoutPassword.department || undefined,
+        studentId: userWithoutPassword.studentId || undefined,
+        level: userWithoutPassword.level || undefined,
+        createdAt: userWithoutPassword.createdAt || new Date(),
+        updatedAt: userWithoutPassword.updatedAt || new Date(),
       }
 
       return {

@@ -10,10 +10,10 @@ export function Badge({ children, variant = 'default', className = '' }: BadgePr
   const baseClasses = 'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium'
 
   const variantClasses = {
-    default: 'bg-primary text-primary-foreground',
+    default: 'bg-[#3182CE] text-white border-none py-[8px] px-[1rem]',
     secondary: 'bg-secondary text-secondary-foreground',
     destructive: 'bg-destructive text-destructive-foreground',
-    outline: 'border border-input bg-background text-foreground',
+    outline: 'border border-[#4A5568] py-[8px] px-[1rem]',
   }
 
   return (

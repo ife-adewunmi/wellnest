@@ -1,6 +1,8 @@
 import { config } from 'dotenv'
+import { config } from 'dotenv'
 import type { Config } from 'drizzle-kit'
 
+// Load environment variables from .env.local
 config({ path: '.env.local' })
 
 export default {
@@ -9,12 +11,5 @@ export default {
   dialect: 'postgresql',
   dbCredentials: {
     url: process.env.DATABASE_URL!,
-  },
-  verbose: true,
-  strict: true,
-  migrations: {
-    prefix: 'timestamp',
-    table: '__drizzle_migrations__',
-    schema: 'public',
   },
 } satisfies Config

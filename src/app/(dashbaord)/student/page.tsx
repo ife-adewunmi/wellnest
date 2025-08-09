@@ -1,7 +1,7 @@
-import { getSession } from '@/features/auth/lib/auth'
+import { getSession } from '@/user/auth/lib/auth.server'
 import { redirect } from 'next/navigation'
 import { StudentDashboard } from '@/features/students/components/student-dashboard'
-import { UserRole } from '@/features/auth/enums'
+import { UserRole } from '@/user/auth/enums'
 
 export default async function StudentPage() {
   const session = await getSession()

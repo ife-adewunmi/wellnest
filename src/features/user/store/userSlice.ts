@@ -1,15 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { User } from '../auth/types'
 
-interface User {
-  id: string
-  first_name: string
-  last_name: string
-  email: string
-  password: string
-}
-
-interface UserStore {
+export interface UserStore {
   user: User | null
   isLoggedIn: boolean
   setUser: (user: User) => void
@@ -30,5 +23,3 @@ export const useUserStore = create<UserStore>()(
     },
   ),
 )
-
-export const IsLoggedIn = (state: UserStore) => state.isLoggedIn
