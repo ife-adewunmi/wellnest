@@ -6,7 +6,6 @@ export interface MoodCheckIn {
   mood: MoodType
   reasons: string[]
   description?: string
-  socialMediaImpact?: boolean
   riskScore?: number
   riskLevel?: 'LOW' | 'MEDIUM' | 'HIGH'
   mlAnalysis?: {

@@ -60,8 +60,8 @@ export class StudentService {
       const result = await db
         .insert(users)
         .values({
-          firstName: first_name,
-          lastName: last_name,
+          first_name,
+          last_name,
           email,
           password: hashedPassword,
         })
@@ -71,11 +71,11 @@ export class StudentService {
 
       const mappedStudent: Student = {
         id: studentWithoutPassword.id.toString(),
-        first_name: studentWithoutPassword.firstName,
-        last_name: studentWithoutPassword.lastName,
+        first_name: studentWithoutPassword.first_name,
+        last_name: studentWithoutPassword.last_name,
         email: studentWithoutPassword.email,
-        created_at: studentWithoutPassword.createdAt || new Date(),
-        updated_at: studentWithoutPassword.updatedAt || new Date(),
+        created_at: studentWithoutPassword.created_at,
+        updated_at: studentWithoutPassword.updated_at,
       }
 
       return {
@@ -97,11 +97,11 @@ export class StudentService {
       const allStudents = await db
         .select({
           id: users.id,
-          first_name: users.firstName,
-          last_name: users.lastName,
+          first_name: users.first_name,
+          last_name: users.last_name,
           email: users.email,
-          created_at: users.createdAt,
-          updated_at: users.updatedAt,
+          created_at: users.created_at,
+          updated_at: users.updated_at,
         })
         .from(users)
 
@@ -110,8 +110,8 @@ export class StudentService {
         first_name: student.first_name,
         last_name: student.last_name,
         email: student.email,
-        created_at: student.created_at || new Date(),
-        updated_at: student.updated_at || new Date(),
+        created_at: student.created_at,
+        updated_at: student.updated_at,
       }))
 
       return {

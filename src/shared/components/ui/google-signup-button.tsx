@@ -2,7 +2,7 @@ import { Button } from './custom-button'
 
 export default function GoogleSignupButton() {
   return (
-    <Button variant="outline" className="flex items-center gap-[1rem] w-full justify-center flex">
+    <Button variant="outline" className="flex items-center gap-[1rem]">
       <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
         <path
           fill="#4285F4"

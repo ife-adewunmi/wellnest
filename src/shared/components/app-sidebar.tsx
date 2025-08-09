@@ -16,9 +16,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { User } from '@/user/auth/types'
-import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { User } from '@/features/auth/types'
 
 interface AppSidebarProps {
   user: User
@@ -85,15 +84,7 @@ const studentNavItems = [
 
 export function AppSidebar({ user }: AppSidebarProps) {
   const pathname = usePathname()
-  const router = useRouter()
   const navItems = user.role === 'COUNSELOR' ? counselorNavItems : studentNavItems
-
-  // Prefetch the intervention page for faster navigation
-  useEffect(() => {
-    if (user.role === 'COUNSELOR' && router.prefetch) {
-      router.prefetch('/intervention')
-    }
-  }, [router, user.role])
 
   return (
     <Sidebar>

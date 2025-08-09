@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { MoodCheckInForm } from '@/features/mood/components/mood-check-in-form'
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
 import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
 import { RecentMessages } from '@/features/messaging/components/recent-messages'
-import type { User } from '@/user/auth/types'
+import type { User } from '@/features/auth/types'
 import {
   fetchMoodCheckIns,
   fetchUpcomingSessions,
@@ -16,9 +16,6 @@ import {
   fetchStudentStats,
 } from '@/shared/service/api'
 import { MoodCheckIn } from '@/shared/types/mood'
-import { toast } from 'react-toastify'
-import { StudentProfile } from './student-profile'
-import Sidebar from './sidebar'
 // import ScreenTimeMonitor from "@/features/screen-time/lib/screen-time-monitor"
 // import { useToast } from "@/shared/hooks/use-toast"
 
@@ -68,20 +65,9 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
           fetchStudentStats(user.id),
         ])
         setMoodCheckIns(checkIns.data ?? [])
-        setUpcomingSessions((sessions.data as any[]) || [])
-        setScreenTimeStats((screenTime.data as any) || {
-          dailyAverage: 0,
-          weeklyTotal: 0,
-          todayTotal: 0,
-          threshold: 120
-        })
-        setStudentStats((stats.data as any) || {
-          weeklyCheckIns: 0,
-          totalCheckIns: 0,
-          averageMood: 'Neutral',
-          moodEmoji: '😐',
-          nextSession: null
-        })
+        setUpcomingSessions(sessions.data)
+        setScreenTimeStats(screenTime.data)
+        setStudentStats(stats.data)
       } catch (error) {
         console.error('Error loading dashboard data:', error)
       } finally {
@@ -92,16 +78,10 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
   }, [user.id])
 
   return (
-    <div className="flex">
-           <Sidebar />
-      <section >
-
-
-
-
+    <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white w-full max-w-[541px]">
-        <h1 className="mb-2 text-2xl font-bold">Good Afternoon, {user.firstName} {user.lastName}!</h1>
+      <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white">
+        <h1 className="mb-2 text-2xl font-bold">Good Afternoon, {user.name}!</h1>
         <p className="text-blue-100">
           Welcome back to your portal account! You can start by using the menu dashboard to navigate
           the portal
@@ -128,20 +108,10 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
             </div>
             <Dialog open={showMoodForm} onOpenChange={setShowMoodForm}>
               <DialogTrigger asChild>
-                <Button className="w-full cursor-pointer">Record Mood</Button>
+                <Button className="w-full">Record Mood</Button>
               </DialogTrigger>
-              <DialogContent className="w-full max-w-[761px] flex justify-center py-[48px]">
-                <DialogTitle className="sr-only">Mood Check-in Form</DialogTitle>
-<MoodCheckInForm userName={`${user.firstName} ${user.lastName}`} onSuccess={async () => {
-  setShowMoodForm(false);
-  try {
-    const checkIns = await fetchMoodCheckIns(user.id);
-    setMoodCheckIns(checkIns.data ?? []);
-    toast.success('Mood check-in saved! Your mood has been recorded and your dashboard updated.');
-  } catch (e) {
-    toast.error('Error updating mood history. Your mood was saved, but could not update the history. Please refresh.');
-  }
-}} />
+              <DialogContent className="max-w-4xl">
+                <MoodCheckInForm userName={user.name} onSuccess={() => setShowMoodForm(false)} />
               </DialogContent>
             </Dialog>
           </CardContent>
@@ -229,7 +199,6 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
           <RecentMessages userId={user.id} />
         </div>
       </div>
-      </section>
     </div>
   )
 }

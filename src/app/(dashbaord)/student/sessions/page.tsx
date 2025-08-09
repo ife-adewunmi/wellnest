@@ -19,23 +19,18 @@ interface Session {
 
 export default function StudentSessionsPage() {
   const [sessions, setSessions] = useState<Session[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function loadSessions() {
-      //  setLoading(true)
-      const timeout = setTimeout(() => {}, 100)
+      setLoading(true)
       try {
         const result = await fetchUpcomingSessions('student')
-        console.log('Fetched sessions:', result.data)
         setSessions(result.data as Session[])
       } catch (error) {
         console.error('Error loading sessions:', error)
       } finally {
-        clearTimeout(timeout)
-        setTimeout(() => {
-          setLoading(false)
-        }, 100)
+        setLoading(false)
       }
     }
 

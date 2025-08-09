@@ -15,8 +15,6 @@ const buttonVariants = cva('', {
       ghost: `cursor-pointer items-center bg-[#3182CE] text-xs sm:text-sm lg:text-lg text-white ${interSemiBold.className} px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-[10px] rounded-full gap-2 flex`,
       link: `bg-[#CBD5E0] cursor-pointer rounded-full py-2 px-3 sm:py-[8px] sm:px-[12px] text-[#1A202C] text-xs sm:text-sm ${interSemiBold.className}`,
       dropdown: `bg-[#EDF2F7] cursor-pointer rounded-full py-2 px-3 sm:py-[8px] sm:px-[12px] text-[#1A202C] text-xs sm:text-sm ${interSemiBold.className}`,
-      moodDefault: 'w-full bg-transparent, rounded-[72px] border border-[#4A5568] lg:py-[24px] lg:px-[48px] cursor-pointer py-2 px-3 sm:py-[8px] sm:px-[12px] text-[#1A202C] text-xs sm:text-sm',
-      moodSelected: 'w-full bg-[#4299E1] rounded-[72px] border border-[#4299E1] lg:py-[24px] lg:px-[48px] cursor-pointer py-2 px-3 sm:py-[8px] sm:px-[12px] text-[#FFFFFF] text-xs sm:text-sm',
     },
     size: {},
   },
