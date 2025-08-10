@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
 import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
 import { RecentMessages } from '@/features/messaging/components/recent-messages'
-import type { User } from '@/features/auth/types'
+import type { User } from '@/features/users/auth/types'
 import {
   fetchMoodCheckIns,
   fetchUpcomingSessions,
@@ -25,8 +25,8 @@ interface StudentDashboardProps {
 
 export function StudentDashboard({ user }: StudentDashboardProps) {
   const [showMoodForm, setShowMoodForm] = useState(false)
-  const [moodCheckIns, setMoodCheckIns] = useState<MoodCheckIn[]>([])
-  const [upcomingSessions, setUpcomingSessions] = useState<any[]>([])
+  // const [moodCheckIns, setMoodCheckIns] = useState<MoodCheckIn[]>([])
+  // const [upcomingSessions, setUpcomingSessions] = useState<any[]>([])
   const [screenTimeStats, setScreenTimeStats] = useState({
     dailyAverage: 0,
     weeklyTotal: 0,
@@ -64,10 +64,10 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
           fetchScreenTimeStats(user.id),
           fetchStudentStats(user.id),
         ])
-        setMoodCheckIns(checkIns.data ?? [])
-        setUpcomingSessions(sessions.data)
-        setScreenTimeStats(screenTime.data)
-        setStudentStats(stats.data)
+        // setMoodCheckIns(checkIns.data ?? [])
+        // setUpcomingSessions(sessions.data)
+        // setScreenTimeStats(screenTime.data)
+        // setStudentStats(stats.data)
       } catch (error) {
         console.error('Error loading dashboard data:', error)
       } finally {
@@ -81,7 +81,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
     <div className="space-y-6">
       {/* Welcome Section */}
       <div className="from-primary rounded-lg bg-gradient-to-r to-blue-600 p-6 text-white">
-        <h1 className="mb-2 text-2xl font-bold">Good Afternoon, {user.name}!</h1>
+        <h1 className="mb-2 text-2xl font-bold">Good Afternoon!</h1>
         <p className="text-blue-100">
           Welcome back to your portal account! You can start by using the menu dashboard to navigate
           the portal
@@ -111,7 +111,7 @@ export function StudentDashboard({ user }: StudentDashboardProps) {
                 <Button className="w-full">Record Mood</Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl">
-                <MoodCheckInForm userName={user.name} onSuccess={() => setShowMoodForm(false)} />
+                <MoodCheckInForm userName={'user.name'} onSuccess={() => setShowMoodForm(false)} />
               </DialogContent>
             </Dialog>
           </CardContent>

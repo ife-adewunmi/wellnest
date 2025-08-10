@@ -16,7 +16,7 @@ import {
 import { SidebarTrigger } from '@/shared/components/ui/sidebar'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
 import { useRouter } from 'next/navigation'
-import { User } from '@/features/auth/types'
+import { User } from '@/features/users/auth/types'
 
 interface HeaderProps {
   user: User
@@ -27,7 +27,7 @@ export function Header({ user }: HeaderProps) {
 
   const handleSignOut = async () => {
     await fetch('/api/auth/signout', { method: 'POST' })
-    router.push('/auth/login')
+    router.push('/signin')
     router.refresh()
   }
 

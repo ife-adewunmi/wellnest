@@ -17,7 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { User } from '@/features/auth/types'
+import { User } from '@/features/users/auth/types'
 
 interface AppSidebarProps {
   user: User

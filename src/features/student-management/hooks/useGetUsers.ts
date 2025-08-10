@@ -1,15 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { db } from '@/shared/db'
-import { users } from '@/shared/db/schema'
+import {
+  studentApi,
+  type StudentListItem,
+} from '@/features/student-management/services/student-api'
 
 export async function fetchUsers() {
-  const allUsers = await db.select().from(users)
-  return allUsers
+  // Use API route via request client to avoid server-only imports
+  const data = await studentApi.list({ limit: 50 })
+  return data
 }
 
 export function useGetUsers() {
-  return useQuery({
-    queryKey: ['users'],
+  return useQuery<StudentListItem[]>({
+    queryKey: ['users', { limit: 50 }],
     queryFn: fetchUsers,
   })
 }

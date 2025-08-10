@@ -6,6 +6,7 @@ export {
   counselorsTable as counselors,
   studentsTable as students,
 } from './users'
+export { authSessionsTable as authSessions } from './auth'
 export { counselorStudentTable as counselorStudent } from './counselor-student'
 export {
   moodCheckInsTable as moodCheckIns,

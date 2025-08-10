@@ -1,28 +1,44 @@
+'use client'
+
 import type React from 'react'
-import { getSession } from '@/features/auth/lib/auth'
-import { redirect } from 'next/navigation'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SidebarProvider } from '@/components/ui/sidebar-context'
-import { SidebarInset } from '@/components/ui/sidebar'
-import { OfflineIndicator } from '@/components/offline-indicator'
-import { cookies } from 'next/headers'
-import { Header } from '@/components/header'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { AppSidebar } from '@/shared/components/app-sidebar'
+import { SidebarProvider } from '@/shared/components/ui/sidebar-context'
+import { SidebarInset } from '@/shared/components/ui/sidebar'
+import { OfflineIndicator } from '@/shared/components/offline-indicator'
+import { Header } from '@/shared/components/header'
+import { useUserStore } from '@/features/users/state'
+import { navigateToAuth } from '@/shared/state/navigation'
+import { useSessionStore } from '@/features/users/auth/state/sessionStore'
 
-export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const session = await getSession()
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const { user, isLoggedIn, isInitialized } = useUserStore()
 
-  if (!session) {
-    redirect('/signin')
+  useEffect(() => {
+    if (isInitialized && !isLoggedIn) {
+      navigateToAuth(router, '/signin')
+    }
+  }, [isInitialized, isLoggedIn, router])
+
+  // Also check session validity
+  useEffect(() => {
+    const sessionStore = useSessionStore.getState()
+    if (sessionStore.shouldRedirectToAuth()) {
+      navigateToAuth(router, '/signin')
+    }
+  }, [])
+
+  if (!user) {
+    return null
   }
 
-  const cookieStore = cookies()
-  const defaultOpen = (await cookieStore).get('sidebar:state')?.value === 'true'
-
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar user={session.user} />
+    <SidebarProvider defaultOpen={false}>
+      <AppSidebar user={user} />
       <SidebarInset>
-        <Header user={session.user} />
+        <Header user={user} />
         <main className="flex-1 p-6">{children}</main>
         <OfflineIndicator />
       </SidebarInset>

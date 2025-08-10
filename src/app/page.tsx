@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useUserStore, IsLoggedIn } from '@/shared/store/useUserStore'
+import { useUserStore, IsLoggedIn } from '@/features/users/state'
 import Loading from '@/shared/components/ui/loading'
+import { Endpoints } from '@/shared/enums/endpoints'
+import { navigateTo } from '@/shared/state/navigation'
 
 export default function RootPage() {
   const isLoggedIn = useUserStore(IsLoggedIn)
@@ -13,11 +15,9 @@ export default function RootPage() {
   useEffect(() => {
     // Give zustand persist time to rehydrate
     const checkTimer = setTimeout(() => {
-      if (isLoggedIn) {
-        router.replace('/dashboard')
-      } else {
-        router.replace('/signin')
-      }
+      const path = isLoggedIn ? Endpoints.COUNSELORS.DASHBOARD : Endpoints.AUTH_PAGE.SIGNIN
+      navigateTo(router, path)
+
       setIsChecking(false)
     }, 100)
 

@@ -11,18 +11,18 @@ import { Button } from '@/shared/components/ui/custom-button'
 import { ArrowRight } from 'lucide-react'
 import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
-
-import { loginSchema, LoginFormData } from '@/shared/lib/validations'
-import useLoginUser from '../hooks/useLoginUser'
+import { loginSchema, LoginFormData } from '@/features/users/auth/lib/validations'
 import { toast } from 'react-toastify'
-import { useUserStore } from '@/shared/store/useUserStore'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
-import { UserRole } from '../enums'
+import { UserRole } from '@/features/users/auth/enums'
+import { useUserStore } from '@/features/users/state'
+import { navigateTo } from '@/shared/state/navigation'
+import { Endpoints } from '@/shared/enums/endpoints'
+import { rememberUser } from '../lib/remember-user'
 
 export default function LoginForm() {
   const router = useRouter()
-  const { mutate: loginUser, isPending } = useLoginUser()
-  const { setUser } = useUserStore()
+  const { login, isLoading } = useUserStore()
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
@@ -50,6 +50,7 @@ export default function LoginForm() {
       setRemember(true)
     }
   }, [])
+
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -67,39 +68,33 @@ export default function LoginForm() {
 
     setValidationErrors({})
 
-    loginUser(validationResult.data, {
-      onSuccess: (data) => {
-        if (data.user) {
-          setUser({
-            id: data.user.id.toString(),
-            first_name: data.user.firstName,
-            last_name: data.user.lastName,
-            email: data.user.email,
-            password: '',
-          })
-        }
-
-        if (remember) {
-          localStorage.setItem('rememberEmail', formData.email)
-          localStorage.setItem('rememberPassword', formData.password)
-        } else {
-          localStorage.removeItem('rememberEmail')
-          localStorage.removeItem('rememberPassword')
-        }
+    // Use the store's login method
+    login(validationResult.data)
+      .then(() => {
+        // Handle remember functionality
+        rememberUser(validationResult.data)
 
         toast.success('Login successful!')
-        if (data.user?.role === UserRole.COUNSELOR) {
-          router.push('/dashboard')
-        } else {
-          router.push('/student')
-        }
-        router.refresh()
-      },
-      onError: (error) => {
+
+        // Small delay to ensure user state is fully updated
+        setTimeout(() => {
+          // Get updated user from store after successful login
+          const currentUser = useUserStore.getState().user
+
+          // Navigate based on role - replace history to prevent back button issues
+          const path =
+            currentUser?.role === UserRole.COUNSELOR
+              ? Endpoints.COUNSELORS.DASHBOARD
+              : Endpoints.STUDENTS.DASHBOARD
+
+          // Use replace to prevent users from going back to signin page
+          navigateTo(router, path, { replace: true })
+        }, 100)
+      })
+      .catch((error) => {
         console.error('Failed to login:', error)
-        toast.error('Invalid email or password!')
-      },
-    })
+        toast.error(error.message || 'Invalid email or password!')
+      })
   }
 
   return (
@@ -191,10 +186,10 @@ export default function LoginForm() {
                     type="submit"
                     variant={'default'}
                     className="flex items-center"
-                    disabled={isPending}
+                    disabled={isLoading}
                   >
-                    {isPending ? 'Signing in...' : 'Sign in'}
-                    {!isPending && <ArrowRight className="ml-2 h-4 w-4" />}
+                    {isLoading ? 'Signing in...' : 'Sign in'}
+                    {!isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
                   </Button>
                 </div>
                 <div className="mt-[2.5rem] flex items-center justify-center">
