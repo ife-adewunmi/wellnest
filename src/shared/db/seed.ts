@@ -69,7 +69,7 @@ async function main() {
     {
       firstName: 'Ife',
       lastName: 'Adewunmi',
-      email: 'ife.adewunmi@student.test',
+      email: 'student@wellnest.test',
       role: 'STUDENT',
       password: await hashPassword('Password123!'),
     },

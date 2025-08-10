@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { CreateUserData } from '@/shared/lib/validations'
+import { CreateUserData } from '@/features/users/auth/lib/validations'
 
 interface ApiResponse {
   success: boolean

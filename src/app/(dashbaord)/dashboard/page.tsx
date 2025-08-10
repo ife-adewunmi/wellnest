@@ -1,14 +1,22 @@
-import { getSession } from '@/features/auth/lib/auth'
-import { redirect } from 'next/navigation'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import Dashboard from '@/features/dashboard/components/dashboard'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { UserRole } from '@/features/users/auth/enums'
+import { navigateTo } from '@/shared/store/navigation'
+import { useUserStore } from '@/features/users/state'
 
-const page = async () => {
-  const session = await getSession()
+export default function Page() {
+  const router = useRouter()
+  const { user } = useUserStore()
 
-  if (!session || session.user.role !== 'COUNSELOR') {
-    redirect('/student')
-  }
+  useEffect(() => {
+    if (!user) return
+    if (user.role !== UserRole.COUNSELOR) {
+      navigateTo(router, '/student')
+    }
+  }, [user, router])
 
   return (
     <div>
@@ -16,5 +24,3 @@ const page = async () => {
     </div>
   )
 }
-
-export default page

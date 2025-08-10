@@ -82,6 +82,7 @@
     "drizzle-kit": "^0.31.4",
     "sharp": "^0.33.5",
     "tailwindcss": "^4",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

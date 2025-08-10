@@ -1,7 +1,7 @@
 import { db } from '@/shared/db'
 import { users } from '@/shared/db/schema'
 import { eq } from 'drizzle-orm'
-import { createUserSchema } from '@/shared/lib/validations'
+import { createUserSchema } from '@/features/users/auth/lib/validations'
 import bcrypt from 'bcryptjs'
 
 export interface CreateStudentData {

@@ -151,7 +151,7 @@ export default function Dashboard() {
         )}
 
         {/* Student Table */}
-        {isWidgetEnabled('student-table') && <StudentTable />}
+        {/* {isWidgetEnabled('student-table') && <StudentTable />} */}
       </main>
     </div>
   )

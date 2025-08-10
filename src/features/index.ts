@@ -1,4 +1,4 @@
-export * from './auth'
+export * from './users'
 export * from './dashboard'
 export * from './student-management'
 export * from './social-media'

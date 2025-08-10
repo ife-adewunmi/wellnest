@@ -1,14 +1,25 @@
-import { getSession } from '@/features/auth/lib/auth'
-import { redirect } from 'next/navigation'
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { StudentDashboard } from '@/features/students/components/student-dashboard'
-import { UserRole } from '@/features/auth/enums'
+import { UserRole } from '@/features/users/auth/enums'
+import { useUserStore } from '@/features/users/state'
+import { navigateTo } from '@/shared/store/navigation'
 
-export default async function StudentPage() {
-  const session = await getSession()
+export default function StudentPage() {
+  const router = useRouter()
+  const { user } = useUserStore()
 
-  if (!session || session.user.role !== UserRole.STUDENT) {
-    redirect('/dashboard')
-  }
+  useEffect(() => {
+    if (!user) return
+    if (user.role !== UserRole.STUDENT) {
+      navigateTo(router, '/dashboard')
+    }
+  }, [user, router])
 
-  return <StudentDashboard user={session.user} />
+  if (!user) return null
+  if (user.role !== UserRole.STUDENT) return null
+
+  return <StudentDashboard user={user} />
 }
