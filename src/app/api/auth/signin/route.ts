@@ -11,15 +11,15 @@ const getDeviceInfo = (request: NextRequest): string => {
 const getClientIp = (request: NextRequest): string => {
   const forwarded = request.headers.get('x-forwarded-for')
   const realIp = request.headers.get('x-real-ip')
-  
+
   if (forwarded) {
     return forwarded.split(',')[0].trim()
   }
-  
+
   if (realIp) {
     return realIp
   }
-  
+
   return 'unknown'
 }
 
@@ -48,12 +48,8 @@ export async function POST(request: NextRequest) {
     // Create a new session
     const deviceInfo = getDeviceInfo(request)
     const ipAddress = getClientIp(request)
-    
-    const session = await SessionService.createSession(
-      result.user.id,
-      deviceInfo,
-      ipAddress
-    )
+
+    const session = await SessionService.createSession(result.user.id, deviceInfo, ipAddress)
 
     // Set secure session cookie
     const cookieStore = await cookies()

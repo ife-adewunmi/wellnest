@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import { StudentDashboard } from '@/features/students/components/student-dashboard'
 import { UserRole } from '@/features/users/auth/enums'
 import { useUserStore } from '@/features/users/state'
-import { navigateTo } from '@/shared/store/navigation'
+import { navigateTo } from '@/shared/state/navigation'
+import { Endpoints } from '@/shared/enums/endpoints'
 
 export default function StudentPage() {
   const router = useRouter()
@@ -14,7 +15,7 @@ export default function StudentPage() {
   useEffect(() => {
     if (!user) return
     if (user.role !== UserRole.STUDENT) {
-      navigateTo(router, '/dashboard')
+      navigateTo(router, Endpoints.COUNSELORS.DASHBOARD, { replace: true })
     }
   }, [user, router])
 

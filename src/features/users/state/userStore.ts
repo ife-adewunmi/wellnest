@@ -166,7 +166,7 @@ export const useUserStore = create<UserStore>()(
 
         try {
           let sessionResponse = null
-          
+
           if (!isServer) {
             const sessionStore = useSessionStore.getState()
             sessionResponse = await sessionStore.validateSession()

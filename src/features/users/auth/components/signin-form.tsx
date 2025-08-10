@@ -16,13 +16,13 @@ import { toast } from 'react-toastify'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { UserRole } from '@/features/users/auth/enums'
 import { useUserStore } from '@/features/users/state'
-import { navigateTo } from '@/shared/store/navigation'
+import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { rememberUser } from '../lib/remember-user'
 
 export default function LoginForm() {
   const router = useRouter()
-  const { login, isLoading, user } = useUserStore()
+  const { login, isLoading } = useUserStore()
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
@@ -80,15 +80,13 @@ export default function LoginForm() {
         setTimeout(() => {
           // Get updated user from store after successful login
           const currentUser = useUserStore.getState().user
-          
+
           // Navigate based on role - replace history to prevent back button issues
           const path =
             currentUser?.role === UserRole.COUNSELOR
               ? Endpoints.COUNSELORS.DASHBOARD
               : Endpoints.STUDENTS.DASHBOARD
-          
-          console.log('User role:', currentUser?.role, 'Navigating to:', path)
-          
+
           // Use replace to prevent users from going back to signin page
           navigateTo(router, path, { replace: true })
         }, 100)

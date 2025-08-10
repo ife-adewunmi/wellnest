@@ -3,16 +3,27 @@ export const Endpoints = {
   API: '/api',
 
   // Auth Endpoints
-  AUTH: {
+  AUTH_ROUTES: {
     SIGNIN: '/auth/signin',
     SIGNUP: '/auth/signup',
     SIGNOUT: '/auth/signout',
-    AUTH_SESSION: '/auth/session',
+  },
+
+  AUTH_SESSION: {
+    VALIDATE: '/auth/session',
+    EXTEND: '/auth/session/extend',
+    INVALIDATE: '/auth/session/invalidate',
+    INVALIDATE_ALL: '/auth/session/invalidate-all',
+    ACTIVE: '/auth/session/active',
+    REFRESH: '/auth/session/refresh',
+    INVALIDATE_BY_ID: (sessionId: string) => `/auth/session/${sessionId}/invalidate`,
   },
 
   AUTH_PAGE: {
     SIGNIN: '/signin',
     SIGNUP: '/signup',
+    FORGOT_PASSWORD: '/forgot-password',
+    RESET_PASSWORD: '/reset-password',
   },
 
   // Students

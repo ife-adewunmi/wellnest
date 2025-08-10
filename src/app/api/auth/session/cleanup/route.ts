@@ -5,19 +5,19 @@ export async function POST() {
   try {
     // This endpoint can be called by cron jobs or scheduled tasks
     await SessionService.cleanupExpiredSessions()
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       success: true,
-      message: 'Session cleanup completed'
+      message: 'Session cleanup completed',
     })
   } catch (error) {
     console.error('Session cleanup error:', error)
     return NextResponse.json(
-      { 
+      {
         success: false,
-        error: 'Session cleanup failed' 
+        error: 'Session cleanup failed',
       },
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

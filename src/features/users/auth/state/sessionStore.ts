@@ -20,7 +20,7 @@ interface SessionStore {
   invalidateSession: (sessionId?: string) => Promise<boolean>
   invalidateAllSessions: () => Promise<boolean>
   refreshActivity: () => Promise<boolean>
-  
+
   // Navigation helpers
   shouldRedirectToAuth: () => boolean
   shouldRedirectFromAuth: () => boolean
@@ -36,16 +36,16 @@ export const useSessionStore = create<SessionStore>()(
       isValidating: false,
 
       setSession: (session) => {
-        set({ 
-          session, 
+        set({
+          session,
           isSessionValid: !!session && new Date(session.expiresAt) > new Date(),
-          lastChecked: Date.now()
+          lastChecked: Date.now(),
         })
       },
 
       validateSession: async () => {
         const { isValidating } = get()
-        
+
         // Prevent multiple simultaneous validation requests
         if (isValidating) {
           return null
@@ -55,37 +55,37 @@ export const useSessionStore = create<SessionStore>()(
 
         try {
           const response = await sessionApi.validateSession()
-          
+
           if (response.isAuthenticated && response.user && response.session) {
             const session: AuthSession = {
               ...response.session,
               expiresAt: new Date(response.session.expiresAt),
               lastActiveAt: new Date(response.session.lastActiveAt),
             }
-            
-            set({ 
+
+            set({
               session,
               isSessionValid: true,
               lastChecked: Date.now(),
-              isValidating: false
+              isValidating: false,
             })
           } else {
-            set({ 
+            set({
               session: null,
               isSessionValid: false,
               lastChecked: Date.now(),
-              isValidating: false
+              isValidating: false,
             })
           }
 
           return response
         } catch (error) {
           console.error('Session validation error:', error)
-          set({ 
+          set({
             session: null,
             isSessionValid: false,
             lastChecked: Date.now(),
-            isValidating: false
+            isValidating: false,
           })
           return null
         }
@@ -96,31 +96,34 @@ export const useSessionStore = create<SessionStore>()(
         if (checkInterval) {
           clearInterval(checkInterval)
         }
-        
-        set({ 
+
+        set({
           session: null,
           isSessionValid: false,
           lastChecked: null,
           checkInterval: null,
-          isValidating: false
+          isValidating: false,
         })
       },
 
       startPeriodicCheck: () => {
         const { checkInterval } = get()
-        
+
         // Clear existing interval if any
         if (checkInterval) {
           clearInterval(checkInterval)
         }
 
         // Start new interval - check every 5 minutes
-        const newInterval = setInterval(async () => {
-          const { validateSession, isSessionValid } = get()
-          if (isSessionValid) {
-            await validateSession()
-          }
-        }, 5 * 60 * 1000)
+        const newInterval = setInterval(
+          async () => {
+            const { validateSession, isSessionValid } = get()
+            if (isSessionValid) {
+              await validateSession()
+            }
+          },
+          5 * 60 * 1000,
+        )
 
         set({ checkInterval: newInterval })
       },
@@ -146,10 +149,10 @@ export const useSessionStore = create<SessionStore>()(
               expiresAt: new Date(response.session.expiresAt),
               lastActiveAt: new Date(response.session.lastActiveAt),
             }
-            
-            set({ 
+
+            set({
               session: extendedSession,
-              lastChecked: Date.now()
+              lastChecked: Date.now(),
             })
             return true
           }
@@ -163,7 +166,7 @@ export const useSessionStore = create<SessionStore>()(
       invalidateSession: async (sessionId?: string) => {
         try {
           const response = await sessionApi.invalidateSession(sessionId)
-          
+
           if (response.success) {
             // If invalidating current session, clear local state
             if (!sessionId) {
@@ -174,14 +177,14 @@ export const useSessionStore = create<SessionStore>()(
         } catch (error) {
           console.error('Session invalidation error:', error)
         }
-        
+
         return false
       },
 
       invalidateAllSessions: async () => {
         try {
           const response = await sessionApi.invalidateAllSessions()
-          
+
           if (response.success) {
             get().clearSession()
             return true
@@ -189,7 +192,7 @@ export const useSessionStore = create<SessionStore>()(
         } catch (error) {
           console.error('All sessions invalidation error:', error)
         }
-        
+
         return false
       },
 
@@ -205,7 +208,7 @@ export const useSessionStore = create<SessionStore>()(
 
       shouldRedirectToAuth: () => {
         const { isSessionValid, session } = get()
-        
+
         if (!isSessionValid || !session) {
           return true
         }
@@ -213,13 +216,13 @@ export const useSessionStore = create<SessionStore>()(
         // Check if session is expired
         const now = new Date()
         const expiresAt = new Date(session.expiresAt)
-        
+
         return now >= expiresAt
       },
 
       shouldRedirectFromAuth: () => {
         const { isSessionValid, session } = get()
-        
+
         if (!isSessionValid || !session) {
           return false
         }
@@ -227,7 +230,7 @@ export const useSessionStore = create<SessionStore>()(
         // Check if session is still valid
         const now = new Date()
         const expiresAt = new Date(session.expiresAt)
-        
+
         return now < expiresAt
       },
     }),
@@ -243,12 +246,12 @@ export const useSessionStore = create<SessionStore>()(
         if (state?.session) {
           const now = new Date()
           const expiresAt = new Date(state.session.expiresAt)
-          
+
           if (now >= expiresAt) {
             state.clearSession()
           }
         }
       },
-    }
-  )
+    },
+  ),
 )

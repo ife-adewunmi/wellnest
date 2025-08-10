@@ -1,10 +1,5 @@
 import { request } from '@/shared/service/request'
-import {
-  AuthResponse,
-  LoginCredentials,
-  SignupCredentials,
-  User,
-} from '@/features/users/auth/types'
+import { AuthResponse, LoginCredentials, SignupCredentials } from '@/features/users/auth/types'
 import { Endpoints } from '@/shared/enums/endpoints'
 
 interface AuthApiRequests {
@@ -15,15 +10,15 @@ interface AuthApiRequests {
 
 export class AuthApi implements AuthApiRequests {
   public async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    return await request.post(Endpoints.API.concat(Endpoints.AUTH.SIGNIN), credentials)
+    return await request.post(Endpoints.API.concat(Endpoints.AUTH_ROUTES.SIGNIN), credentials)
   }
 
   public async signup(credentials: SignupCredentials): Promise<AuthResponse> {
-    return await request.post(Endpoints.API.concat(Endpoints.AUTH.SIGNUP), credentials)
+    return await request.post(Endpoints.API.concat(Endpoints.AUTH_ROUTES.SIGNUP), credentials)
   }
 
   public async logout(): Promise<void> {
-    return await request.post(Endpoints.API.concat(Endpoints.AUTH.SIGNOUT))
+    return await request.post(Endpoints.API.concat(Endpoints.AUTH_ROUTES.SIGNOUT))
   }
 }
 

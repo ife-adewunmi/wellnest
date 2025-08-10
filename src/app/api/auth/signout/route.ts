@@ -15,7 +15,7 @@ export async function POST() {
     // Clear the session cookie
     const response = NextResponse.json({ success: true })
     response.cookies.delete('session-token')
-    
+
     return response
   } catch (error) {
     console.error('Sign out error:', error)

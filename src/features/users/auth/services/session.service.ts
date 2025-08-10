@@ -3,7 +3,6 @@ import { eq, and, gt, lt } from 'drizzle-orm'
 import { usersTable } from '@/shared/db/schema/users'
 import { authSessionsTable } from '@/shared/db/schema/auth'
 import { User } from '../types'
-// Using Web Crypto API instead of Node.js crypto for Edge compatibility
 import { generateToken } from '../lib/get-token'
 
 export interface SessionData {
@@ -46,7 +45,7 @@ export class SessionService {
   static async createSession(
     userId: string,
     deviceInfo?: string,
-    ipAddress?: string
+    ipAddress?: string,
   ): Promise<SessionData> {
     const sessionToken = await this.generateSessionToken()
     const expiresAt = new Date(Date.now() + this.SESSION_DURATION)
@@ -93,8 +92,8 @@ export class SessionService {
           and(
             eq(authSessionsTable.sessionToken, sessionToken),
             eq(authSessionsTable.isActive, true),
-            gt(authSessionsTable.expiresAt, new Date())
-          )
+            gt(authSessionsTable.expiresAt, new Date()),
+          ),
         )
         .limit(1)
 
@@ -183,12 +182,12 @@ export class SessionService {
           and(
             eq(authSessionsTable.userId, userId),
             eq(authSessionsTable.isActive, true),
-            gt(authSessionsTable.expiresAt, new Date())
-          )
+            gt(authSessionsTable.expiresAt, new Date()),
+          ),
         )
         .orderBy(authSessionsTable.lastActiveAt)
 
-      return sessions.map(session => ({
+      return sessions.map((session) => ({
         id: session.id,
         userId: session.userId,
         sessionToken: session.sessionToken,
@@ -212,15 +211,13 @@ export class SessionService {
     try {
       // Delete expired sessions that are older than cleanup interval
       const cleanupThreshold = new Date(Date.now() - this.CLEANUP_INTERVAL)
-      await db
-        .delete(authSessionsTable)
-        .where(
-          and(
-            eq(authSessionsTable.isActive, false),
-            // Delete expired sessions older than cleanup interval (expiresAt < cleanupThreshold)
-            lt(authSessionsTable.expiresAt, cleanupThreshold)
-          )
-        )
+      await db.delete(authSessionsTable).where(
+        and(
+          eq(authSessionsTable.isActive, false),
+          // Delete expired sessions older than cleanup interval (expiresAt < cleanupThreshold)
+          lt(authSessionsTable.expiresAt, cleanupThreshold),
+        ),
+      )
 
       // Mark expired but still active sessions as inactive
       const now = new Date()
@@ -234,8 +231,8 @@ export class SessionService {
           and(
             eq(authSessionsTable.isActive, true),
             // Sessions that have expired (expiresAt < now)
-            lt(authSessionsTable.expiresAt, now)
-          )
+            lt(authSessionsTable.expiresAt, now),
+          ),
         )
     } catch (error) {
       console.error('Session cleanup error:', error)
@@ -248,7 +245,7 @@ export class SessionService {
   static async extendSession(sessionToken: string): Promise<boolean> {
     try {
       const newExpiresAt = new Date(Date.now() + this.SESSION_DURATION)
-      
+
       const result = await db
         .update(authSessionsTable)
         .set({
@@ -259,8 +256,8 @@ export class SessionService {
         .where(
           and(
             eq(authSessionsTable.sessionToken, sessionToken),
-            eq(authSessionsTable.isActive, true)
-          )
+            eq(authSessionsTable.isActive, true),
+          ),
         )
 
       return true

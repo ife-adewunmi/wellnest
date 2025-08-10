@@ -9,7 +9,7 @@ import { SidebarInset } from '@/shared/components/ui/sidebar'
 import { OfflineIndicator } from '@/shared/components/offline-indicator'
 import { Header } from '@/shared/components/header'
 import { useUserStore } from '@/features/users/state'
-import { navigateToAuth } from '@/shared/store/navigation'
+import { navigateToAuth } from '@/shared/state/navigation'
 import { useSessionStore } from '@/features/users/auth/state/sessionStore'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {

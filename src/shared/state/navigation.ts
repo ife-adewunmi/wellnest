@@ -39,7 +39,7 @@ export const navigateTo = (
   if (!options?.preventHistory) {
     useNavigationStore.getState().push(path)
   }
-  
+
   if (options?.refresh && router.refresh) router.refresh()
 }
 

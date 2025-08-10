@@ -11,28 +11,27 @@ const PROTECTED_ROUTES = [
 ]
 
 // Routes that should redirect authenticated users
-const AUTH_ROUTES = [
-  Endpoints.AUTH_PAGE.SIGNIN,
-  Endpoints.AUTH_PAGE.SIGNUP,
-]
+const AUTH_ROUTES = [Endpoints.AUTH_PAGE.SIGNIN, Endpoints.AUTH_PAGE.SIGNUP]
 
 // Public routes that don't require authentication
 const PUBLIC_ROUTES = ['/', '/about', '/contact', '/help', '/privacy', '/terms']
 
 const isProtectedRoute = (pathname: string): boolean => {
-  return PROTECTED_ROUTES.some(route => pathname.startsWith(route))
+  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route))
 }
 
 function isAuthRoute(pathname: string): boolean {
-  return AUTH_ROUTES.some(route => pathname === route)
+  return AUTH_ROUTES.some((route) => pathname === route)
 }
 
 const isPublicRoute = (pathname: string): boolean => {
-  return PUBLIC_ROUTES.some(route => pathname === route) ||
-         pathname.startsWith('/api/') ||
-         pathname.startsWith('/_next/') ||
-         pathname.startsWith('/favicon') ||
-         pathname.includes('.')
+  return (
+    PUBLIC_ROUTES.some((route) => pathname === route) ||
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/favicon') ||
+    pathname.includes('.')
+  )
 }
 
 // Simplified session check - just verify token exists
@@ -61,7 +60,7 @@ export async function middleware(request: NextRequest) {
       url.searchParams.set('redirect', pathname) // Store intended destination
       return NextResponse.redirect(url)
     }
-    
+
     return NextResponse.next()
   }
 
@@ -70,7 +69,7 @@ export async function middleware(request: NextRequest) {
     if (isAuthenticated) {
       // Redirect authenticated users away from auth pages
       const url = request.nextUrl.clone()
-      
+
       // Check for a redirect parameter first
       const redirectTo = request.nextUrl.searchParams.get('redirect')
       if (redirectTo && redirectTo.startsWith('/') && isProtectedRoute(redirectTo)) {
@@ -80,10 +79,10 @@ export async function middleware(request: NextRequest) {
         // Default redirect to dashboard (role-based routing will handle the final destination)
         url.pathname = Endpoints.COUNSELORS.DASHBOARD
       }
-      
+
       return NextResponse.redirect(url)
     }
-    
+
     return NextResponse.next()
   }
 
