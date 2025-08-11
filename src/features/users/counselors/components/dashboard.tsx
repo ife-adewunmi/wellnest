@@ -1,6 +1,6 @@
 'use client'
 
-import { Header } from './dashboard-header'
+import { Header } from './header'
 import {
   DashboardTitle,
   MetricsSection,
@@ -8,7 +8,13 @@ import {
   ActivitySection,
   NotificationsSection,
 } from './sections'
-import { MOCK_MOOD_CHECK_INS, MOCK_METRICS } from '../constants/dashboard-data'
+import { MOCK_MOOD_CHECK_INS, MOCK_METRICS } from '../data/dashboard-data'
+import { User } from '../../auth/types'
+
+// interface DashboardProps {
+//   user: User | null
+//   logout: () => Promise<void>
+// }
 
 export default function Dashboard() {
 
@@ -27,9 +33,6 @@ export default function Dashboard() {
         <ActivitySection />
         
         <NotificationsSection />
-
-        {/* Student Table - Commented out for now */}
-        {/* {isWidgetEnabled('student-table') && <StudentTable />} */}
       </main>
     </div>
   )
