@@ -1,4 +1,4 @@
-import { Metric } from "../components/sections/metrics-section"
+import { Metric } from '../components/sections/metrics-section'
 
 export const MOCK_MOOD_CHECK_INS = [
   {

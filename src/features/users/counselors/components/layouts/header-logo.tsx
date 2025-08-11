@@ -16,7 +16,9 @@ export function HeaderLogo() {
           className="h-4 w-4 sm:h-5 sm:w-5"
         />
       </div>
-      <span className={`text-gray-900 font-semibold text-lg ${interBold.className}`}>{siteConfig.logoText}</span>
+      <span className={`text-lg font-semibold text-gray-900 ${interBold.className}`}>
+        {siteConfig.logoText}
+      </span>
     </div>
   )
 }

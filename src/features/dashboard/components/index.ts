@@ -1,5 +1,3 @@
-export { default as Dashboard } from './dashboard'
-export { Header as DashboardHeader } from './dashboard-header'
 export { MetricCard } from './metric-card'
 export { MoodHistoryChart as LineCharts } from './line-charts'
 export { InsightCard } from './insight-card'

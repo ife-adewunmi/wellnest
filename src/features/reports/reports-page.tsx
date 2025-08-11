@@ -12,7 +12,7 @@ import { ReportHeader } from './components/report-header'
 import { ReportFilters } from './components/reports-filter'
 import { ReportOptions } from './components/reports-options'
 import { toast } from 'react-toastify'
-import { DashboardHeader } from '../dashboard/components'
+import { Header } from '@/features/users/counselors/components/header'
 
 export default function Reports() {
   const [filters, setFilters] = useState<ReportFiltersType>({
@@ -81,7 +81,7 @@ export default function Reports() {
 
   return (
     <div className="flex flex-col">
-      <DashboardHeader />
+      <Header />
       <div className="mt-[4.44vh] flex flex-col items-center justify-center">
         <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
           <div className="">

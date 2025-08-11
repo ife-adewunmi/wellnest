@@ -1,8 +1,8 @@
 type NavigationItem = {
-  label: string;
-  path: string;
-  tab: string;
-};
+  label: string
+  path: string
+  tab: string
+}
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { label: 'Dashboard', path: '/dashboard', tab: 'Dashboard' },

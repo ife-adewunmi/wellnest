@@ -9,7 +9,7 @@ import { Label } from '@/shared/components/ui/label'
 import { Separator } from '@/shared/components/ui/separator'
 import { toast } from 'react-toastify'
 import { useDashboardSettings } from '@/shared/contexts/dashboard-settings-context'
-import { DashboardHeader } from '@/features/dashboard/components'
+import { Header } from '@/features/users/counselors/components/header'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { DashboardWidget } from '@/features'
 
@@ -98,7 +98,7 @@ export default function SettingsPage() {
 
   return (
     <div className="flex flex-col">
-      <DashboardHeader />
+      <Header />
       <div className="mt-4 flex flex-col items-center justify-center sm:mt-6 lg:mt-[4.44vh]">
         <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
           <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">

@@ -14,9 +14,7 @@ export function NotificationsSection() {
     <div className="mt-8 mb-8 flex flex-col gap-4 sm:mt-12 sm:mb-12 sm:gap-6 lg:mt-[5rem] lg:mb-[5rem] lg:flex-row lg:gap-[2rem]">
       {isWidgetEnabled('notification-widget') && <Notifications />}
       {isWidgetEnabled('upcoming-sessions') && (
-        <div
-          className={`w-full ${isWidgetEnabled('notification-widget') ? 'max-w-[806px]' : ''}`}
-        >
+        <div className={`w-full ${isWidgetEnabled('notification-widget') ? 'max-w-[806px]' : ''}`}>
           <UpcomingSessions />
         </div>
       )}

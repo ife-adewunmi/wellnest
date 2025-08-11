@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@/shared/components/ui/select'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
-import { Header } from '@/features/dashboard/components/dashboard-header'
+import { Header } from '@/features/users/counselors/components/header'
 import { useViewContext } from '@/context/view-context'
 import { Profile } from './student-profile'
 
