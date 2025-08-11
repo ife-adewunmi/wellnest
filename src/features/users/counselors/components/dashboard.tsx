@@ -9,12 +9,6 @@ import {
   NotificationsSection,
 } from './sections'
 import { MOCK_MOOD_CHECK_INS, MOCK_METRICS } from '../data/dashboard-data'
-import { User } from '../../auth/types'
-
-// interface DashboardProps {
-//   user: User | null
-//   logout: () => Promise<void>
-// }
 
 export default function Dashboard() {
   return (

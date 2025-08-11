@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { HeaderLogo, DesktopNavigation, MobileNavigation, HeaderActions } from './layouts'
+import { HeaderLogo, DesktopNavigation, MobileNavigation, HeaderActions } from '.'
 import { useRouter } from 'next/navigation'
 import { useUserStore } from '@/features/users/state/userStore'
 import { toast } from 'react-toastify'
