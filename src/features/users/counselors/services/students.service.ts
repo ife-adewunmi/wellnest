@@ -188,18 +188,13 @@ export class StudentService {
       // Get today's screen time
       const today = new Date()
       today.setHours(0, 0, 0, 0)
-      
+
       const [screenTimeToday] = await db
         .select({
           totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
         })
         .from(screenTimeDataTable)
-        .where(
-          and(
-            eq(screenTimeDataTable.userId, userId),
-            gte(screenTimeDataTable.date, today),
-          ),
-        )
+        .where(and(eq(screenTimeDataTable.userId, userId), gte(screenTimeDataTable.date, today)))
         .groupBy(screenTimeDataTable.userId)
         .limit(1)
 
@@ -208,7 +203,7 @@ export class StudentService {
       let upcomingSessions = 0
       try {
         const { sessionsTable } = await import('@/shared/db/schema/sessions')
-        
+
         const [sessionCounts] = await db
           .select({
             total: sql<number>`COUNT(*)::int`,
@@ -217,7 +212,7 @@ export class StudentService {
           .from(sessionsTable)
           .where(eq(sessionsTable.studentId, userId))
           .limit(1)
-        
+
         if (sessionCounts) {
           totalSessions = sessionCounts.total || 0
           upcomingSessions = sessionCounts.upcoming || 0
@@ -250,7 +245,7 @@ export class StudentService {
         phoneNumber: student.phoneNumber,
         avatar: student.avatar,
         createdAt: student.createdAt,
-        
+
         // Student detail fields
         department: student.department,
         faculty: student.faculty,
@@ -264,13 +259,13 @@ export class StudentService {
         emergencyContact: student.emergencyContact,
         medicalInfo: student.medicalInfo,
         academicInfo: student.academicInfo,
-        
+
         // Dynamic data based on database queries
         riskLevel: calculateRiskLevel(latestMoodCheckIn?.riskScore, latestMoodCheckIn?.mood),
         currentMood: latestMoodCheckIn?.mood as MoodType | undefined,
         screenTimeToday: screenTimeToday?.totalMinutes || 0,
         lastCheckIn: latestMoodCheckIn?.createdAt || student.createdAt,
-        
+
         // Additional StudentDetail fields
         moodDescription: latestMoodCheckIn?.description || null,
         hasActiveCounselor: true,

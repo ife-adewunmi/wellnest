@@ -49,9 +49,9 @@ type TabId = (typeof tabs)[number]['id']
 
 export const EnhancedStudentProfile = ({
   student,
-  onBack, 
-  onRefresh, 
-  isRefreshing = false 
+  onBack,
+  onRefresh,
+  isRefreshing = false,
 }: EnhancedStudentProfileProps) => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabId>('overview')
@@ -72,11 +72,7 @@ export const EnhancedStudentProfile = ({
           <p className="mb-4 text-gray-500">No student data available</p>
           <div className="space-x-2">
             {onRefresh && (
-              <Button 
-                onClick={onRefresh} 
-                variant="outline"
-                disabled={isRefreshing}
-              >
+              <Button onClick={onRefresh} variant="outline" disabled={isRefreshing}>
                 {isRefreshing ? <LoadingSpinner size="small" /> : 'Try Again'}
               </Button>
             )}
