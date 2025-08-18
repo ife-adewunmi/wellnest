@@ -10,7 +10,7 @@ import { Button } from '@/shared/components/ui/custom-button'
 import { ArrowRight } from 'lucide-react'
 import LayoutImage from '@/shared/components/layout-image'
 import HomeMessage from '@/shared/components/ui/home-screen-popup'
-import { SignupFormData } from '@/features/users/auth/lib/validations'
+import { SignupFormData } from '@/users/auth/lib/validations'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 
 export default function SignupForm() {

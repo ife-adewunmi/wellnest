@@ -20,15 +20,15 @@ import { Badge } from '@/shared/components/ui/badge'
 import { Phone, Mail, GraduationCap, Calendar, AlertCircle, Clock } from 'lucide-react'
 
 // Import chart components
-import { MoodHistoryChart } from '@/features/users/counselors/dashboard/analysis/mood-history-widget'
-import { ScreenTimeWidget } from '@/features/users/counselors/dashboard/activity/screen-time-widget'
+import { MoodHistoryChart } from '@/users/counselors/dashboard/analysis/mood-history-widget'
+import { ScreenTimeWidget } from '@/users/counselors/dashboard/activity/screen-time-widget'
 import { UpcomingSessions } from './upcoming-sessions'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
 // Store imports removed - now using prop data
 import { CounselorNotes } from '@/features/notes/components/councilor-note'
 import { SocialMedia } from '@/features/social-media/components'
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 import { RiskLevel, MoodType } from '@/shared/types/common.types'
 
 interface EnhancedStudentProfileProps {

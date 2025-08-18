@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/ui/select'
-import { useStudents, useStudentsLoading } from '@/features/users/counselors/state'
+import { useStudents, useStudentsLoading } from '@/users/counselors/state'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import {
   exportStudentsToCSV,

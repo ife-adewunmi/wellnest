@@ -1,8 +1,8 @@
 import { request } from '@/shared/service/request'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { isLocalEnvironment } from '@/shared/enums/environment'
-import { MOCK_NOTIFICATIONS } from '@/features/users/counselors/common/data/mock-dashboard'
-import type { Notification } from '@/features/users/counselors/types/dashboard.types'
+import { MOCK_NOTIFICATIONS } from '@/users/counselors/common/data/mock-dashboard'
+import type { Notification } from '@/users/counselors/types/dashboard.types'
 
 interface NotificationsApiRequests {
   getNotifications: (counselorId: string, unreadOnly?: boolean) => Promise<Notification[]>

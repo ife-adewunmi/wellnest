@@ -1,4 +1,4 @@
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 import { useStudentProfileStore } from './studentProfileStore'
 import { useMemo } from 'react'
 

@@ -1,5 +1,5 @@
 // Main dashboard component
-export * from './dashboard'
+export * from './dashboard-component'
 
 // Section components
 export * from './sections'

@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import { ErrorMessage } from '@/shared/components/error-message'
 import { Button } from '@/shared/components/ui/button'
-import { EnhancedStudentProfile } from '@/features/users/counselors/manage-student/student-profile'
+import { EnhancedStudentProfile } from '@/users/counselors/manage-student/student-profile'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
-import { studentsApi } from '@/features/users/counselors/services/models/students-api'
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { studentsApi } from '@/users/counselors/services/models/students-api'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 
 interface StudentProfileContainerProps {
   initialStudent: StudentDetail | null

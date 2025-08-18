@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
 import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
 import { RecentMessages } from '@/features/messaging/components/recent-messages'
-import type { User } from '@/features/users/auth/types'
+import type { User } from '@/users/auth/types'
 import {
   fetchMoodCheckIns,
   fetchUpcomingSessions,

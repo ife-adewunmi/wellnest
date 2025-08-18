@@ -10,7 +10,7 @@ import {
   NotificationsSection,
   StudentTableSection,
 } from './sections'
-import { useUserStore } from '@/features/users/state/userStore'
+import { useUserStore } from '@/users/state/userStore'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import { ErrorMessage } from '@/shared/components/error-message'
 import {
@@ -22,9 +22,9 @@ import {
   useMoodCheckIns,
   useStudents,
   useDashboardStore,
-} from '@/features/users/counselors/state/dashboard'
+} from '@/users/counselors/state/dashboard'
 
-export default function Dashboard() {
+export default function DashboardComponent() {
   const { user } = useUserStore()
 
   // Data from stores

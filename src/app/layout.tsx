@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/shared/styles/globals.css'
 import { Metadata } from 'next'
 import QueryProvider from '@/shared/components/query-provider'
 import { ViewProvider } from '@/context/view-context'

@@ -8,10 +8,10 @@ import { SidebarProvider } from '@/shared/components/ui/sidebar-context'
 import { SidebarInset } from '@/shared/components/ui/sidebar'
 import { OfflineIndicator } from '@/shared/components/offline-indicator'
 import { Header } from '@/shared/components/header'
-import { useUserStore } from '@/features/users/state'
-import { useAuthStore } from '@/features/users/auth/state/authStore'
+import { useUserStore } from '@/users/state'
+import { useAuthStore } from '@/users/auth/state/authStore'
 import { navigateToAuth } from '@/shared/state/navigation'
-import { useSessionStore } from '@/features/users/auth/state/sessionStore'
+import { useSessionStore } from '@/users/auth/state/sessionStore'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()

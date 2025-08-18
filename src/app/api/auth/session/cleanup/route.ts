@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { SessionService } from '@/users/auth/services/session.service'
 
 export async function POST() {
   try {

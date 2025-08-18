@@ -6,14 +6,14 @@ import {
   MOCK_METRICS,
   MOCK_MOOD_CHECKINS,
   MOCK_ACTIVITIES,
-} from '@/features/users/counselors/common/data/mock-dashboard'
+} from '@/users/counselors/common/data/mock-dashboard'
 import type {
   DashboardDataResponse,
   Metric,
   MoodCheckIn,
   ActivityData,
   StudentTableData,
-} from '@/features/users/counselors/types/dashboard.types'
+} from '@/users/counselors/types/dashboard.types'
 
 interface DashboardApiRequests {
   getDashboardData: (counselorId: string) => Promise<DashboardDataResponse>

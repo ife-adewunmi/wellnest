@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import Avatar from '@/shared/components/ui/avatar'
-import { User } from '@/features/users/auth/types'
+import { User } from '@/users/auth/types'
 
 interface UserMenuProps {
   user?: User

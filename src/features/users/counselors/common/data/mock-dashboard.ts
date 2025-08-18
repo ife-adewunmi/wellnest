@@ -5,7 +5,7 @@ import type {
   ActivityData,
   Notification,
   StudentTableData,
-} from '@/features/users/counselors/types/dashboard.types'
+} from '@/users/counselors/types/dashboard.types'
 
 export const MOCK_METRICS: Metric[] = [
   {

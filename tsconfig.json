@@ -26,17 +26,13 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/users/*": ["./src/features/users/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/config/*": ["./src/shared/config/*"],
       "@/db/*": ["./src/shared/db/*"],
       "@/enums/*": ["./src/shared/enums/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/hooks/*": ["./src/shared/hooks/*"],
       "@/lib/*": ["./src/shared/lib/*"],
-      "@/providers/*": ["./src/shared/providers/*"],
-      "@/styles/*": ["./src/shared/styles/*"],
-      "@/types/*": ["./src/shared/types/*"],
-      "@/ui/*": ["./src/shared/components/ui/*"],
       "@/shared/*": ["./src/shared/*"]
     }
   },

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { plusJakarta } from '@/shared/styles/fonts'
 import { Button } from '@/shared/components/ui/button'
-import { NAVIGATION_ITEMS } from '@/features/users/counselors/common/data/navigation-data'
+import { NAVIGATION_ITEMS } from '@/users/counselors/common/data/navigation-data'
 
 interface DesktopNavigationProps {
   activeTab: string

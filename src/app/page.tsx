@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useUserStore, IsLoggedIn } from '@/features/users/state'
+import { useUserStore, IsLoggedIn } from '@/users/state'
 import Loading from '@/shared/components/ui/loading'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { navigateTo } from '@/shared/state/navigation'

@@ -1,6 +1,6 @@
 import { Endpoints } from '@/shared/enums/endpoints'
 import { request } from '@/shared/service/request'
-import type { StudentTableData } from '@/features/users/counselors/types/dashboard.types'
+import type { StudentTableData } from '@/users/counselors/types/dashboard.types'
 import { isLocalEnvironment } from '@/shared/enums/environment'
 import { StudentDetail, StudentListItem } from '../../types/student.types'
 

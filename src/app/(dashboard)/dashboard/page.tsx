@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import Dashboard from '@/features/users/counselors/dashboard/dashboard'
+import DashboardComponent from '@/users/counselors/dashboard/dashboard-component'
 import React, { useEffect } from 'react'
-import { UserRole } from '@/features/users/auth/enums/index'
+import { UserRole } from '@/users/auth/enums'
 import { navigateTo } from '@/shared/state/navigation'
-import { useUserStore } from '@/features/users/state/index'
+import { useUserStore } from '@/users/state/index'
 import { Endpoints } from '@/shared/enums/endpoints'
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <div>
-      <Dashboard />
+      <DashboardComponent />
     </div>
   )
 }

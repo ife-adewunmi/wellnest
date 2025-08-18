@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 import { studentsApi } from '../../services/models/students-api'
 import { ActionTypes } from '../actionTypes'
 

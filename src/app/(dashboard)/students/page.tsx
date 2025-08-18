@@ -1,19 +1,19 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useUserStore } from '@/features/users/state/userStore'
+import { useUserStore } from '@/users/state/userStore'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import { ErrorMessage } from '@/shared/components/error-message'
-import { useDashboardStore } from '@/features/users/counselors/state/dashboard/dashboardStore'
+import { useDashboardStore } from '@/users/counselors/state/dashboard/dashboardStore'
 import {
   useIsLoading,
   useError,
   useIsDataStale,
   useHasData,
-} from '@/features/users/counselors/state/dashboard/dashboardSelectors'
-import { StudentsTable } from '@/features/users/counselors/manage-student/students-table'
-import { Header } from '@/features/users/counselors/dashboard/header'
-import { useStudentsStore } from '@/features/users/counselors/state'
+} from '@/users/counselors/state/dashboard/dashboardSelectors'
+import { StudentsTable } from '@/users/counselors/manage-student/students-table'
+import { Header } from '@/users/counselors/dashboard/header'
+import { useStudentsStore } from '@/users/counselors/state'
 
 export default function StudentsPage() {
   const { user } = useUserStore()

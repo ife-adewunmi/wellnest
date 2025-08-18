@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import { AuthService } from '@/features/users/auth/services/auth.service'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { AuthService } from '@/users/auth/services/auth.service'
+import { SessionService } from '@/users/auth/services/session.service'
 
 const getDeviceInfo = (request: NextRequest): string => {
   const userAgent = request.headers.get('user-agent') || 'Unknown'

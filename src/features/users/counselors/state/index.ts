@@ -16,4 +16,4 @@ export type {
   ActivityData,
   Notification,
   StudentTableData,
-} from '@/features/users/counselors/types/dashboard.types'
+} from '@/users/counselors/types/dashboard.types'
