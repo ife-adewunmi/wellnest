@@ -1,8 +1,9 @@
 name: Deploy to Production (Vercel)
 
 on:
-  pull_request:
-    types: [ready_for_review]
+  push:
+    branches:
+      - main
 
 jobs:
   log-tests:
