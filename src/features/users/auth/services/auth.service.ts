@@ -36,8 +36,6 @@ export class AuthService {
       // Find user by email
       const found = await db.select().from(usersTable).where(eq(usersTable.email, email)).limit(1)
 
-      console.log(found)
-
       if (found.length === 0) {
         return { success: false, message: 'Invalid credentials', error: 'Invalid credentials' }
       }

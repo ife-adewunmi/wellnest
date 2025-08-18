@@ -33,9 +33,6 @@ export async function GET(request: NextRequest) {
 
     // Use the authenticated user's ID to fetch dashboard data
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching dashboard data for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch dashboard data from service
     const dashboardData = await DashboardService.getDashboardData(counselorId)

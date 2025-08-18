@@ -36,9 +36,6 @@ export async function GET(request: NextRequest) {
 
     // Use the authenticated user's ID
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching mood history for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch mood history from service
     const moodHistory = await DashboardService.getMoodHistory(counselorId, days)

@@ -2,7 +2,7 @@
 
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Avatar from '@/shared/components/ui/avatar'
 import { Button } from '@/shared/components/ui/button'
@@ -25,13 +25,7 @@ import { ScreenTimeWidget } from '@/features/users/counselors/dashboard/activity
 import { UpcomingSessions } from './upcoming-sessions'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
-import {
-  useStudentProfile,
-  useStudentProfileLoading,
-  useStudentProfileError,
-  useStudentProfileActions,
-  useStudentProfileWithStatus,
-} from '../state'
+// Store imports removed - now using prop data
 import { CounselorNotes } from '@/features/notes/components/councilor-note'
 import { SocialMedia } from '@/features/social-media/components'
 import { StudentDetail } from '@/features/users/counselors/types/student.types'
@@ -39,6 +33,7 @@ import { RiskLevel, MoodType } from '@/shared/types/common.types'
 
 interface EnhancedStudentProfileProps {
   studentId: string
+  student?: StudentDetail | null
   onBack?: () => void
   onRefresh?: () => void
   isRefreshing?: boolean
@@ -55,49 +50,13 @@ type TabId = typeof tabs[number]['id']
 
 export const EnhancedStudentProfile = ({ 
   studentId, 
+  student,
   onBack, 
   onRefresh, 
   isRefreshing = false 
 }: EnhancedStudentProfileProps) => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabId>('overview')
-
-  console.log('EnhancedStudentProfile: Rendering with studentId:', studentId)
-
-  // Use dedicated student profile store
-  const student = useStudentProfile(studentId) as StudentDetail | undefined
-  const isLoading = useStudentProfileLoading()
-  const error = useStudentProfileError()
-  const { fetchStudentProfile, clearError } = useStudentProfileActions()
-  const { needsRefresh } = useStudentProfileWithStatus(studentId)
-
-  console.log('EnhancedStudentProfile: Current state:', {
-    student: !!student,
-    isLoading,
-    error,
-    needsRefresh
-  })
-
-  // Fetch student profile on mount
-  useEffect(() => {
-    console.log('EnhancedStudentProfile: useEffect triggered', {
-      studentId,
-      needsRefresh,
-      hasStudent: !!student
-    })
-
-    if (studentId && needsRefresh) {
-      console.log('EnhancedStudentProfile: Fetching student profile')
-      fetchStudentProfile(studentId)
-    }
-  }, [studentId, needsRefresh, fetchStudentProfile])
-
-  // Clear error when component unmounts
-  useEffect(() => {
-    return () => {
-      clearError()
-    }
-  }, [clearError])
 
   const handleBack = () => {
     if (onBack) {
@@ -107,60 +66,22 @@ export const EnhancedStudentProfile = ({
     }
   }
 
-  // Loading state
-  if (isLoading && !student) {
-    console.log('EnhancedStudentProfile: Showing loading state')
-    return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-center">
-          <LoadingSpinner size="large" />
-          <p className="mt-4 text-gray-600">Loading student profile...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Error state
-  if (error && !student) {
-    console.log('EnhancedStudentProfile: Showing error state:', error)
-    return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4">
-            <p className="text-red-600">{error}</p>
-          </div>
-          <div className="space-x-2">
-            <Button 
-              onClick={() => fetchStudentProfile(studentId, true)} 
-              variant="outline"
-              disabled={isLoading}
-            >
-              {isLoading ? <LoadingSpinner size="small" /> : 'Retry'}
-            </Button>
-            <Button onClick={handleBack} variant="outline">
-              Go Back
-            </Button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // No student data
+  // No student data - This should be handled by the container
   if (!student) {
-    console.log('EnhancedStudentProfile: No student data available')
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <p className="mb-4 text-gray-500">No student data available</p>
           <div className="space-x-2">
-            <Button 
-              onClick={() => fetchStudentProfile(studentId, true)} 
-              variant="outline"
-              disabled={isLoading}
-            >
-              {isLoading ? <LoadingSpinner size="small" /> : 'Try Again'}
-            </Button>
+            {onRefresh && (
+              <Button 
+                onClick={onRefresh} 
+                variant="outline"
+                disabled={isRefreshing}
+              >
+                {isRefreshing ? <LoadingSpinner size="small" /> : 'Try Again'}
+              </Button>
+            )}
             <Button onClick={handleBack} variant="outline">
               Go Back
             </Button>
@@ -170,22 +91,10 @@ export const EnhancedStudentProfile = ({
     )
   }
 
-  console.log('EnhancedStudentProfile: Rendering student profile for:', student.name)
-
   return (
     <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
       <div className="bg-white">
-        {/* Error banner */}
-        {error && (
-          <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4">
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-red-600">{error}</p>
-              <Button onClick={clearError} variant="ghost" size="sm">
-                ×
-              </Button>
-            </div>
-          </div>
-        )}
+        {/* Error banner handled by container */}
 
         {/* Header Section with Student Info */}
         <Card className="mb-6">

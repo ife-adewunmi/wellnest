@@ -163,7 +163,8 @@ export function StudentProfileContainer({
 
       {student && (
         <EnhancedStudentProfile 
-          studentId={studentId} 
+          studentId={studentId}
+          student={student}
           onBack={handleBack}
           onRefresh={refreshStudent}
           isRefreshing={isRefreshing}

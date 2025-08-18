@@ -7,9 +7,11 @@ import { screenTimeDataTable } from '@/shared/db/schema/screen-time-monitoring'
 import { sessionsTable } from '@/shared/db/schema/sessions'
 import { eq, desc, and, gte, sql } from 'drizzle-orm'
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const studentUserId = params.id
+    // Await the params as required in Next.js 15
+    const { id } = await params
+    const studentUserId = id
 
     if (!studentUserId) {
       return NextResponse.json({ error: 'Student ID is required' }, { status: 400 })

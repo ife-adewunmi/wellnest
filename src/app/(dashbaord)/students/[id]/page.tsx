@@ -37,49 +37,14 @@ async function getStudentData(studentId: string): Promise<{
       return { student: null, error: 'Forbidden - Only counselors can access this resource' }
     }
 
-    const counselorId = sessionData.user.id
-
-    // Fetch student data
+    // Fetch student data - StudentService now returns complete StudentDetail
     const result = await StudentService.getStudentById(studentId)
     
     if (!result.success || !result.student) {
       return { student: null, error: result.error || 'Student not found' }
     }
 
-    // Transform to StudentDetail format
-    const studentData: StudentDetail = {
-      // Base StudentTableData fields
-      id: result.student.id,
-      studentId: result.student.studentId,
-      name: `${result.student.firstName} ${result.student.lastName}`,
-      lastCheckIn: result.student.createdAt,
-      riskLevel: 'LOW' as const,
-      currentMood: 'NEUTRAL',
-      screenTimeToday: 0,
-
-      // Extended StudentDetail fields
-      firstName: result.student.firstName,
-      lastName: result.student.lastName,
-      phoneNumber: result.student.phoneNumber,
-      dateOfBirth: null,
-      gender: null,
-      faculty: null,
-      admissionYear: null,
-      graduationYear: null,
-      nationality: null,
-      stateOfOrigin: null,
-      homeAddress: null,
-      emergencyContact: null,
-      medicalInfo: null,
-      academicInfo: null,
-      moodDescription: null,
-      hasActiveCounselor: true,
-      counselorId: counselorId,
-      email: result.student.email,
-      createdAt: result.student.createdAt
-    }
-
-    return { student: studentData, error: null }
+    return { student: result.student as StudentDetail, error: null }
   } catch (error) {
     console.error('Error fetching student data:', error)
     return { 
@@ -89,11 +54,17 @@ async function getStudentData(studentId: string): Promise<{
   }
 }
 
-// Server Component (SSR)
 export default async function StudentProfilePage({ params }: StudentProfilePageProps) {
   const { id: studentId } = await params
 
   if (!studentId) {
+    notFound()
+  }
+
+  // Validate UUID format
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  if (!uuidRegex.test(studentId)) {
+    console.error('Invalid student ID format:', studentId)
     notFound()
   }
 
