@@ -1,16 +1,14 @@
-name: Deploy to Production (Vercel)
-
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      WORKING_DIRECTORY:
+        required: true
+        type: string
 
 jobs:
-  deploy-production:
+  test:
+    name: Titans
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
