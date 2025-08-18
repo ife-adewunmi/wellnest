@@ -4,39 +4,6 @@ import type { StudentTableData } from '@/features/users/counselors/types/dashboa
 import { isLocalEnvironment } from '@/shared/enums/environment'
 import { StudentDetail, StudentListItem } from '../../types/student.types'
 
-// export interface StudentListItem {
-//   id: string
-//   name: string
-//   email: string
-//   department?: string | null
-//   studentId?: string | null
-//   level?: string | null
-//   avatar?: string | null
-//   createdAt: string | Date
-//   latestMood?: string | null
-//   latestMoodDate?: string | Date | null
-//   riskScore?: number | null
-//   totalSessions?: number | null
-//   upcomingSessions?: number | null
-// }
-
-// export interface StudentDetail extends StudentTableData {
-//   firstName: string
-//   lastName: string
-//   phoneNumber?: string | null
-//   dateOfBirth?: string | Date | null
-//   gender?: string | null
-//   faculty?: string | null
-//   admissionYear?: string | null
-//   graduationYear?: string | null
-//   nationality?: string | null
-//   stateOfOrigin?: string | null
-//   homeAddress?: string | null
-//   emergencyContact?: any | null
-//   medicalInfo?: any | null
-//   academicInfo?: any | null
-// }
-
 interface StudentsApiRequests {
   getStudents: (counselorId: string) => Promise<StudentTableData[]>
   list: (params?: { limit?: number; offset?: number }) => Promise<StudentListItem[]>

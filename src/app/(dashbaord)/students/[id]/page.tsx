@@ -37,8 +37,6 @@ async function getStudentData(studentId: string): Promise<{
       return { student: null, error: 'Forbidden - Only counselors can access this resource' }
     }
 
-    const counselorId = sessionData.user.id
-
     // Fetch student data - StudentService now returns complete StudentDetail
     const result = await StudentService.getStudentById(studentId)
     
@@ -46,8 +44,6 @@ async function getStudentData(studentId: string): Promise<{
       return { student: null, error: result.error || 'Student not found' }
     }
 
-    console.log(result.student);
-    
     return { student: result.student as StudentDetail, error: null }
   } catch (error) {
     console.error('Error fetching student data:', error)
