@@ -1,0 +1,7 @@
+export { HeaderLogo } from './header-logo'
+export { AvatarIcon } from './avatar-icon'
+export { DesktopNavigation } from './desktop-navigation'
+export { MobileNavigation } from './mobile-navigation'
+export { UserMenu } from './user-menu'
+export { HeaderActions } from './header-actions'
+export { Header } from '../sections'

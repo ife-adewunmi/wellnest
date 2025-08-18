@@ -1,8 +1,8 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  disable: false,
   register: true,
   skipWaiting: true,
   // Custom service worker with advanced features
@@ -116,6 +116,21 @@ const nextConfig: NextConfig = {
   generateEtags: false,
   httpAgentOptions: {
     keepAlive: true,
+  },
+  webpack: (config, { isServer }) => {
+    // Fix for PostgreSQL client modules not available in browser
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        dns: false,
+        pg: false,
+        'pg-native': false,
+      }
+    }
+    return config
   },
 }
 

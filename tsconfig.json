@@ -4,6 +4,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "react", "react-dom"],
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -13,15 +15,34 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/shared/components/*"],
+      "@/config/*": ["./src/shared/config/*"],
+      "@/db/*": ["./src/shared/db/*"],
+      "@/enums/*": ["./src/shared/enums/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/hooks/*": ["./src/shared/hooks/*"],
+      "@/lib/*": ["./src/shared/lib/*"],
+      "@/providers/*": ["./src/shared/providers/*"],
+      "@/styles/*": ["./src/shared/styles/*"],
+      "@/types/*": ["./src/shared/types/*"],
+      "@/ui/*": ["./src/shared/components/ui/*"],
+      "@/shared/*": ["./src/shared/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/feature/components/upcoming-sessions.tsx"
+  ],
   "exclude": ["node_modules"]
 }
