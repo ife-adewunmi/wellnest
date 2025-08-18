@@ -9,8 +9,8 @@ export function RecentPost() {
       <CardContent>
         <div className="rounded-r border-l-4 border-blue-400 bg-blue-50 p-4">
           <p className="text-sm leading-relaxed text-gray-700">
-            I&apos;m feeling so overwhelmed with everything right now. I don&apos;t know how much longer I can
-            keep going.
+            I&apos;m feeling so overwhelmed with everything right now. I don&apos;t know how much
+            longer I can keep going.
           </p>
         </div>
       </CardContent>

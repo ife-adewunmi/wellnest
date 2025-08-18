@@ -44,9 +44,12 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     // Validate UUID format
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
     if (!uuidRegex.test(studentUserId)) {
-      return NextResponse.json({ 
-        error: 'Invalid student ID format. Expected UUID format.' 
-      }, { status: 400 })
+      return NextResponse.json(
+        {
+          error: 'Invalid student ID format. Expected UUID format.',
+        },
+        { status: 400 },
+      )
     }
 
     // Use the authenticated user's ID to fetch students data

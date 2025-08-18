@@ -83,7 +83,13 @@ interface ChartTooltipContentProps {
   hideIndicator?: boolean
   labelFormatter?: (label: unknown, payload: Array<Record<string, unknown>>) => React.ReactNode
   labelClassName?: string
-  formatter?: (value: unknown, name: unknown, item: Record<string, unknown>, index: number, payload: Record<string, unknown>) => React.ReactNode
+  formatter?: (
+    value: unknown,
+    name: unknown,
+    item: Record<string, unknown>,
+    index: number,
+    payload: Record<string, unknown>,
+  ) => React.ReactNode
   color?: string
   nameKey?: string
   labelKey?: string
@@ -148,7 +154,10 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContent
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || 'value'}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color || (item.payload as Record<string, unknown>)?.fill || (item as Record<string, unknown>)?.color
+            const indicatorColor =
+              color ||
+              (item.payload as Record<string, unknown>)?.fill ||
+              (item as Record<string, unknown>)?.color
 
             return (
               <div
@@ -156,7 +165,13 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContent
                 className={`[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5`}
               >
                 {formatter && item?.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, (item.payload as Record<string, unknown>) || {})
+                  formatter(
+                    item.value,
+                    item.name,
+                    item,
+                    index,
+                    (item.payload as Record<string, unknown>) || {},
+                  )
                 ) : (
                   <>
                     {itemConfig?.icon ? (
