@@ -33,9 +33,6 @@ export async function GET(request: NextRequest) {
 
     // Use the authenticated user's ID to fetch students data
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching students for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch students data from service
     const students = await StudentService.getStudents(counselorId)

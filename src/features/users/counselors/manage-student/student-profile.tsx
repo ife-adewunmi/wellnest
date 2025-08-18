@@ -68,7 +68,6 @@ export const EnhancedStudentProfile = ({
 
   // No student data - This should be handled by the container
   if (!student) {
-    console.log('EnhancedStudentProfile: No student data provided')
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">

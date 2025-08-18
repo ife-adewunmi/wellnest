@@ -21,8 +21,6 @@ class StudentsApi implements StudentsApiRequests {
       const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
         params: { counselorId },
       })
-      console.log('Dashboard API getStudents response:', response)
-      console.log('Dashboard API getStudents response.data:', response.data)
       return response.data?.students || []
     } catch (error) {
       console.error('Failed to fetch students:', error)

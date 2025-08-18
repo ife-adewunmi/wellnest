@@ -51,14 +51,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     // Use the authenticated user's ID to fetch students data
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching students for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch student user and profile data
     const students = await StudentService.getStudentById(studentUserId)
-
-    console.log(`Fetching student profile data: ${students}`)
 
     return NextResponse.json(students)
   } catch (error) {
