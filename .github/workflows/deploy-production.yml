@@ -1,16 +1,29 @@
 name: Deploy to Production (Vercel)
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-# env:
-#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  pull_request:
+    types: [ready_for_review]
 
 jobs:
+  log-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const output = `Test started by: @${{ github.actor }} on ${{ github.event_name }}`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
   deploy-production:
     runs-on: ubuntu-latest
     environment: production
@@ -25,38 +38,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      # - name: Install Vercel CLI
-      #   run: npm install --global vercel@latest
-
-      # - name: Pull Vercel Environment Information
-      #   run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      # - name: Build Project Artifacts
-      #   run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      # - name: Deploy to Vercel Production
-      #   run: |
-      #     vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
-      #     echo "DEPLOYMENT_URL=$(cat deployment-url.txt)" >> $GITHUB_ENV
-
       - name: Comment deployment URL on commit
         uses: actions/github-script@v7
         with:
-          # github-token: ${{ secrets.GITHUB_TOKEN }}
+          result-encoding: string
           script: |
-            const deployment_url = process.env.DEPLOYMENT_URL;
-            await github.rest.repos.createCommitComment({
+            const output = `Deployment started by: @${{ github.actor }} on ${{ github.event_name }}`;
+            const environment = github.event_name === 'pull_request' ? 'preview-pr' : 'preview';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: `✅ Production deployment successful!\n\n🚀 **URL:** ${deployment_url}\n📦 **Environment:** Production\n🔄 **Commit:** ${context.sha.substring(0, 7)}`
-            });
+              body: output
+            })
 
-      - name: Create GitHub Deployment
-        uses: actions/github-script@v7
-        with:
-          # github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
             const deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -73,5 +69,5 @@ jobs:
               deployment_id: deployment.data.id,
               state: 'success',
               environment_url: process.env.DEPLOYMENT_URL,
-              description: 'Deployed to Vercel Production'
+              description: 'Deployed to Vercel Preview'
             });
