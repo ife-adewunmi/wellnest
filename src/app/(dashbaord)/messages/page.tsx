@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Send, User, Search } from 'lucide-react'
+import { Send, User } from 'lucide-react'
 import { fetchRecentMessages, sendMessage } from '@/shared/service/api'
 
 interface Message {

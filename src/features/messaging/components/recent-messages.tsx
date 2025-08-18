@@ -65,7 +65,9 @@ export function RecentMessages({ userId }: RecentMessagesProps) {
                 <p className="text-sm font-medium">{message.sender}</p>
                 <div className="flex items-center gap-2">
                   {message.unread && (
-                    <Badge variant="destructive" className="h-2 w-2 p-0" children={undefined} />
+                    <Badge variant="destructive" className="h-2 w-2 p-0">
+                      <span className="sr-only">New</span>
+                    </Badge>
                   )}
                   <span className="text-muted-foreground text-xs">{message.time}</span>
                 </div>

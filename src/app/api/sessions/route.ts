@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
     }
 
-    let query = db
+    const query = db
       .select()
       .from(sessions)
       .where(

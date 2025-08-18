@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { SessionService } from '@/features/users/auth/services/session.service'
 import { cookies } from 'next/headers'
 import { StudentService } from '@/features/users/counselors/services/students.service'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Get session token from cookies
     const cookieStore = await cookies()

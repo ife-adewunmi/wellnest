@@ -165,9 +165,10 @@ export const useSmartFetch = () => {
       }
     },
     fetchStudentsIfNeeded: async (counselorId: string, force = false) => {
-      const isStudentsStale = useIsDataStale('STUDENTS')
+      const studentsState = useStudentsStore.getState()
+      const isStudentsStale = studentsState.isDataStale()
       if (force || isStudentsStale) {
-        await studentStore.fetchStudents(counselorId)
+        await studentsState.fetchStudents(counselorId)
       }
     },
   }

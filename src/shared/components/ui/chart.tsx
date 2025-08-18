@@ -75,15 +75,15 @@ const ChartTooltip = RechartsPrimitive.Tooltip
 
 interface ChartTooltipContentProps {
   active?: boolean
-  payload?: any[]
+  payload?: Array<Record<string, unknown>>
   label?: string
   className?: string
   indicator?: 'line' | 'dot' | 'dashed'
   hideLabel?: boolean
   hideIndicator?: boolean
-  labelFormatter?: (label: any, payload: any[]) => React.ReactNode
+  labelFormatter?: (label: unknown, payload: Array<Record<string, unknown>>) => React.ReactNode
   labelClassName?: string
-  formatter?: (value: any, name: any, item: any, index: number, payload: any) => React.ReactNode
+  formatter?: (value: unknown, name: unknown, item: Record<string, unknown>, index: number, payload: Record<string, unknown>) => React.ReactNode
   color?: string
   nameKey?: string
   labelKey?: string
@@ -148,15 +148,15 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContent
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || 'value'}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color || item.payload?.fill || item.color
+            const indicatorColor = color || (item.payload as Record<string, unknown>)?.fill || (item as Record<string, unknown>)?.color
 
             return (
               <div
-                key={item.dataKey}
+                key={String(item.dataKey) || `item-${index}`}
                 className={`[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5`}
               >
                 {formatter && item?.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, item.payload)
+                  formatter(item.value, item.name, item, index, (item.payload as Record<string, unknown>) || {})
                 ) : (
                   <>
                     {itemConfig?.icon ? (
@@ -188,12 +188,12 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContent
                           </div>
                         ) : null}
                         <div className="text-muted-foreground font-medium">
-                          {itemConfig?.label || item.name}
+                          {String(itemConfig?.label || item.name || '')}
                         </div>
                       </div>
-                      {item.value && (
+                      {item.value !== undefined && item.value !== null && (
                         <div className="text-foreground font-mono font-medium tabular-nums">
-                          {item.value}
+                          {String(item.value)}
                         </div>
                       )}
                     </div>
@@ -214,7 +214,7 @@ const ChartLegend = RechartsPrimitive.Legend
 interface ChartLegendContentProps {
   className?: string
   hideIcon?: boolean
-  payload?: any[]
+  payload?: Array<Record<string, unknown>>
   verticalAlign?: 'top' | 'middle' | 'bottom'
   nameKey?: string
 }
@@ -235,7 +235,7 @@ const ChartLegendContent = React.forwardRef<HTMLDivElement, ChartLegendContentPr
 
           return (
             <div
-              key={item.value}
+              key={String(item.value) || `legend-${key}`}
               className={`[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3`}
             >
               {itemConfig?.icon && !hideIcon ? (
@@ -244,7 +244,7 @@ const ChartLegendContent = React.forwardRef<HTMLDivElement, ChartLegendContentPr
                 <div
                   className="h-2 w-2 shrink-0 rounded-[2px]"
                   style={{
-                    backgroundColor: item.color,
+                    backgroundColor: String(item.color) || 'currentColor',
                   }}
                 />
               )}
@@ -269,7 +269,7 @@ function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key:
       ? payload.payload
       : undefined
 
-  let configLabelKey: string = key
+  const configLabelKey: string = key
 
   if (key in config || (payloadPayload && configLabelKey in payloadPayload)) {
     return config[configLabelKey]

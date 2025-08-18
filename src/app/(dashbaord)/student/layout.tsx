@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     if (sessionStore.shouldRedirectToAuth()) {
       navigateToAuth(router, '/signin')
     }
-  }, [])
+  }, [router])
 
   if (!user) {
     return null
