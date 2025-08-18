@@ -130,6 +130,13 @@ const nextConfig: NextConfig = {
         'pg-native': false,
       }
     }
+    
+    // Improve module resolution for case-sensitive file systems (like Vercel)
+    config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx', '.json']
+    
+    // Add explicit module resolution for better compatibility
+    config.resolve.modules = ['node_modules', './src']
+    
     return config
   },
 }
