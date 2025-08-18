@@ -11,7 +11,9 @@ const sessionSchema = z.object({
   description: z.string().optional(),
   scheduledAt: z.string().transform((str) => new Date(str)),
   duration: z.number(),
-  status: z.enum(['SCHEDULED', 'COMPLETED', 'CANCELLED', 'PENDING']).optional(),
+  status: z
+    .enum(['SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'NO_SHOW', 'RESCHEDULED'])
+    .optional(),
   notes: z.string().optional(),
 })
 

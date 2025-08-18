@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { sessionApi, AuthSession, SessionResponse } from '../services/session-api'
 
-interface SessionStore {
+export interface SessionStore {
   // Session state
   session: AuthSession | null
   isSessionValid: boolean

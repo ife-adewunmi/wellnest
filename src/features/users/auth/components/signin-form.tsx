@@ -16,13 +16,14 @@ import { toast } from 'react-toastify'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { UserRole } from '@/features/users/auth/enums'
 import { useUserStore } from '@/features/users/state'
+import { useAuthStore } from '../state/authStore'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { rememberUser } from '../lib/remember-user'
 
 export default function LoginForm() {
   const router = useRouter()
-  const { login, isLoading } = useUserStore()
+  const { login, isLoading } = useAuthStore()
 
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',

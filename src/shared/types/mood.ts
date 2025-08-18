@@ -1,4 +1,4 @@
-export type MoodType = 'HAPPY' | 'GOOD' | 'NEUTRAL' | 'BAD' | 'STRESSED'
+import type { MoodType, RiskLevel, MLRiskCategory } from './common.types'
 
 export interface MoodCheckIn {
   id: string
@@ -7,10 +7,10 @@ export interface MoodCheckIn {
   reasons: string[]
   description?: string
   riskScore?: number
-  riskLevel?: 'LOW' | 'MEDIUM' | 'HIGH'
+  riskLevel?: RiskLevel
   mlAnalysis?: {
     riskScore: number
-    category: 'low' | 'moderate' | 'high'
+    category: MLRiskCategory
     recommendations: string[]
     confidence: number
   }

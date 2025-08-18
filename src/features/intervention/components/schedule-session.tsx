@@ -6,8 +6,8 @@ import { SessionsTable } from './session-table'
 import { LogHistoryTable } from './log-history-table'
 import { CreateSessionModal } from './create-session-modal'
 import { useSessions } from '../hooks/use-sessions'
-import { DashboardHeader } from '@/features/dashboard'
 import { interBold } from '@/shared/styles/fonts'
+import { Header } from '@/features/users/counselors/dashboard/header'
 
 export default function ScheduleSession() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,7 +19,7 @@ export default function ScheduleSession() {
 
   return (
     <div className="flex flex-col">
-      <DashboardHeader />
+      <Header />
       <div className="mt-[4.44vh] flex flex-col items-center justify-center">
         <div className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
           {/* Schedule Session Section */}

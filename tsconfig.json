@@ -32,7 +32,6 @@
       "@/lib/*": ["./src/shared/lib/*"],
       "@/providers/*": ["./src/shared/providers/*"],
       "@/styles/*": ["./src/shared/styles/*"],
-      "@/store/*": ["src/shared/state/*"],
       "@/types/*": ["./src/shared/types/*"],
       "@/ui/*": ["./src/shared/components/ui/*"],
       "@/shared/*": ["./src/shared/*"]

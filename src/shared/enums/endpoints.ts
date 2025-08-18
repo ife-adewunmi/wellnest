@@ -1,3 +1,5 @@
+import { ST } from 'next/dist/shared/lib/utils'
+
 export const Endpoints = {
   // Base API
   API: '/api',
@@ -34,8 +36,18 @@ export const Endpoints = {
   },
 
   COUNSELORS: {
+    API: {
+      DASHBOARD: '/api/counselors/dashboard',
+      METRICS: '/api/counselors/dashboard/metrics',
+      MOOD_CHECKINS: '/api/counselors/dashboard/mood-checkins',
+      ACTIVITIES: '/api/counselors/dashboard/activities',
+      NOTIFICATIONS: '/api/counselors/dashboard/notifications',
+      STUDENTS: '/api/counselors/dashboard/students',
+      STUDENT_PROFILE: (id: string) => `/api/counselors/students/${id}`,
+    },
     DASHBOARD: '/dashboard',
     MANAGE_STUDENT: '/students',
+    STUDENT_PROFILE_PAGE: (id: string) => `/students/${id}`,
   },
 
   // User Management

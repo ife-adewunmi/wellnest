@@ -1,4 +1,9 @@
 export const siteConfig = {
+  name: 'Wellestate',
+  description: 'A scalable and modular Next.js starter template',
+  url: 'https://wellestate.com',
+  logoText: 'Distress Detection',
+  logoLink: '/svg/distress.svg',
   meta: {
     title: {
       default: 'Wellestate | Distress Detection System',

@@ -466,44 +466,63 @@ async function main() {
   ]
   await db.insert(counselorNotes).values(notesInput)
 
-  // 7) Mood check-ins for a few students
-  const moodInput: NewMood[] = [
-    {
-      userId: studentUserRows[0].id,
-      mood: 'STRESSED' as const,
-      socialMediaImpact: false,
-      influences: ['Assignments', 'Exams'],
-      reasons: ['Heavy workload'],
-      description: 'Feeling overwhelmed with deadlines.',
-      riskScore: 65,
-      riskLevel: 'MEDIUM' as const,
-      mlAnalysis: {
-        riskScore: 65,
-        category: 'moderate',
-        recommendations: ['Take breaks'],
-        confidence: 0.82,
-      },
-      createdAt: new Date(),
-    },
-    {
-      userId: studentUserRows[1].id,
-      mood: 'HAPPY' as const,
-      socialMediaImpact: true,
-      influences: ['Friends'],
-      reasons: ['Completed a project'],
-      description: 'Feeling good after finishing a task.',
-      riskScore: 20,
-      riskLevel: 'LOW' as const,
-      mlAnalysis: {
-        riskScore: 20,
-        category: 'low',
-        recommendations: ['Keep it up'],
-        confidence: 0.9,
-      },
-      createdAt: new Date(),
-    },
+  // 7) Mood check-ins for ALL assigned students (so counselors can see data)
+  const moodInputs: NewMood[] = []
+  const moods = ['HAPPY', 'NEUTRAL', 'SAD', 'VERY_SAD', 'ANXIOUS', 'STRESSED'] as const
+  const influences = [
+    ['Assignments', 'Exams'],
+    ['Friends', 'Social'],
+    ['Family', 'Health'],
+    ['Academic', 'Workload'],
+    ['Relationships'],
+    ['Financial'],
   ]
-  await db.insert(moodCheckIns).values(moodInput)
+  const descriptions = [
+    'Feeling overwhelmed with deadlines.',
+    'Had a great day at school!',
+    'Feeling a bit down today.',
+    'Anxious about upcoming exams.',
+    'Neutral, just going through the day.',
+    'Stressed about multiple assignments.',
+  ]
+
+  // Create mood check-ins for all 5 assigned students (first 5)
+  for (let i = 0; i < 5; i++) {
+    const student = studentUserRows[i]
+    // Create multiple mood check-ins per student (for history)
+    for (let j = 0; j < 3; j++) {
+      const moodIndex = (i + j) % moods.length
+      const mood = moods[moodIndex]
+      const riskScore =
+        mood === 'VERY_SAD'
+          ? 85
+          : mood === 'SAD' || mood === 'ANXIOUS' || mood === 'STRESSED'
+            ? 65
+            : mood === 'NEUTRAL'
+              ? 40
+              : 20
+      const riskLevel = riskScore > 70 ? 'HIGH' : riskScore > 50 ? 'MEDIUM' : 'LOW'
+
+      moodInputs.push({
+        userId: student.id,
+        mood: mood,
+        socialMediaImpact: j % 2 === 0,
+        influences: influences[moodIndex],
+        reasons: [`Reason ${j + 1}`],
+        description: descriptions[moodIndex],
+        riskScore: riskScore,
+        riskLevel: riskLevel as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL',
+        mlAnalysis: {
+          riskScore: riskScore,
+          category: riskLevel === 'HIGH' ? 'high' : riskLevel === 'MEDIUM' ? 'moderate' : 'low',
+          recommendations: ['Take breaks', 'Talk to counselor', 'Practice mindfulness'],
+          confidence: 0.75 + Math.random() * 0.2,
+        },
+        createdAt: new Date(Date.now() - j * 24 * 60 * 60 * 1000), // Spread over past few days
+      })
+    }
+  }
+  await db.insert(moodCheckIns).values(moodInputs)
 
   // 8) Screen time data and thresholds
   const screenDataInput: NewScreenData[] = [
@@ -586,23 +605,100 @@ async function main() {
   ]
   await db.insert(riskThresholds).values(riskThresholdsInput)
 
-  // 10) Notifications and messages
+  // 10) Notifications for COUNSELORS (so they can see notifications in their dashboard)
   const notificationsInput: NewNotification[] = [
-    {
-      userId: studentUserRows[0].id,
-      type: 'SESSION_REMINDER' as const,
-      title: 'Session Reminder',
-      message: 'You have a counseling session tomorrow.',
-      data: { sessionId: 'auto' },
-      isRead: false,
-    },
+    // Notifications for Counselor A
     {
       userId: counselorAUserId,
       type: 'NEW_ASSIGNMENT' as const,
       title: 'New Student Assigned',
-      message: 'A new student has been assigned to you.',
-      data: {},
+      message: `${studentUserRows[0].firstName} ${studentUserRows[0].lastName} has been assigned to you.`,
+      data: { studentId: studentUserRows[0].id },
       isRead: false,
+      createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+    },
+    {
+      userId: counselorAUserId,
+      type: 'MOOD_CHANGE' as const,
+      title: 'Student Mood Alert',
+      message: `${studentUserRows[1].firstName} ${studentUserRows[1].lastName} reported feeling stressed.`,
+      data: { studentId: studentUserRows[1].id, mood: 'STRESSED' },
+      isRead: false,
+      createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+    },
+    {
+      userId: counselorAUserId,
+      type: 'SESSION_REMINDER' as const,
+      title: 'Upcoming Session',
+      message: `Session with ${studentUserRows[0].firstName} ${studentUserRows[0].lastName} in 1 hour.`,
+      data: { sessionId: 'session-1', studentId: studentUserRows[0].id },
+      isRead: true,
+      createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // Yesterday
+    },
+    {
+      userId: counselorAUserId,
+      type: 'CRISIS_ALERT' as const,
+      title: 'Urgent: Crisis Alert',
+      message: `${studentUserRows[1].firstName} ${studentUserRows[1].lastName} needs immediate attention.`,
+      data: { studentId: studentUserRows[1].id, urgency: 'high' },
+      isRead: false,
+      createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+    },
+    // Notifications for Counselor B
+    {
+      userId: counselorBUserId,
+      type: 'NEW_ASSIGNMENT' as const,
+      title: 'New Student Assigned',
+      message: `${studentUserRows[2].firstName} ${studentUserRows[2].lastName} has been assigned to you.`,
+      data: { studentId: studentUserRows[2].id },
+      isRead: true,
+      createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+    },
+    {
+      userId: counselorBUserId,
+      type: 'MOOD_CHANGE' as const,
+      title: 'Mood Improvement',
+      message: `${studentUserRows[3].firstName} ${studentUserRows[3].lastName}'s mood has improved.`,
+      data: { studentId: studentUserRows[3].id, mood: 'HAPPY' },
+      isRead: false,
+      createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
+    },
+    {
+      userId: counselorBUserId,
+      type: 'CHECK_IN_REMINDER' as const,
+      title: 'Check-In Required',
+      message: `Please check in with ${studentUserRows[4].firstName} ${studentUserRows[4].lastName}.`,
+      data: { studentId: studentUserRows[4].id },
+      isRead: false,
+      createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000), // 12 hours ago
+    },
+    {
+      userId: counselorBUserId,
+      type: 'SCREEN_TIME_RISK' as const,
+      title: 'High Screen Time Alert',
+      message: `${studentUserRows[2].firstName} ${studentUserRows[2].lastName} exceeded screen time threshold.`,
+      data: { studentId: studentUserRows[2].id, screenTime: '8 hours' },
+      isRead: false,
+      createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
+    },
+    // Student notifications (for completeness)
+    {
+      userId: studentUserRows[0].id,
+      type: 'SESSION_REMINDER' as const,
+      title: 'Session Tomorrow',
+      message: 'You have a counseling session tomorrow at 2:00 PM.',
+      data: { sessionId: 'session-1' },
+      isRead: false,
+      createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    },
+    {
+      userId: studentUserRows[2].id,
+      type: 'CHECK_IN_REMINDER' as const,
+      title: 'Time for Check-In',
+      message: 'Please complete your daily mood check-in.',
+      data: {},
+      isRead: true,
+      createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000),
     },
   ]
   await db.insert(notifications).values(notificationsInput)

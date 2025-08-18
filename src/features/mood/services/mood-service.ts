@@ -1,5 +1,5 @@
 import { api } from '@/shared/service/api'
-import type { MoodType } from '@/shared/types/mood'
+import type { MoodType, RiskLevel, MLRiskCategory } from '@/shared/types/common.types'
 
 export interface MoodCheckInData {
   mood: MoodType
@@ -13,7 +13,7 @@ export interface MoodCheckInResponse {
   reasons: string[]
   description?: string
   riskScore?: number
-  riskLevel?: 'LOW' | 'MEDIUM' | 'HIGH'
+  riskLevel?: RiskLevel
   createdAt: string
 }
 
@@ -29,12 +29,12 @@ export async function getMoodHistory(userId: string, limit = 30): Promise<MoodCh
 
 export async function analyzeMood(checkInId: string): Promise<{
   riskScore: number
-  category: 'low' | 'moderate' | 'high'
+  category: MLRiskCategory
   recommendations: string[]
 }> {
   const response = await api.post<{
     riskScore: number
-    category: 'low' | 'moderate' | 'high'
+    category: MLRiskCategory
     recommendations: string[]
   }>(`/api/analyze`, { checkInId })
   return response.data
