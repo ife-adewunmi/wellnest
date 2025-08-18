@@ -144,9 +144,21 @@ export class StudentService {
           phoneNumber: usersTable.phoneNumber,
           isActive: usersTable.isActive,
           createdAt: usersTable.createdAt,
+          avatar: usersTable.avatar,
+          // Student-specific fields
           studentId: studentsTable.studentId,
           department: studentsTable.department,
+          faculty: studentsTable.faculty,
           level: studentsTable.level,
+          admissionYear: studentsTable.admissionYear,
+          gender: studentsTable.gender,
+          dateOfBirth: studentsTable.dateOfBirth,
+          nationality: studentsTable.nationality,
+          stateOfOrigin: studentsTable.stateOfOrigin,
+          homeAddress: studentsTable.homeAddress,
+          emergencyContact: studentsTable.emergencyContact,
+          medicalInfo: studentsTable.medicalInfo,
+          academicInfo: studentsTable.academicInfo,
         })
         .from(usersTable)
         .leftJoin(studentsTable, eq(usersTable.id, studentsTable.userId))
@@ -160,9 +172,120 @@ export class StudentService {
         }
       }
 
+      // Get additional student data: latest mood check-in, sessions, etc.
+      const [latestMoodCheckIn] = await db
+        .select({
+          mood: moodCheckInsTable.mood,
+          riskScore: moodCheckInsTable.riskScore,
+          createdAt: moodCheckInsTable.createdAt,
+          description: moodCheckInsTable.description,
+        })
+        .from(moodCheckInsTable)
+        .where(eq(moodCheckInsTable.userId, userId))
+        .orderBy(desc(moodCheckInsTable.createdAt))
+        .limit(1)
+
+      // Get today's screen time
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      
+      const [screenTimeToday] = await db
+        .select({
+          totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
+        })
+        .from(screenTimeDataTable)
+        .where(
+          and(
+            eq(screenTimeDataTable.userId, userId),
+            gte(screenTimeDataTable.date, today),
+          ),
+        )
+        .groupBy(screenTimeDataTable.userId)
+        .limit(1)
+
+      // Get session counts (requires importing sessions table)
+      let totalSessions = 0
+      let upcomingSessions = 0
+      try {
+        const { sessionsTable } = await import('@/shared/db/schema/sessions')
+        
+        const [sessionCounts] = await db
+          .select({
+            total: sql<number>`COUNT(*)::int`,
+            upcoming: sql<number>`COUNT(CASE WHEN ${sessionsTable.scheduledAt} > NOW() THEN 1 END)::int`,
+          })
+          .from(sessionsTable)
+          .where(eq(sessionsTable.studentId, userId))
+          .limit(1)
+        
+        if (sessionCounts) {
+          totalSessions = sessionCounts.total || 0
+          upcomingSessions = sessionCounts.upcoming || 0
+        }
+      } catch (error) {
+        console.warn('Sessions table not available or error fetching session counts:', error)
+      }
+
+      // Calculate risk level based on mood and risk score
+      const calculateRiskLevel = (
+        riskScore?: number | null,
+        mood?: string | null,
+      ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
+        if (!riskScore) return 'LOW'
+        if (riskScore >= 8 || mood === 'VERY_SAD') return 'CRITICAL'
+        if (riskScore >= 6 || mood === 'SAD' || mood === 'ANXIOUS') return 'HIGH'
+        if (riskScore >= 4 || mood === 'STRESSED') return 'MEDIUM'
+        return 'LOW'
+      }
+
+      // Transform the data to match StudentDetail interface
+      const studentDetail = {
+        // Base fields
+        id: student.id,
+        studentId: student.studentId,
+        name: `${student.firstName} ${student.lastName}`,
+        email: student.email,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        phoneNumber: student.phoneNumber,
+        avatar: student.avatar,
+        createdAt: student.createdAt,
+        
+        // Student detail fields
+        department: student.department,
+        faculty: student.faculty,
+        level: student.level,
+        admissionYear: student.admissionYear,
+        gender: student.gender,
+        dateOfBirth: student.dateOfBirth,
+        nationality: student.nationality,
+        stateOfOrigin: student.stateOfOrigin,
+        homeAddress: student.homeAddress,
+        emergencyContact: student.emergencyContact,
+        medicalInfo: student.medicalInfo,
+        academicInfo: student.academicInfo,
+        
+        // Dynamic data based on database queries
+        riskLevel: calculateRiskLevel(latestMoodCheckIn?.riskScore, latestMoodCheckIn?.mood),
+        currentMood: latestMoodCheckIn?.mood as MoodType | undefined,
+        screenTimeToday: screenTimeToday?.totalMinutes || 0,
+        lastCheckIn: latestMoodCheckIn?.createdAt || student.createdAt,
+        
+        // Additional StudentDetail fields
+        moodDescription: latestMoodCheckIn?.description || null,
+        hasActiveCounselor: true,
+        counselorId: null, // TODO: Get actual counselor ID from relationship
+        latestMood: latestMoodCheckIn?.mood || null,
+        latestMoodDate: latestMoodCheckIn?.createdAt || null,
+        riskScore: latestMoodCheckIn?.riskScore || null,
+        totalSessions,
+        upcomingSessions,
+        graduationYear: null,
+      }
+
       return {
         success: true,
-        student,
+        student: studentDetail,
       }
     } catch (error) {
       console.error('Error fetching student:', error)
