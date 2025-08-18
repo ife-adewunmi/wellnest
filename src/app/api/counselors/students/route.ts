@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
-import { StudentService } from '@/features/users/counselors/services/students.service'
+import { StudentService } from '@/users/counselors/services/students.service'
 
 export async function GET() {
   try {

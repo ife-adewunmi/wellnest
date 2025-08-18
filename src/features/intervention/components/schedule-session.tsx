@@ -7,7 +7,7 @@ import { LogHistoryTable } from './log-history-table'
 import { CreateSessionModal } from './create-session-modal'
 import { useSessions } from '../hooks/use-sessions'
 import { interBold } from '@/shared/styles/fonts'
-import { Header } from '@/features/users/counselors/dashboard/header'
+import { Header } from '@/users/counselors/dashboard/header'
 
 export default function ScheduleSession() {
   const [isModalOpen, setIsModalOpen] = useState(false)

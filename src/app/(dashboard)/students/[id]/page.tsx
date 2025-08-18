@@ -1,12 +1,12 @@
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
-import { Header } from '@/features/users/counselors/dashboard'
-import { StudentProfileContainer } from '@/features/users/counselors/manage-student/student-profile-container'
-import { StudentService } from '@/features/users/counselors/services/students.service'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { Header } from '@/users/counselors/dashboard'
+import { StudentProfileContainer } from '@/users/counselors/manage-student/student-profile-container'
+import { StudentService } from '@/users/counselors/services/students.service'
+import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 
 interface StudentProfilePageProps {
   params: Promise<{ id: string }>

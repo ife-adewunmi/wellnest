@@ -8,7 +8,7 @@ import type {
   Metric,
   MoodCheckIn,
   ActivityData,
-} from '@/features/users/counselors/types/dashboard.types'
+} from '@/users/counselors/types/dashboard.types'
 import { NotificationsService } from './notification.service'
 import { StudentService } from './students.service'
 

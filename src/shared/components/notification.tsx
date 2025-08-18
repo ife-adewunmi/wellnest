@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { AlertCircle, Smartphone, Calendar } from 'lucide-react'
 import { Button } from './ui/custom-button'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
-import { useDashboardStore } from '@/features/users/counselors/state/dashboard/dashboardStore'
+import { useDashboardStore } from '@/users/counselors/state/dashboard/dashboardStore'
 import { LoadingSpinner } from './loading-spinner'
 
 import Image from 'next/image'

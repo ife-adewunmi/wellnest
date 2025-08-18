@@ -1,5 +1,5 @@
 import { isServer } from '@/shared/lib/is-server'
-import { LoginCredentials } from '@/features/users/auth/types'
+import { LoginCredentials } from '@/users/auth/types'
 
 export const rememberUser = (user: LoginCredentials) => {
   if (isServer) return

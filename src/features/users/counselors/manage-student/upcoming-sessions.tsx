@@ -6,7 +6,7 @@ import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
 import {
   useActivities,
   useActivitiesLoading,
-} from '@/features/users/counselors/state/activities/activitiesSelectors'
+} from '@/users/counselors/state/activities/activitiesSelectors'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 
 interface Session {

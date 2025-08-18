@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useDashboardSettings } from '@/shared/contexts/dashboard-settings-context'
-import { useMoodCheckIns, useStudents } from '@/features/users/counselors/state'
+import { useMoodCheckIns, useStudents } from '@/users/counselors/state'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
 import { AlertTriangle, TrendingUp, TrendingDown } from 'lucide-react'

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import type { MoodCheckIn } from '@/features/users/counselors/types/dashboard.types'
-import { dashboardApi } from '@/features/users/counselors/services/models/dashboard-api'
+import type { MoodCheckIn } from '@/users/counselors/types/dashboard.types'
+import { dashboardApi } from '@/users/counselors/services/models/dashboard-api'
 import { ActionTypes } from '../actionTypes'
 
 interface MoodCheckInsState {

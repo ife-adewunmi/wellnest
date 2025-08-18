@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { DashboardService } from '@/features/users/counselors/services/main.service'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { DashboardService } from '@/users/counselors/services/main.service'
+import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
 
 export async function GET() {

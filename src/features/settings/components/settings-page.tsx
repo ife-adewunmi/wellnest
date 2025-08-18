@@ -7,7 +7,7 @@ import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Switch } from '@/shared/components/ui/switch'
 import { Label } from '@/shared/components/ui/label'
 import { toast } from 'react-toastify'
-import { Header } from '@/features/users/counselors/dashboard/header'
+import { Header } from '@/users/counselors/dashboard/header'
 import { interMedium, interRegular } from '@/shared/styles/fonts'
 import { DashboardWidget } from '@/features'
 

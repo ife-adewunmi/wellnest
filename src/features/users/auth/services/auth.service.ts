@@ -1,7 +1,7 @@
 import { db } from '@/shared/db'
 import { eq } from 'drizzle-orm'
 import { usersTable } from '@/shared/db/schema/users'
-import { loginSchema, signupSchema } from '@/features/users/auth/lib/validations'
+import { loginSchema, signupSchema } from '@/users/auth/lib/validations'
 import bcrypt from 'bcryptjs'
 import { LoginCredentials, AuthResponse, User, SignupCredentials } from '../types'
 
