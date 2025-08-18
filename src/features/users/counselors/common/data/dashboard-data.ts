@@ -1,4 +1,4 @@
-import type { Metric } from '../dashboard/metrics'
+import type { Metric } from '@/features/users/counselors/types/dashboard.types'
 
 // Legacy mock data - use mock-dashboard.ts instead
 // export const MOCK_MOOD_CHECK_INS = []
