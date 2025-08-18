@@ -37,6 +37,7 @@ async function resetDatabase() {
     await client.query('DROP TABLE IF EXISTS students CASCADE')
     await client.query('DROP TABLE IF EXISTS counselors CASCADE')
     await client.query('DROP TABLE IF EXISTS users CASCADE')
+    await client.query('DROP TABLE IF EXISTS auth_sessions CASCADE')
 
     // Drop all enums
     console.log('🗑️ Dropping enums...')

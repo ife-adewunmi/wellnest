@@ -12,7 +12,7 @@ import { ReportHeader } from './components/report-header'
 import { ReportFilters } from './components/reports-filter'
 import { ReportOptions } from './components/reports-options'
 import { toast } from 'react-toastify'
-import { Header } from '@/features/users/counselors/components/header'
+import { Header } from '@/features/users/counselors/dashboard/header'
 
 export default function Reports() {
   const [filters, setFilters] = useState<ReportFiltersType>({

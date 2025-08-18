@@ -9,18 +9,20 @@ import { SidebarInset } from '@/shared/components/ui/sidebar'
 import { OfflineIndicator } from '@/shared/components/offline-indicator'
 import { Header } from '@/shared/components/header'
 import { useUserStore } from '@/features/users/state'
+import { useAuthStore } from '@/features/users/auth/state/authStore'
 import { navigateToAuth } from '@/shared/state/navigation'
 import { useSessionStore } from '@/features/users/auth/state/sessionStore'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const { user, isLoggedIn, isInitialized } = useUserStore()
+  const { user } = useUserStore()
+  const { isAuthenticated, isInitialized } = useAuthStore()
 
   useEffect(() => {
-    if (isInitialized && !isLoggedIn) {
+    if (isInitialized && !isAuthenticated) {
       navigateToAuth(router, '/signin')
     }
-  }, [isInitialized, isLoggedIn, router])
+  }, [isInitialized, isAuthenticated, router])
 
   // Also check session validity
   useEffect(() => {

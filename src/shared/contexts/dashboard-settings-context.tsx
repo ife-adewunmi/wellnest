@@ -21,6 +21,7 @@ const STORAGE_KEY = 'dashboard-widget-settings'
 
 const defaultWidgets: DashboardWidget[] = [
   { id: 'mood-tracker', label: 'Mood tracker', enabled: true },
+  { id: 'mood-history', label: 'Mood History', enabled: true },
   { id: 'screen-time', label: 'Screen time tracker', enabled: true },
   { id: 'distress-score', label: 'Overall distress score', enabled: true },
   { id: 'notification-widget', label: 'Notification widget', enabled: true },

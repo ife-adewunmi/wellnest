@@ -117,6 +117,21 @@ const nextConfig: NextConfig = {
   httpAgentOptions: {
     keepAlive: true,
   },
+  webpack: (config, { isServer }) => {
+    // Fix for PostgreSQL client modules not available in browser
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        dns: false,
+        pg: false,
+        'pg-native': false,
+      }
+    }
+    return config
+  },
 }
 
 export default withPWA(nextConfig)

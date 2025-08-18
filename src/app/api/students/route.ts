@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/shared/db'
-import { users, moodCheckIns, sessions } from '@/shared/db/schema'
+import { users, students, moodCheckIns, sessions } from '@/shared/db/schema'
 import { eq, desc, and, sql } from 'drizzle-orm'
 
 export async function GET(request: NextRequest) {
@@ -10,14 +10,14 @@ export async function GET(request: NextRequest) {
     const offset = Number(searchParams.get('offset')) || 0
 
     // Get all students with their latest mood check-in and session info
-    const students = await db
+    const studentsList = await db
       .select({
         id: users.id,
         name: sql`${users.firstName} || ' ' || ${users.lastName}`.as('name'),
         email: users.email,
-        department: users.department,
-        studentId: users.studentId,
-        level: users.level,
+        department: students.department,
+        studentId: students.studentId,
+        level: students.level,
         avatar: users.avatar,
         createdAt: users.createdAt,
         // Latest mood check-in
@@ -54,11 +54,12 @@ export async function GET(request: NextRequest) {
         )`,
       })
       .from(users)
+      .innerJoin(students, eq(students.userId, users.id))
       .where(eq(users.role, 'STUDENT'))
       .limit(limit)
       .offset(offset)
 
-    return NextResponse.json(students)
+    return NextResponse.json(studentsList)
   } catch (error) {
     console.error('Error fetching students:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

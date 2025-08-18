@@ -172,8 +172,10 @@ export function PWAProvider({ children }: { children: React.ReactNode }) {
 
       // Trigger background sync when back online
       if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
-        navigator.serviceWorker.ready.then((registration) => {
-          return registration.sync.register('background-sync')
+        navigator.serviceWorker.ready.then((registration: any) => {
+          if (registration.sync) {
+            return registration.sync.register('background-sync')
+          }
         })
       }
     }
