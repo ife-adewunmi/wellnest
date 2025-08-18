@@ -29,7 +29,7 @@ export class DashboardService {
           this.getRecentActivities(counselorId),
           getNotificationsData,
           this.getMoodHistory(counselorId),
-          getStudentsData
+          getStudentsData,
         ])
 
       return {

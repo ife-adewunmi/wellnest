@@ -32,7 +32,6 @@ import { StudentDetail } from '@/features/users/counselors/types/student.types'
 import { RiskLevel, MoodType } from '@/shared/types/common.types'
 
 interface EnhancedStudentProfileProps {
-  studentId: string
   student?: StudentDetail | null
   onBack?: () => void
   onRefresh?: () => void
@@ -46,10 +45,9 @@ const tabs = [
   { id: 'sessions', label: 'Sessions' },
 ] as const
 
-type TabId = typeof tabs[number]['id']
+type TabId = (typeof tabs)[number]['id']
 
-export const EnhancedStudentProfile = ({ 
-  studentId, 
+export const EnhancedStudentProfile = ({
   student,
   onBack, 
   onRefresh, 
@@ -123,13 +121,15 @@ export const EnhancedStudentProfile = ({
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <Badge className={getRiskLevelColor(student.riskLevel || 'LOW' as RiskLevel)}>
+                    <Badge className={getRiskLevelColor(student.riskLevel || ('LOW' as RiskLevel))}>
                       <AlertCircle className="mr-1 h-3 w-3" />
                       Risk: {student.riskLevel || 'Low'}
                     </Badge>
 
                     <Badge variant="outline">
-                      <span className="mr-1">{getMoodEmoji(student.currentMood as MoodType || 'NEUTRAL' as MoodType)}</span>
+                      <span className="mr-1">
+                        {getMoodEmoji((student.currentMood as MoodType) || ('NEUTRAL' as MoodType))}
+                      </span>
                       {student.currentMood || 'Neutral'}
                     </Badge>
 
