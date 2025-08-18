@@ -41,7 +41,7 @@ async function getStudentData(studentId: string): Promise<{
 
     // Fetch student data
     const result = await StudentService.getStudentById(studentId)
-    
+
     if (!result.success || !result.student) {
       return { student: null, error: result.error || 'Student not found' }
     }
@@ -76,15 +76,15 @@ async function getStudentData(studentId: string): Promise<{
       hasActiveCounselor: true,
       counselorId: counselorId,
       email: result.student.email,
-      createdAt: result.student.createdAt
+      createdAt: result.student.createdAt,
     }
 
     return { student: studentData, error: null }
   } catch (error) {
     console.error('Error fetching student data:', error)
-    return { 
-      student: null, 
-      error: error instanceof Error ? error.message : 'Failed to fetch student data' 
+    return {
+      student: null,
+      error: error instanceof Error ? error.message : 'Failed to fetch student data',
     }
   }
 }
@@ -105,7 +105,7 @@ export default async function StudentProfilePage({ params }: StudentProfilePageP
       <Header />
       <div className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
         <h1 className="mb-6 text-2xl font-bold">Students Management</h1>
-        
+
         <Suspense
           fallback={
             <div className="flex h-64 items-center justify-center">

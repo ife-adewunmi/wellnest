@@ -31,42 +31,48 @@ export const useStudentProfileWithStatus = (studentId: string) => {
   const isStale = useStudentProfileStore((state) => state.isDataStale(studentId))
   const lastFetched = useStudentProfileStore((state) => state.lastFetched[studentId])
 
-  return useMemo(() => ({
-    profile,
-    isStale,
-    lastFetched,
-    exists: !!profile,
-    needsRefresh: !profile || isStale,
-  }), [profile, isStale, lastFetched])
+  return useMemo(
+    () => ({
+      profile,
+      isStale,
+      lastFetched,
+      exists: !!profile,
+      needsRefresh: !profile || isStale,
+    }),
+    [profile, isStale, lastFetched],
+  )
 }
 
 // Action selectors
 export const useStudentProfileActions = () => {
   const store = useStudentProfileStore()
 
-  return useMemo(() => ({
-    fetchStudentProfile: store.fetchStudentProfile,
-    setStudentProfile: store.setStudentProfile,
-    updateStudentProfile: store.updateStudentProfile,
-    removeStudentProfile: store.removeStudentProfile,
-    refreshStudentProfile: store.refreshStudentProfile,
-    setLoading: store.setLoading,
-    setError: store.setError,
-    clearError: store.clearError,
-    clearCache: store.clearCache,
-    clearStudentCache: store.clearStudentCache,
-  }), [
-    store.fetchStudentProfile,
-    store.setStudentProfile,
-    store.updateStudentProfile,
-    store.removeStudentProfile,
-    store.refreshStudentProfile,
-    store.setLoading,
-    store.setError,
-    store.clearError,
-    store.clearCache,
-    store.clearStudentCache,
-  ])
+  return useMemo(
+    () => ({
+      fetchStudentProfile: store.fetchStudentProfile,
+      setStudentProfile: store.setStudentProfile,
+      updateStudentProfile: store.updateStudentProfile,
+      removeStudentProfile: store.removeStudentProfile,
+      refreshStudentProfile: store.refreshStudentProfile,
+      setLoading: store.setLoading,
+      setError: store.setError,
+      clearError: store.clearError,
+      clearCache: store.clearCache,
+      clearStudentCache: store.clearStudentCache,
+    }),
+    [
+      store.fetchStudentProfile,
+      store.setStudentProfile,
+      store.updateStudentProfile,
+      store.removeStudentProfile,
+      store.refreshStudentProfile,
+      store.setLoading,
+      store.setError,
+      store.clearError,
+      store.clearCache,
+      store.clearStudentCache,
+    ],
+  )
 }
 
 // Bulk selectors for performance
@@ -80,4 +86,3 @@ export const useMultipleStudentProfiles = (studentIds: string[]) =>
       {} as Record<string, StudentDetail | undefined>,
     ),
   )
-  

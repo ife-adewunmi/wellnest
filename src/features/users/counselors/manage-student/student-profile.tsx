@@ -51,13 +51,13 @@ const tabs = [
   { id: 'sessions', label: 'Sessions' },
 ] as const
 
-type TabId = typeof tabs[number]['id']
+type TabId = (typeof tabs)[number]['id']
 
-export const EnhancedStudentProfile = ({ 
-  studentId, 
-  onBack, 
-  onRefresh, 
-  isRefreshing = false 
+export const EnhancedStudentProfile = ({
+  studentId,
+  onBack,
+  onRefresh,
+  isRefreshing = false,
 }: EnhancedStudentProfileProps) => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabId>('overview')
@@ -75,7 +75,7 @@ export const EnhancedStudentProfile = ({
     student: !!student,
     isLoading,
     error,
-    needsRefresh
+    needsRefresh,
   })
 
   // Fetch student profile on mount
@@ -83,7 +83,7 @@ export const EnhancedStudentProfile = ({
     console.log('EnhancedStudentProfile: useEffect triggered', {
       studentId,
       needsRefresh,
-      hasStudent: !!student
+      hasStudent: !!student,
     })
 
     if (studentId && needsRefresh) {
@@ -130,8 +130,8 @@ export const EnhancedStudentProfile = ({
             <p className="text-red-600">{error}</p>
           </div>
           <div className="space-x-2">
-            <Button 
-              onClick={() => fetchStudentProfile(studentId, true)} 
+            <Button
+              onClick={() => fetchStudentProfile(studentId, true)}
               variant="outline"
               disabled={isLoading}
             >
@@ -154,8 +154,8 @@ export const EnhancedStudentProfile = ({
         <div className="text-center">
           <p className="mb-4 text-gray-500">No student data available</p>
           <div className="space-x-2">
-            <Button 
-              onClick={() => fetchStudentProfile(studentId, true)} 
+            <Button
+              onClick={() => fetchStudentProfile(studentId, true)}
               variant="outline"
               disabled={isLoading}
             >
@@ -214,13 +214,15 @@ export const EnhancedStudentProfile = ({
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <Badge className={getRiskLevelColor(student.riskLevel || 'LOW' as RiskLevel)}>
+                    <Badge className={getRiskLevelColor(student.riskLevel || ('LOW' as RiskLevel))}>
                       <AlertCircle className="mr-1 h-3 w-3" />
                       Risk: {student.riskLevel || 'Low'}
                     </Badge>
 
                     <Badge variant="outline">
-                      <span className="mr-1">{getMoodEmoji(student.currentMood as MoodType || 'NEUTRAL' as MoodType)}</span>
+                      <span className="mr-1">
+                        {getMoodEmoji((student.currentMood as MoodType) || ('NEUTRAL' as MoodType))}
+                      </span>
                       {student.currentMood || 'Neutral'}
                     </Badge>
 
