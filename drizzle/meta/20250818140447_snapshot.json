@@ -1,5 +1,5 @@
 {
-  "id": "bd338af1-fcaa-4765-964b-ebd77551976f",
+  "id": "5a8bb144-98cf-490d-8fdb-67d9a094cd03",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -80,8 +80,12 @@
           "name": "auth_sessions_user_id_users_id_fk",
           "tableFrom": "auth_sessions",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -91,7 +95,9 @@
         "auth_sessions_session_token_unique": {
           "name": "auth_sessions_session_token_unique",
           "nullsNotDistinct": false,
-          "columns": ["session_token"]
+          "columns": [
+            "session_token"
+          ]
         }
       },
       "policies": {},
@@ -167,8 +173,12 @@
           "name": "counselor_notes_counselor_id_users_id_fk",
           "tableFrom": "counselor_notes",
           "tableTo": "users",
-          "columnsFrom": ["counselor_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "counselor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -176,8 +186,12 @@
           "name": "counselor_notes_student_id_users_id_fk",
           "tableFrom": "counselor_notes",
           "tableTo": "users",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -240,8 +254,12 @@
           "name": "counselor_student_counselor_id_counselors_id_fk",
           "tableFrom": "counselor_student",
           "tableTo": "counselors",
-          "columnsFrom": ["counselor_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "counselor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -249,8 +267,12 @@
           "name": "counselor_student_student_id_students_id_fk",
           "tableFrom": "counselor_student",
           "tableTo": "students",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -361,8 +383,12 @@
           "name": "counselors_user_id_users_id_fk",
           "tableFrom": "counselors",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -372,12 +398,16 @@
         "counselors_user_id_unique": {
           "name": "counselors_user_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["user_id"]
+          "columns": [
+            "user_id"
+          ]
         },
         "counselors_employee_id_unique": {
           "name": "counselors_employee_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["employee_id"]
+          "columns": [
+            "employee_id"
+          ]
         }
       },
       "policies": {},
@@ -434,8 +464,12 @@
           "name": "messages_sender_id_users_id_fk",
           "tableFrom": "messages",
           "tableTo": "users",
-          "columnsFrom": ["sender_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "sender_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -443,8 +477,12 @@
           "name": "messages_receiver_id_users_id_fk",
           "tableFrom": "messages",
           "tableTo": "users",
-          "columnsFrom": ["receiver_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "receiver_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -544,8 +582,12 @@
           "name": "mood_check_ins_user_id_users_id_fk",
           "tableFrom": "mood_check_ins",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -619,8 +661,12 @@
           "name": "notifications_user_id_users_id_fk",
           "tableFrom": "notifications",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -695,8 +741,12 @@
           "name": "push_subscriptions_user_id_users_id_fk",
           "tableFrom": "push_subscriptions",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -706,7 +756,9 @@
         "push_subscriptions_endpoint_unique": {
           "name": "push_subscriptions_endpoint_unique",
           "nullsNotDistinct": false,
-          "columns": ["endpoint"]
+          "columns": [
+            "endpoint"
+          ]
         }
       },
       "policies": {},
@@ -792,8 +844,12 @@
           "name": "risk_thresholds_counselor_id_users_id_fk",
           "tableFrom": "risk_thresholds",
           "tableTo": "users",
-          "columnsFrom": ["counselor_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "counselor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -801,8 +857,12 @@
           "name": "risk_thresholds_student_id_users_id_fk",
           "tableFrom": "risk_thresholds",
           "tableTo": "users",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -868,8 +928,12 @@
           "name": "screen_time_data_user_id_users_id_fk",
           "tableFrom": "screen_time_data",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1106,8 +1170,12 @@
           "name": "sessions_counselor_id_users_id_fk",
           "tableFrom": "sessions",
           "tableTo": "users",
-          "columnsFrom": ["counselor_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "counselor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1115,8 +1183,12 @@
           "name": "sessions_student_id_users_id_fk",
           "tableFrom": "sessions",
           "tableTo": "users",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1278,8 +1350,12 @@
           "name": "students_user_id_users_id_fk",
           "tableFrom": "students",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1289,17 +1365,23 @@
         "students_user_id_unique": {
           "name": "students_user_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["user_id"]
+          "columns": [
+            "user_id"
+          ]
         },
         "students_student_id_unique": {
           "name": "students_student_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["student_id"]
+          "columns": [
+            "student_id"
+          ]
         },
         "students_matric_number_unique": {
           "name": "students_matric_number_unique",
           "nullsNotDistinct": false,
-          "columns": ["matric_number"]
+          "columns": [
+            "matric_number"
+          ]
         }
       },
       "policies": {},
@@ -1415,7 +1497,9 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       },
       "policies": {},
@@ -1427,22 +1511,47 @@
     "public.assignment_status": {
       "name": "assignment_status",
       "schema": "public",
-      "values": ["ACTIVE", "INACTIVE", "TRANSFERRED", "COMPLETED"]
+      "values": [
+        "ACTIVE",
+        "INACTIVE",
+        "TRANSFERRED",
+        "COMPLETED"
+      ]
     },
     "public.gender": {
       "name": "gender",
       "schema": "public",
-      "values": ["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"]
+      "values": [
+        "MALE",
+        "FEMALE",
+        "OTHER",
+        "PREFER_NOT_TO_SAY"
+      ]
     },
     "public.level": {
       "name": "level",
       "schema": "public",
-      "values": ["100", "200", "300", "400", "500", "MASTERS", "PHD"]
+      "values": [
+        "100",
+        "200",
+        "300",
+        "400",
+        "500",
+        "MASTERS",
+        "PHD"
+      ]
     },
     "public.mood_type": {
       "name": "mood_type",
       "schema": "public",
-      "values": ["HAPPY", "NEUTRAL", "SAD", "VERY_SAD", "ANXIOUS", "STRESSED"]
+      "values": [
+        "HAPPY",
+        "NEUTRAL",
+        "SAD",
+        "VERY_SAD",
+        "ANXIOUS",
+        "STRESSED"
+      ]
     },
     "public.notification_type": {
       "name": "notification_type",
@@ -1461,27 +1570,53 @@
     "public.push_subscription_status": {
       "name": "push_subscription_status",
       "schema": "public",
-      "values": ["ACTIVE", "INACTIVE"]
+      "values": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
     },
     "public.risk_level": {
       "name": "risk_level",
       "schema": "public",
-      "values": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      "values": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
     },
     "public.session_status": {
       "name": "session_status",
       "schema": "public",
-      "values": ["SCHEDULED", "IN_PROGRESS", "COMPLETED", "CANCELLED", "NO_SHOW", "RESCHEDULED"]
+      "values": [
+        "SCHEDULED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "CANCELLED",
+        "NO_SHOW",
+        "RESCHEDULED"
+      ]
     },
     "public.session_type": {
       "name": "session_type",
       "schema": "public",
-      "values": ["INDIVIDUAL", "GROUP", "CRISIS", "FOLLOW_UP", "INTAKE", "EMERGENCY"]
+      "values": [
+        "INDIVIDUAL",
+        "GROUP",
+        "CRISIS",
+        "FOLLOW_UP",
+        "INTAKE",
+        "EMERGENCY"
+      ]
     },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",
-      "values": ["STUDENT", "COUNSELOR", "ADMIN"]
+      "values": [
+        "STUDENT",
+        "COUNSELOR",
+        "ADMIN"
+      ]
     }
   },
   "schemas": {},
