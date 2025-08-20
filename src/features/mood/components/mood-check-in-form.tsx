@@ -12,12 +12,11 @@ import { submitMoodCheckIn } from '../services/mood-service'
 import type { MoodType } from '@/shared/types/common.types'
 
 const MOOD_OPTIONS = [
-  { value: 'HAPPY' as MoodType, emoji: '😊', label: 'Happy', color: 'bg-green-500' },
-  { value: 'GOOD' as MoodType, emoji: '😐', label: 'GOOD', color: 'bg-gray-500' },
-  { value: 'SAD' as MoodType, emoji: '😔', label: 'Sad', color: 'bg-blue-500' },
-  { value: 'VERY_SAD' as MoodType, emoji: '😢', label: 'Very Sad', color: 'bg-indigo-500' },
-  { value: 'ANXIOUS' as MoodType, emoji: '😰', label: 'Anxious', color: 'bg-yellow-500' },
-  { value: 'STRESSED' as MoodType, emoji: '😩', label: 'Stressed', color: 'bg-red-500' },
+  { value: 'GOOD' as MoodType, emoji: '😊', label: 'Good', color: 'bg-green-500' },
+  { value: 'HAPPY' as MoodType, emoji: '😄', label: 'Happy', color: 'bg-yellow-500' },
+  { value: 'NEUTRAL' as MoodType, emoji: '😐', label: 'Neutral', color: 'bg-gray-500' },
+  { value: 'BAD' as MoodType, emoji: '😞', label: 'Bad', color: 'bg-orange-500' },
+  { value: 'SAD' as MoodType, emoji: '😢', label: 'Sad', color: 'bg-purple-500' },
 ]
 
 const REASON_OPTIONS = [

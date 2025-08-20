@@ -51,7 +51,7 @@ export function useMoodCheckInModal() {
       throw new Error('User not authenticated')
     }
 
-    const response = await fetch('/api/mood-check-in', {
+    const response = await fetch('/api/students/mood-check-in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -54,7 +54,7 @@ async function getStudentData(studentId: string): Promise<{
       name: `${result.student.firstName} ${result.student.lastName}`,
       lastCheckIn: result.student.createdAt,
       riskLevel: 'LOW' as const,
-      currentMood: 'GOOD',
+      currentMood: 'NEUTRAL',
       screenTimeToday: 0,
 
       // Extended StudentDetail fields

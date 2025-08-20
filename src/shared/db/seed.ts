@@ -483,7 +483,7 @@ async function main() {
     'Feeling a bit down today.',
     'Anxious about upcoming exams.',
     'Neutral, just going through the day.',
-    'Stressed about multiple assignments.',
+    'Feeling bad about multiple assignments.',
   ]
 
   // Create mood check-ins for all 5 assigned students (first 5)
@@ -623,8 +623,8 @@ async function main() {
       userId: counselorAUserId,
       type: 'MOOD_CHANGE' as const,
       title: 'Student Mood Alert',
-      message: `${studentUserRows[1].firstName} ${studentUserRows[1].lastName} reported feeling stressed.`,
-      data: { studentId: studentUserRows[1].id, mood: 'STRESSED' },
+      message: `${studentUserRows[1].firstName} ${studentUserRows[1].lastName} reported feeling bad.`,
+      data: { studentId: studentUserRows[1].id, mood: 'BAD' },
       isRead: false,
       createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
     },
