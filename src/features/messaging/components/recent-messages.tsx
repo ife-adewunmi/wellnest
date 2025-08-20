@@ -1,9 +1,15 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
-import { Badge } from '@/components/ui/badge'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared-components/ui/card'
+import { Button } from '@/shared-components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared-components/avatar'
+import { Badge } from '@/shared-components/ui/badge'
 import { MessageSquare, Send } from 'lucide-react'
 
 interface RecentMessagesProps {

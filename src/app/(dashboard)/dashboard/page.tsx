@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { UserRole } from '@/users/auth/enums'
+import { UserRole } from '@/features/users/auth/enums/user-role'
 import { navigateTo } from '@/shared/state/navigation'
 import { useUserStore } from '@/users/state/index'
-import { Endpoints } from '@/shared/enums/endpoints'
+import { Endpoints } from '@/shared-enums/endpoints'
 import {
   Header,
   DashboardTitle,
@@ -14,7 +14,7 @@ import {
   ActivitySection,
   NotificationsSection,
   StudentTableSection,
-} from '@/features/users/counselors/dashboard'
+} from '@/features/users/counselors/dashboard/sections'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import { ErrorMessage } from '@/shared/components/error-message'
 import {

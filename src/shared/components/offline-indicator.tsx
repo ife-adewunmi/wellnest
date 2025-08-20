@@ -1,7 +1,7 @@
 'use client'
 
 import { useOfflineStorage } from '@/shared/hooks/use-offline-storage'
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/shared-components/ui/badge'
 import { WifiOff, Clock } from 'lucide-react'
 
 export function OfflineIndicator() {
