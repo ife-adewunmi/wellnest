@@ -1546,7 +1546,7 @@
       "schema": "public",
       "values": [
         "HAPPY",
-        "NEUTRAL",
+        "GOOD",
         "SAD",
         "VERY_SAD",
         "ANXIOUS",

@@ -468,7 +468,7 @@ async function main() {
 
   // 7) Mood check-ins for ALL assigned students (so counselors can see data)
   const moodInputs: NewMood[] = []
-  const moods = ['HAPPY', 'NEUTRAL', 'SAD', 'VERY_SAD', 'ANXIOUS', 'STRESSED'] as const
+  const moods = ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'] as const
   const influences = [
     ['Assignments', 'Exams'],
     ['Friends', 'Social'],
@@ -494,13 +494,15 @@ async function main() {
       const moodIndex = (i + j) % moods.length
       const mood = moods[moodIndex]
       const riskScore =
-        mood === 'VERY_SAD'
+        mood === 'SAD'
           ? 85
-          : mood === 'SAD' || mood === 'ANXIOUS' || mood === 'STRESSED'
+          : mood === 'BAD'
             ? 65
             : mood === 'NEUTRAL'
               ? 40
-              : 20
+              : mood === 'HAPPY'
+                ? 25
+                : 20 // GOOD
       const riskLevel = riskScore > 70 ? 'HIGH' : riskScore > 50 ? 'MEDIUM' : 'LOW'
 
       moodInputs.push({

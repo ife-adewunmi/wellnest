@@ -13,7 +13,7 @@ import type { MoodType } from '@/shared/types/common.types'
 
 const MOOD_OPTIONS = [
   { value: 'HAPPY' as MoodType, emoji: '😊', label: 'Happy', color: 'bg-green-500' },
-  { value: 'NEUTRAL' as MoodType, emoji: '😐', label: 'Neutral', color: 'bg-gray-500' },
+  { value: 'GOOD' as MoodType, emoji: '😐', label: 'GOOD', color: 'bg-gray-500' },
   { value: 'SAD' as MoodType, emoji: '😔', label: 'Sad', color: 'bg-blue-500' },
   { value: 'VERY_SAD' as MoodType, emoji: '😢', label: 'Very Sad', color: 'bg-indigo-500' },
   { value: 'ANXIOUS' as MoodType, emoji: '😰', label: 'Anxious', color: 'bg-yellow-500' },
