@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { User } from '@/users/auth/types'
 import { Bell, LogOut, MoreHorizontal, Settings } from 'lucide-react'
 import { Button } from '@/shared/components/ui/button'
-import { UserRole } from '@/users/auth/enums'
+import { UserRole } from '@/features/users/auth/enums/user-role'
 
 interface HeaderActionsProps {
   user: User | null

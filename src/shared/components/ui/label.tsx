@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { interRegular } from '@/shared/styles/fonts'
-// import { cn } from "@/lib/utils"
+// import { cn } from "@/shared-lib/utils"
 
 const labelVariants = cva(`text-[1rem] text-[#666666] ${interRegular.className}`)
 
