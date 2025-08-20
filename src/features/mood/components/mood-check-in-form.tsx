@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/shared/hooks/use-toast'
-import { useOfflineStorage } from '@/hooks/use-offline-storage'
+import { useOfflineStorage } from '@/shared/hooks/use-offline-storage'
 import { submitMoodCheckIn } from '../services/mood-service'
 import type { MoodType } from '@/shared/types/common.types'
 

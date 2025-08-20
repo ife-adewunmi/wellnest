@@ -31,7 +31,7 @@ import { SocialMedia } from '@/features/social-media/components'
 import { StudentDetail } from '@/users/counselors/types/student.types'
 import { RiskLevel, MoodType } from '@/shared/types/common.types'
 
-interface EnhancedStudentProfileProps {
+interface StudentProfileProps {
   student?: StudentDetail | null
   onBack?: () => void
   onRefresh?: () => void
@@ -47,12 +47,12 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]['id']
 
-export const EnhancedStudentProfile = ({
+export const StudentProfile = ({
   student,
   onBack,
   onRefresh,
   isRefreshing = false,
-}: EnhancedStudentProfileProps) => {
+}: StudentProfileProps) => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabId>('overview')
 
