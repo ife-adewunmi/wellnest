@@ -1,10 +1,10 @@
 'use client'
 
 import { Bell, Settings, MessageSquare, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@/shared-components/ui/button'
+import { Input } from '@/shared-components/ui/input'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared-components/avatar'
+import { Badge } from '@/shared-components/ui/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/shared-components/ui/dropdown-menu'
 import { SidebarTrigger } from '@/shared/components/ui/sidebar'
 import { ThemeToggle } from '@/shared/components/theme-toggle'
 import { useRouter } from 'next/navigation'

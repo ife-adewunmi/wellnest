@@ -22,32 +22,26 @@ export default function StudentsPage() {
   const isStale = useIsDataStale('STUDENTS')
   const hasData = useHasData()
 
-  // Get actions directly from store to avoid recreation
   const fetchStudents = useStudentsStore((state) => state.fetchStudents)
   const fetchDashboardData = useDashboardStore((state) => state.fetchDashboardData)
 
-  // Use ref to track if we've initiated a fetch
   const hasFetchedRef = useRef(false)
 
   useEffect(() => {
-    // Only fetch once when component mounts or user changes
     if (!user?.id || isLoading) return
 
-    // Check if we need to fetch data
     const shouldFetch = !hasData || (isStale && !hasFetchedRef.current)
 
     if (shouldFetch) {
       hasFetchedRef.current = true
 
       if (!hasData) {
-        // If we have no data at all, fetch everything
         fetchDashboardData(user.id)
       } else if (isStale) {
-        // If students data is stale, just fetch students
         fetchStudents(user.id)
       }
     }
-  }, [user?.id]) // Only depend on user ID
+  }, [user?.id])
 
   if (isLoading) {
     return (

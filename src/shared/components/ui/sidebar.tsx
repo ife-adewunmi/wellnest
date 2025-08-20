@@ -7,12 +7,12 @@ import { PanelLeft } from 'lucide-react'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 import { cn } from '@/shared/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Button } from '@/shared-components/ui/button'
+import { Input } from '@/shared-components/ui/input'
+import { Separator } from '@/shared-components/ui/separator'
+import { Sheet, SheetContent } from '@/shared-components/ui/sheet'
+import { Skeleton } from '@/shared-components/ui/skeleton'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared-components/ui/tooltip'
 import { useSidebar, SidebarProvider as ContextSidebarProvider } from './sidebar-context'
 
 // Removed these constants as they are now in sidebar-context.tsx

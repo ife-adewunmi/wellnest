@@ -1,3 +1,3 @@
-export { EnhancedStudentProfile as StudentProfile } from './student-profile'
-export { UpcomingSessions } from './upcoming-sessions'
-export { StudentsTable } from './students-table'
+export * from './student-profile'
+export * from './upcoming-sessions'
+export * from './students-table'
