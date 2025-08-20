@@ -41,7 +41,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <AppSidebar user={user} />
       <SidebarInset>
         <Header user={user} />
-        <main className="flex-1 p-6">{children}</main>
+        <main className="">{children}</main>
         <OfflineIndicator />
       </SidebarInset>
     </SidebarProvider>
