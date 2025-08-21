@@ -191,13 +191,11 @@ export class DashboardService {
 
       // Map to the expected format
       const moodEmojis: Record<string, string> = {
-        HAPPY: '😊',
-        SAD: '😔',
-        ANXIOUS: '😰',
-        ANGRY: '😠',
-        EXCITED: '😄',
+        GOOD: '😊',
+        HAPPY: '😄',
         NEUTRAL: '😐',
-        STRESSED: '😩',
+        BAD: '😞',
+        SAD: '😔',
       }
 
       return checkIns.map((checkIn) => {
@@ -209,7 +207,7 @@ export class DashboardService {
           studentId: checkIn.userId, // For display purposes
           studentName: `${checkIn.firstName} ${checkIn.lastName?.charAt(0)}.`,
           avatar: checkIn.avatar || '/placeholder.svg?height=32&width=32',
-          mood: checkIn.mood as 'HAPPY' | 'NEUTRAL' | 'SAD' | 'VERY_SAD' | 'ANXIOUS' | 'STRESSED',
+          mood: checkIn.mood as 'GOOD' | 'HAPPY' | 'NEUTRAL' | 'BAD' | 'SAD',
           description:
             checkIn.description || `Feeling ${checkIn.mood?.toLowerCase() || 'okay'} today`,
           emoji: moodEmojis[checkIn.mood || 'NEUTRAL'] || '😐',
@@ -351,13 +349,12 @@ export class DashboardService {
       const moodHistory = await db
         .select({
           date: sql<string>`DATE(${moodCheckInsTable.createdAt})`,
-          avgMood: sql<number>`AVG(CASE 
-            WHEN ${moodCheckInsTable.mood} = 'HAPPY' THEN 9
-            WHEN ${moodCheckInsTable.mood} = 'NEUTRAL' THEN 7
-            WHEN ${moodCheckInsTable.mood} = 'SAD' THEN 4
-            WHEN ${moodCheckInsTable.mood} = 'VERY_SAD' THEN 2
-            WHEN ${moodCheckInsTable.mood} = 'ANXIOUS' THEN 3
-            WHEN ${moodCheckInsTable.mood} = 'STRESSED' THEN 4
+          avgMood: sql<number>`AVG(CASE
+            WHEN ${moodCheckInsTable.mood} = 'GOOD' THEN 9
+            WHEN ${moodCheckInsTable.mood} = 'HAPPY' THEN 8
+            WHEN ${moodCheckInsTable.mood} = 'NEUTRAL' THEN 5
+            WHEN ${moodCheckInsTable.mood} = 'BAD' THEN 3
+            WHEN ${moodCheckInsTable.mood} = 'SAD' THEN 2
             ELSE 5
           END)`,
           avgRiskScore: sql<number>`AVG(${moodCheckInsTable.riskScore})`,
@@ -489,9 +486,9 @@ export class DashboardService {
   //       mood?: string | null,
   //     ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
   //       if (!riskScore) return 'LOW'
-  //       if (riskScore >= 8 || mood === 'VERY_SAD') return 'CRITICAL'
-  //       if (riskScore >= 6 || mood === 'SAD' || mood === 'ANXIOUS') return 'HIGH'
-  //       if (riskScore >= 4 || mood === 'STRESSED') return 'MEDIUM'
+  //       if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+  //       if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
+  //       if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
   //       return 'LOW'
   //     }
 
