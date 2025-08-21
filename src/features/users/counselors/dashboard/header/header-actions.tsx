@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { User } from '@/features/users/auth/types'
+import { User } from '@/users/auth/types'
 import { Bell, LogOut, MoreHorizontal, Settings } from 'lucide-react'
 import { Button } from '@/shared/components/ui/button'
-import { UserRole } from '@/features/users/auth/enums'
+import { UserRole } from '@/features/users/auth/enums/user-role'
 
 interface HeaderActionsProps {
   user: User | null

@@ -16,38 +16,24 @@
     "jsx": "preserve",
     "incremental": true,
 
-    "jsxImportSource": "react",
- 
-    "allowSyntheticDefaultImports": true,
- 
-
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/shared/components/*"],
+      "@/*": ["./*"],
+      "@/src/*": ["./src/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/users/*": ["./src/features/users/*"],
+      "@/shared/*": ["./src/shared/*"],
       "@/config/*": ["./src/shared/config/*"],
       "@/db/*": ["./src/shared/db/*"],
-      "@/enums/*": ["./src/shared/enums/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/hooks/*": ["./src/shared/hooks/*"],
-      "@/lib/*": ["./src/shared/lib/*"],
-      "@/providers/*": ["./src/shared/providers/*"],
-      "@/styles/*": ["./src/shared/styles/*"],
-      "@/types/*": ["./src/shared/types/*"],
-      "@/ui/*": ["./src/shared/components/ui/*"],
-      "@/shared/*": ["./src/shared/*"]
+      "@/shared-components/*": ["./src/shared/components/*"],
+      "@/shared-enums/*": ["./src/shared/enums/*"],
+      "@/shared-lib/*": ["./src/shared/lib/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/feature/components/upcoming-sessions.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/types/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

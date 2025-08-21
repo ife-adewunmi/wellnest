@@ -1,4 +1,4 @@
-import { StudentTableData } from "./dashboard.types"
+import { StudentTableData } from './dashboard.types'
 
 export interface StudentListItem extends StudentTableData {
   id: string

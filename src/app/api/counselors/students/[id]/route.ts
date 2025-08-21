@@ -1,6 +1,6 @@
-import { SessionService } from '@/features/users/auth/services/session.service'
-import { DashboardService } from '@/features/users/counselors/services/main.service'
-import { StudentService } from '@/features/users/counselors/services/students.service'
+import { SessionService } from '@/users/auth/services/session.service'
+import { DashboardService } from '@/users/counselors/services/main.service'
+import { StudentService } from '@/users/counselors/services/students.service'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -41,16 +41,22 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Student ID is required' }, { status: 400 })
     }
 
+    // Validate UUID format
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+    if (!uuidRegex.test(studentUserId)) {
+      return NextResponse.json(
+        {
+          error: 'Invalid student ID format. Expected UUID format.',
+        },
+        { status: 400 },
+      )
+    }
+
     // Use the authenticated user's ID to fetch students data
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching students for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch student user and profile data
     const students = await StudentService.getStudentById(studentUserId)
-
-    console.log(`Fetching student profile data: ${students}`)
 
     return NextResponse.json(students)
   } catch (error) {

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Send, User, Search } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared-components/ui/card'
+import { Button } from '@/shared-components/ui/button'
+import { Input } from '@/shared-components/ui/input'
+import { Textarea } from '@/shared-components/ui/textarea'
+import { Send, User } from 'lucide-react'
 import { fetchRecentMessages, sendMessage } from '@/shared/service/api'
 
 interface Message {

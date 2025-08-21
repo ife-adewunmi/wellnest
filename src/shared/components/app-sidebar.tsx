@@ -13,11 +13,11 @@ import {
   SidebarHeader,
   SidebarFooter,
 } from './ui/sidebar'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar'
-import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared-components/avatar'
+import { Badge } from '@/shared-components/ui/badge'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { User } from '@/features/users/auth/types'
+import { User } from '@/users/auth/types'
 
 interface AppSidebarProps {
   user: User

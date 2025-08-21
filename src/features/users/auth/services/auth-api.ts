@@ -1,5 +1,5 @@
 import { request } from '@/shared/service/request'
-import { AuthResponse, LoginCredentials, SignupCredentials } from '@/features/users/auth/types'
+import { AuthResponse, LoginCredentials, SignupCredentials } from '@/users/auth/types'
 import { Endpoints } from '@/shared/enums/endpoints'
 
 interface AuthApiRequests {

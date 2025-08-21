@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 import { ErrorMessage } from '@/shared/components/error-message'
 import { Button } from '@/shared/components/ui/button'
-import { EnhancedStudentProfile } from '@/features/users/counselors/manage-student/student-profile'
+import { StudentProfile as EnhancedStudentProfile } from '@/users/counselors/manage-student/student-profile'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
-import { studentsApi } from '@/features/users/counselors/services/models/students-api'
-import { StudentDetail } from '@/features/users/counselors/types/student.types'
+import { studentsApi } from '@/users/counselors/services/models/students-api'
+import { StudentDetail } from '@/users/counselors/types/student.types'
 
 interface StudentProfileContainerProps {
   initialStudent: StudentDetail | null
@@ -17,10 +17,10 @@ interface StudentProfileContainerProps {
   studentId: string
 }
 
-export function StudentProfileContainer({ 
-  initialStudent, 
-  initialError, 
-  studentId 
+export function StudentProfileContainer({
+  initialStudent,
+  initialError,
+  studentId,
 }: StudentProfileContainerProps) {
   const router = useRouter()
   const [student, setStudent] = useState<StudentDetail | null>(initialStudent)
@@ -33,9 +33,9 @@ export function StudentProfileContainer({
     try {
       setIsRefreshing(true)
       setError(null)
-      
+
       const studentData = await studentsApi.getStudentById(studentId)
-      
+
       if (!studentData) {
         setError('Student not found')
       } else {
@@ -54,9 +54,9 @@ export function StudentProfileContainer({
     try {
       setIsLoading(true)
       setError(null)
-      
+
       const studentData = await studentsApi.getStudentById(studentId)
-      
+
       if (!studentData) {
         setError('Student not found')
       } else {
@@ -139,7 +139,7 @@ export function StudentProfileContainer({
     <div className="relative">
       {/* Refresh indicator */}
       {isRefreshing && (
-        <div className="absolute top-0 left-0 right-0 z-10 bg-blue-50 border border-blue-200 rounded-md p-2 mb-4">
+        <div className="absolute top-0 right-0 left-0 z-10 mb-4 rounded-md border border-blue-200 bg-blue-50 p-2">
           <div className="flex items-center justify-center">
             <LoadingSpinner size="small" />
             <span className="ml-2 text-sm text-blue-600">Refreshing data...</span>
@@ -151,9 +151,7 @@ export function StudentProfileContainer({
       {error && student && (
         <div className="mb-4 rounded-md border border-yellow-200 bg-yellow-50 p-4">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-yellow-600">
-              Warning: {error} (showing cached data)
-            </p>
+            <p className="text-sm text-yellow-600">Warning: {error} (showing cached data)</p>
             <Button onClick={() => setError(null)} variant="ghost" size="sm">
               ×
             </Button>
@@ -162,8 +160,8 @@ export function StudentProfileContainer({
       )}
 
       {student && (
-        <EnhancedStudentProfile 
-          studentId={studentId} 
+        <EnhancedStudentProfile
+          student={student}
           onBack={handleBack}
           onRefresh={refreshStudent}
           isRefreshing={isRefreshing}

@@ -1,7 +1,7 @@
 import { db } from '@/shared/db'
 import { eq } from 'drizzle-orm'
 import { usersTable } from '@/shared/db/schema/users'
-import { loginSchema, signupSchema } from '@/features/users/auth/lib/validations'
+import { loginSchema, signupSchema } from '@/users/auth/lib/validations'
 import bcrypt from 'bcryptjs'
 import { LoginCredentials, AuthResponse, User, SignupCredentials } from '../types'
 
@@ -35,8 +35,6 @@ export class AuthService {
 
       // Find user by email
       const found = await db.select().from(usersTable).where(eq(usersTable.email, email)).limit(1)
-
-      console.log(found)
 
       if (found.length === 0) {
         return { success: false, message: 'Invalid credentials', error: 'Invalid credentials' }

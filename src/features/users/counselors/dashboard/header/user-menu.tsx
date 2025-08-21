@@ -1,8 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Avatar as UserAvatar, AvatarFallback, AvatarImage } from '@/components/avatar'
+import { Button } from '@/shared-components/ui/button'
+import { Avatar as UserAvatar, AvatarFallback, AvatarImage } from '@/shared-components/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/shared-components/ui/dropdown-menu'
 import Avatar from '@/shared/components/ui/avatar'
-import { User } from '@/features/users/auth/types'
+import { User } from '@/users/auth/types'
 
 interface UserMenuProps {
   user?: User

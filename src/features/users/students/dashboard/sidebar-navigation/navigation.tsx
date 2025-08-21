@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { Home, CreditCard, BookOpen, FileText, Briefcase, User, LogOut, ChevronRight } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import { Button } from "@/shared-components/ui/button"
 interface NavigationItem {
   icon: React.ComponentType<any>
   label: string

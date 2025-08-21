@@ -19,7 +19,7 @@ import {
 } from '@/shared/components/ui/select'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/components/ui/toggle-group'
 import { interBold, interMedium, interRegular } from '@/shared/styles/fonts'
-import { useUserStore } from '@/features/users/state/userStore'
+import { useUserStore } from '@/users/state/userStore'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
 
 const chartConfig = {

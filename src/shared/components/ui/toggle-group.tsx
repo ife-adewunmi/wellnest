@@ -40,7 +40,7 @@ const ToggleGroup = React.forwardRef<
         ? React.cloneElement(child, {
             variant,
             size,
-          } as any)
+          } as React.HTMLAttributes<HTMLElement>)
         : child,
     )}
   </ToggleGroupPrimitive.Root>

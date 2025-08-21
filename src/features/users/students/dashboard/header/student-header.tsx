@@ -1,4 +1,4 @@
-import { interBold, interExtraBold, interRegular } from '@/shared/styles/fonts'
+import { interExtraBold, interRegular } from '@/shared/styles/fonts'
 import Image from 'next/image'
 import { useUserStore } from '@/features/users/state'
 

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { Notification } from '@/features/users/counselors/types/dashboard.types'
-import { notificationsApi } from '@/features/users/counselors/services/models'
+import { Notification } from '@/users/counselors/types/dashboard.types'
+import { notificationsApi } from '@/users/counselors/services/models'
 import { ActionTypes } from '../actionTypes'
 
 interface NotificationsState {

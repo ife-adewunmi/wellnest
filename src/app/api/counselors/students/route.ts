@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { NextResponse } from 'next/server'
+import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
-import { StudentService } from '@/features/users/counselors/services/students.service'
+import { StudentService } from '@/users/counselors/services/students.service'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Get session token from cookies
     const cookieStore = await cookies()
@@ -33,9 +33,6 @@ export async function GET(request: NextRequest) {
 
     // Use the authenticated user's ID to fetch students data
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching students for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch students data from service
     const students = await StudentService.getStudents(counselorId)

@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import StudentDashboardPage from '@/features/users/students/dashboard/dashboard'
-import { UserRole } from '@/features/users/auth/enums'
-import { useUserStore } from '@/features/users/state'
+import { StudentDashboard } from '@/features/students/components/student-dashboard'
+import { UserRole } from '@/features/users/auth/enums/user-role'
+import { useUserStore } from '@/users/state'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
 
@@ -22,5 +22,5 @@ export default function StudentPage() {
   if (!user) return null
   if (user.role !== UserRole.STUDENT) return null
 
-  return <StudentDashboardPage />
+  return <StudentDashboard user={user} />
 }

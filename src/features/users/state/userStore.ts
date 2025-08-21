@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { User } from '@/features/users/auth/types'
+import { User } from '@/users/auth/types'
 
 export interface UserStore {
   // User state

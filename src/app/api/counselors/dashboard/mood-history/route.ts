@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { DashboardService } from '@/features/users/counselors/services/main.service'
-import { SessionService } from '@/features/users/auth/services/session.service'
+import { DashboardService } from '@/users/counselors/services/main.service'
+import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
@@ -36,9 +36,6 @@ export async function GET(request: NextRequest) {
 
     // Use the authenticated user's ID
     const counselorId = sessionData.user.id
-    console.log(
-      `Fetching mood history for counselor: ${sessionData.user.email} (User ID: ${counselorId})`,
-    )
 
     // Fetch mood history from service
     const moodHistory = await DashboardService.getMoodHistory(counselorId, days)

@@ -6,14 +6,14 @@ import {
   MOCK_METRICS,
   MOCK_MOOD_CHECKINS,
   MOCK_ACTIVITIES,
-} from '@/features/users/counselors/common/data/mock-dashboard'
+} from '@/users/counselors/common/data/mock-dashboard'
 import type {
   DashboardDataResponse,
   Metric,
   MoodCheckIn,
   ActivityData,
   StudentTableData,
-} from '@/features/users/counselors/types/dashboard.types'
+} from '@/users/counselors/types/dashboard.types'
 
 interface DashboardApiRequests {
   getDashboardData: (counselorId: string) => Promise<DashboardDataResponse>
@@ -193,12 +193,9 @@ export class DashboardApi implements DashboardApiRequests {
       const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
         params: { counselorId },
       })
-      console.log('Dashboard API getStudents response:', response)
       const students = response.data?.students || response.students || []
-      console.log('Dashboard API getStudents extracted:', students)
       return students
     } catch (error) {
-      console.error('Failed to fetch students:', error)
       // Fallback to mock data in local environment when DB fails
       if (isLocalEnvironment()) {
         console.warn('Using mock students as fallback in local environment')

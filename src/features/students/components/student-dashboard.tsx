@@ -1,14 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared-components/ui/card'
+import { Button } from '@/shared-components/ui/button'
 import { MoodCheckInForm } from '@/features/mood/components/mood-check-in-form'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/shared-components/ui/dialog'
 import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
 import { UpcomingSessions } from '@/features/sessions/components/upcoming-sessions'
 import { RecentMessages } from '@/features/messaging/components/recent-messages'
-import type { User } from '@/features/users/auth/types'
+import type { User } from '@/users/auth/types'
 import {
   fetchMoodCheckIns,
   fetchUpcomingSessions,
