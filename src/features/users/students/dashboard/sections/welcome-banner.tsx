@@ -13,4 +13,3 @@ export function WelcomeBanner({ greeting }: { greeting: string }) {
     </Card>
   )
 }
-

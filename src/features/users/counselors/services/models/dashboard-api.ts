@@ -1,6 +1,6 @@
 import { request } from '@/shared/service/request'
 import { Endpoints } from '@/shared/enums/endpoints'
-import { isLocalEnvironment } from '@/shared/enums/environment'
+import { isLocal } from '@/shared/enums/environment'
 import {
   MOCK_DASHBOARD_DATA,
   MOCK_METRICS,
@@ -37,6 +37,8 @@ export class DashboardApi implements DashboardApiRequests {
    */
   public async getDashboardData(counselorId: string): Promise<DashboardDataResponse> {
     try {
+      console.log('isLocal(): ', isLocal())
+
       const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
         params: { counselorId },
       })
@@ -44,7 +46,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock dashboard data as fallback in local environment')
         return MOCK_DASHBOARD_DATA
       }
@@ -65,7 +67,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch metrics:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock metrics as fallback in local environment')
         return MOCK_METRICS
       }
@@ -87,7 +89,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch mood check-ins:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock mood check-ins as fallback in local environment')
         return MOCK_MOOD_CHECKINS.slice(0, limit)
       }
@@ -118,7 +120,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch activities:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock activities as fallback in local environment')
         return MOCK_ACTIVITIES
       }
@@ -197,7 +199,7 @@ export class DashboardApi implements DashboardApiRequests {
       return students
     } catch (error) {
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock students as fallback in local environment')
         // Generate mock student data
         return [

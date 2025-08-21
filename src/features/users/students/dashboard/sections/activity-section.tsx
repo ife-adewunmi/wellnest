@@ -9,4 +9,3 @@ export function StudentActivitySection({ userId }: { userId: string }) {
     </div>
   )
 }
-

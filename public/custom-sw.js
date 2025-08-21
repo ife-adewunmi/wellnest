@@ -1,1 +1,407 @@
-if(!self.define){let e,s={};const a=(a,c)=>(a=new URL(a+".js",c).href,s[a]||new Promise(s=>{if("document"in self){const e=document.createElement("script");e.src=a,e.onload=s,document.head.appendChild(e)}else e=a,importScripts(a),s()}).then(()=>{let e=s[a];if(!e)throw new Error(`Module ${a} didn’t register its module`);return e}));self.define=(c,i)=>{const t=e||("document"in self?document.currentScript.src:"")||location.href;if(s[t])return;let n={};const r=e=>a(e,t),b={module:{uri:t},exports:n,require:r};s[t]=Promise.all(c.map(e=>b[e]||r(e))).then(e=>(i(...e),n))}}define(["./workbox-e5ef0007"],function(e){"use strict";importScripts("fallback-XGb1YY7UPGgcBa1tKaVbJ.js"),self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next/static/XGb1YY7UPGgcBa1tKaVbJ/_buildManifest.js",revision:"69836445fdcdf527ce2420004b805768"},{url:"/_next/static/XGb1YY7UPGgcBa1tKaVbJ/_ssgManifest.js",revision:"b6652df95db52feb4daf4eca35380933"},{url:"/_next/static/chunks/1144-d01e7643c612262e.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/1614-e3caa71e20de9925.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/164f4fb6.0a8cf1651537b860.js",revision:"0a8cf1651537b860"},{url:"/_next/static/chunks/1684-5daf046ace6952dd.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/2121.192ca3d1fff3cc4d.js",revision:"192ca3d1fff3cc4d"},{url:"/_next/static/chunks/2158-31aa41e440fc57c0.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/2170a4aa-8be2e1de3df20b60.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/2358-905da7839bfa3367.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/2518-170a73ca231f845e.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/3056-195f056b75082f2f.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/3455-9ff74c866981df11.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/4bd1b696-8aa9867a6426446f.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/519-f9877b680e9df61b.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/5204-cdc4dd91c8ab2803.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/5508-0f97d36d4c75fd51.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/6118.394f5f75294d49ad.js",revision:"394f5f75294d49ad"},{url:"/_next/static/chunks/7157-6de2e8574bcc81d9.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/8117-59e84d9e2a83830b.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/822.d1eebe7df2d8fc0a.js",revision:"d1eebe7df2d8fc0a"},{url:"/_next/static/chunks/8543-fd35b82c4b698550.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/880-8a322d220afe575f.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/913.fb6bec3e460ba7b8.js",revision:"fb6bec3e460ba7b8"},{url:"/_next/static/chunks/9211-eeba9baed138be66.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/ad2866b8.1fc071285e350c45.js",revision:"1fc071285e350c45"},{url:"/_next/static/chunks/app/(auth)/signin/page-6bda948b70b6b7a0.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(auth)/signup/page-2c40a95e97b3093d.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/dashboard/page-f5a6468001c0ec88.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/intervention/page-784fffd805844b62.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/messages/page-410061748fec9691.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/notifications/page-c2a366273fc9fd81.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/reports/page-cfa11035a37a2eee.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/settings/page-5982b23c3a03436c.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/student/layout-78c2b5270ea8cc13.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/student/messages/page-0b2a72e25eb98da9.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/student/page-be12067ebb624d51.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/student/privacy/page-7167c77b020325cb.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/student/sessions/page-e84e3ca64704d1b2.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/students/%5Bid%5D/page-f3800300102b6f6f.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/(dashboard)/students/page-9cdad88efb3a1604.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/_not-found/page-dd675a313545ee69.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/auth/session/cleanup/route-a1290c35e8b96b88.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/auth/session/route-809000dbaa764e4d.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/auth/signin/route-a4e8b0246be0ef5f.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/auth/signout/route-933e2459f469c894.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/auth/signup/route-bfdb0e268477bcb4.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/counselors/dashboard/mood-history/route-643971f8f19e6265.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/counselors/dashboard/route-3f048a60b639cc56.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/counselors/students/%5Bid%5D/route-af86b77878d5268b.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/counselors/students/route-a6a51f799b975aa1.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/messages/route-3ec61b5a0f0e84e0.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/notifications/%5Bid%5D/read/route-8a6a386761780705.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/notifications/route-6bffe8ec2d5998d3.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/sessions/route-66b46d8f9c6843a3.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/students/%5Bid%5D/route-ad5dd3846af48761.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/students/route-9c266d4fa69a7ddc.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/api/users/route-7cd65d838bcbd4e2.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/layout-ec6de9f73138a3d4.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/app/page-433e48a1a4a41c7d.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/bc98253f.a20b3a3cf1b114d6.js",revision:"a20b3a3cf1b114d6"},{url:"/_next/static/chunks/framework-82b67a6346ddd02b.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/main-app-e2e52f69e737c510.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/main-d52056c25e526d23.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/pages/_app-5d1abe03d322390c.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/pages/_error-3b2a1d523de49635.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/chunks/polyfills-42372ed130431b0a.js",revision:"846118c33b2c0e922d7b3a7676f81f6f"},{url:"/_next/static/chunks/webpack-fffe35f8e9c7e5e7.js",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/_next/static/css/0ba209f381cb539b.css",revision:"0ba209f381cb539b"},{url:"/_next/static/css/42fdfff71f22b421.css",revision:"42fdfff71f22b421"},{url:"/_next/static/css/82a4525c1e8eb296.css",revision:"82a4525c1e8eb296"},{url:"/_next/static/css/88554d6d76590b32.css",revision:"88554d6d76590b32"},{url:"/_next/static/css/c3d5158d8f0cbbba.css",revision:"c3d5158d8f0cbbba"},{url:"/_next/static/css/e28bb54f58d00b64.css",revision:"e28bb54f58d00b64"},{url:"/_next/static/css/f21d4be02a8807dd.css",revision:"f21d4be02a8807dd"},{url:"/_next/static/media/11540fc693bd1a25-s.p.ttf",revision:"c77560a8441d664af3e65dd57026dff9"},{url:"/_next/static/media/37089f52ccd73e0c-s.p.ttf",revision:"e48c1217adab2a0e44f8df400d33c325"},{url:"/_next/static/media/560c123d023f024e-s.p.ttf",revision:"995fb5ac38b90303c0cc1a0b21e2c9fe"},{url:"/_next/static/media/5b8409335a5b011c-s.p.ttf",revision:"8b04b3bd9435341377d7f4b4d68b6ecc"},{url:"/_next/static/media/a3210dc3e70d67b6-s.p.ttf",revision:"6610bc1e35f982d2cf44f52335b5793b"},{url:"/_next/static/media/defbff1c3961a844-s.p.ttf",revision:"8ca1a84037fdb644723129315c390ad9"},{url:"/_next/static/media/f53ddc1e29b5dc42-s.p.ttf",revision:"4591e900425d177e6ba268d165bf12e8"},{url:"/favicon.ico",revision:"c30c7d42707a47a3f4591831641e50dc"},{url:"/file.svg",revision:"d09f95206c3fa0bb9bd9fefabfd0ea71"},{url:"/globe.svg",revision:"2aaafa6a49b6563925fe440891e32717"},{url:"/images/bad.png",revision:"e2da7ff52793fb5fa44f67822d2515e6"},{url:"/images/dashboard-img.png",revision:"d6b6d8b710171779ceaad25e159fed3a"},{url:"/images/good.png",revision:"928b6ff238666a9b4e7dc8903d3b96ec"},{url:"/images/happy.png",revision:"5019085c3e68d75e64b443156a268f83"},{url:"/images/header-default-profile.svg",revision:"67a8973a115d72d3790fbcd00db9f582"},{url:"/images/header-img.png",revision:"c17ce8c236412fb4aa804269c1c22a74"},{url:"/images/home.png",revision:"a31b18f4d8db3ad872fb0114b845c933"},{url:"/images/neutral.png",revision:"595afb278104b05bf0602a11b6b02325"},{url:"/images/offline-fallback.png",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/images/onboarding.png",revision:"e9f81b6e2e3ba8fcc54676231b7d905f"},{url:"/images/profile-img.png",revision:"0b8bfcb8eea6df36b7090a09f484a76f"},{url:"/images/sad.png",revision:"fbcaf0d2757aab6e43579342fcbc8804"},{url:"/manifest.json",revision:"58e7f834533ba38327402c92d5bf222f"},{url:"/next.svg",revision:"8e061864f388b47f33a1c3780831193e"},{url:"/offline",revision:"XGb1YY7UPGgcBa1tKaVbJ"},{url:"/robots.txt",revision:"e85909f63920e5452dee586f4b20df78"},{url:"/svg/all-notification.svg",revision:"2394357eaa7fed4b2a5365d2561b3738"},{url:"/svg/bulb.svg",revision:"2a260ac37c4b8bfdc1903a1ad4e5f944"},{url:"/svg/calendar.svg",revision:"5c35b1157ee62c375ec78434d14e1386"},{url:"/svg/chat.svg",revision:"9e2110081cfcdf80f5aff00f5446715c"},{url:"/svg/check-in.svg",revision:"7f41268685885a60aa4eb8a8d8e98baa"},{url:"/svg/check-session.svg",revision:"c11df1e0f3a4a0dbe9ca1e46ae54f8f3"},{url:"/svg/confirm.svg",revision:"cc9da0e547a1d6fb9a0a11912412d8a6"},{url:"/svg/distress.svg",revision:"9bd7132cad4a0084fad7141180909953"},{url:"/svg/download.svg",revision:"8b392d49a0d9c1bb289686268439f6bc"},{url:"/svg/facebook.svg",revision:"dbe0225750ad70b38396f33f07399d62"},{url:"/svg/flag.svg",revision:"1f7be0412d74d8ff4565973c217c218d"},{url:"/svg/flagged-post.svg",revision:"9556b9530733320e4986779697dcaf3f"},{url:"/svg/home-screen.svg",revision:"fe472ab4309e2abba68aa028609683f8"},{url:"/svg/increased-screen.svg",revision:"cd7cd9048ae00a9373717bba5a4e209a"},{url:"/svg/insta.svg",revision:"6cc73156b5e9f2515dcbae2dad8ac4a2"},{url:"/svg/mail.svg",revision:"9b8a5aac719c242f9a3d6cd5c1fd5ff8"},{url:"/svg/missed.svg",revision:"6db57a87e07974e7e197656d81c3c0f2"},{url:"/svg/note.svg",revision:"01731ddb95a23d6f99996d23eff8ce82"},{url:"/svg/notification.svg",revision:"9fef4a1b6cef1004b215bd2d07f3d7fd"},{url:"/svg/notify-card.svg",revision:"1ac094f612dba754a4a96f2094cfd5c6"},{url:"/svg/prompt.svg",revision:"8090db54244cf226144a1a6b05ceba5f"},{url:"/svg/screen-time.svg",revision:"d335bb75bc976e7272631bbebcfd1f9f"},{url:"/svg/search-icon.svg",revision:"c9a1bd8b39fbbc3bb7483c9c6e481e7e"},{url:"/svg/settings.svg",revision:"ae825b2c8e23ef727469f11406071557"},{url:"/svg/social-distress.svg",revision:"7c84b10e42c189122524d57b555e8eab"},{url:"/svg/telegram.svg",revision:"db64ac98e33e36525674a8a759512ab5"},{url:"/svg/tiktok.svg",revision:"3bf285eb654df541022de54f409e63fd"},{url:"/svg/tweeter.svg",revision:"57656f9efb4c214a295734d6c0e32783"},{url:"/svg/youtube.svg",revision:"ac579b7921cd64678a911acd866f92c2"},{url:"/vercel.svg",revision:"c0af2f507b369b085b35ef4bbe3bcf1e"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[{cacheWillUpdate:async({request:e,response:s,event:a,state:c})=>s&&"opaqueredirect"===s.type?new Response(s.body,{status:200,statusText:"OK",headers:s.headers}):s},{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/^.*\/api\/.*$/,new e.NetworkFirst({cacheName:"api-cache",plugins:[new e.ExpirationPlugin({maxEntries:100,maxAgeSeconds:300}),new e.CacheableResponsePlugin({statuses:[0,200]}),new e.BackgroundSyncPlugin("api-background-sync",{maxRetentionTime:1440}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,new e.CacheFirst({cacheName:"images-cache",plugins:[new e.ExpirationPlugin({maxEntries:200,maxAgeSeconds:2592e3}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:woff|woff2|eot|ttf|otf)$/,new e.CacheFirst({cacheName:"fonts-cache",plugins:[new e.ExpirationPlugin({maxEntries:50,maxAgeSeconds:31536e3}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/\.(?:css|js)$/,new e.StaleWhileRevalidate({cacheName:"static-resources",plugins:[new e.ExpirationPlugin({maxEntries:100,maxAgeSeconds:604800}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/^https?:\/\/localhost:3000\/.*$/,new e.NetworkFirst({cacheName:"pages-cache",networkTimeoutSeconds:3,plugins:[new e.ExpirationPlugin({maxEntries:50,maxAgeSeconds:86400}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.googleapis\.com\/.*/,new e.CacheFirst({cacheName:"google-fonts-cache",plugins:[new e.ExpirationPlugin({maxEntries:30,maxAgeSeconds:31536e3}),{handlerDidError:async({request:e})=>self.fallback(e)}]}),"GET")});
+if (!self.define) {
+  let e,
+    s = {}
+  const a = (a, i) => (
+    (a = new URL(a + '.js', i).href),
+    s[a] ||
+      new Promise((s) => {
+        if ('document' in self) {
+          const e = document.createElement('script')
+          ;((e.src = a), (e.onload = s), document.head.appendChild(e))
+        } else ((e = a), importScripts(a), s())
+      }).then(() => {
+        let e = s[a]
+        if (!e) throw new Error(`Module ${a} didn’t register its module`)
+        return e
+      })
+  )
+  self.define = (i, n) => {
+    const c = e || ('document' in self ? document.currentScript.src : '') || location.href
+    if (s[c]) return
+    let t = {}
+    const r = (e) => a(e, c),
+      b = { module: { uri: c }, exports: t, require: r }
+    s[c] = Promise.all(i.map((e) => b[e] || r(e))).then((e) => (n(...e), t))
+  }
+}
+define(['./workbox-e5ef0007'], function (e) {
+  'use strict'
+  ;(importScripts('fallback-fUmSE-vg0REaBblNZ3TbM.js'),
+    self.skipWaiting(),
+    e.clientsClaim(),
+    e.precacheAndRoute(
+      [
+        { url: '/_next/static/chunks/1144-d01e7643c612262e.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/164f4fb6.0a8cf1651537b860.js', revision: '0a8cf1651537b860' },
+        { url: '/_next/static/chunks/1684-5daf046ace6952dd.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/2121.192ca3d1fff3cc4d.js', revision: '192ca3d1fff3cc4d' },
+        {
+          url: '/_next/static/chunks/2170a4aa-8be2e1de3df20b60.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        { url: '/_next/static/chunks/2446-081293146f3c515d.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/2837-65ecbf97e8a8040e.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/2971-f4e83af25457eb39.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/3455-9ff74c866981df11.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/3729-d9af51f73c324e82.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/4743-425665786614694d.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        {
+          url: '/_next/static/chunks/4bd1b696-8aa9867a6426446f.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        { url: '/_next/static/chunks/519-f9877b680e9df61b.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/6099-2e23dd253797c5a9.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/6118.394f5f75294d49ad.js', revision: '394f5f75294d49ad' },
+        { url: '/_next/static/chunks/6874-1cc5b668ffa197df.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/7713-31a9495270795082.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/8117-670daed0b793ea67.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/822.d1eebe7df2d8fc0a.js', revision: 'd1eebe7df2d8fc0a' },
+        { url: '/_next/static/chunks/8543-fd35b82c4b698550.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/880-8a322d220afe575f.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/913.fb6bec3e460ba7b8.js', revision: 'fb6bec3e460ba7b8' },
+        { url: '/_next/static/chunks/9413-23b904fc4075f149.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/_next/static/chunks/ad2866b8.1fc071285e350c45.js', revision: '1fc071285e350c45' },
+        {
+          url: '/_next/static/chunks/app/(auth)/signin/page-ef5c074ad69c2107.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(auth)/signup/page-25507962f9ca2306.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/dashboard/page-e6317d6a8ab51c57.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/intervention/page-968723c6c5ade489.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/messages/page-840f990fb3b45349.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/notifications/page-788075138ec9f99f.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/reports/page-9ebbb3aa18d373fe.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/settings/page-9db69ceeb84a3117.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/student/layout-7db7dc942d9ae65a.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/student/messages/page-0fdd5734530a8697.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/student/page-9146b7b138b3d639.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/student/privacy/page-cb29384f60bc2c38.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/student/sessions/page-76239c8be01eb679.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/students/%5Bid%5D/page-60c77f10ea06893a.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/(dashboard)/students/page-e4bd4416a520d6ab.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/_not-found/page-dd675a313545ee69.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/auth/session/cleanup/route-a1290c35e8b96b88.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/auth/session/route-809000dbaa764e4d.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/auth/signin/route-a4e8b0246be0ef5f.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/auth/signout/route-933e2459f469c894.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/auth/signup/route-bfdb0e268477bcb4.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/counselors/dashboard/mood-history/route-643971f8f19e6265.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/counselors/dashboard/route-3f048a60b639cc56.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/counselors/students/%5Bid%5D/route-af86b77878d5268b.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/counselors/students/route-a6a51f799b975aa1.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/messages/route-3ec61b5a0f0e84e0.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/notifications/%5Bid%5D/read/route-8a6a386761780705.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/notifications/route-6bffe8ec2d5998d3.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/sessions/route-66b46d8f9c6843a3.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/students/%5Bid%5D/route-ad5dd3846af48761.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/students/route-9c266d4fa69a7ddc.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/api/users/route-7cd65d838bcbd4e2.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/layout-ec6de9f73138a3d4.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/app/page-433e48a1a4a41c7d.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        { url: '/_next/static/chunks/bc98253f.a20b3a3cf1b114d6.js', revision: 'a20b3a3cf1b114d6' },
+        {
+          url: '/_next/static/chunks/framework-82b67a6346ddd02b.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/main-app-e2e52f69e737c510.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        { url: '/_next/static/chunks/main-d52056c25e526d23.js', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        {
+          url: '/_next/static/chunks/pages/_app-5d1abe03d322390c.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/pages/_error-3b2a1d523de49635.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        {
+          url: '/_next/static/chunks/polyfills-42372ed130431b0a.js',
+          revision: '846118c33b2c0e922d7b3a7676f81f6f',
+        },
+        {
+          url: '/_next/static/chunks/webpack-fffe35f8e9c7e5e7.js',
+          revision: 'fUmSE-vg0REaBblNZ3TbM',
+        },
+        { url: '/_next/static/css/01904a32196a4efe.css', revision: '01904a32196a4efe' },
+        { url: '/_next/static/css/0ba209f381cb539b.css', revision: '0ba209f381cb539b' },
+        { url: '/_next/static/css/42fdfff71f22b421.css', revision: '42fdfff71f22b421' },
+        { url: '/_next/static/css/88554d6d76590b32.css', revision: '88554d6d76590b32' },
+        { url: '/_next/static/css/c3d5158d8f0cbbba.css', revision: 'c3d5158d8f0cbbba' },
+        { url: '/_next/static/css/e28bb54f58d00b64.css', revision: 'e28bb54f58d00b64' },
+        { url: '/_next/static/css/f21d4be02a8807dd.css', revision: 'f21d4be02a8807dd' },
+        {
+          url: '/_next/static/fUmSE-vg0REaBblNZ3TbM/_buildManifest.js',
+          revision: '69836445fdcdf527ce2420004b805768',
+        },
+        {
+          url: '/_next/static/fUmSE-vg0REaBblNZ3TbM/_ssgManifest.js',
+          revision: 'b6652df95db52feb4daf4eca35380933',
+        },
+        {
+          url: '/_next/static/media/11540fc693bd1a25-s.p.ttf',
+          revision: 'c77560a8441d664af3e65dd57026dff9',
+        },
+        {
+          url: '/_next/static/media/37089f52ccd73e0c-s.p.ttf',
+          revision: 'e48c1217adab2a0e44f8df400d33c325',
+        },
+        {
+          url: '/_next/static/media/560c123d023f024e-s.p.ttf',
+          revision: '995fb5ac38b90303c0cc1a0b21e2c9fe',
+        },
+        {
+          url: '/_next/static/media/5b8409335a5b011c-s.p.ttf',
+          revision: '8b04b3bd9435341377d7f4b4d68b6ecc',
+        },
+        {
+          url: '/_next/static/media/a3210dc3e70d67b6-s.p.ttf',
+          revision: '6610bc1e35f982d2cf44f52335b5793b',
+        },
+        {
+          url: '/_next/static/media/defbff1c3961a844-s.p.ttf',
+          revision: '8ca1a84037fdb644723129315c390ad9',
+        },
+        {
+          url: '/_next/static/media/f53ddc1e29b5dc42-s.p.ttf',
+          revision: '4591e900425d177e6ba268d165bf12e8',
+        },
+        { url: '/favicon.ico', revision: 'c30c7d42707a47a3f4591831641e50dc' },
+        { url: '/file.svg', revision: 'd09f95206c3fa0bb9bd9fefabfd0ea71' },
+        { url: '/globe.svg', revision: '2aaafa6a49b6563925fe440891e32717' },
+        { url: '/images/bad.png', revision: 'e2da7ff52793fb5fa44f67822d2515e6' },
+        { url: '/images/dashboard-img.png', revision: 'd6b6d8b710171779ceaad25e159fed3a' },
+        { url: '/images/good.png', revision: '928b6ff238666a9b4e7dc8903d3b96ec' },
+        { url: '/images/happy.png', revision: '5019085c3e68d75e64b443156a268f83' },
+        { url: '/images/header-default-profile.svg', revision: '67a8973a115d72d3790fbcd00db9f582' },
+        { url: '/images/header-img.png', revision: 'c17ce8c236412fb4aa804269c1c22a74' },
+        { url: '/images/home.png', revision: 'a31b18f4d8db3ad872fb0114b845c933' },
+        { url: '/images/neutral.png', revision: '595afb278104b05bf0602a11b6b02325' },
+        { url: '/images/offline-fallback.png', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/images/onboarding.png', revision: 'e9f81b6e2e3ba8fcc54676231b7d905f' },
+        { url: '/images/profile-img.png', revision: '0b8bfcb8eea6df36b7090a09f484a76f' },
+        { url: '/images/sad.png', revision: 'fbcaf0d2757aab6e43579342fcbc8804' },
+        { url: '/manifest.json', revision: '58e7f834533ba38327402c92d5bf222f' },
+        { url: '/next.svg', revision: '8e061864f388b47f33a1c3780831193e' },
+        { url: '/offline', revision: 'fUmSE-vg0REaBblNZ3TbM' },
+        { url: '/robots.txt', revision: 'e85909f63920e5452dee586f4b20df78' },
+        { url: '/svg/all-notification.svg', revision: '2394357eaa7fed4b2a5365d2561b3738' },
+        { url: '/svg/bulb.svg', revision: '2a260ac37c4b8bfdc1903a1ad4e5f944' },
+        { url: '/svg/calendar.svg', revision: '5c35b1157ee62c375ec78434d14e1386' },
+        { url: '/svg/chat.svg', revision: '9e2110081cfcdf80f5aff00f5446715c' },
+        { url: '/svg/check-in.svg', revision: '7f41268685885a60aa4eb8a8d8e98baa' },
+        { url: '/svg/check-session.svg', revision: 'c11df1e0f3a4a0dbe9ca1e46ae54f8f3' },
+        { url: '/svg/confirm.svg', revision: 'cc9da0e547a1d6fb9a0a11912412d8a6' },
+        { url: '/svg/distress.svg', revision: '9bd7132cad4a0084fad7141180909953' },
+        { url: '/svg/download.svg', revision: '8b392d49a0d9c1bb289686268439f6bc' },
+        { url: '/svg/facebook.svg', revision: 'dbe0225750ad70b38396f33f07399d62' },
+        { url: '/svg/flag.svg', revision: '1f7be0412d74d8ff4565973c217c218d' },
+        { url: '/svg/flagged-post.svg', revision: '9556b9530733320e4986779697dcaf3f' },
+        { url: '/svg/home-screen.svg', revision: 'fe472ab4309e2abba68aa028609683f8' },
+        { url: '/svg/increased-screen.svg', revision: 'cd7cd9048ae00a9373717bba5a4e209a' },
+        { url: '/svg/insta.svg', revision: '6cc73156b5e9f2515dcbae2dad8ac4a2' },
+        { url: '/svg/mail.svg', revision: '9b8a5aac719c242f9a3d6cd5c1fd5ff8' },
+        { url: '/svg/missed.svg', revision: '6db57a87e07974e7e197656d81c3c0f2' },
+        { url: '/svg/note.svg', revision: '01731ddb95a23d6f99996d23eff8ce82' },
+        { url: '/svg/notification.svg', revision: '9fef4a1b6cef1004b215bd2d07f3d7fd' },
+        { url: '/svg/notify-card.svg', revision: '1ac094f612dba754a4a96f2094cfd5c6' },
+        { url: '/svg/prompt.svg', revision: '8090db54244cf226144a1a6b05ceba5f' },
+        { url: '/svg/screen-time.svg', revision: 'd335bb75bc976e7272631bbebcfd1f9f' },
+        { url: '/svg/search-icon.svg', revision: 'c9a1bd8b39fbbc3bb7483c9c6e481e7e' },
+        { url: '/svg/settings.svg', revision: 'ae825b2c8e23ef727469f11406071557' },
+        { url: '/svg/social-distress.svg', revision: '7c84b10e42c189122524d57b555e8eab' },
+        { url: '/svg/telegram.svg', revision: 'db64ac98e33e36525674a8a759512ab5' },
+        { url: '/svg/tiktok.svg', revision: '3bf285eb654df541022de54f409e63fd' },
+        { url: '/svg/tweeter.svg', revision: '57656f9efb4c214a295734d6c0e32783' },
+        { url: '/svg/youtube.svg', revision: 'ac579b7921cd64678a911acd866f92c2' },
+        { url: '/vercel.svg', revision: 'c0af2f507b369b085b35ef4bbe3bcf1e' },
+      ],
+      { ignoreURLParametersMatching: [] },
+    ),
+    e.cleanupOutdatedCaches(),
+    e.registerRoute(
+      '/',
+      new e.NetworkFirst({
+        cacheName: 'start-url',
+        plugins: [
+          {
+            cacheWillUpdate: async ({ request: e, response: s, event: a, state: i }) =>
+              s && 'opaqueredirect' === s.type
+                ? new Response(s.body, { status: 200, statusText: 'OK', headers: s.headers })
+                : s,
+          },
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /^.*\/api\/.*$/,
+      new e.NetworkFirst({
+        cacheName: 'api-cache',
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 300 }),
+          new e.CacheableResponsePlugin({ statuses: [0, 200] }),
+          new e.BackgroundSyncPlugin('api-background-sync', { maxRetentionTime: 1440 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,
+      new e.CacheFirst({
+        cacheName: 'images-cache',
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 200, maxAgeSeconds: 2592e3 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /\.(?:woff|woff2|eot|ttf|otf)$/,
+      new e.CacheFirst({
+        cacheName: 'fonts-cache',
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 31536e3 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /\.(?:css|js)$/,
+      new e.StaleWhileRevalidate({
+        cacheName: 'static-resources',
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 604800 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /^https?:\/\/localhost:3000\/.*$/,
+      new e.NetworkFirst({
+        cacheName: 'pages-cache',
+        networkTimeoutSeconds: 3,
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 86400 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ),
+    e.registerRoute(
+      /^https:\/\/fonts\.googleapis\.com\/.*/,
+      new e.CacheFirst({
+        cacheName: 'google-fonts-cache',
+        plugins: [
+          new e.ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 31536e3 }),
+          { handlerDidError: async ({ request: e }) => self.fallback(e) },
+        ],
+      }),
+      'GET',
+    ))
+})

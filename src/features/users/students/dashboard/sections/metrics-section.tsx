@@ -34,7 +34,9 @@ export function StudentMetricsSection({
           <CardTitle>Average Mood</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-semibold">{averageMood} {moodEmoji}</div>
+          <div className="text-2xl font-semibold">
+            {averageMood} {moodEmoji}
+          </div>
         </CardContent>
       </Card>
       <Card>
@@ -48,4 +50,3 @@ export function StudentMetricsSection({
     </div>
   )
 }
-

@@ -35,15 +35,15 @@ export const getEnvironment = (): Environment => {
   }
 }
 
-export const isLocalEnvironment = (): boolean => {
+export const isLocal = (): boolean => {
   return getEnvironment() === Environment.LOCAL
 }
 
-export const isDevelopmentEnvironment = (): boolean => {
+export const isDevelop = (): boolean => {
   const env = getEnvironment()
   return env === Environment.LOCAL || env === Environment.DEVELOPMENT
 }
 
-export const isProductionEnvironment = (): boolean => {
+export const isProd = (): boolean => {
   return getEnvironment() === Environment.PRODUCTION
 }

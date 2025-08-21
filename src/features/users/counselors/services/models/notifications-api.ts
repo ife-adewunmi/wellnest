@@ -1,6 +1,6 @@
 import { request } from '@/shared/service/request'
 import { Endpoints } from '@/shared/enums/endpoints'
-import { isLocalEnvironment } from '@/shared/enums/environment'
+import { isLocal } from '@/shared/enums/environment'
 import { MOCK_NOTIFICATIONS } from '@/users/counselors/common/data/mock-dashboard'
 import type { Notification } from '@/users/counselors/types/dashboard.types'
 
@@ -27,7 +27,7 @@ export class NotificationsApi implements NotificationsApiRequests {
     } catch (error) {
       console.error('Failed to fetch notifications:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock notifications as fallback in local environment')
         const notifications = unreadOnly
           ? MOCK_NOTIFICATIONS.filter((n) => !n.isRead)
