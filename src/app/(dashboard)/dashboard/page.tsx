@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Dashboard from '@/features/users/counselors/dashboard/dashboard'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { UserRole } from '@/features/users/auth/enums'
 import { navigateTo } from '@/shared/state/navigation'
 import { useUserStore } from '@/features/users/state'
