@@ -1,6 +1,6 @@
 import { request } from '@/shared/service/request'
 import { Endpoints } from '@/shared/enums/endpoints'
-import { isLocalEnvironment } from '@/shared/enums/environment'
+import { isLocal } from '@/shared/enums/environment'
 import {
   MOCK_DASHBOARD_DATA,
   MOCK_METRICS,
@@ -37,6 +37,8 @@ export class DashboardApi implements DashboardApiRequests {
    */
   public async getDashboardData(counselorId: string): Promise<DashboardDataResponse> {
     try {
+      console.log('isLocal(): ', isLocal())
+
       const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
         params: { counselorId },
       })
@@ -44,7 +46,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock dashboard data as fallback in local environment')
         return MOCK_DASHBOARD_DATA
       }
@@ -65,7 +67,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch metrics:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock metrics as fallback in local environment')
         return MOCK_METRICS
       }
@@ -87,7 +89,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch mood check-ins:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock mood check-ins as fallback in local environment')
         return MOCK_MOOD_CHECKINS.slice(0, limit)
       }
@@ -118,7 +120,7 @@ export class DashboardApi implements DashboardApiRequests {
     } catch (error) {
       console.error('Failed to fetch activities:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock activities as fallback in local environment')
         return MOCK_ACTIVITIES
       }
@@ -197,7 +199,7 @@ export class DashboardApi implements DashboardApiRequests {
       return students
     } catch (error) {
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock students as fallback in local environment')
         // Generate mock student data
         return [
@@ -207,7 +209,7 @@ export class DashboardApi implements DashboardApiRequests {
             name: 'Ife Adewunmi',
             lastCheckIn: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'MEDIUM',
-            currentMood: 'STRESSED',
+            currentMood: 'BAD',
             screenTimeToday: 240,
             avatar: '/avatars/student1.jpg',
           },
@@ -227,7 +229,7 @@ export class DashboardApi implements DashboardApiRequests {
             name: 'Bisi Ojo',
             lastCheckIn: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'HIGH',
-            currentMood: 'ANXIOUS',
+            currentMood: 'BAD',
             screenTimeToday: 420,
             avatar: '/avatars/student3.jpg',
           },
@@ -237,7 +239,7 @@ export class DashboardApi implements DashboardApiRequests {
             name: 'Emeka Nwosu',
             lastCheckIn: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'LOW',
-            currentMood: 'NEUTRAL',
+            currentMood: 'GOOD',
             screenTimeToday: 120,
             avatar: '/avatars/student4.jpg',
           },
@@ -247,7 +249,7 @@ export class DashboardApi implements DashboardApiRequests {
             name: 'Zara Ahmed',
             lastCheckIn: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'CRITICAL',
-            currentMood: 'VERY_SAD',
+            currentMood: 'SAD',
             screenTimeToday: 480,
             avatar: '/avatars/student5.jpg',
           },

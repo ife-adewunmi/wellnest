@@ -27,10 +27,14 @@ import {
   useStudents,
   useDashboardStore,
 } from '@/users/counselors/state/dashboard'
+import { isLocal, isProd } from '@/src/shared/enums/environment'
 
 export default function Page() {
   const router = useRouter()
   const { user } = useUserStore()
+
+  console.log('isLocal: ', isLocal())
+  console.log('isProd: ', isProd())
 
   useEffect(() => {
     if (!user) return

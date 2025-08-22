@@ -382,9 +382,9 @@ export class StudentService {
         mood?: string | null,
       ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
         if (!riskScore) return 'LOW'
-        if (riskScore >= 8 || mood === 'VERY_SAD') return 'CRITICAL'
-        if (riskScore >= 6 || mood === 'SAD' || mood === 'ANXIOUS') return 'HIGH'
-        if (riskScore >= 4 || mood === 'STRESSED') return 'MEDIUM'
+        if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+        if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
+        if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
         return 'LOW'
       }
 

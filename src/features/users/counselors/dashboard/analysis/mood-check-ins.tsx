@@ -33,15 +33,16 @@ export function MoodCheckIns({ checkIns }: MoodCheckInsProps) {
   // Map mood to color
   const getMoodColor = (mood: string) => {
     switch (mood) {
-      case 'HAPPY':
+      case 'GOOD':
         return 'text-green-600'
-      case 'SAD':
-      case 'VERY_SAD':
-        return 'text-red-600'
-      case 'ANXIOUS':
-      case 'STRESSED':
-        return 'text-orange-600'
+      case 'HAPPY':
+        return 'text-yellow-600'
       case 'NEUTRAL':
+        return 'text-gray-600'
+      case 'BAD':
+        return 'text-orange-600'
+      case 'SAD':
+        return 'text-red-600'
       default:
         return 'text-gray-600'
     }

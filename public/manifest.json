@@ -6,7 +6,7 @@
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
+  "theme_color": "#63B3ED",
   "scope": "/",
   "lang": "en",
   "categories": ["health", "lifestyle", "productivity", "medical"],

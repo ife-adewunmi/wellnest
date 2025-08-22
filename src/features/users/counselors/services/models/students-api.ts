@@ -1,7 +1,7 @@
 import { Endpoints } from '@/shared/enums/endpoints'
 import { request } from '@/shared/service/request'
 import type { StudentTableData } from '@/users/counselors/types/dashboard.types'
-import { isLocalEnvironment } from '@/shared/enums/environment'
+import { isLocal } from '@/shared/enums/environment'
 import { StudentDetail, StudentListItem } from '../../types/student.types'
 
 interface StudentsApiRequests {
@@ -25,7 +25,7 @@ class StudentsApi implements StudentsApiRequests {
     } catch (error) {
       console.error('Failed to fetch students:', error)
       // Fallback to mock data in local environment when DB fails
-      if (isLocalEnvironment()) {
+      if (isLocal()) {
         console.warn('Using mock students as fallback in local environment')
         // Generate mock student data
         return [
@@ -35,7 +35,7 @@ class StudentsApi implements StudentsApiRequests {
             name: 'Ife Adewunmi',
             lastCheckIn: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'MEDIUM',
-            currentMood: 'STRESSED',
+            currentMood: 'BAD',
             screenTimeToday: 240,
             avatar: '/avatars/student1.jpg',
           },
@@ -55,7 +55,7 @@ class StudentsApi implements StudentsApiRequests {
             name: 'Bisi Ojo',
             lastCheckIn: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'HIGH',
-            currentMood: 'ANXIOUS',
+            currentMood: 'BAD',
             screenTimeToday: 420,
             avatar: '/avatars/student3.jpg',
           },
@@ -65,7 +65,7 @@ class StudentsApi implements StudentsApiRequests {
             name: 'Emeka Nwosu',
             lastCheckIn: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'LOW',
-            currentMood: 'NEUTRAL',
+            currentMood: 'GOOD',
             screenTimeToday: 120,
             avatar: '/avatars/student4.jpg',
           },
@@ -75,7 +75,7 @@ class StudentsApi implements StudentsApiRequests {
             name: 'Zara Ahmed',
             lastCheckIn: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
             riskLevel: 'CRITICAL',
-            currentMood: 'VERY_SAD',
+            currentMood: 'SAD',
             screenTimeToday: 480,
             avatar: '/avatars/student5.jpg',
           },

@@ -4,7 +4,7 @@
  */
 
 // Mood types matching mood_type_enum in database
-export type MoodType = 'HAPPY' | 'NEUTRAL' | 'SAD' | 'VERY_SAD' | 'ANXIOUS' | 'STRESSED'
+export type MoodType = 'GOOD' | 'HAPPY' | 'NEUTRAL' | 'BAD' | 'SAD'
 
 // Risk level types matching risk_level_enum in database
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
@@ -58,7 +58,7 @@ export type ActivityType = 'session' | 'assessment' | 'intervention' | 'group'
 
 // Helper type guards
 export const isMoodType = (value: any): value is MoodType => {
-  return ['HAPPY', 'NEUTRAL', 'SAD', 'VERY_SAD', 'ANXIOUS', 'STRESSED'].includes(value)
+  return ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'].includes(value)
 }
 
 export const isRiskLevel = (value: any): value is RiskLevel => {
@@ -74,12 +74,11 @@ export const isSessionStatus = (value: any): value is SessionStatus => {
 // Utility functions for type conversions
 export const getMoodEmoji = (mood: MoodType): string => {
   const moodEmojis: Record<MoodType, string> = {
-    HAPPY: '😊',
+    GOOD: '😊',
+    HAPPY: '😄',
     NEUTRAL: '😐',
-    SAD: '😔',
-    VERY_SAD: '😢',
-    ANXIOUS: '😰',
-    STRESSED: '😩',
+    BAD: '😞',
+    SAD: '😢',
   }
   return moodEmojis[mood] || '😐'
 }

@@ -164,7 +164,7 @@ Before deploying to production:
 Add the install prompt to your app:
 
 ```tsx
-import PWAInstallPrompt from '@/shared-/PWAInstallPrompt'
+import PWAInstallPrompt from '@/shared-components/PWAInstallPrompt'
 
 export default function Layout({ children }) {
   return (

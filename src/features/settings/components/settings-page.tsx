@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/custom-button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Switch } from '@/shared/components/ui/switch'
 import { Label } from '@/shared/components/ui/label'

@@ -24,6 +24,12 @@ export const interBold = localFont({
   variable: '--font-inter-bold',
 })
 
+export const interExtraBold = localFont({
+  src: './assets/Inter_24pt-ExtraBold.ttf',
+  display: 'swap',
+  variable: '--font-inter-extrabold',
+})
+
 export const plusJakarta = localFont({
   src: './assets/PlusJakartaSans-SemiBold.ttf',
   display: 'swap',
