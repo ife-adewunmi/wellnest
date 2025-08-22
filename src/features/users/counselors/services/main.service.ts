@@ -186,13 +186,11 @@ export class DashboardService {
 
       // Map to the expected format
       const moodEmojis: Record<string, string> = {
-        HAPPY: '😊',
-        SAD: '😔',
-        ANXIOUS: '😰',
-        ANGRY: '😠',
-        EXCITED: '😄',
+        GOOD: '😊',
+        HAPPY: '😄',
         NEUTRAL: '😐',
-        STRESSED: '😩',
+        BAD: '😞',
+        SAD: '😔',
       }
 
       return checkIns.map((checkIn) => {
@@ -204,7 +202,7 @@ export class DashboardService {
           studentId: checkIn.userId, // For display purposes
           studentName: `${checkIn.firstName} ${checkIn.lastName?.charAt(0)}.`,
           avatar: checkIn.avatar || '/placeholder.svg?height=32&width=32',
-          mood: checkIn.mood as 'HAPPY' | 'NEUTRAL' | 'SAD' | 'VERY_SAD' | 'ANXIOUS' | 'STRESSED',
+          mood: checkIn.mood as 'GOOD' | 'HAPPY' | 'NEUTRAL' | 'BAD' | 'SAD',
           description:
             checkIn.description || `Feeling ${checkIn.mood?.toLowerCase() || 'okay'} today`,
           emoji: moodEmojis[checkIn.mood || 'NEUTRAL'] || '😐',
@@ -346,13 +344,12 @@ export class DashboardService {
       const moodHistory = await db
         .select({
           date: sql<string>`DATE(${moodCheckInsTable.createdAt})`,
-          avgMood: sql<number>`AVG(CASE 
-            WHEN ${moodCheckInsTable.mood} = 'HAPPY' THEN 9
-            WHEN ${moodCheckInsTable.mood} = 'NEUTRAL' THEN 7
-            WHEN ${moodCheckInsTable.mood} = 'SAD' THEN 4
-            WHEN ${moodCheckInsTable.mood} = 'VERY_SAD' THEN 2
-            WHEN ${moodCheckInsTable.mood} = 'ANXIOUS' THEN 3
-            WHEN ${moodCheckInsTable.mood} = 'STRESSED' THEN 4
+          avgMood: sql<number>`AVG(CASE
+            WHEN ${moodCheckInsTable.mood} = 'GOOD' THEN 9
+            WHEN ${moodCheckInsTable.mood} = 'HAPPY' THEN 8
+            WHEN ${moodCheckInsTable.mood} = 'NEUTRAL' THEN 5
+            WHEN ${moodCheckInsTable.mood} = 'BAD' THEN 3
+            WHEN ${moodCheckInsTable.mood} = 'SAD' THEN 2
             ELSE 5
           END)`,
           avgRiskScore: sql<number>`AVG(${moodCheckInsTable.riskScore})`,
@@ -393,4 +390,159 @@ export class DashboardService {
       return []
     }
   }
+
+  /**
+   * Get students assigned to a counselor with their latest data
+   */
+  // static async getStudents(counselorId: string): Promise<StudentTableData[]> {
+  //   try {
+  //     // Get counselor record
+  //     const counselor = await db
+  //       .select()
+  //       .from(counselorsTable)
+  //       .where(eq(counselorsTable.userId, counselorId))
+  //       .limit(1)
+
+  //     if (!counselor[0]) {
+  //       console.log('Counselor not found for userId:', counselorId)
+  //       return []
+  //     }
+
+  //     // Get students assigned to this counselor
+  //     const studentRelations = await db
+  //       .select({
+  //         studentId: studentsTable.studentId,
+  //         userId: studentsTable.userId,
+  //         id: studentsTable.id,
+  //         firstName: usersTable.firstName,
+  //         lastName: usersTable.lastName,
+  //         avatar: usersTable.avatar,
+  //       })
+  //       .from(counselorStudentTable)
+  //       .innerJoin(studentsTable, eq(counselorStudentTable.studentId, studentsTable.id))
+  //       .innerJoin(usersTable, eq(studentsTable.userId, usersTable.id))
+  //       .where(eq(counselorStudentTable.counselorId, counselor[0].id))
+
+  //     if (studentRelations.length === 0) {
+  //       console.log('No students found for counselor:', counselor[0].id)
+  //       return []
+  //     }
+
+  //     // Get latest mood check-ins for each student
+  //     const studentUserIds = studentRelations.map((s) => s.userId)
+
+  //     const latestMoodCheckIns = await db
+  //       .select({
+  //         userId: moodCheckInsTable.userId,
+  //         mood: moodCheckInsTable.mood,
+  //         riskScore: moodCheckInsTable.riskScore,
+  //         createdAt: moodCheckInsTable.createdAt,
+  //       })
+  //       .from(moodCheckInsTable)
+  //       .where(inArray(moodCheckInsTable.userId, studentUserIds))
+  //       .orderBy(desc(moodCheckInsTable.createdAt))
+
+  //     // Get today's screen time for each student
+  //     const today = new Date()
+  //     today.setHours(0, 0, 0, 0)
+
+  //     const screenTimeData = await db
+  //       .select({
+  //         userId: screenTimeDataTable.userId,
+  //         totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
+  //       })
+  //       .from(screenTimeDataTable)
+  //       .where(
+  //         and(
+  //           inArray(screenTimeDataTable.userId, studentUserIds),
+  //           gte(screenTimeDataTable.date, today),
+  //         ),
+  //       )
+  //       .groupBy(screenTimeDataTable.userId)
+
+  //     // Create a map for quick lookup
+  //     const moodMap = new Map()
+  //     const screenTimeMap = new Map()
+
+  //     // Group mood check-ins by user (keep only latest per user)
+  //     latestMoodCheckIns.forEach((checkIn) => {
+  //       if (!moodMap.has(checkIn.userId)) {
+  //         moodMap.set(checkIn.userId, checkIn)
+  //       }
+  //     })
+
+  //     screenTimeData.forEach((data) => {
+  //       screenTimeMap.set(data.userId, data.totalMinutes)
+  //     })
+
+  //     // Calculate risk level based on mood and risk score
+  //     const calculateRiskLevel = (
+  //       riskScore?: number | null,
+  //       mood?: string | null,
+  //     ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
+  //       if (!riskScore) return 'LOW'
+  //       if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+  //       if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
+  //       if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
+  //       return 'LOW'
+  //     }
+
+  //     // Map student data to StudentTableData format
+  //     return studentRelations.map((student) => {
+  //       const moodCheckIn = moodMap.get(student.userId)
+  //       const screenTime = screenTimeMap.get(student.userId) || 0
+
+  //       return {
+  //         id: student.userId,
+  //         studentId: student.studentId,
+  //         name: `${student.firstName} ${student.lastName}`,
+  //         lastCheckIn: moodCheckIn?.createdAt || undefined,
+  //         riskLevel: calculateRiskLevel(moodCheckIn?.riskScore, moodCheckIn?.mood),
+  //         currentMood: moodCheckIn?.mood as MoodType | undefined,
+  //         screenTimeToday: screenTime,
+  //         avatar: student.avatar || undefined,
+  //       }
+  //     })
+  //   } catch (error) {
+  //     console.error('Error fetching students:', error)
+  //     return []
+  //   }
+  // }
+
+  /**
+   * Get notifications for a counselor
+   */
+  // static async getNotifications(
+  //   counselorId: string,
+  //   unreadOnly: boolean = false,
+  // ): Promise<Notification[]> {
+  //   try {
+  //     const conditions = [eq(notificationsTable.userId, counselorId)]
+
+  //     if (unreadOnly) {
+  //       conditions.push(eq(notificationsTable.isRead, false))
+  //     }
+
+  //     const counselorNotifications = await db
+  //       .select()
+  //       .from(notificationsTable)
+  //       .where(and(...conditions))
+  //       .orderBy(desc(notificationsTable.createdAt))
+  //       .limit(20)
+
+  //     return counselorNotifications.map((n) => ({
+  //       id: n.id,
+  //       userId: n.userId,
+  //       type: n.type,
+  //       title: n.title,
+  //       message: n.message,
+  //       data: n.data,
+  //       isRead: n.isRead || false,
+  //       createdAt: n.createdAt || new Date(),
+  //     }))
+  //   } catch (error) {
+  //     console.error('Error fetching notifications:', error)
+  //     throw new Error('Failed to fetch notifications')
+  //   }
+  // }
 }

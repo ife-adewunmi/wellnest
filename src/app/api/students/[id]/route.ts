@@ -104,9 +104,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     // Calculate risk level
     const calculateRiskLevel = (riskScore?: number | null, mood?: string | null): string => {
       if (!riskScore) return 'Low'
-      if (riskScore >= 8 || mood === 'VERY_SAD') return 'Critical'
-      if (riskScore >= 6 || mood === 'SAD' || mood === 'ANXIOUS') return 'High'
-      if (riskScore >= 4 || mood === 'STRESSED') return 'Medium'
+      if (riskScore >= 8 || mood === 'SAD') return 'Critical'
+      if (riskScore >= 6 || mood === 'BAD') return 'High'
+      if (riskScore >= 4 || mood === 'NEUTRAL') return 'Medium'
       return 'Low'
     }
 

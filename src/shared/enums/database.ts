@@ -16,14 +16,7 @@ export const assignmentStatusEnum = pgEnum('assignment_status', [
 ])
 
 // Mood-related enums
-export const moodTypeEnum = pgEnum('mood_type', [
-  'HAPPY',
-  'NEUTRAL',
-  'SAD',
-  'VERY_SAD',
-  'ANXIOUS',
-  'STRESSED',
-])
+export const moodTypeEnum = pgEnum('mood_type', ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'])
 
 export const riskLevelEnum = pgEnum('risk_level', ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'])
 

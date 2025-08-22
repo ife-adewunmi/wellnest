@@ -1442,7 +1442,7 @@
     "public.mood_type": {
       "name": "mood_type",
       "schema": "public",
-      "values": ["HAPPY", "NEUTRAL", "SAD", "VERY_SAD", "ANXIOUS", "STRESSED"]
+      "values": ["HAPPY", "GOOD", "SAD", "VERY_SAD", "ANXIOUS", "STRESSED"]
     },
     "public.notification_type": {
       "name": "notification_type",
