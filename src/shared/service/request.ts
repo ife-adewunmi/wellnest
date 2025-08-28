@@ -313,7 +313,7 @@ export class Request {
     cache: 'no-cache',
     credentials: 'same-origin',
     redirect: 'follow',
-    referrer: 'no-referrer',
+    referrerPolicy: 'no-referrer',
     _timeout: timeout,
     headers: {
       'Content-Type': 'application/json',

@@ -72,7 +72,9 @@ export const Endpoints = {
   SCREEN_TIME: {},
 
   // ML & Analysis
-  ML: {},
+  ML: {
+    PREDICT: '/api/ml/predict',
+  },
 
   // Push Notifications
   PUSH: {},
