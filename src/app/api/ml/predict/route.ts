@@ -29,15 +29,6 @@ export async function POST(req: NextRequest) {
       },
       { status: 201 },
     )
-
-    // const data = await request.post(url, payload, {
-    //   headers: {
-    //     ...(process.env.ML_API_KEY ? { 'x-api-key': process.env.ML_API_KEY } : {}),
-    //   },
-    //   timeout: 60_000,
-    // })
-
-    return NextResponse.json(result)
   } catch (err: any) {
     if (err instanceof CustomError) {
       const status = typeof err.errorCode === 'number' ? err.errorCode : err.response?.status || 500
