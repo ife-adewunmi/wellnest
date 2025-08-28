@@ -2,12 +2,7 @@
 
 import { useUserStore } from '@/features/users/state'
 import { StudentHeader } from './header'
-import {
-  StudentDashboardTitle,
-  StudentMetricsSection,
-  StudentAnalysisSection,
-  StudentActivitySection,
-} from './sections'
+import { StudentAnalysisSection } from './sections'
 import { StudentMoodRecord } from './mood-checkin/student-mood-record'
 import { StudentProfile } from './sidebar-profile/profile-card'
 import Image from 'next/image'
@@ -20,13 +15,6 @@ import { SidebarNavigation } from './sidebar-navigation'
 export default function StudentDashboardPage() {
   const { user } = useUserStore()
   if (!user) return null
-
-  const studentStats = {
-    weeklyCheckIns: 0,
-    totalCheckIns: 7,
-    averageMood: 'Good',
-    moodEmoji: '🙂',
-  }
 
   return (
     <div className="flex bg-[#F1F5FA]">
@@ -57,11 +45,8 @@ export default function StudentDashboardPage() {
               <PendingIssues issues={pendingIssues} />
               <RecentUpdates />
             </div>
-            {/* <StudentDashboardTitle /> */}
-            {/* <StudentMetricsSection {...studentStats} /> */}
             <StudentAnalysisSection userId={user.id} />
             <PaymentTransactions transactions={transactions} />
-            {/* <StudentActivitySection userId={user.id} /> */}
           </main>
         </div>
       </div>

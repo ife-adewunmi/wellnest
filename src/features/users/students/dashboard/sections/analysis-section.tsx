@@ -1,4 +1,4 @@
-import { MoodHistoryChart } from '@/features/mood/components/mood-history-chart'
+import { MoodHistoryChart } from '@/src/features/users/students/components/mood-history-chart'
 
 export function StudentAnalysisSection({ userId }: { userId: string }) {
   return (
