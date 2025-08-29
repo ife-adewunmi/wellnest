@@ -12,7 +12,7 @@ interface NavigationStore {
   clear: () => void
 }
 
-export const useNavigationStore = create<NavigationStore>((set, get) => ({
+export const useNavigationStore = create<NavigationStore>((set) => ({
   history: [],
   currentPath: null,
   push: (path: string) =>
