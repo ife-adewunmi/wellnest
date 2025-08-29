@@ -388,7 +388,7 @@ export const StudentProfile = ({
 
         {/* Action Buttons */}
         <div className="mt-8 flex items-center justify-between">
-          <Button onClick={handleBack} variant="outline" className='cursor-pointer'>
+          <Button onClick={handleBack} variant="outline" className="cursor-pointer">
             Back to Students
           </Button>
 
