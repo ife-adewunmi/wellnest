@@ -33,9 +33,6 @@ export default function Page() {
   const router = useRouter()
   const { user } = useUserStore()
 
-  console.log('isLocal: ', isLocal())
-  console.log('isProd: ', isProd())
-
   useEffect(() => {
     if (!user) return
     if (user.role !== UserRole.COUNSELOR) {

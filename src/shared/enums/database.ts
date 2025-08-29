@@ -1,4 +1,5 @@
 import { pgEnum } from 'drizzle-orm/pg-core'
+import { MOOD_TYPE, RISK_LEVEL } from '@/shared/types/common.types'
 
 // User and Role enums
 export const userRoleEnum = pgEnum('user_role', ['STUDENT', 'COUNSELOR', 'ADMIN'])
@@ -16,9 +17,9 @@ export const assignmentStatusEnum = pgEnum('assignment_status', [
 ])
 
 // Mood-related enums
-export const moodTypeEnum = pgEnum('mood_type', ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'])
+export const moodTypeEnum = pgEnum('mood_type', MOOD_TYPE)
 
-export const riskLevelEnum = pgEnum('risk_level', ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'])
+export const riskLevelEnum = pgEnum('risk_level', RISK_LEVEL)
 
 // Session-related enums
 export const sessionStatusEnum = pgEnum('session_status', [

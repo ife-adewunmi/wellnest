@@ -3,7 +3,7 @@ import { counselorStudentTable } from '@/shared/db/schema/counselor-student'
 import { moodCheckInsTable } from '@/shared/db/schema/mood-checkins'
 import { screenTimeDataTable } from '@/shared/db/schema/screen-time-monitoring'
 import { usersTable, studentsTable, counselorsTable } from '@/shared/db/schema/users'
-import { MoodType } from '@/shared/types/common.types'
+import { MoodType, RiskLevel } from '@/shared/types/common.types'
 import bcrypt from 'bcryptjs'
 import { eq, and, desc, gte, inArray, sql } from 'drizzle-orm'
 import { StudentTableData } from '../state'
@@ -28,6 +28,14 @@ export interface StudentResult {
 }
 
 export class StudentService {
+  static calculateRiskLevel(riskScore?: number | null, mood?: string | null): RiskLevel {
+    if (!riskScore) return 'LOW'
+    if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+    if (riskScore >= 6 || mood === 'STRESSED') return 'HIGH'
+    if (riskScore >= 4 || mood === 'BOREDOM') return 'MEDIUM'
+    return 'LOW'
+  }
+
   static async createStudent(data: CreateStudentData): Promise<StudentResult> {
     try {
       // Validate required fields
@@ -188,13 +196,16 @@ export class StudentService {
       // Get today's screen time
       const today = new Date()
       today.setHours(0, 0, 0, 0)
+      const todayString = today.toISOString().split('T')[0] // Format as YYYY-MM-DD
 
       const [screenTimeToday] = await db
         .select({
-          totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
+          totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalScreenTimeHours} * 60), 0)::int`,
         })
         .from(screenTimeDataTable)
-        .where(and(eq(screenTimeDataTable.userId, userId), gte(screenTimeDataTable.date, today)))
+        .where(
+          and(eq(screenTimeDataTable.userId, userId), gte(screenTimeDataTable.date, todayString)),
+        )
         .groupBy(screenTimeDataTable.userId)
         .limit(1)
 
@@ -222,16 +233,16 @@ export class StudentService {
       }
 
       // Calculate risk level based on mood and risk score
-      const calculateRiskLevel = (
-        riskScore?: number | null,
-        mood?: string | null,
-      ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
-        if (!riskScore) return 'LOW'
-        if (riskScore >= 8 || mood === 'VERY_SAD') return 'CRITICAL'
-        if (riskScore >= 6 || mood === 'SAD' || mood === 'ANXIOUS') return 'HIGH'
-        if (riskScore >= 4 || mood === 'STRESSED') return 'MEDIUM'
-        return 'LOW'
-      }
+      // const calculateRiskLevel = (
+      //   riskScore?: number | null,
+      //   mood?: string | null,
+      // ): RiskLevel => {
+      //   if (!riskScore) return 'LOW'
+      //   if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+      //   if (riskScore >= 6 || mood === 'STRESSED') return 'HIGH'
+      //   if (riskScore >= 4 || mood === 'BOREDOM') return 'MEDIUM'
+      //   return 'LOW'
+      // }
 
       // Transform the data to match StudentDetail interface
       const studentDetail = {
@@ -261,7 +272,7 @@ export class StudentService {
         academicInfo: student.academicInfo,
 
         // Dynamic data based on database queries
-        riskLevel: calculateRiskLevel(latestMoodCheckIn?.riskScore, latestMoodCheckIn?.mood),
+        riskLevel: this.calculateRiskLevel(latestMoodCheckIn?.riskScore, latestMoodCheckIn?.mood),
         currentMood: latestMoodCheckIn?.mood as MoodType | undefined,
         screenTimeToday: screenTimeToday?.totalMinutes || 0,
         lastCheckIn: latestMoodCheckIn?.createdAt || student.createdAt,
@@ -346,17 +357,18 @@ export class StudentService {
       // Get today's screen time for each student
       const today = new Date()
       today.setHours(0, 0, 0, 0)
+      const todayString = today.toISOString().split('T')[0] // Format as YYYY-MM-DD
 
       const screenTimeData = await db
         .select({
           userId: screenTimeDataTable.userId,
-          totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
+          totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalScreenTimeHours} * 60), 0)::int`,
         })
         .from(screenTimeDataTable)
         .where(
           and(
             inArray(screenTimeDataTable.userId, studentUserIds),
-            gte(screenTimeDataTable.date, today),
+            gte(screenTimeDataTable.date, todayString),
           ),
         )
         .groupBy(screenTimeDataTable.userId)
@@ -377,16 +389,16 @@ export class StudentService {
       })
 
       // Calculate risk level based on mood and risk score
-      const calculateRiskLevel = (
-        riskScore?: number | null,
-        mood?: string | null,
-      ): 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' => {
-        if (!riskScore) return 'LOW'
-        if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
-        if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
-        if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
-        return 'LOW'
-      }
+      // const calculateRiskLevel = (
+      //   riskScore?: number | null,
+      //   mood?: string | null,
+      // ): RiskLevel => {
+      //   if (!riskScore) return 'LOW'
+      //   if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
+      //   if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
+      //   if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
+      //   return 'LOW'
+      // }
 
       // Map student data to StudentTableData format
       return studentRelations.map((student) => {
@@ -398,7 +410,7 @@ export class StudentService {
           studentId: student.studentId,
           name: `${student.firstName} ${student.lastName}`,
           lastCheckIn: moodCheckIn?.createdAt || undefined,
-          riskLevel: calculateRiskLevel(moodCheckIn?.riskScore, moodCheckIn?.mood),
+          riskLevel: this.calculateRiskLevel(moodCheckIn?.riskScore, moodCheckIn?.mood),
           currentMood: moodCheckIn?.mood as MoodType | undefined,
           screenTimeToday: screenTime,
           avatar: student.avatar || undefined,

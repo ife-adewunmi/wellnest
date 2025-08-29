@@ -11,6 +11,7 @@ import { RecentUpdates } from './recent-updates'
 import { PaymentTransactions } from './payment-transaction'
 import { pendingIssues, transactions } from '@/features/users/students/common/data'
 import { SidebarNavigation } from './sidebar-navigation'
+import ScreenTimeMonitoringToggle from '@/src/features/screen-time/lib/ScreenTimeMonitoringToggle'
 
 export default function StudentDashboardPage() {
   const { user } = useUserStore()
@@ -46,6 +47,10 @@ export default function StudentDashboardPage() {
               <RecentUpdates />
             </div>
             <StudentAnalysisSection userId={user.id} />
+            <div className="mt-8 rounded-lg bg-white p-6 shadow-sm">
+              <h2 className="mb-4 text-lg font-semibold text-gray-900">Screen Time Monitoring</h2>
+              <ScreenTimeMonitoringToggle userId={user.id} />
+            </div>
             <PaymentTransactions transactions={transactions} />
           </main>
         </div>

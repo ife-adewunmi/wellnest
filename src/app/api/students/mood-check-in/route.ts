@@ -3,11 +3,12 @@ import { db } from '@/shared/db'
 import { moodCheckInsTable } from '@/shared/db/schema/mood-checkins'
 import { eq, desc } from 'drizzle-orm'
 import { z } from 'zod'
+import { MOOD_TYPE } from '@/shared/types/common.types'
 
 // Validation schema for mood check-in data
 const moodCheckInSchema = z.object({
-  userId: z.string().uuid(),
-  mood: z.enum(['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD']),
+  userId: z.uuid(),
+  mood: z.enum(MOOD_TYPE),
   socialMediaImpact: z.boolean().optional(),
   influences: z.array(z.string()).optional(),
   reasons: z.array(z.string()).optional(),
