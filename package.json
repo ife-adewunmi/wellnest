@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:mobile": "next dev --turbopack --hostname 0.0.0.0",
+    "prebuild": "yarn build:screen-time-monitor",
     "build": "NODE_OPTIONS='--max-old-space-size=8192' next build",
     "build:mobile": "NODE_OPTIONS='--max-old-space-size=8192' next build && npx cap sync",
     "build:prod": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=8192' next build && npx cap sync",
+    "postinstall": "yarn build:screen-time-monitor",
+    "build:screen-time-monitor": "cd src/shared/lib/screen-time-monitor && yarn install && yarn build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier -c \"**/*.{css,js,json,jsx,ts,tsx}\"",

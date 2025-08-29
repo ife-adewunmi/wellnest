@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Capacitor } from '@capacitor/core'
-import { ScreenTimeMonitor } from 'screen-time-monitor'
-import type { MonitoringStatus } from 'screen-time-monitor'
+import { MonitoringStatus, ScreenTimeMonitor } from '@/shared/lib/screen-time-monitor/src'
 
 interface ScreenTimeMonitoringToggleProps {
   userId: string

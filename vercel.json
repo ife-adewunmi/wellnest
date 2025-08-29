@@ -1,0 +1,9 @@
+{
+  "buildCommand": "yarn build",
+  "installCommand": "yarn install",
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  }
+}
