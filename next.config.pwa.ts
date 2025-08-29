@@ -127,16 +127,16 @@ const nextConfig: NextConfig = {
           default: {
             minChunks: 2,
             priority: -20,
-            reuseExistingChunk: true
+            reuseExistingChunk: true,
           },
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             priority: -10,
-            chunks: 'all'
-          }
-        }
-      }
+            chunks: 'all',
+          },
+        },
+      },
     }
 
     // Fix for PostgreSQL client modules not available in browser

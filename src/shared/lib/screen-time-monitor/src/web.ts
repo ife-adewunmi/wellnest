@@ -1,14 +1,14 @@
 import { WebPlugin } from '@capacitor/core';
 import type { PluginListenerHandle } from '@capacitor/core';
 
-import type { 
-  AppUsageData, 
-  MonitoringStatus, 
-  ScreenTimeMonitorPlugin, 
-  StartMonitoringOptions, 
-  UsageStats, 
-  UsageStatsOptions, 
-  UsageStatsPermissionResult 
+import type {
+  AppUsageData,
+  MonitoringStatus,
+  ScreenTimeMonitorPlugin,
+  StartMonitoringOptions,
+  UsageStats,
+  UsageStatsOptions,
+  UsageStatsPermissionResult,
 } from './definitions';
 
 export class ScreenTimeMonitorWeb extends WebPlugin implements ScreenTimeMonitorPlugin {
@@ -40,7 +40,10 @@ export class ScreenTimeMonitorWeb extends WebPlugin implements ScreenTimeMonitor
     throw this.unavailable('This method is not available on the web.');
   }
 
-  async addListener(_eventName: 'screenTimeUpdate', _listenerFunc: (event: { apps: any[] }) => void): Promise<PluginListenerHandle> {
+  async addListener(
+    _eventName: 'screenTimeUpdate',
+    _listenerFunc: (event: { apps: any[] }) => void,
+  ): Promise<PluginListenerHandle> {
     throw this.unavailable('This method is not available on the web.');
   }
 

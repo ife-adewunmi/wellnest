@@ -50,45 +50,45 @@ export interface ScreenTimeMonitorPlugin {
    * Check if usage stats permission is granted
    */
   isUsageStatsPermissionGranted(): Promise<UsageStatsPermissionResult>;
-  
+
   /**
    * Open usage stats settings page
    */
   openUsageStatsSettings(): Promise<void>;
-  
+
   /**
    * Query and aggregate usage stats for specified time period
    */
   queryAndAggregateUsageStats(options: UsageStatsOptions): Promise<{ stats: { [key: string]: UsageStats } }>;
-  
+
   /**
    * Start background monitoring of screen time
    */
   startMonitoring(options: StartMonitoringOptions): Promise<void>;
-  
+
   /**
    * Stop background monitoring
    */
   stopMonitoring(): Promise<void>;
-  
+
   /**
    * Get current monitoring status
    */
   getMonitoringStatus(): Promise<MonitoringStatus>;
-  
+
   /**
    * Get current day's app usage data
    */
   getCurrentDayUsage(): Promise<{ apps: AppUsageData[] }>;
-  
+
   /**
    * Listen for screen time updates
    */
   addListener(
     eventName: 'screenTimeUpdate',
-    listenerFunc: (event: { apps: ScreenTimeEvent[] }) => void
+    listenerFunc: (event: { apps: ScreenTimeEvent[] }) => void,
   ): Promise<PluginListenerHandle>;
-  
+
   /**
    * Remove all listeners
    */
