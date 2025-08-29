@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import * as schema from '@/shared/db/schema'
-import { isLocal, isProd } from '../enums/environment'
+import { isProd } from '../enums/environment'
 
 // Load env before creating the pool (important for CLI scripts like seed.ts)
 dotenv.config({ path: '.env.local' })

@@ -2,12 +2,7 @@
 
 import { useUserStore } from '@/features/users/state'
 import { StudentHeader } from './header'
-import {
-  StudentDashboardTitle,
-  StudentMetricsSection,
-  StudentAnalysisSection,
-  StudentActivitySection,
-} from './sections'
+import { StudentAnalysisSection } from './sections'
 import { StudentMoodRecord } from './mood-checkin/student-mood-record'
 import { StudentProfile } from './sidebar-profile/profile-card'
 import Image from 'next/image'
@@ -16,17 +11,11 @@ import { RecentUpdates } from './recent-updates'
 import { PaymentTransactions } from './payment-transaction'
 import { pendingIssues, transactions } from '@/features/users/students/common/data'
 import { SidebarNavigation } from './sidebar-navigation'
+import ScreenTimeMonitoringToggle from '@/src/features/screen-time/lib/ScreenTimeMonitoringToggle'
 
 export default function StudentDashboardPage() {
   const { user } = useUserStore()
   if (!user) return null
-
-  const studentStats = {
-    weeklyCheckIns: 0,
-    totalCheckIns: 7,
-    averageMood: 'Good',
-    moodEmoji: '🙂',
-  }
 
   return (
     <div className="flex bg-[#F1F5FA]">
@@ -57,11 +46,12 @@ export default function StudentDashboardPage() {
               <PendingIssues issues={pendingIssues} />
               <RecentUpdates />
             </div>
-            {/* <StudentDashboardTitle /> */}
-            {/* <StudentMetricsSection {...studentStats} /> */}
             <StudentAnalysisSection userId={user.id} />
+            <div className="mt-8 rounded-lg bg-white p-6 shadow-sm">
+              <h2 className="mb-4 text-lg font-semibold text-gray-900">Screen Time Monitoring</h2>
+              <ScreenTimeMonitoringToggle userId={user.id} />
+            </div>
             <PaymentTransactions transactions={transactions} />
-            {/* <StudentActivitySection userId={user.id} /> */}
           </main>
         </div>
       </div>

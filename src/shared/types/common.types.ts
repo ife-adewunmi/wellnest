@@ -5,9 +5,11 @@
 
 // Mood types matching mood_type_enum in database
 export type MoodType = 'GOOD' | 'HAPPY' | 'NEUTRAL' | 'BAD' | 'SAD'
+export const MOOD_TYPE = ['HAPPY', 'GOOD', 'BOREDOM', 'SAD', 'STRESSED'] as const
 
 // Risk level types matching risk_level_enum in database
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+export const RISK_LEVEL = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] as const
 
 // Session status types matching session_status_enum in database
 export type SessionStatus =
@@ -58,11 +60,11 @@ export type ActivityType = 'session' | 'assessment' | 'intervention' | 'group'
 
 // Helper type guards
 export const isMoodType = (value: any): value is MoodType => {
-  return ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'].includes(value)
+  return MOOD_TYPE.includes(value)
 }
 
 export const isRiskLevel = (value: any): value is RiskLevel => {
-  return ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].includes(value)
+  return [RISK_LEVEL].includes(value)
 }
 
 export const isSessionStatus = (value: any): value is SessionStatus => {

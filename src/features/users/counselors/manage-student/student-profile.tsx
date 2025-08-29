@@ -388,18 +388,18 @@ export const StudentProfile = ({
 
         {/* Action Buttons */}
         <div className="mt-8 flex items-center justify-between">
-          <Button onClick={handleBack} variant="outline">
+          <Button onClick={handleBack} variant="outline" className="cursor-pointer">
             Back to Students
           </Button>
 
-          <div className="flex gap-2">
-            {/* <Button onClick={handleRefresh} variant="outline" disabled={isLoading}>
+          {/* <div className="flex gap-2">
+            <Button onClick={handleRefresh} variant="outline" disabled={isLoading}>
               {isLoading ? <LoadingSpinner size="small" /> : 'Refresh Data'}
-            </Button> */}
+            </Button>
             <Button onClick={() => router.push(`/messages?studentId=${student.id}`)}>
               Send Message
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
