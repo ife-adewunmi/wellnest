@@ -6216,7 +6216,7 @@ schema-utils@^4.3.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.1.0"
 
-"screen-time-monitor@file:../cap-go/screen-time-monitor":
+"screen-time-monitor@file:./src/shared/lib/screen-time-monitor":
   version "0.0.1"
 
 semver@^6.0.0, semver@^6.3.1:
