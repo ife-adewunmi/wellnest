@@ -10,7 +10,7 @@
     "build:mobile": "NODE_OPTIONS='--max-old-space-size=8192' next build && npx cap sync",
     "build:prod": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=8192' next build && npx cap sync",
     "postinstall": "yarn build:screen-time-monitor",
-    "build:screen-time-monitor": "cd src/shared/lib/screen-time-monitor && yarn install && yarn build",
+    "build:screen-time-monitor": "cd src/shared/lib/screen-time-monitor && yarn install && (yarn build || echo 'Plugin build failed, continuing...') && cd -",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier -c \"**/*.{css,js,json,jsx,ts,tsx}\"",

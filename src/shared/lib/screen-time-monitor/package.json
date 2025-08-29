@@ -55,6 +55,7 @@
     "@ionic/prettier-config": "^4.0.0",
     "@ionic/swiftlint-config": "^2.0.0",
     "@types/minimatch": "^5.1.2",
+    "@types/node": "^20.0.0",
     "eslint": "^8.57.0",
     "prettier": "^3.4.2",
     "prettier-plugin-java": "^2.6.6",
