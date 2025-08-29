@@ -66,15 +66,19 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     // Get today's screen time
     const today = new Date()
-    today.setHours(0, 0, 0, 0)
+    const todayString = today.toISOString().split('T')[0] // Format as YYYY-MM-DD
 
     const screenTimeToday = await db
       .select({
-        totalMinutes: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalMinutes}), 0)::int`,
+        totalHours: sql<number>`COALESCE(SUM(${screenTimeDataTable.totalScreenTimeHours}), 0)::float`,
+        socialMediaHours: sql<number>`COALESCE(SUM(${screenTimeDataTable.socialMediaUsageHours}), 0)::float`,
       })
       .from(screenTimeDataTable)
       .where(
-        and(eq(screenTimeDataTable.userId, studentUserId), gte(screenTimeDataTable.date, today)),
+        and(
+          eq(screenTimeDataTable.userId, studentUserId),
+          gte(screenTimeDataTable.date, todayString),
+        ),
       )
 
     // Get assigned counselor
@@ -147,8 +151,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       riskLevel,
 
       // Screen time data
-      screenTimeToday: screenTimeToday[0]?.totalMinutes || 0,
-      screenTime: `${Math.floor((screenTimeToday[0]?.totalMinutes || 0) / 60)} hours`,
+      screenTimeToday: Math.round((screenTimeToday[0]?.totalHours || 0) * 60), // Convert hours to minutes for backward compatibility
+      screenTime: `${Math.round(screenTimeToday[0]?.totalHours || 0)} hours`,
+      socialMediaTime: `${Math.round(screenTimeToday[0]?.socialMediaHours || 0)} hours`,
 
       // Session data
       totalSessions: sessionCounts[0]?.totalSessions || 0,

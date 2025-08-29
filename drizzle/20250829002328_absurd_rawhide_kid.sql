@@ -1,7 +1,7 @@
 CREATE TYPE "public"."assignment_status" AS ENUM('ACTIVE', 'INACTIVE', 'TRANSFERRED', 'COMPLETED');--> statement-breakpoint
 CREATE TYPE "public"."gender" AS ENUM('MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY');--> statement-breakpoint
 CREATE TYPE "public"."level" AS ENUM('100', '200', '300', '400', '500', 'MASTERS', 'PHD');--> statement-breakpoint
-CREATE TYPE "public"."mood_type" AS ENUM('HAPPY', 'NEUTRAL', 'SAD', 'VERY_SAD', 'ANXIOUS', 'STRESSED');--> statement-breakpoint
+CREATE TYPE "public"."mood_type" AS ENUM('HAPPY', 'GOOD', 'BOREDOM', 'SAD', 'STRESSED');--> statement-breakpoint
 CREATE TYPE "public"."notification_type" AS ENUM('MOOD_CHANGE', 'SESSION_REMINDER', 'CHECK_IN_REMINDER', 'FLAGGED_POST', 'SCREEN_TIME_RISK', 'SYSTEM_UPDATE', 'NEW_ASSIGNMENT', 'CRISIS_ALERT');--> statement-breakpoint
 CREATE TYPE "public"."push_subscription_status" AS ENUM('ACTIVE', 'INACTIVE');--> statement-breakpoint
 CREATE TYPE "public"."risk_level" AS ENUM('LOW', 'MEDIUM', 'HIGH', 'CRITICAL');--> statement-breakpoint
@@ -125,11 +125,17 @@ CREATE TABLE "risk_thresholds" (
 CREATE TABLE "screen_time_data" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid NOT NULL,
-	"date" timestamp NOT NULL,
-	"total_minutes" integer NOT NULL,
-	"night_time_minutes" integer NOT NULL,
+	"date" date NOT NULL,
+	"social_media_usage_hours" numeric(5, 2) DEFAULT '0.00' NOT NULL,
+	"screen_time_before_sleep_hours" numeric(5, 2) DEFAULT '0.00' NOT NULL,
+	"total_screen_time_hours" numeric(5, 2) DEFAULT '0.00' NOT NULL,
+	"sleep_to_screen_ratio" numeric(5, 2) DEFAULT '1.00',
+	"notifications_per_day" integer DEFAULT 0,
 	"app_usage" jsonb,
-	"created_at" timestamp DEFAULT now()
+	"focus_apps_used" boolean DEFAULT false,
+	"dominant_emotion" text DEFAULT 'Neutral',
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE "screen_time_sessions" (

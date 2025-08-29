@@ -17,9 +17,7 @@ export const moodCheckInsTable = pgTable('mood_check_ins', {
   riskLevel: riskLevelEnum('risk_level'),
   mlAnalysis: jsonb('ml_analysis').$type<{
     riskScore: number
-    category: 'low' | 'moderate' | 'high'
-    recommendations: string[]
-    confidence: number
+    riskLevel: string
   }>(),
   syncedAt: timestamp('synced_at'),
   createdAt: timestamp('created_at').defaultNow(),

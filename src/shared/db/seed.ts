@@ -18,6 +18,7 @@ import {
   riskThresholds,
 } from '@/shared/db/schema'
 import { inArray } from 'drizzle-orm'
+import { MOOD_TYPE, RiskLevel } from '@/shared/types/common.types'
 
 // Helpful inferred insert types from Drizzle
 type NewUser = typeof users.$inferInsert
@@ -468,7 +469,6 @@ async function main() {
 
   // 7) Mood check-ins for ALL assigned students (so counselors can see data)
   const moodInputs: NewMood[] = []
-  const moods = ['GOOD', 'HAPPY', 'NEUTRAL', 'BAD', 'SAD'] as const
   const influences = [
     ['Assignments', 'Exams'],
     ['Friends', 'Social'],
@@ -491,19 +491,19 @@ async function main() {
     const student = studentUserRows[i]
     // Create multiple mood check-ins per student (for history)
     for (let j = 0; j < 3; j++) {
-      const moodIndex = (i + j) % moods.length
-      const mood = moods[moodIndex]
+      const moodIndex = (i + j) % MOOD_TYPE.length
+      const mood = MOOD_TYPE[moodIndex]
       const riskScore =
-        mood === 'SAD'
-          ? 85
-          : mood === 'BAD'
-            ? 65
-            : mood === 'NEUTRAL'
-              ? 40
-              : mood === 'HAPPY'
-                ? 25
-                : 20 // GOOD
-      const riskLevel = riskScore > 70 ? 'HIGH' : riskScore > 50 ? 'MEDIUM' : 'LOW'
+        mood === 'STRESSED'
+          ? 5
+          : mood === 'SAD'
+            ? 4
+            : mood === 'BOREDOM'
+              ? 3
+              : mood === 'GOOD'
+                ? 2
+                : 1 // HAPPY
+      const riskLevel = riskScore > 4 ? 'HIGH' : riskScore > 2 ? 'MEDIUM' : 'LOW'
 
       moodInputs.push({
         userId: student.id,
@@ -513,12 +513,10 @@ async function main() {
         reasons: [`Reason ${j + 1}`],
         description: descriptions[moodIndex],
         riskScore: riskScore,
-        riskLevel: riskLevel as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL',
+        riskLevel: riskLevel as RiskLevel,
         mlAnalysis: {
           riskScore: riskScore,
-          category: riskLevel === 'HIGH' ? 'high' : riskLevel === 'MEDIUM' ? 'moderate' : 'low',
-          recommendations: ['Take breaks', 'Talk to counselor', 'Practice mindfulness'],
-          confidence: 0.75 + Math.random() * 0.2,
+          riskLevel: riskLevel,
         },
         createdAt: new Date(Date.now() - j * 24 * 60 * 60 * 1000), // Spread over past few days
       })
@@ -526,26 +524,118 @@ async function main() {
   }
   await db.insert(moodCheckIns).values(moodInputs)
 
-  // 8) Screen time data and thresholds
+  // 8) Screen time data and thresholds - aligned with ML model payload
   const screenDataInput: NewScreenData[] = [
     {
       userId: studentUserRows[0].id,
-      date: new Date(),
-      totalMinutes: 240,
-      nightTimeMinutes: 30,
+      date: new Date().toISOString().split('T')[0], // Date only
+
+      // ML model aligned fields
+      socialMediaUsageHours: '3.50', // 3.5 hours of social media
+      screenTimeBeforeSleepHours: '1.25', // 1.25 hours before sleep
+      totalScreenTimeHours: '8.00', // 8 hours total
+      sleepToScreenRatio: '1.00', // 8 hours sleep / 8 hours screen time
+      notificationsPerDay: 150,
+      focusAppsUsed: true,
+      dominantEmotion: 'Stressed',
+
+      // Enhanced app usage data
       appUsage: [
-        { appName: 'YouTube', minutes: 90, category: 'Entertainment' },
-        { appName: 'VSCode', minutes: 120, category: 'Productivity' },
+        {
+          appName: 'Instagram',
+          packageName: 'com.instagram.android',
+          durationSeconds: 7200, // 2 hours
+          category: 'Social' as const,
+          lastUsed: Date.now() - 3600000, // 1 hour ago
+        },
+        {
+          appName: 'TikTok',
+          packageName: 'com.zhiliaoapp.musically',
+          durationSeconds: 5400, // 1.5 hours
+          category: 'Social' as const,
+          lastUsed: Date.now() - 1800000, // 30 min ago
+        },
+        {
+          appName: 'VSCode',
+          packageName: 'com.microsoft.vscode',
+          durationSeconds: 14400, // 4 hours
+          category: 'Productivity' as const,
+          lastUsed: Date.now() - 7200000, // 2 hours ago
+        },
       ],
     },
     {
       userId: studentUserRows[1].id,
-      date: new Date(),
-      totalMinutes: 180,
-      nightTimeMinutes: 10,
+      date: new Date().toISOString().split('T')[0],
+
+      // ML model aligned fields
+      socialMediaUsageHours: '2.00', // 2 hours of social media
+      screenTimeBeforeSleepHours: '0.50', // 30 minutes before sleep
+      totalScreenTimeHours: '6.00', // 6 hours total
+      sleepToScreenRatio: '1.33', // 8 hours sleep / 6 hours screen time
+      notificationsPerDay: 85,
+      focusAppsUsed: false,
+      dominantEmotion: 'Happy',
+
       appUsage: [
-        { appName: 'Chrome', minutes: 100, category: 'Productivity' },
-        { appName: 'Instagram', minutes: 50, category: 'Social' },
+        {
+          appName: 'Chrome',
+          packageName: 'com.android.chrome',
+          durationSeconds: 10800, // 3 hours
+          category: 'Productivity' as const,
+          lastUsed: Date.now() - 5400000, // 1.5 hours ago
+        },
+        {
+          appName: 'WhatsApp',
+          packageName: 'com.whatsapp',
+          durationSeconds: 3600, // 1 hour
+          category: 'Social' as const,
+          lastUsed: Date.now() - 600000, // 10 min ago
+        },
+        {
+          appName: 'Facebook',
+          packageName: 'com.facebook.katana',
+          durationSeconds: 3600, // 1 hour
+          category: 'Social' as const,
+          lastUsed: Date.now() - 3600000, // 1 hour ago
+        },
+      ],
+    },
+    // Add more diverse data for ML training
+    {
+      userId: studentUserRows[2].id,
+      date: new Date().toISOString().split('T')[0],
+
+      socialMediaUsageHours: '5.25', // High social media usage
+      screenTimeBeforeSleepHours: '2.00', // 2 hours before sleep
+      totalScreenTimeHours: '10.50', // Very high usage
+      sleepToScreenRatio: '0.67', // 7 hours sleep / 10.5 hours screen time
+      notificationsPerDay: 200,
+      focusAppsUsed: false,
+      dominantEmotion: 'Anxious',
+
+      appUsage: [
+        {
+          appName: 'TikTok',
+          packageName: 'com.zhiliaoapp.musically',
+          durationSeconds: 14400, // 4 hours
+          category: 'Social' as const,
+          lastUsed: Date.now() - 900000, // 15 min ago
+        },
+        {
+          appName: 'Instagram',
+          packageName: 'com.instagram.android',
+          durationSeconds: 4500, // 1.25 hours
+          category: 'Social' as const,
+          lastUsed: Date.now() - 1800000, // 30 min ago
+        },
+        {
+          appName: 'YouTube',
+          packageName: 'com.google.android.youtube',
+          durationSeconds: 18900, // 5.25 hours
+          category: 'Entertainment' as const,
+          lastUsed: Date.now() - 300000, // 5 min ago
+        },
       ],
     },
   ]

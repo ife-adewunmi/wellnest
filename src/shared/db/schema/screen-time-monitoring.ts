@@ -1,23 +1,54 @@
-import { pgTable, text, timestamp, integer, boolean, jsonb, uuid } from 'drizzle-orm/pg-core'
+import {
+  pgTable,
+  text,
+  timestamp,
+  integer,
+  boolean,
+  jsonb,
+  uuid,
+  decimal,
+  date,
+} from 'drizzle-orm/pg-core'
 import { usersTable } from './users'
 
-// Screen time data table
+// Enhanced screen time data table aligned with ML model payload
 export const screenTimeDataTable = pgTable('screen_time_data', {
   id: uuid('id').primaryKey().defaultRandom(),
   userId: uuid('user_id')
     .references(() => usersTable.id)
     .notNull(),
-  date: timestamp('date').notNull(),
-  totalMinutes: integer('total_minutes').notNull(),
-  nightTimeMinutes: integer('night_time_minutes').notNull(), // 12AM-3AM
+  date: date('date').notNull(), // Date only for daily aggregation
+
+  // Core ML model fields
+  socialMediaUsageHours: decimal('social_media_usage_hours', { precision: 5, scale: 2 })
+    .notNull()
+    .default('0.00'), // Social Media Usage (hours/day)
+  screenTimeBeforeSleepHours: decimal('screen_time_before_sleep_hours', { precision: 5, scale: 2 })
+    .notNull()
+    .default('0.00'), // Screen Time Before Sleep (hours)
+  totalScreenTimeHours: decimal('total_screen_time_hours', { precision: 5, scale: 2 })
+    .notNull()
+    .default('0.00'), // Total daily screen time
+  sleepToScreenRatio: decimal('sleep_to_screen_ratio', { precision: 5, scale: 2 }).default('1.00'), // sleep_to_screen_ratio
+  notificationsPerDay: integer('notifications_per_day').default(0), // Number of Notifications (per day)
+
+  // Detailed app usage breakdown
   appUsage: jsonb('app_usage').$type<
     {
       appName: string
-      minutes: number
-      category: string
+      packageName: string
+      durationSeconds: number
+      category: 'Social' | 'Entertainment' | 'Productivity' | 'Communication' | 'Other'
+      lastUsed: number
     }[]
   >(),
+
+  // Additional tracking data
+  focusAppsUsed: boolean('focus_apps_used').default(false), // Uses Focus Apps
+  dominantEmotion: text('dominant_emotion').default('Neutral'), // Dominant Daily Emotion
+
   createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
 })
 
 // Screen time sessions table

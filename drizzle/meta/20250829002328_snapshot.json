@@ -1,5 +1,5 @@
 {
-  "id": "5a8bb144-98cf-490d-8fdb-67d9a094cd03",
+  "id": "ec777320-3fe1-4047-8385-923164fd1fe3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -832,21 +832,44 @@
         },
         "date": {
           "name": "date",
-          "type": "timestamp",
+          "type": "date",
           "primaryKey": false,
           "notNull": true
         },
-        "total_minutes": {
-          "name": "total_minutes",
-          "type": "integer",
+        "social_media_usage_hours": {
+          "name": "social_media_usage_hours",
+          "type": "numeric(5, 2)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'0.00'"
         },
-        "night_time_minutes": {
-          "name": "night_time_minutes",
+        "screen_time_before_sleep_hours": {
+          "name": "screen_time_before_sleep_hours",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0.00'"
+        },
+        "total_screen_time_hours": {
+          "name": "total_screen_time_hours",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0.00'"
+        },
+        "sleep_to_screen_ratio": {
+          "name": "sleep_to_screen_ratio",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'1.00'"
+        },
+        "notifications_per_day": {
+          "name": "notifications_per_day",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false,
+          "default": 0
         },
         "app_usage": {
           "name": "app_usage",
@@ -854,8 +877,29 @@
           "primaryKey": false,
           "notNull": false
         },
+        "focus_apps_used": {
+          "name": "focus_apps_used",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "dominant_emotion": {
+          "name": "dominant_emotion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Neutral'"
+        },
         "created_at": {
           "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
@@ -1442,7 +1486,7 @@
     "public.mood_type": {
       "name": "mood_type",
       "schema": "public",
-      "values": ["HAPPY", "GOOD", "SAD", "VERY_SAD", "ANXIOUS", "STRESSED"]
+      "values": ["HAPPY", "GOOD", "BOREDOM", "SAD", "STRESSED"]
     },
     "public.notification_type": {
       "name": "notification_type",

@@ -345,15 +345,16 @@ export class DashboardService {
         .select({
           date: sql<string>`DATE(${moodCheckInsTable.createdAt})`,
           avgMood: sql<number>`AVG(CASE
-            WHEN ${moodCheckInsTable.mood} = 'GOOD' THEN 9
-            WHEN ${moodCheckInsTable.mood} = 'HAPPY' THEN 8
-            WHEN ${moodCheckInsTable.mood} = 'NEUTRAL' THEN 5
-            WHEN ${moodCheckInsTable.mood} = 'BAD' THEN 3
-            WHEN ${moodCheckInsTable.mood} = 'SAD' THEN 2
+            WHEN "mood" = 'HAPPY' THEN 9
+            WHEN "mood" = 'GOOD' THEN 7
+            WHEN "mood" = 'BOREDOM' THEN 5
+            WHEN "mood" = 'STRESSED' THEN 3
+            WHEN "mood" = 'SAD' THEN 1
             ELSE 5
           END)`,
           avgRiskScore: sql<number>`AVG(${moodCheckInsTable.riskScore})`,
           count: sql<number>`COUNT(*)::int`,
+          totalCheckIns: sql<number>`COUNT(*)::int`,
         })
         .from(moodCheckInsTable)
         .where(
