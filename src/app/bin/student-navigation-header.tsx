@@ -78,7 +78,8 @@ export function StudentNavigationHeader({ user }: StudentNavigationHeaderProps) 
                   alt={`${user?.firstName} ${user?.lastName}`}
                 />
                 <AvatarFallback>
-                  {user?.firstName?.[0]}{user?.lastName?.[0]}
+                  {user?.firstName?.[0]}
+                  {user?.lastName?.[0]}
                 </AvatarFallback>
               </Avatar>
             </Button>
@@ -101,9 +102,7 @@ export function StudentNavigationHeader({ user }: StudentNavigationHeaderProps) 
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut}>
-              Sign out
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

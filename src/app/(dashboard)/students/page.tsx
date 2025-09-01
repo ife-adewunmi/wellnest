@@ -12,7 +12,6 @@ import {
   useHasData,
 } from '@/users/counselors/state/dashboard/dashboardSelectors'
 import { StudentsTable } from '@/users/counselors/manage-student/students-table'
-import { Header } from '@/users/counselors/dashboard/header'
 import { useStudentsStore } from '@/users/counselors/state'
 
 export default function StudentsPage() {
@@ -70,7 +69,6 @@ export default function StudentsPage() {
 
   return (
     <>
-      <Header />
       <div className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
         <h1 className="mb-6 text-2xl font-bold">Students Management</h1>
         <StudentsTable />

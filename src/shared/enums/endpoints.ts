@@ -52,39 +52,14 @@ export const Endpoints = {
     DASHBOARD: '/dashboard',
     MANAGE_STUDENT: '/students',
     STUDENT_PROFILE_PAGE: (id: string) => `/students/${id}`,
+    REPORTS: '/reports',
+    INTERVENTION: '/intervention',
   },
-
-  // User Management
-  USERS: {},
-
-  // Mood Check-ins
-  MOOD: {},
-
-  // Sessions
-  SESSIONS: {},
-
-  // Messages
-  MESSAGES: {},
-
-  // Dashboard
-  DASHBOARD: {},
-
-  // Notifications
-  NOTIFICATIONS: {},
-
-  // Screen Time
-  SCREEN_TIME: {},
 
   // ML & Analysis
   ML: {
     PREDICT: '/api/ml/predict',
   },
-
-  // Push Notifications
-  PUSH: {},
-
-  // Reports
-  REPORTS: {},
 } as const
 
 export type ApiEndpointsType = typeof Endpoints

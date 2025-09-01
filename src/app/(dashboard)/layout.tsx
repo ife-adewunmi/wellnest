@@ -11,8 +11,8 @@ import { useUserStore } from '@/features/users/state/userStore'
 import { useAuthStore } from '@/features/users/auth/state/authStore'
 import { navigateToAuth } from '@/shared/state/navigation'
 import { useSessionStore } from '@/features/users/auth/state/sessionStore'
-import { RoleBasedDashboardGuard } from '@/shared/components/auth'
-import { Header } from '@/src/features/users/counselors/dashboard/sections/header'
+import { DashboardGuard } from '@/shared/components/auth'
+import { Header } from '@/features/users/counselors/dashboard/sections/header'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
@@ -45,9 +45,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <SidebarInset>
         <Header />
         <main className="flex-1 p-6">
-          <RoleBasedDashboardGuard user={user}>
-            {children}
-          </RoleBasedDashboardGuard>
+          <DashboardGuard user={user}>{children}</DashboardGuard>
         </main>
         <OfflineIndicator />
       </SidebarInset>

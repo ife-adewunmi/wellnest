@@ -7,42 +7,39 @@ import { UserRole } from '@/features/users/auth/enums/user-role'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { navigateTo } from '@/shared/state/navigation'
 import Dashboard from '@/features/users/counselors/dashboard/dashboard'
-import StudentDashboardPage from '@/features/users/students/dashboard/dashboard'
+import StudentDashboard from '@/features/users/students/dashboard/dashboard'
 
-interface RoleBasedDashboardGuardProps {
+interface DashboardGuardProps {
   user: User
   children: React.ReactNode
 }
 
-const RoleBasedDashboardGuard: React.FC<RoleBasedDashboardGuardProps> = ({
-  user,
-  children,
-}) => {
+const DashboardGuard: React.FC<DashboardGuardProps> = ({ user, children }) => {
   const router = useRouter()
   const pathname = usePathname()
 
   useEffect(() => {
     if (!user) return
 
-    // Counselor trying to access student route
-    if (pathname === '/student' && user.role !== UserRole.STUDENT) {
+    // Redirect based on role and attempted path
+    if (
+      user.role === UserRole.COUNSELOR &&
+      (pathname.startsWith('/student/') || pathname === Endpoints.STUDENTS.DASHBOARD)
+    ) {
       navigateTo(router, Endpoints.COUNSELORS.DASHBOARD, { replace: true })
       return
     }
 
-    if (pathname === '/dashboard' && user.role !== UserRole.COUNSELOR) {
+    if (
+      user.role === UserRole.STUDENT &&
+      [
+        Endpoints.COUNSELORS.DASHBOARD,
+        Endpoints.COUNSELORS.MANAGE_STUDENT,
+        Endpoints.COUNSELORS.REPORTS,
+        Endpoints.COUNSELORS.INTERVENTION,
+      ].includes(pathname as any)
+    ) {
       navigateTo(router, Endpoints.STUDENTS.DASHBOARD, { replace: true })
-      return
-    }
-
-    if (user.role === UserRole.STUDENT && ['/students', '/reports', '/intervention'].includes(pathname)) {
-      navigateTo(router, Endpoints.STUDENTS.DASHBOARD, { replace: true })
-      return
-    }
-
-    // Counselor trying to access student-only routes
-    if (user.role === UserRole.COUNSELOR && pathname.startsWith('/student/')) {
-      navigateTo(router, Endpoints.COUNSELORS.DASHBOARD, { replace: true })
       return
     }
   }, [pathname, user, router])
@@ -53,11 +50,11 @@ const RoleBasedDashboardGuard: React.FC<RoleBasedDashboardGuardProps> = ({
   }
 
   if (pathname === '/student' && user.role === UserRole.STUDENT) {
-    return <StudentDashboardPage />
+    return <StudentDashboard />
   }
 
   // For all other routes, render children (normal page content)
   return <>{children}</>
 }
 
-export default RoleBasedDashboardGuard
+export default DashboardGuard

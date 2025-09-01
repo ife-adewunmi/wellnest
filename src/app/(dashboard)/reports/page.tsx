@@ -132,7 +132,6 @@ export default function ReportsPage() {
   if (error && studentsReports.length === 0 && !isGenerating) {
     return (
       <div className="flex flex-col">
-        <Header />
         <div className="flex min-h-[400px] flex-col items-center justify-center">
           <ErrorMessage message={error} />
           <button
@@ -149,7 +148,6 @@ export default function ReportsPage() {
   if (isGenerating) {
     return (
       <div className="flex flex-col">
-        <Header />
         <div className="flex min-h-[400px] flex-col items-center justify-center">
           <LoadingSpinner />
           <p className="mt-4 text-gray-600">Generating and exporting report...</p>
@@ -160,7 +158,6 @@ export default function ReportsPage() {
 
   return (
     <div className="flex flex-col">
-      <Header />
       <div className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
         <ReportsFilters onGenerate={handleGenerateReport} isGenerating={isGenerating} />
       </div>

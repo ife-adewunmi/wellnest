@@ -7,7 +7,7 @@ type NavigationItem = {
 export const NAVIGATION_ITEMS: NavigationItem[] = [
   { label: 'Dashboard', path: '/dashboard', tab: 'Dashboard' },
   { label: 'Students', path: '/students', tab: 'Students' },
-  { label: 'Intervention', path: '/intervention', tab: 'Intervention' },
+  // { label: 'Intervention', path: '/intervention', tab: 'Intervention' },
   { label: 'Report', path: '/reports', tab: 'Reports' },
 ] as const
 

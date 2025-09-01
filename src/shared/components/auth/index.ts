@@ -1,1 +1,1 @@
-export { default as RoleBasedDashboardGuard } from './role-based-dashboard-guard'
+export { default as DashboardGuard } from './dashboard-guard'

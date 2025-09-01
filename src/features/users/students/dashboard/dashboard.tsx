@@ -13,7 +13,7 @@ import { pendingIssues, transactions } from '@/features/users/students/common/da
 import { SidebarNavigation } from './sidebar-navigation'
 import ScreenTimeMonitoringToggle from '@/src/features/users/students/components/ScreenTimeMonitoringToggle'
 
-export default function StudentDashboardPage() {
+export default function StudentDashboard() {
   const { user } = useUserStore()
   if (!user) return null
 

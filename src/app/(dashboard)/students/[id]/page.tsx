@@ -72,7 +72,6 @@ export default async function StudentProfilePage({ params }: StudentProfilePageP
 
   return (
     <>
-      <Header />
       <div className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
         <h1 className="mb-6 text-2xl font-bold">Students Management</h1>
 

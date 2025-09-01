@@ -56,7 +56,6 @@ export default function InterventionPage() {
   if (error) {
     return (
       <div className="flex flex-col">
-        <Header />
         <div className="flex min-h-[400px] flex-col items-center justify-center">
           <ErrorMessage message={error} />
           <button
