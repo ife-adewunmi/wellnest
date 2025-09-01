@@ -7,7 +7,7 @@ import { AppSidebar } from '@/shared/components/app-sidebar'
 import { SidebarProvider } from '@/shared/components/ui/sidebar-context'
 import { SidebarInset } from '@/shared/components/ui/sidebar'
 import { OfflineIndicator } from '@/shared/components/offline-indicator'
-import { Header } from '@/shared/components/header'
+import { Header } from '@/features/users/counselors/dashboard/header'
 import { useUserStore } from '@/users/state'
 import { useAuthStore } from '@/users/auth/state/authStore'
 import { navigateToAuth } from '@/shared/state/navigation'
@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <SidebarProvider defaultOpen={false}>
       <AppSidebar user={user} />
       <SidebarInset>
-        <Header user={user} />
+        <Header />
         <main className="flex-1 p-6">{children}</main>
         <OfflineIndicator />
       </SidebarInset>

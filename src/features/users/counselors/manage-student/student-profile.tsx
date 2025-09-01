@@ -26,8 +26,8 @@ import { UpcomingSessions } from './upcoming-sessions'
 import { navigateTo } from '@/shared/state/navigation'
 import { Endpoints } from '@/shared/enums/endpoints'
 // Store imports removed - now using prop data
-import { CounselorNotes } from '@/features/notes/components/councilor-note'
-import { SocialMedia } from '@/features/social-media/components'
+import { CounselorNotes } from '@/src/features/users/counselors/common/notes/components/councilor-note'
+import { SocialMedia } from '@/src/features/social-media/components'
 import { StudentDetail } from '@/users/counselors/types/student.types'
 import { RiskLevel, MoodType } from '@/shared/types/common.types'
 

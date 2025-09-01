@@ -1,15 +1,15 @@
 import { Endpoints } from '@/shared/enums/endpoints'
 import { request } from '@/shared/service/request'
-import type { StudentTableData } from '@/users/counselors/types/dashboard.types'
+import type { StudentDetail, /*StudentListItem,*/ StudentTableData } from '@/users/counselors/types'
 import { isLocal } from '@/shared/enums/environment'
-import { StudentDetail, StudentListItem } from '../../types/student.types'
+import { MOCK_STUDENTS } from '../../common/data'
 
 interface StudentsApiRequests {
   getStudents: (counselorId: string) => Promise<StudentTableData[]>
-  list: (params?: { limit?: number; offset?: number }) => Promise<StudentListItem[]>
+  // list: (params?: { limit?: number; offset?: number }) => Promise<StudentListItem[]>
   getStudentById: (id: string) => Promise<StudentDetail | null>
   updateStudent: (id: string, updates: Partial<StudentDetail>) => Promise<StudentDetail>
-  searchStudents: (query: string, counselorId?: string) => Promise<StudentListItem[]>
+  // searchStudents: (query: string, counselorId?: string) => Promise<StudentListItem[]>
 }
 
 class StudentsApi implements StudentsApiRequests {
@@ -18,78 +18,28 @@ class StudentsApi implements StudentsApiRequests {
    */
   public getStudents = async (counselorId: string): Promise<StudentTableData[]> => {
     try {
-      const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
+      const response = await request.get(Endpoints.COUNSELORS.API.STUDENTS, undefined, {
         params: { counselorId },
       })
-      return response.data?.students || []
+      // return response.data?.students || []
+      return response as Array<StudentTableData>
     } catch (error) {
       console.error('Failed to fetch students:', error)
       // Fallback to mock data in local environment when DB fails
       if (isLocal()) {
         console.warn('Using mock students as fallback in local environment')
         // Generate mock student data
-        return [
-          {
-            id: '1',
-            studentId: 'CSC/20/19283',
-            name: 'Ife Adewunmi',
-            lastCheckIn: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'MEDIUM',
-            currentMood: 'BAD',
-            screenTimeToday: 240,
-            avatar: '/avatars/student1.jpg',
-          },
-          {
-            id: '2',
-            studentId: 'BOT/21/7547',
-            name: 'Tunde Balogun',
-            lastCheckIn: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'LOW',
-            currentMood: 'HAPPY',
-            screenTimeToday: 180,
-            avatar: '/avatars/student2.jpg',
-          },
-          {
-            id: '3',
-            studentId: 'MCB/25/17293',
-            name: 'Bisi Ojo',
-            lastCheckIn: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'HIGH',
-            currentMood: 'BAD',
-            screenTimeToday: 420,
-            avatar: '/avatars/student3.jpg',
-          },
-          {
-            id: '4',
-            studentId: 'STA/19/2560',
-            name: 'Emeka Nwosu',
-            lastCheckIn: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'LOW',
-            currentMood: 'GOOD',
-            screenTimeToday: 120,
-            avatar: '/avatars/student4.jpg',
-          },
-          {
-            id: '5',
-            studentId: 'CSC/23/6844',
-            name: 'Zara Ahmed',
-            lastCheckIn: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'CRITICAL',
-            currentMood: 'SAD',
-            screenTimeToday: 480,
-            avatar: '/avatars/student5.jpg',
-          },
-        ]
+        return MOCK_STUDENTS
       }
       throw error
     }
   }
 
-  list = async (params?: { limit?: number; offset?: number }): Promise<StudentListItem[]> => {
-    const query = params ? { ...params } : undefined
-    const data = await request.get('/api/students', undefined, { params: query })
-    return data as StudentListItem[]
-  }
+  // list = async (params?: { limit?: number; offset?: number }): Promise<StudentListItem[]> => {
+  //   const query = params ? { ...params } : undefined
+  //   const data = await request.get('/api/students', undefined, { params: query })
+  //   return data as StudentListItem[]
+  // }
 
   getStudentById = async (id: string): Promise<StudentDetail | null> => {
     try {
@@ -111,18 +61,18 @@ class StudentsApi implements StudentsApiRequests {
     }
   }
 
-  searchStudents = async (query: string, counselorId?: string): Promise<StudentListItem[]> => {
-    try {
-      const params: any = { q: query }
-      if (counselorId) params.counselorId = counselorId
+  // searchStudents = async (query: string, counselorId?: string): Promise<StudentListItem[]> => {
+  //   try {
+  //     const params: any = { q: query }
+  //     if (counselorId) params.counselorId = counselorId
 
-      const data = await request.get('/api/students/search', undefined, { params })
-      return data || []
-    } catch (error) {
-      console.error('Error searching students:', error)
-      throw new Error('Failed to search students')
-    }
-  }
+  //     const data = await request.get('/api/students/search', undefined, { params })
+  //     return data || []
+  //   } catch (error) {
+  //     console.error('Error searching students:', error)
+  //     throw new Error('Failed to search students')
+  //   }
+  // }
 }
 
 export const studentsApi = new StudentsApi()

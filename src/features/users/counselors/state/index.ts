@@ -4,9 +4,8 @@ export * from './notifications'
 export * from './mood'
 export * from './activities'
 export * from './students'
-
-// Legacy exports for backward compatibility (to be deprecated)
-export * from './dashboard/dashboardStore'
+export * from './interventions'
+export * from './reports'
 
 // Re-export types for convenience
 export type {

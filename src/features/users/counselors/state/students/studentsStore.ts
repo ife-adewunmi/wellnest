@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import type { StudentTableData } from '../../types/dashboard.types'
-import { dashboardApi } from '../../services/models/dashboard-api'
+import type { StudentTableData } from '@/users/counselors/types'
+import { studentsApi } from '@/users/counselors/services/models'
 import { ActionTypes } from '../actionTypes'
 
 interface StudentsState {
@@ -47,7 +47,7 @@ export const useStudentsStore = create<StudentsStore>()(
 
           set({ isLoading: true, error: null })
           try {
-            const students = await dashboardApi.getStudents(counselorId)
+            const students = await studentsApi.getStudents(counselorId)
             set({
               students: students || [],
               isLoading: false,

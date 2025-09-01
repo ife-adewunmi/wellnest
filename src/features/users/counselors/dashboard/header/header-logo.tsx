@@ -1,24 +1,39 @@
 'use client'
 
 import Image from 'next/image'
-import { interBold } from '@/shared/styles/fonts'
+import { interBold, interRegular } from '@/shared/styles/fonts'
 import { siteConfig } from '@/shared/config/site'
 
-export function HeaderLogo() {
+interface HeaderLogoProps {
+  isStudent: boolean
+}
+
+export function HeaderLogo({ isStudent }: HeaderLogoProps) {
   return (
     <div className="flex w-full max-w-[206px] items-center justify-center gap-1 sm:gap-2 lg:justify-start">
       <div className="flex">
         <Image
-          src={siteConfig.logoLink}
+          src={isStudent ? siteConfig.portal.logoImage : siteConfig.logoLink}
           alt="Logo"
-          width={16}
-          height={16}
+          width={isStudent ? 25 : 16}
+          height={isStudent ? 29 : 16}
           className="h-4 w-4 sm:h-5 sm:w-5"
         />
       </div>
-      <span className={`text-lg font-semibold text-gray-900 ${interBold.className}`}>
-        {siteConfig.logoText}
-      </span>
+      {isStudent ? (
+        <>
+          <p className={`${interRegular.className} text-[17px] text-[#B96D68]`}>
+            {siteConfig.portal.schoolName}
+          </p>
+          <span className={`${interRegular.className} text-[8px] text-[#C1AE7F]`}>
+            {siteConfig.portal.title}
+          </span>
+        </>
+      ) : (
+        <span className={`text-lg font-semibold text-gray-900 ${interBold.className}`}>
+          {siteConfig.logoText}
+        </span>
+      )}
     </div>
   )
 }

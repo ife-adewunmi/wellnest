@@ -1,5 +1,5 @@
 export * from './users'
 export * from './social-media'
-export * from './notes'
+export * from './users/counselors/common/notes'
 export * from './intervention'
 export * from './settings'

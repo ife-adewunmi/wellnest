@@ -17,16 +17,6 @@ export const getRiskLevelColor = (level: string): string => {
   return getRiskLevelBadgeClass(level as RiskLevel)
 }
 
-// export const formatScreenTime = (minutes?: number): string => {
-//   if (!minutes) return '-'
-//   const hours = Math.floor(minutes / 60)
-//   const mins = minutes % 60
-//   if (hours > 0) {
-//     return `${hours}h ${mins}m`
-//   }
-//   return `${mins}m`
-// }
-
 export const formatScreenTime = (minutes: number): string => {
   if (minutes < 60) return `${minutes} min`
   const hours = Math.floor(minutes / 60)

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { DashboardService } from '@/users/counselors/services/main.service'
+import { DashboardService } from '@/src/features/users/counselors/services/dashboard.service'
 import { SessionService } from '@/users/auth/services/session.service'
 import { cookies } from 'next/headers'
 

@@ -96,6 +96,8 @@ export interface StudentTableData {
   currentMood?: MoodType
   screenTimeToday?: number // in minutes
   avatar?: string
+  department?: string
+  level?: string
 }
 
 // Dashboard state type

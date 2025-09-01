@@ -30,14 +30,6 @@ export function MobileNavigation({ activeTab, setActiveTab }: MobileNavigationPr
 
   return (
     <>
-      {/* Mobile Menu Button - Only visible on mobile/tablet */}
-      <button
-        onClick={() => setMobileMenuOpen(true)}
-        className="rounded-lg p-2 hover:bg-gray-100 lg:hidden"
-      >
-        <Menu className="h-6 w-6 text-gray-600" />
-      </button>
-
       {/* Mobile Slide-in Menu */}
       {mobileMenuOpen && (
         <>

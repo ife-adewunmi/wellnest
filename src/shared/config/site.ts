@@ -4,6 +4,11 @@ export const siteConfig = {
   url: 'https://wellestate.com',
   logoText: 'Distress Detection',
   logoLink: '/svg/distress.svg',
+  portal: {
+    schoolName: 'OAUSTECH',
+    title: 'EDUPORTAL',
+    logoImage: '/images/header-img.png',
+  },
   meta: {
     title: {
       default: 'Wellestate | Distress Detection System',

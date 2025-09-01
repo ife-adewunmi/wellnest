@@ -1,7 +1,7 @@
 import { db } from '@/shared/db'
 import { notificationsTable } from '@/shared/db/schema/communication'
 import { eq, desc, and } from 'drizzle-orm'
-import type { Notification } from '@/users/counselors/types/dashboard.types'
+import type { Notification } from '@/users/counselors/types'
 
 export class NotificationsService {
   /**

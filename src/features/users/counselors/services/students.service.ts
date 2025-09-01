@@ -232,18 +232,6 @@ export class StudentService {
         console.warn('Sessions table not available or error fetching session counts:', error)
       }
 
-      // Calculate risk level based on mood and risk score
-      // const calculateRiskLevel = (
-      //   riskScore?: number | null,
-      //   mood?: string | null,
-      // ): RiskLevel => {
-      //   if (!riskScore) return 'LOW'
-      //   if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
-      //   if (riskScore >= 6 || mood === 'STRESSED') return 'HIGH'
-      //   if (riskScore >= 4 || mood === 'BOREDOM') return 'MEDIUM'
-      //   return 'LOW'
-      // }
-
       // Transform the data to match StudentDetail interface
       const studentDetail = {
         // Base fields
@@ -308,6 +296,8 @@ export class StudentService {
    */
   static async getStudents(counselorId: string): Promise<StudentTableData[]> {
     try {
+      console.log('Fetching students for counselorId:', counselorId)
+
       // Get counselor record
       const counselor = await db
         .select()
@@ -329,6 +319,8 @@ export class StudentService {
           firstName: usersTable.firstName,
           lastName: usersTable.lastName,
           avatar: usersTable.avatar,
+          department: studentsTable.department,
+          level: studentsTable.level,
         })
         .from(counselorStudentTable)
         .innerJoin(studentsTable, eq(counselorStudentTable.studentId, studentsTable.id))
@@ -388,18 +380,6 @@ export class StudentService {
         screenTimeMap.set(data.userId, data.totalMinutes)
       })
 
-      // Calculate risk level based on mood and risk score
-      // const calculateRiskLevel = (
-      //   riskScore?: number | null,
-      //   mood?: string | null,
-      // ): RiskLevel => {
-      //   if (!riskScore) return 'LOW'
-      //   if (riskScore >= 8 || mood === 'SAD') return 'CRITICAL'
-      //   if (riskScore >= 6 || mood === 'BAD') return 'HIGH'
-      //   if (riskScore >= 4 || mood === 'NEUTRAL') return 'MEDIUM'
-      //   return 'LOW'
-      // }
-
       // Map student data to StudentTableData format
       return studentRelations.map((student) => {
         const moodCheckIn = moodMap.get(student.userId)
@@ -414,6 +394,8 @@ export class StudentService {
           currentMood: moodCheckIn?.mood as MoodType | undefined,
           screenTimeToday: screenTime,
           avatar: student.avatar || undefined,
+          department: student.department,
+          level: student.level,
         }
       })
     } catch (error) {

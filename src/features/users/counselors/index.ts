@@ -1,3 +1,5 @@
-// export * from './components'
-// export * from './services'
-// export * from './types'
+export * from './manage-interventions'
+export * from './manage-reports'
+export * from './manage-student'
+export * from './types'
+export * from './types'

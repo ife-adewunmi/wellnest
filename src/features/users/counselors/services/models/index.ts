@@ -1,3 +1,5 @@
 export * from './dashboard-api'
+export * from './interventions-api'
 export * from './notifications-api'
 export * from './students-api'
+export * from './reports-api'
