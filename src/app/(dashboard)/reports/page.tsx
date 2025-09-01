@@ -11,6 +11,7 @@ import {
   useReportsGenerating,
   useReportsError,
   useStudentsReports,
+  useReportsLoading,
 } from '@/features/users/counselors/state/reports'
 import { ReportFilters } from '@/users/counselors/types'
 import { toast } from 'react-toastify'
@@ -31,6 +32,7 @@ export default function ReportsPage() {
   const studentsReports = useStudentsReports()
   const { generateStudentReport, generateStudentsSummaryReport, clearError, exportReport } =
     useReportsActions()
+  const isLoading = useReportsLoading()
 
   useEffect(() => {
     if (error) {
@@ -127,6 +129,15 @@ export default function ReportsPage() {
 
   const handleRetry = () => {
     clearError()
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[400px] flex-col items-center justify-center">
+        <LoadingSpinner size="large" />
+        <p className="mt-4 text-gray-600">Loading reports...</p>
+      </div>
+    )
   }
 
   if (error && studentsReports.length === 0 && !isGenerating) {

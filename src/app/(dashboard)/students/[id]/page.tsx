@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { LoadingSpinner } from '@/shared/components/loading-spinner'
-import { Header } from '@/users/counselors/dashboard'
 import { StudentProfileContainer } from '@/users/counselors/manage-student/student-profile-container'
 import { StudentService } from '@/users/counselors/services/students.service'
 import { SessionService } from '@/users/auth/services/session.service'
