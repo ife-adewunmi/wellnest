@@ -14,6 +14,7 @@ import {
 } from '@/features/users/counselors/state/reports'
 import { ReportFilters } from '@/users/counselors/types'
 import { toast } from 'react-toastify'
+import { ExportFormat } from '@/users/counselors/types'
 
 interface ExtendedReportFilters extends ReportFilters {
   gender?: string
@@ -88,7 +89,7 @@ export default function ReportsPage() {
         }))
 
         // Export the report based on selected format
-        await handleExportReport(filteredReports, filters.exportType || '.xlsx')
+        await handleExportReport(filteredReports, filters.exportType || 'xlsx')
 
         toast.success(`Report generated and exported successfully as ${filters.exportType}`)
       } else {
@@ -104,7 +105,7 @@ export default function ReportsPage() {
     try {
       // This would be implemented in the store/actions
       if (exportReport) {
-        await exportReport(reports, format.replace('.', '') as 'csv' | 'pdf' | 'xlsx')
+        await exportReport(reports, format as ExportFormat)
       } else {
         // Fallback - trigger browser download
         const dataStr = JSON.stringify(reports, null, 2)

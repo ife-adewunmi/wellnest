@@ -31,22 +31,22 @@ export const convertToCSV = (reports: StudentReportData[]): string => {
 
   const rows = reports.map((report) =>
     [
-      report.studentId,
-      `"${report.name}"`,
-      report.email,
-      report.department,
-      report.level,
-      report.avgMood.toFixed(2),
-      report.avgRiskScore.toFixed(2),
-      report.currentRiskLevel,
-      report.riskTrend,
-      report.totalScreenTime.toFixed(2),
-      report.avgDailyScreenTime.toFixed(2),
-      report.totalSessions,
-      report.completedSessions,
-      report.reportPeriod.start,
-      report.reportPeriod.end,
-      report.generatedAt,
+      report.studentId || 'N/A',
+      `"${report.name || 'Unknown'}"`,
+      report.email || 'N/A',
+      report.department || 'N/A',
+      report.level || 'N/A',
+      (report.avgMood ?? 0).toFixed(2),
+      (report.avgRiskScore ?? 0).toFixed(2),
+      report.currentRiskLevel || 'LOW',
+      report.riskTrend || 'STABLE',
+      (report.totalScreenTime ?? 0).toFixed(2),
+      (report.avgDailyScreenTime ?? 0).toFixed(2),
+      report.totalSessions ?? 0,
+      report.completedSessions ?? 0,
+      report.reportPeriod?.start || 'N/A',
+      report.reportPeriod?.end || 'N/A',
+      report.generatedAt || new Date().toISOString(),
     ].join(','),
   )
 
@@ -59,25 +59,25 @@ export const convertToText = (reports: StudentReportData[]): string => {
       (report) =>
         `Student Report
 ===============
-Name: ${report.name}
-Student ID: ${report.studentId}
-Email: ${report.email}
-Department: ${report.department}
-Level: ${report.level}
-Gender: ${report.gender}
+Name: ${report.name || 'Unknown'}
+Student ID: ${report.studentId || 'N/A'}
+Email: ${report.email || 'N/A'}
+Department: ${report.department || 'N/A'}
+Level: ${report.level || 'N/A'}
+Gender: ${report.gender || 'N/A'}
 
 Metrics:
-- Average Mood: ${report.avgMood.toFixed(2)}
-- Average Risk Score: ${report.avgRiskScore.toFixed(2)}
-- Current Risk Level: ${report.currentRiskLevel}
-- Risk Trend: ${report.riskTrend}
-- Total Screen Time: ${report.totalScreenTime.toFixed(2)} hours
-- Average Daily Screen Time: ${report.avgDailyScreenTime.toFixed(2)} hours
-- Total Sessions: ${report.totalSessions}
-- Completed Sessions: ${report.completedSessions}
+- Average Mood: ${(report.avgMood ?? 0).toFixed(2)}
+- Average Risk Score: ${(report.avgRiskScore ?? 0).toFixed(2)}
+- Current Risk Level: ${report.currentRiskLevel || 'LOW'}
+- Risk Trend: ${report.riskTrend || 'STABLE'}
+- Total Screen Time: ${(report.totalScreenTime ?? 0).toFixed(2)} hours
+- Average Daily Screen Time: ${(report.avgDailyScreenTime ?? 0).toFixed(2)} hours
+- Total Sessions: ${report.totalSessions ?? 0}
+- Completed Sessions: ${report.completedSessions ?? 0}
 
-Report Period: ${report.reportPeriod.start} to ${report.reportPeriod.end}
-Generated: ${report.generatedAt}
+Report Period: ${report.reportPeriod?.start || 'N/A'} to ${report.reportPeriod?.end || 'N/A'}
+Generated: ${report.generatedAt || new Date().toISOString()}
 
 `,
     )

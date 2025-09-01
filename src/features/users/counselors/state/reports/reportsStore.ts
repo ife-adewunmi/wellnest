@@ -3,7 +3,11 @@ import { devtools } from 'zustand/middleware'
 import { reportsApi } from '@/users/counselors/services/models'
 import { ExportFormat, ReportFilters, StudentReportData } from '@/users/counselors/types'
 import { ActionTypes } from '../actionTypes'
-import { convertToCSV, convertToText, downloadFile } from '@/shared/lib/utils'
+import {
+  exportToExcel,
+  exportToCSV,
+  exportToPDF,
+} from '@/users/counselors/common/utils/export-utils'
 
 export interface ReportsState {
   // Data
@@ -130,27 +134,30 @@ export const useReportsStore = create<ReportsState>()(
         }
       },
 
-      exportReport: async (reports: StudentReportData[], format: 'csv' | 'pdf' | 'xlsx') => {
+      exportReport: async (reports: StudentReportData[], format: ExportFormat) => {
         try {
+          if (reports.length === 0) {
+            throw new Error('No reports to export')
+          }
+
           const timestamp = new Date().toISOString().split('T')[0]
           const filename = `student-reports-${timestamp}.${format}`
 
-          if (format === 'csv') {
-            // Convert to CSV
-            const csvContent = convertToCSV(reports)
-            downloadFile(csvContent, filename, 'text/csv')
-          } else if (format === 'xlsx') {
-            // For Excel format, we'll use a simplified approach
-            // In a real implementation, you'd use a library like xlsx or similar
-            const csvContent = convertToCSV(reports)
-            downloadFile(csvContent, `student-reports-${timestamp}.csv`, 'text/csv')
-          } else if (format === 'pdf') {
-            // For PDF, you'd typically use a library like jsPDF or similar
-            // For now, we'll create a simple text-based PDF content
-            const textContent = convertToText(reports)
-            downloadFile(textContent, `student-reports-${timestamp}.txt`, 'text/plain')
+          switch (format) {
+            case 'csv':
+              exportToCSV(reports, filename)
+              break
+            case 'xlsx':
+              await exportToExcel(reports, filename)
+              break
+            case 'pdf':
+              await exportToPDF(reports, filename)
+              break
+            default:
+              throw new Error(`Unsupported export format: ${format}`)
           }
         } catch (error) {
+          console.error('Export error:', error)
           set({
             error: error instanceof Error ? error.message : 'Failed to export report',
           })

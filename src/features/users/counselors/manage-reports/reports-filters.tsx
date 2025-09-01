@@ -52,7 +52,7 @@ export function ReportsFilters({ onGenerate, isGenerating }: ReportsFiltersProps
     department: '',
     level: '',
     gender: '',
-    exportType: '.xlsx',
+    exportType: 'xlsx',
     includeMoodHistory: true,
     includeScreenTime: true,
     includeDistressScore: true,
@@ -240,9 +240,9 @@ export function ReportsFilters({ onGenerate, isGenerating }: ReportsFiltersProps
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value=".xlsx">.xlsx</SelectItem>
-                <SelectItem value=".csv">.csv</SelectItem>
-                <SelectItem value=".pdf">.pdf</SelectItem>
+                <SelectItem value="xlsx">Excel (.xlsx)</SelectItem>
+                <SelectItem value="csv">CSV (.csv)</SelectItem>
+                <SelectItem value="pdf">PDF (.pdf)</SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -72,4 +72,4 @@ export interface ReportFilters {
   endDate: string
 }
 
-export type ExportFormat = 'csv' | 'pdf' | 'xlsx' | '.txt'
+export type ExportFormat = 'csv' | 'pdf' | 'xlsx' | 'txt'
