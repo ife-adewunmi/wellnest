@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { Header } from './header'
+
 import {
   DashboardTitle,
   MetricsSection,
@@ -84,10 +84,8 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col items-center justify-center pb-3">
-      <Header />
-
       {/* Main Content */}
-      <main className="mx-auto mt-[4rem] w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
+      <main className="mx-auto w-full max-w-[1152px] min-w-[320px] px-4 sm:px-6 lg:min-w-[1024px] lg:px-8 xl:px-0">
         <DashboardTitle />
 
         {/* First Row: Metrics (4 cards) */}
