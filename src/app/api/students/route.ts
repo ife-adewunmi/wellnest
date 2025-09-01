@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/shared/db'
-import { users, students, moodCheckIns, sessions } from '@/shared/db/schema'
-import { eq, desc, and, sql } from 'drizzle-orm'
+import { users, students } from '@/shared/db/schema'
+import { eq, sql } from 'drizzle-orm'
 
 export async function GET(request: NextRequest) {
   try {

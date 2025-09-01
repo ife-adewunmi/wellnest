@@ -1,4 +1,4 @@
-import { ST } from 'next/dist/shared/lib/utils'
+import { ReportFilters } from '@/users/counselors/types'
 
 export const Endpoints = {
   // Base API
@@ -42,8 +42,12 @@ export const Endpoints = {
       MOOD_CHECKINS: '/api/counselors/dashboard/mood-checkins',
       ACTIVITIES: '/api/counselors/dashboard/activities',
       NOTIFICATIONS: '/api/counselors/dashboard/notifications',
-      STUDENTS: '/api/counselors/dashboard/students',
+      STUDENTS: '/api/counselors/students',
       STUDENT_PROFILE: (id: string) => `/api/counselors/students/${id}`,
+      REPORTS: '/api/counselors/reports',
+      SESSIONS: {
+        BASE: '/api/counselors/sessions',
+      },
     },
     DASHBOARD: '/dashboard',
     MANAGE_STUDENT: '/students',

@@ -1,5 +1,4 @@
 import { SessionService } from '@/users/auth/services/session.service'
-import { DashboardService } from '@/users/counselors/services/main.service'
 import { StudentService } from '@/users/counselors/services/students.service'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'

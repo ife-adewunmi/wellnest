@@ -6,13 +6,13 @@ import {
   MOCK_METRICS,
   MOCK_MOOD_CHECKINS,
   MOCK_ACTIVITIES,
-} from '@/users/counselors/common/data/mock-dashboard'
+} from '@/users/counselors/common/data'
 import type {
   DashboardDataResponse,
   Metric,
   MoodCheckIn,
   ActivityData,
-  StudentTableData,
+  // StudentTableData,
 } from '@/users/counselors/types/dashboard.types'
 
 interface DashboardApiRequests {
@@ -28,7 +28,7 @@ interface DashboardApiRequests {
   createMoodCheckIn: (checkIn: Omit<MoodCheckIn, 'id' | 'createdAt'>) => Promise<MoodCheckIn>
   updateActivity: (activityId: string, updates: Partial<ActivityData>) => Promise<ActivityData>
   deleteNotification: (notificationId: string) => Promise<void>
-  getStudents: (counselorId: string) => Promise<StudentTableData[]>
+  // getStudents: (counselorId: string) => Promise<StudentTableData[]>
 }
 
 export class DashboardApi implements DashboardApiRequests {
@@ -37,8 +37,6 @@ export class DashboardApi implements DashboardApiRequests {
    */
   public async getDashboardData(counselorId: string): Promise<DashboardDataResponse> {
     try {
-      console.log('isLocal(): ', isLocal())
-
       const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
         params: { counselorId },
       })
@@ -189,75 +187,75 @@ export class DashboardApi implements DashboardApiRequests {
   /**
    * Fetch students for a counselor
    */
-  public async getStudents(counselorId: string): Promise<StudentTableData[]> {
-    try {
-      // Since individual endpoints don't exist, get from main dashboard
-      const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
-        params: { counselorId },
-      })
-      const students = response.data?.students || response.students || []
-      return students
-    } catch (error) {
-      // Fallback to mock data in local environment when DB fails
-      if (isLocal()) {
-        console.warn('Using mock students as fallback in local environment')
-        // Generate mock student data
-        return [
-          {
-            id: '1',
-            studentId: 'CSC/20/19283',
-            name: 'Ife Adewunmi',
-            lastCheckIn: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'MEDIUM',
-            currentMood: 'BAD',
-            screenTimeToday: 240,
-            avatar: '/avatars/student1.jpg',
-          },
-          {
-            id: '2',
-            studentId: 'BOT/21/7547',
-            name: 'Tunde Balogun',
-            lastCheckIn: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'LOW',
-            currentMood: 'HAPPY',
-            screenTimeToday: 180,
-            avatar: '/avatars/student2.jpg',
-          },
-          {
-            id: '3',
-            studentId: 'MCB/25/17293',
-            name: 'Bisi Ojo',
-            lastCheckIn: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'HIGH',
-            currentMood: 'BAD',
-            screenTimeToday: 420,
-            avatar: '/avatars/student3.jpg',
-          },
-          {
-            id: '4',
-            studentId: 'STA/19/2560',
-            name: 'Emeka Nwosu',
-            lastCheckIn: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'LOW',
-            currentMood: 'GOOD',
-            screenTimeToday: 120,
-            avatar: '/avatars/student4.jpg',
-          },
-          {
-            id: '5',
-            studentId: 'CSC/23/6844',
-            name: 'Zara Ahmed',
-            lastCheckIn: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
-            riskLevel: 'CRITICAL',
-            currentMood: 'SAD',
-            screenTimeToday: 480,
-            avatar: '/avatars/student5.jpg',
-          },
-        ]
-      }
-      throw error
-    }
-  }
+  // public async getStudents(counselorId: string): Promise<StudentTableData[]> {
+  //   try {
+  //     // Since individual endpoints don't exist, get from main dashboard
+  //     const response = await request.get(Endpoints.COUNSELORS.API.DASHBOARD, undefined, {
+  //       params: { counselorId },
+  //     })
+  //     const students = response.data?.students || response.students || []
+  //     return students
+  //   } catch (error) {
+  //     // Fallback to mock data in local environment when DB fails
+  //     if (isLocal()) {
+  //       console.warn('Using mock students as fallback in local environment')
+  //       // Generate mock student data
+  //       return [
+  //         {
+  //           id: '1',
+  //           studentId: 'CSC/20/19283',
+  //           name: 'Ife Adewunmi',
+  //           lastCheckIn: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  //           riskLevel: 'MEDIUM',
+  //           currentMood: 'BAD',
+  //           screenTimeToday: 240,
+  //           avatar: '/avatars/student1.jpg',
+  //         },
+  //         {
+  //           id: '2',
+  //           studentId: 'BOT/21/7547',
+  //           name: 'Tunde Balogun',
+  //           lastCheckIn: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  //           riskLevel: 'LOW',
+  //           currentMood: 'HAPPY',
+  //           screenTimeToday: 180,
+  //           avatar: '/avatars/student2.jpg',
+  //         },
+  //         {
+  //           id: '3',
+  //           studentId: 'MCB/25/17293',
+  //           name: 'Bisi Ojo',
+  //           lastCheckIn: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+  //           riskLevel: 'HIGH',
+  //           currentMood: 'BAD',
+  //           screenTimeToday: 420,
+  //           avatar: '/avatars/student3.jpg',
+  //         },
+  //         {
+  //           id: '4',
+  //           studentId: 'STA/19/2560',
+  //           name: 'Emeka Nwosu',
+  //           lastCheckIn: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
+  //           riskLevel: 'LOW',
+  //           currentMood: 'GOOD',
+  //           screenTimeToday: 120,
+  //           avatar: '/avatars/student4.jpg',
+  //         },
+  //         {
+  //           id: '5',
+  //           studentId: 'CSC/23/6844',
+  //           name: 'Zara Ahmed',
+  //           lastCheckIn: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+  //           riskLevel: 'CRITICAL',
+  //           currentMood: 'SAD',
+  //           screenTimeToday: 480,
+  //           avatar: '/avatars/student5.jpg',
+  //         },
+  //       ]
+  //     }
+  //     throw error
+  //   }
+  // }
 }
 
 export const dashboardApi = new DashboardApi()

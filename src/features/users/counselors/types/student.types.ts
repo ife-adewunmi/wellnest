@@ -3,8 +3,6 @@ import { StudentTableData } from './dashboard.types'
 export interface StudentListItem extends StudentTableData {
   id: string
   email: string
-  department?: string | null
-  level?: string | null
   createdAt: string | Date
   latestMood?: string | null
   latestMoodDate?: string | Date | null

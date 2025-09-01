@@ -27,7 +27,6 @@ import {
   useStudents,
   useDashboardStore,
 } from '@/users/counselors/state/dashboard'
-import { isLocal, isProd } from '@/src/shared/enums/environment'
 
 export default function Page() {
   const router = useRouter()

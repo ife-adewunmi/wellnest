@@ -1,5 +1,5 @@
-import { UpcomingSessions } from '@/src/features/sessions/components/upcoming-sessions'
-import { RecentMessages } from '@/features/messaging/components/recent-messages'
+import { RecentMessages } from '@/users/students/components/recent-messages'
+import { UpcomingSessions } from '@/users/students/components/upcoming-sessions'
 
 export function StudentActivitySection({ userId }: { userId: string }) {
   return (

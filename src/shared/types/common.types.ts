@@ -11,6 +11,10 @@ export const MOOD_TYPE = ['HAPPY', 'GOOD', 'BOREDOM', 'SAD', 'STRESSED'] as cons
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
 export const RISK_LEVEL = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] as const
 
+// Risk trend types matching risk_trend_enum in database
+export type RiskTrend = 'IMPROVING' | 'STABLE' | 'WORSENING'
+export const RISK_TREND = ['IMPROVING', 'STABLE', 'WORSENING'] as const
+
 // Session status types matching session_status_enum in database
 export type SessionStatus =
   | 'SCHEDULED'

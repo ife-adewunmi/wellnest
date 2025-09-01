@@ -1,7 +1,7 @@
 import { request } from '@/shared/service/request'
 import { Endpoints } from '@/shared/enums/endpoints'
 import { isLocal } from '@/shared/enums/environment'
-import { MOCK_NOTIFICATIONS } from '@/users/counselors/common/data/mock-dashboard'
+import { MOCK_NOTIFICATIONS } from '@/users/counselors/common/data'
 import type { Notification } from '@/users/counselors/types/dashboard.types'
 
 interface NotificationsApiRequests {

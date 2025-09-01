@@ -30,17 +30,19 @@ export default function StudentsPage() {
   useEffect(() => {
     if (!user?.id || isLoading) return
 
-    const shouldFetch = !hasData || (isStale && !hasFetchedRef.current)
+    fetchStudents(user.id)
 
-    if (shouldFetch) {
-      hasFetchedRef.current = true
+    // const shouldFetch = !hasData || (isStale && !hasFetchedRef.current)
 
-      if (!hasData) {
-        fetchDashboardData(user.id)
-      } else if (isStale) {
-        fetchStudents(user.id)
-      }
-    }
+    // if (shouldFetch) {
+    //   hasFetchedRef.current = true
+
+    //   if (!hasData) {
+    //     fetchDashboardData(user.id)
+    //   } else if (isStale) {
+    //     fetchStudents(user.id)
+    //   }
+    // }
   }, [user?.id])
 
   if (isLoading) {

@@ -2,7 +2,7 @@ import { db } from '@/shared/db'
 import { usersTable, studentsTable, counselorsTable } from '@/shared/db/schema/users'
 import { counselorStudentTable } from '@/shared/db/schema/counselor-student'
 import { moodCheckInsTable } from '@/shared/db/schema/mood-checkins'
-import { eq, desc, and, gte, sql, lt, inArray } from 'drizzle-orm'
+import { eq, desc, and, gte, sql, inArray } from 'drizzle-orm'
 import type {
   DashboardDataResponse,
   Metric,
